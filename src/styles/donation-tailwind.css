@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Colors */
+    --global-bg-1: #2a7361;
+    --global-bg-2: #f3f4f6;
+    --global-bg-3: #f9fafb;
+    --global-bg-4: #ffffff;
+    --global-text-1: #111827;
+    --global-text-2: #2a7361;
+    --global-text-3: #374151;
+    --global-text-4: #4b5563;
+    --global-text-5: #6b7280;
+    --global-text-6: #adaebc;
+    --global-text-7: #ffffff;
+    --global-text-8: #000000;
+
+    /* Button Colors */
+    --button-text-1: #000000;
+  }
+}
+
+@layer utilities {
+  /* Global */
+  .bg-global-1 {
+    background-color: var(--global-bg-1);
+  }
+  .bg-global-2 {
+    background-color: var(--global-bg-2);
+  }
+  .bg-global-3 {
+    background-color: var(--global-bg-3);
+  }
+  .bg-global-4 {
+    background-color: var(--global-bg-4);
+  }
+  .text-global-1 {
+    color: var(--global-text-1);
+  }
+  .text-global-2 {
+    color: var(--global-text-2);
+  }
+  .text-global-3 {
+    color: var(--global-text-3);
+  }
+  .text-global-4 {
+    color: var(--global-text-4);
+  }
+  .text-global-5 {
+    color: var(--global-text-5);
+  }
+  .text-global-6 {
+    color: var(--global-text-6);
+  }
+  .text-global-7 {
+    color: var(--global-text-7);
+  }
+  .text-global-8 {
+    color: var(--global-text-8);
+  }
+
+  /* Button */
+  .text-button-1 {
+    color: var(--button-text-1);
+  }
+}

@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    /* Global Colors */
-    --global-bg-1: #333333;
-    --global-bg-2: #3c8a7a;
+    /* Global Colors - Harmonized with donation styles */
+    --global-bg-1: #2a7361;
+    --global-bg-2: #f3f4f6;
     --global-bg-3: #f9fafb;
     --global-bg-4: #ffffff;
     --global-text-1: #111827;
-    --global-text-2: #1f2937;
+    --global-text-2: #2a7361;
     --global-text-3: #374151;
-    --global-text-4: #3c8a7a;
-    --global-text-5: #4b5563;
-    --global-text-6: #6b7280;
-    --global-text-7: #adaebc;
-    --global-text-8: #d1d5db;
+    --global-text-4: #4b5563;
+    --global-text-5: #6b7280;
+    --global-text-6: #adaebc;
+    --global-text-7: #ffffff;
+    --global-text-8: #000000;
     --global-text-9: #dcfce7;
     --global-text-10: #ffffff;
 
     /* Button Colors */
-    --button-text-1: #2563eb;
+    --button-text-1: #000000;
     --button-text-2: #9333ea;
     --button-text-3: #ea580c;
   }

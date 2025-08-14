@@ -130,12 +130,14 @@ const Header = () => {
 
               {/* Donate Button */}
               <div className="mt-4 lg:mt-0">
-                <Button 
-                  variant="primary"
-                  className="pt-[8px] pr-[16px] pb-[8px] pl-[22px] text-[14px] lg:text-[16px] font-normal leading-[21px] lg:leading-[24px] text-center text-[#ffffff] font-['Poppins']"
-                >
-                  {t('donate')}
-                </Button>
+                <Link to="/donation">
+                  <Button 
+                    variant="primary"
+                    className="pt-[8px] pr-[16px] pb-[8px] pl-[22px] text-[14px] lg:text-[16px] font-normal leading-[21px] lg:leading-[24px] text-center text-[#ffffff] font-['Poppins']"
+                  >
+                    {t('donate')}
+                  </Button>
+                </Link>
               </div>
             </div>
           </nav>

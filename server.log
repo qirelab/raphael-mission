@@ -1,0 +1,10 @@
+
+> pipko_s_application@0.0.0 start
+> vite
+
+error when starting dev server:
+Error: Port 4028 is already in use
+    at Server.onError (file:///Users/danikpipko/WebstormProjects/raphael-mission/node_modules/vite/dist/node/chunks/dep-T98iZFpD.js:47017:28)
+    at Server.emit (node:events:518:28)
+    at emitErrorNT (node:net:1973:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
