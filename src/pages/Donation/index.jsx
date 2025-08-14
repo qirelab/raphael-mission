@@ -3,8 +3,10 @@ import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 import Dropdown from '../../components/ui.donation/Dropdown';
 import PaymentSelector from '../../components/payment/PaymentSelector';
+import { useLanguage } from '../../context/LanguageContext';
 
 const DonationPage = () => {
+  const { t } = useLanguage();
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState('');
   const [donationType, setDonationType] = useState('once');
@@ -13,11 +15,11 @@ const DonationPage = () => {
   const [paymentStatus, setPaymentStatus] = useState(null); // 'success', 'error', null
 
   const donationOptions = [
-    { value: 'most-needed', label: 'Most Needed' },
-    { value: 'clean-water', label: 'Clean Water' },
-    { value: 'medical-supplies', label: 'Medical Supplies' },
-    { value: 'community-programs', label: 'Community Programs' },
-    { value: 'emergency-relief', label: 'Emergency Relief' }
+    { value: 'most-needed', label: t('mostNeeded') },
+    { value: 'clean-water', label: t('cleanWater') },
+    { value: 'medical-supplies', label: t('medicalSupplies') },
+    { value: 'community-programs', label: t('communityPrograms') },
+    { value: 'emergency-relief', label: t('emergencyRelief') }
   ];
 
   const presetAmounts = [25, 50, 100, 250];
@@ -70,10 +72,10 @@ const DonationPage = () => {
             <div className="w-full lg:w-1/2 flex flex-col gap-6 sm:gap-8">
               <div className="flex flex-col gap-3 sm:gap-4">
                 <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-inter font-bold leading-[28px] sm:leading-[36px] md:leading-[44px] lg:leading-[48px] text-global-1">
-                  Advance the Mission Through Your Gift
+                  {t('donationPageTitle')}
                 </h1>
                 <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-inter font-normal leading-[24px] sm:leading-[28px] lg:leading-[33px] text-global-4">
-                  100% of your donation goes directly to humanitarian aid, healthcare, and faith-based outreach.
+                  {t('donationPageDescription')}
                 </p>
               </div>
 
@@ -93,19 +95,19 @@ const DonationPage = () => {
 
                   {/* Form Title */}
                   <h2 className="text-[20px] sm:text-[24px] font-inter font-bold leading-[24px] sm:leading-[30px] text-global-1">
-                    Choose an Amount to Give
+                    {t('chooseAmountTitle')}
                   </h2>
 
                   {/* Category Selection */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-inter font-medium leading-[17px] text-global-3">
-                      Where should your gift go?
+                      {t('whereGiftGo')}
                     </label>
                     <Dropdown
                       options={donationOptions}
                       value={selectedCategory}
                       onChange={(option) => setSelectedCategory(option?.value)}
-                      placeholder="Most Needed"
+                      placeholder={t('mostNeeded')}
                       rightIcon={{
                         src: "/images/img_arrow_down.svg",
                         width: 32,
@@ -124,7 +126,7 @@ const DonationPage = () => {
                           donationType === 'once' ?'bg-global-1 text-global-7' :'bg-transparent text-global-4'
                         }`}
                       >
-                        Give Once
+                        {t('giveOnce')}
                       </button>
                       <button
                         onClick={() => setDonationType('monthly')}
@@ -132,7 +134,7 @@ const DonationPage = () => {
                           donationType === 'monthly' ?'bg-global-1 text-global-7' :'bg-transparent text-global-4'
                         }`}
                       >
-                        Give Monthly
+                        {t('giveMonthly')}
                       </button>
                     </div>
                   </div>
@@ -158,7 +160,7 @@ const DonationPage = () => {
                   {/* Custom Amount */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-inter font-medium leading-[17px] text-global-3">
-                      Other amount
+                      {t('otherAmount')}
                     </label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[16px] font-inter font-normal leading-[20px] text-global-5">
@@ -178,7 +180,7 @@ const DonationPage = () => {
                   <div className="bg-global-3 rounded-[8px] p-4">
                     <div className="flex justify-between items-center">
                       <span className="text-[18px] font-inter font-medium leading-[22px] text-global-3">
-                        Total:
+                        {t('total')}
                       </span>
                       <span className="text-[24px] font-inter font-bold leading-[30px] text-global-2">
                         ${getTotalAmount()}
@@ -196,7 +198,7 @@ const DonationPage = () => {
                         disabled={getTotalAmount() === 0}
                         className="w-full bg-global-1 text-global-7 py-4 px-8 rounded-[8px] text-[18px] font-inter font-bold leading-[22px] flex items-center justify-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Proceed to Payment
+                        {t('proceedToPayment')}
                         <img 
                           src="/images/img_i.svg" 
                           alt="arrow" 
@@ -230,7 +232,7 @@ const DonationPage = () => {
                         onClick={() => setShowPayment(false)}
                         className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
                       >
-                        ← Back to donation details
+                        ← {t('backToDonationDetails')}
                       </button>
 
                       {/* Payment Status Messages */}
@@ -241,8 +243,8 @@ const DonationPage = () => {
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                             <div>
-                              <h4 className="text-green-800 font-medium">Payment Successful!</h4>
-                              <p className="text-green-700 text-sm">Thank you for your generous donation of ${getTotalAmount()}.</p>
+                              <h4 className="text-green-800 font-medium">{t('paymentSuccessful')}</h4>
+                              <p className="text-green-700 text-sm">{t('thankYouDonation')} ${getTotalAmount()}.</p>
                             </div>
                           </div>
                         </div>
@@ -255,8 +257,8 @@ const DonationPage = () => {
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                             </svg>
                             <div>
-                              <h4 className="text-red-800 font-medium">Payment Failed</h4>
-                              <p className="text-red-700 text-sm">There was an issue processing your payment. Please try again.</p>
+                              <h4 className="text-red-800 font-medium">{t('paymentFailed')}</h4>
+                              <p className="text-red-700 text-sm">{t('paymentError')}</p>
                             </div>
                           </div>
                         </div>
@@ -277,13 +279,13 @@ const DonationPage = () => {
                   {/* Footer Links */}
                   <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-center">
                     <button className="text-[14px] font-inter font-normal leading-[17px] text-global-2 hover:underline">
-                      Is my gift secure?
+                      {t('isGiftSecure')}
                     </button>
                     <button className="text-[14px] font-inter font-normal leading-[17px] text-global-2 hover:underline">
-                      Tax-deductible?
+                      {t('taxDeductible')}
                     </button>
                     <button className="text-[14px] font-inter font-normal leading-[17px] text-global-2 hover:underline">
-                      Other ways to give
+                      {t('otherWaysToGive')}
                     </button>
                   </div>
                 </div>
@@ -300,10 +302,10 @@ const DonationPage = () => {
             {/* Section Header */}
             <div className="text-center px-4 sm:px-8 lg:px-14">
               <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-inter font-bold leading-[28px] sm:leading-[36px] lg:leading-[44px] text-global-7 mb-3">
-                Your Impact
+                {t('yourImpact')}
               </h2>
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-inter font-normal leading-[24px] sm:leading-[26px] lg:leading-[28px] text-global-7 max-w-2xl mx-auto">
-                See how your donation makes a real difference in communities around the world.
+                {t('impactDescription')}
               </p>
             </div>
 
@@ -326,10 +328,7 @@ const DonationPage = () => {
                 </div>
                 <div className="text-center">
                   <p className="text-[16px] font-inter font-normal leading-[20px] text-global-3">
-                    Clean water for a family of 5 for one
-                  </p>
-                  <p className="text-[16px] font-inter font-normal leading-[20px] text-global-3">
-                    month
+                    {t('impact25')}
                   </p>
                 </div>
               </div>
@@ -350,7 +349,7 @@ const DonationPage = () => {
                 </div>
                 <div className="text-center">
                   <p className="text-[16px] font-inter font-normal leading-[20px] text-global-3">
-                    Medical supplies for mobile clinics
+                    {t('impact50')}
                   </p>
                 </div>
               </div>
@@ -371,7 +370,7 @@ const DonationPage = () => {
                 </div>
                 <div className="text-center">
                   <p className="text-[16px] font-inter font-normal leading-[20px] text-global-3">
-                    Community center programs for children
+                    {t('impact100')}
                   </p>
                 </div>
               </div>
