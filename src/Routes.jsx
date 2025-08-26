@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/Home';
 import ProjectsPage from './pages/Projects';
 import DonationPage from './pages/Donation';
+import TestimoniesPage from './pages/Testimonies';
 
 const AppRoutes = () => {
   return (
@@ -13,6 +14,8 @@ const AppRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/donation" element={<DonationPage />} />
+        <Route path="/donate" element={<DonationPage />} />
+        <Route path="/testimonies" element={<TestimoniesPage />} />
       </Routes>
     </Router>
   );

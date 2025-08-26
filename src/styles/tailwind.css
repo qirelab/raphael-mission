@@ -5,12 +5,14 @@
 @layer base {
   :root {
     /* Global Colors - Harmonized with donation styles */
-    --global-bg-1: #2a7361;
+    --global-bg-1: #2F7D6D;
     --global-bg-2: #f3f4f6;
     --global-bg-3: #f9fafb;
     --global-bg-4: #ffffff;
+    --global-bg-5: #f8fafc;
+    --global-bg-6: #ffffff;
     --global-text-1: #111827;
-    --global-text-2: #2a7361;
+    --global-text-2: #2F7D6D;
     --global-text-3: #374151;
     --global-text-4: #4b5563;
     --global-text-5: #6b7280;
@@ -40,6 +42,12 @@
   }
   .bg-global-4 {
     background-color: var(--global-bg-4);
+  }
+  .bg-global-5 {
+    background-color: var(--global-bg-5);
+  }
+  .bg-global-6 {
+    background-color: var(--global-bg-6);
   }
   .text-global-1 {
     color: var(--global-text-1);

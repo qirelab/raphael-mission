@@ -67,7 +67,7 @@ const Home = () => {
                 <span className="text-[#1f2937]">{t('heroTitle')} </span>
                 <span className="text-[#3b8a79]">{t('heroTitleHighlight')}</span>
               </h1>
-              
+
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-[#4b5563] font-['Poppins'] mb-8 lg:mb-9 max-w-full">
                 {t('heroDescription')}
               </p>
@@ -104,45 +104,51 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[44px]">
             {/* Humanitarian Aid */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center">
-              <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
-                {t('humanitarianAid')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
-                {t('humanitarianAidDesc')}
-              </p>
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+              <div className="flex-1 flex flex-col items-center text-center">
+                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
+                  {t('humanitarianAid')}
+                </h3>
+                <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
+                  {t('humanitarianAidDesc')}
+                </p>
+              </div>
               {/* Кнопка: белая с тенью */}
-              <button className="mt-4 bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
+              <button className="mt-auto bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
               {/* Кнопка: зелёная (раскомментируй, если хочешь зелёную) */}
-              {/* <button className="mt-4 bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
+              {/* <button className="mt-auto bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
             </div>
 
             {/* Spiritual Guidance */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center">
-              <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
-                {t('spiritualGuidance')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
-                {t('spiritualGuidanceDesc')}
-              </p>
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+              <div className="flex-1 flex flex-col items-center text-center">
+                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
+                  {t('spiritualGuidance')}
+                </h3>
+                <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
+                  {t('spiritualGuidanceDesc')}
+                </p>
+              </div>
               {/* Кнопка: белая с тенью */}
-              <button className="mt-4 bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
+              <button className="mt-auto bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
               {/* Кнопка: зелёная (раскомментируй, если хочешь зелёную) */}
-              {/* <button className="mt-4 bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
+              {/* <button className="mt-auto bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
             </div>
 
             {/* Community Building */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center">
-              <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
-                {t('communityBuilding')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
-                {t('communityBuildingDesc')}
-              </p>
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+              <div className="flex-1 flex flex-col items-center text-center">
+                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#ffffff] font-['Poppins'] mb-3">
+                  {t('communityBuilding')}
+                </h3>
+                <p className="text-[14px] lg:text-[16px] font-normal leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
+                  {t('communityBuildingDesc')}
+                </p>
+              </div>
               {/* Кнопка: белая с тенью */}
-              <button className="mt-4 bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
+              <button className="mt-auto bg-white text-[#3c8a7a] font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">{t('learnMore')}</button>
               {/* Кнопка: зелёная (раскомментируй, если хочешь зелёную) */}
-              {/* <button className="mt-4 bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
+              {/* <button className="mt-auto bg-[#3c8a7a] text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg transition">Learn More</button> */}
             </div>
           </div>
         </div>
@@ -161,20 +167,22 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
             {/* Project 1 */}
-            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden">
+            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col">
               <img 
                 src="/images/img_img.png" 
                 alt={t('cleanWaterInitiative')} 
                 className="w-full h-[160px] sm:h-[180px] lg:h-[192px] object-cover" 
               />
-              <div className="p-5 lg:p-6">
-                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
-                  {t('cleanWaterInitiative')}
-                </h3>
-                <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins'] mb-4">
-                  {t('cleanWaterInitiativeDesc')}
-                </p>
-                <div className="flex items-center gap-2">
+              <div className="p-5 lg:p-6 flex flex-col flex-1">
+                <div className="flex-1">
+                  <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
+                    {t('cleanWaterInitiative')}
+                  </h3>
+                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
+                    {t('cleanWaterInitiativeDesc')}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-auto pt-4">
                   <span className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins']">
                     {t('learnMore')}
                   </span>
@@ -184,20 +192,22 @@ const Home = () => {
             </div>
 
             {/* Project 2 */}
-            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden">
+            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col">
               <img 
                 src="/images/img_img.png" 
                 alt={t('educationProgram')} 
                 className="w-full h-[160px] sm:h-[180px] lg:h-[192px] object-cover" 
               />
-              <div className="p-5 lg:p-6">
-                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
-                  {t('educationProgram')}
-                </h3>
-                <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins'] mb-4">
-                  {t('educationProgramDesc')}
-                </p>
-                <div className="flex items-center gap-2">
+              <div className="p-5 lg:p-6 flex flex-col flex-1">
+                <div className="flex-1">
+                  <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
+                    {t('educationProgram')}
+                  </h3>
+                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
+                    {t('educationProgramDesc')}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-auto pt-4">
                   <span className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins']">
                     {t('learnMore')}
                   </span>
@@ -207,20 +217,22 @@ const Home = () => {
             </div>
 
             {/* Project 3 */}
-            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden">
+            <div className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col">
               <img 
                 src="/images/img_img.png" 
                 alt={t('healthcareOutreach')} 
                 className="w-full h-[160px] sm:h-[180px] lg:h-[192px] object-cover" 
               />
-              <div className="p-5 lg:p-6">
-                <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
-                  {t('healthcareOutreach')}
-                </h3>
-                <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins'] mb-4">
-                  {t('healthcareOutreachDesc')}
-                </p>
-                <div className="flex items-center gap-2">
+              <div className="p-5 lg:p-6 flex flex-col flex-1">
+                <div className="flex-1">
+                  <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
+                    {t('healthcareOutreach')}
+                  </h3>
+                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
+                    {t('healthcareOutreachDesc')}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-auto pt-4">
                   <span className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins']">
                     {t('learnMore')}
                   </span>
@@ -288,7 +300,7 @@ const Home = () => {
               <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px]">
                 "{t('testimonyText')}".
               </p>
-              
+
               <div className="flex items-center gap-4">
                 <img 
                   src="/images/img_ellipse_1.png" 
@@ -314,7 +326,7 @@ const Home = () => {
               <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Inter'] mb-16 lg:mb-[74px]">
                 "{t('testimonyText')}".
               </p>
-              
+
               <div className="flex items-center gap-4">
                 <img 
                   src="/images/img_ellipse_1.png" 
@@ -340,7 +352,7 @@ const Home = () => {
               <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Inter'] mb-16 lg:mb-[74px]">
                 "{t('testimonyText')}".
               </p>
-              
+
               <div className="flex items-center gap-4">
                 <img 
                   src="/images/img_ellipse_1.png" 

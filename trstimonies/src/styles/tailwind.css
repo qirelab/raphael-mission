@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Colors */
+    --global-bg-1: #0000004c;
+    --global-bg-2: #2460e8;
+    --global-bg-3: #2a7361;
+    --global-bg-4: #333333;
+    --global-bg-5: #f3f4f6;
+    --global-bg-6: #f9fafb;
+    --global-bg-7: #ffffff;
+    --global-text-1: #000000;
+    --global-text-2: #111827;
+    --global-text-3: #2a7361;
+    --global-text-4: #374151;
+    --global-text-5: #4b5563;
+    --global-text-6: #d1d5db;
+    --global-text-7: #dbeafe;
+    --global-text-8: #dcfce7;
+    --global-text-9: #ffffff;
+
+    /* Header Colors */
+    --header-text-1: #1f2937;
+    --header-text-2: #374151;
+
+    /* Button Colors */
+    --button-bg-1: #059669;
+    --button-bg-2: #3c8a7a;
+    --button-text-1: #22c55e;
+    --button-text-2: #2b5a3e;
+  }
+}
+
+@layer utilities {
+  /* Global */
+  .bg-global-1 {
+    background-color: var(--global-bg-1);
+  }
+  .bg-global-2 {
+    background-color: var(--global-bg-2);
+  }
+  .bg-global-3 {
+    background-color: var(--global-bg-3);
+  }
+  .bg-global-4 {
+    background-color: var(--global-bg-4);
+  }
+  .bg-global-5 {
+    background-color: var(--global-bg-5);
+  }
+  .bg-global-6 {
+    background-color: var(--global-bg-6);
+  }
+  .bg-global-7 {
+    background-color: var(--global-bg-7);
+  }
+  .text-global-1 {
+    color: var(--global-text-1);
+  }
+  .text-global-2 {
+    color: var(--global-text-2);
+  }
+  .text-global-3 {
+    color: var(--global-text-3);
+  }
+  .text-global-4 {
+    color: var(--global-text-4);
+  }
+  .text-global-5 {
+    color: var(--global-text-5);
+  }
+  .text-global-6 {
+    color: var(--global-text-6);
+  }
+  .text-global-7 {
+    color: var(--global-text-7);
+  }
+  .text-global-8 {
+    color: var(--global-text-8);
+  }
+  .text-global-9 {
+    color: var(--global-text-9);
+  }
+
+  /* Header */
+  .text-header-1 {
+    color: var(--header-text-1);
+  }
+  .text-header-2 {
+    color: var(--header-text-2);
+  }
+
+  /* Button */
+  .bg-button-1 {
+    background-color: var(--button-bg-1);
+  }
+  .bg-button-2 {
+    background-color: var(--button-bg-2);
+  }
+  .text-button-1 {
+    color: var(--button-text-1);
+  }
+  .text-button-2 {
+    color: var(--button-text-2);
+  }
+}
