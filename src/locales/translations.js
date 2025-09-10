@@ -118,7 +118,37 @@ export const translations = {
     privacyPolicy: "Privacy Policy",
     termsOfService: "Terms of Service",
     cookiePolicy: "Cookie Policy",
-    copyright: "© 2024 Raphael Mission. All rights reserved."
+    copyright: "© 2024 Raphael Mission. All rights reserved.",
+
+    // About Mission Section
+    aboutHeroTitle: "We bring hope through",
+    aboutFaith: "faith",
+    aboutCompassion: "compassion",
+    aboutService: "service",
+    aboutAnd: "and",
+    aboutDescription: "Raphael Mission is a Christian non-profit dedicated to transforming lives through spiritual guidance, humanitarian relief, and community empowerment. We serve in areas affected by poverty, crisis, and lack of resources — bringing food, clean water, education, and the message of hope through Christ. Our vision is to heal, uplift, and restore dignity where it’s most needed.",
+    aboutMissionNote: "With every mission, we walk alongside communities — listening, serving, and building together.",
+    aboutCoreValuesTitle: "Our Core Values",
+    aboutCoreValuesDesc: "Guided by faith and driven by compassion, these values shape every mission we undertake.",
+    aboutFaithDesc: "Our unwavering belief in Christ's love drives us to serve others with hope and purpose.",
+    aboutCompassionDesc: "We approach every person with empathy and wellbeing.",
+    aboutServiceDesc: "Through humble service, we work alongside communities to bring lasting change.",
+
+    // Training Page
+    trainingPageTitle: "Training Programs",
+    trainingPageDescription: "Empowering individuals with skills and knowledge to serve communities effectively.",
+    trainingEvangelismEssentials: "Evangelism Essentials",
+    trainingEvangelismEssentialsDesc: "Learn practical and spiritual tools to share your faith with confidence. Build meaningful connections through compassionate outreach.",
+    trainingEvangelismEssentialsDuration: "6 weeks",
+    trainingCommunityServiceLeadership: "Community Service Leadership",
+    trainingCommunityServiceLeadershipDesc: "Develop skills to organize and lead impactful local projects. Learn to mobilize communities for positive change.",
+    trainingCommunityServiceLeadershipDuration: "4 weeks",
+    trainingPrayerHealingMinistry: "Prayer and Healing Ministry",
+    trainingPrayerHealingMinistryDesc: "Gain understanding of intercessory prayer and how to minister healing. Develop spiritual discernment and compassionate care.",
+    trainingPrayerHealingMinistryDuration: "8 weeks",
+    trainingCreativeArtsMinistry: "Creative Arts in Ministry",
+    trainingCreativeArtsMinistryDesc: "Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.",
+    trainingCreativeArtsMinistryDuration: "1-day workshop"
   },
 
   ru: {
@@ -240,7 +270,189 @@ export const translations = {
     privacyPolicy: "Политика конфиденциальности",
     termsOfService: "Условия обслуживания",
     cookiePolicy: "Политика файлов cookie",
-    copyright: "© 2024 Миссия Рафаэля. Все права защищены."
+    copyright: "© 2024 Миссия Рафаэля. Все права защищены.",
+
+    // About Mission Section
+    aboutHeroTitle: "Мы приносим надежду через",
+    aboutFaith: "веру",
+    aboutCompassion: "сострадание",
+    aboutService: "служение",
+    aboutAnd: "и",
+    aboutDescription: "Миссия Рафаэля — это христианская некоммерческая организация, посвящённая преобразованию жизней через духовное наставничество, гуманитарную помощь и развитие сообществ. Мы служим в регионах, затронутых бедностью, кризисом и нехваткой ресурсов — приносим еду, чистую воду, образование и послание надежды через Христа. Наша цель — исцелять, вдохновлять и возвращать достоинство там, где это особенно нужно.",
+    aboutMissionNote: "В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.",
+    aboutCoreValuesTitle: "Наши ключевые ценности",
+    aboutCoreValuesDesc: "Руководствуясь верой и движимые состраданием, эти ценности определяют каждую нашу миссию.",
+    aboutFaithDesc: "Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.",
+    aboutCompassionDesc: "Мы относимся к каждому человеку с эмпатией и заботой.",
+    aboutServiceDesc: "Через смиренное служение мы работаем вместе с сообществами ради устойчивых изменений.",
+
+    // Training Page
+    trainingPageTitle: "Training Programs",
+    trainingPageDescription: "Empowering individuals with skills and knowledge to serve communities effectively.",
+    trainingEvangelismEssentials: "Evangelism Essentials",
+    trainingEvangelismEssentialsDesc: "Learn practical and spiritual tools to share your faith with confidence. Build meaningful connections through compassionate outreach.",
+    trainingEvangelismEssentialsDuration: "6 weeks",
+    trainingCommunityServiceLeadership: "Community Service Leadership",
+    trainingCommunityServiceLeadershipDesc: "Develop skills to organize and lead impactful local projects. Learn to mobilize communities for positive change.",
+    trainingCommunityServiceLeadershipDuration: "4 weeks",
+    trainingPrayerHealingMinistry: "Prayer and Healing Ministry",
+    trainingPrayerHealingMinistryDesc: "Gain understanding of intercessory prayer and how to minister healing. Develop spiritual discernment and compassionate care.",
+    trainingPrayerHealingMinistryDuration: "8 weeks",
+    trainingCreativeArtsMinistry: "Creative Arts in Ministry",
+    trainingCreativeArtsMinistryDesc: "Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.",
+    trainingCreativeArtsMinistryDuration: "1-day workshop"
+  },
+
+  ru: {
+    // Header
+    brandName: "Миссия Рафаэля",
+    projects: "Проекты",
+    about: "О нас",
+    fund: "Фонд",
+    training: "Обучение",
+    shop: "Магазин",
+    testimonies: "Свидетельства",
+    story: "История",
+    contact: "Контакты",
+    donate: "Пожертвовать",
+
+    // Dropdown items
+    cleanWaterInitiative: "Инициатива чистой воды",
+    educationProgram: "Образовательная программа",
+    healthcareOutreach: "Медицинская помощь",
+    ourMission: "Наша миссия",
+    ourTeam: "Наша команда",
+    history: "История",
+
+    // Hero Section
+    heroTitle: "Распространяем надежду через веру",
+    heroTitleHighlight: "и служение",
+    heroDescription: "Мы верим, что настоящие перемены происходят, когда практическая помощь и духовная надежда объединяются. Через акты сострадания мы доставляем еду, медицинскую помощь и необходимые ресурсы нуждающимся сообществам, а также делимся посланием веры, которое приносит силу и обновление.",
+    supportMission: "Поддержать нашу миссию",
+    learnMore: "Узнать больше",
+
+    // Mission Section
+    missionTitle: "Наша миссия",
+    missionDescription: "Мы призваны служить человечеству с состраданием, принося надежду и исцеление сообществам по всему миру через инициативы, основанные на вере.",
+
+    // Mission Cards
+    humanitarianAid: "Гуманитарная помощь",
+    humanitarianAidDesc: "Предоставление необходимых ресурсов и поддержки нуждающимся",
+    spiritualGuidance: "Духовное руководство", 
+    spiritualGuidanceDesc: "Предложение консультирования на основе веры и духовной поддержки для укрепления сообществ",
+    communityBuilding: "Развитие сообщества",
+    communityBuildingDesc: "Создание устойчивых программ, которые расширяют возможности",
+
+    // Language switcher
+    language: "Язык",
+    english: "English",
+    russian: "Русский",
+    polish: "Polski",
+
+    // Donation Page
+    donationPageTitle: "Продвигайте миссию через ваш дар",
+    donationPageDescription: "100% вашего пожертвования идет непосредственно на гуманитарную помощь, здравоохранение и религиозную деятельность.",
+    chooseAmountTitle: "Выберите сумму для пожертвования",
+    whereGiftGo: "Куда должен пойти ваш дар?",
+    mostNeeded: "Наиболее необходимое",
+    cleanWater: "Чистая вода",
+    medicalSupplies: "Медицинские принадлежности",
+    communityPrograms: "Общественные программы",
+    emergencyRelief: "Экстренная помощь",
+    giveOnce: "Пожертвовать один раз",
+    giveMonthly: "Ежемесячные пожертвования",
+    otherAmount: "Другая сумма",
+    total: "Итого:",
+    proceedToPayment: "Перейти к оплате",
+    backToDonationDetails: "Вернуться к деталям пожертвования",
+    paymentSuccessful: "Платеж успешен!",
+    thankYouDonation: "Спасибо за ваше щедрое пожертвование в размере",
+    paymentFailed: "Ошибка платежа",
+    paymentError: "Произошла ошибка при обработке вашего платежа. Пожалуйста, попробуйте еще раз.",
+    isGiftSecure: "Безопасен ли мой дар?",
+    taxDeductible: "Не облагается налогом?",
+    otherWaysToGive: "Другие способы пожертвования",
+    yourImpact: "Ваше влияние",
+    impactDescription: "Посмотрите, как ваше пожертвование действительно меняет жизнь сообществ по всему миру.",
+    impact25: "Чистая вода для семьи из 5 человек на один месяц",
+    impact50: "Медицинские принадлежности для мобильных клиник",
+    impact100: "Программы общественного центра для детей",
+
+    // Projects Page
+    projectsPageTitle: "Наши проекты",
+    projectsPageDescription: "Служение сообществам по всему миру через веру, сострадание и действие.",
+    streetEvangelismTitle: "Уличная евангелизация",
+    streetEvangelismDesc: "Делимся посланием надежды и веры в общественных местах, встречаясь с людьми там, где они находятся.",
+    tentEvangelismTitle: "Палаточная евангелизация",
+    tentEvangelismDesc: "Проведение собраний во временных палаточных условиях для охвата местных сообществ любовью и целью.",
+    personalEvangelismTitle: "Личная евангелизация",
+    personalEvangelismDesc: "Индивидуальные беседы для обмена верой и ободрением, построение значимых отношений.",
+    socialProjectsTitle: "Социальные проекты",
+    socialProjectsDesc: "Предоставление практической помощи и поддержки нуждающимся, демонстрация любви через действие.",
+    artEvangelismTitle: "Художественная евангелизация",
+    artEvangelismDesc: "Использование музыки, живописи и творческих искусств для вдохновения и соединения сердец с божественной красотой.",
+    churchSupportTitle: "Поддержка церквей",
+    churchSupportDesc: "Помощь церквям ресурсами, обучением и ободрением для укрепления их служений.",
+    healingMinistryTitle: "Служение исцеления",
+    healingMinistryDesc: "Предложение молитвы и духовной заботы для физического и эмоционального исцеления через божественную благодать.",
+    livesTouched: "Затронутых жизней",
+    communitiesServed: "Обслуженных сообществ",
+    activeProjects: "Активных проектов",
+    transformingLivesTitle: "Преобразование жизней, строительство сообществ",
+    transformingLivesDesc: "Каждый проект служит мостом надежды, соединяя сердца с верой, а сообщества с длительными изменениями. Через наши разнообразные служения мы наблюдаем преобразованные жизни, укрепленные семьи и процветающие сообщества, отражающие Божью любовь и сострадание.",
+    joinUsTitle: "Присоединяйтесь к нам в изменении мира",
+    joinUsDesc: "Ваша поддержка и участие могут помочь нам охватить больше сообществ и преобразовать больше жизней. Вместе мы можем распространить надежду и сострадание тем, кто в этом больше всего нуждается.",
+    getInvolved: "Принять участие",
+    donateNow: "Пожертвовать сейчас",
+    learnMoreBtn: "Узнать больше",
+
+    // Testimonies Page
+    testimoniesPageTitle: "Истории веры и",
+    testimoniesPageTitleHighlight: " преобразования",
+    testimoniesPageDescription: "Реальный опыт людей, чьи жизни были затронуты и изменены благодаря работе миссии.",
+    shareYourStoryTitle: "Поделитесь своей историей",
+    shareYourStoryDesc: "Коснулась ли Миссия Рафаэля вашей жизни? Мы хотели бы услышать ваше свидетельство и поделиться им с другими, кому нужна надежда.",
+    shareYourStoryBtn: "Поделиться историей",
+    readFullStory: "Читать полную историю",
+
+    // Footer
+    footerDesc: "Распространение Божьей любви через евангелизацию, исцеление и поддержку церквей.",
+    navigation: "Навигация",
+    legal: "Правовая информация",
+    privacyPolicy: "Политика конфиденциальности",
+    termsOfService: "Условия обслуживания",
+    cookiePolicy: "Политика файлов cookie",
+    copyright: "© 2024 Миссия Рафаэля. Все права защищены.",
+
+    // About Mission Section
+    aboutHeroTitle: "Мы приносим надежду через",
+    aboutFaith: "веру",
+    aboutCompassion: "сострадание",
+    aboutService: "служение",
+    aboutAnd: "и",
+    aboutDescription: "Миссия Рафаэля — это христианская некоммерческая организация, посвящённая преобразованию жизней через духовное наставничество, гуманитарную помощь и развитие сообществ. Мы служим в регионах, затронутых бедностью, кризисом и нехваткой ресурсов — приносим еду, чистую воду, образование и послание надежды через Христа. Наша цель — исцелять, вдохновлять и возвращать достоинство там, где это особенно нужно.",
+    aboutMissionNote: "В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.",
+    aboutCoreValuesTitle: "Наши ключевые ценности",
+    aboutCoreValuesDesc: "Руководствуясь верой и движимые состраданием, эти ценности определяют каждую нашу миссию.",
+    aboutFaithDesc: "Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.",
+    aboutCompassionDesc: "Мы относимся к каждому человеку с эмпатией и заботой.",
+    aboutServiceDesc: "Через смиренное служение мы работаем вместе с сообществами ради устойчивых изменений.",
+
+    // Training Page
+    trainingPageTitle: "Training Programs",
+    trainingPageDescription: "Empowering individuals with skills and knowledge to serve communities effectively.",
+    trainingEvangelismEssentials: "Evangelism Essentials",
+    trainingEvangelismEssentialsDesc: "Learn practical and spiritual tools to share your faith with confidence. Build meaningful connections through compassionate outreach.",
+    trainingEvangelismEssentialsDuration: "6 weeks",
+    trainingCommunityServiceLeadership: "Community Service Leadership",
+    trainingCommunityServiceLeadershipDesc: "Develop skills to organize and lead impactful local projects. Learn to mobilize communities for positive change.",
+    trainingCommunityServiceLeadershipDuration: "4 weeks",
+    trainingPrayerHealingMinistry: "Prayer and Healing Ministry",
+    trainingPrayerHealingMinistryDesc: "Gain understanding of intercessory prayer and how to minister healing. Develop spiritual discernment and compassionate care.",
+    trainingPrayerHealingMinistryDuration: "8 weeks",
+    trainingCreativeArtsMinistry: "Creative Arts in Ministry",
+    trainingCreativeArtsMinistryDesc: "Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.",
+    trainingCreativeArtsMinistryDuration: "1-day workshop"
   },
 
   pl: {
@@ -362,6 +574,36 @@ export const translations = {
     privacyPolicy: "Polityka prywatności",
     termsOfService: "Warunki usługi",
     cookiePolicy: "Polityka plików cookie",
-    copyright: "© 2024 Misja Rafaela. Wszystkie prawa zastrzeżone."
+    copyright: "© 2024 Misja Rafaela. Wszystkie prawa zastrzeżone.",
+
+    // About Mission Section
+    aboutHeroTitle: "Przynosimy nadzieję przez",
+    aboutFaith: "wiarę",
+    aboutCompassion: "współczucie",
+    aboutService: "służbę",
+    aboutAnd: "i",
+    aboutDescription: "Misja Rafaela to chrześcijańska organizacja non-profit, której celem jest przemiana życia poprzez duchowe przewodnictwo, pomoc humanitarną i wzmacnianie społeczności. Działamy w rejonach dotkniętych biedą, kryzysem i brakiem zasobów — dostarczamy żywność, czystą wodę, edukację oraz przesłanie nadziei przez Chrystusa. Naszą wizją jest uzdrawiać, podnosić i przywracać godność tam, gdzie jest to najbardziej potrzebne.",
+    aboutMissionNote: "W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.",
+    aboutCoreValuesTitle: "Nasze kluczowe wartości",
+    aboutCoreValuesDesc: "Kierując się wiarą i współczuciem, te wartości kształtują każdą naszą misję.",
+    aboutFaithDesc: "Nasza niezachwiana wiara w miłość Chrystusa skłania nas do służenia innym z nadzieją i celem.",
+    aboutCompassionDesc: "Podchodzimy do każdej osoby z empatią i troską.",
+    aboutServiceDesc: "Poprzez pokorną służbę współpracujemy ze społecznościami, aby wprowadzać trwałe zmiany.",
+
+    // Training Page
+    trainingPageTitle: "Training Programs",
+    trainingPageDescription: "Empowering individuals with skills and knowledge to serve communities effectively.",
+    trainingEvangelismEssentials: "Evangelism Essentials",
+    trainingEvangelismEssentialsDesc: "Learn practical and spiritual tools to share your faith with confidence. Build meaningful connections through compassionate outreach.",
+    trainingEvangelismEssentialsDuration: "6 weeks",
+    trainingCommunityServiceLeadership: "Community Service Leadership",
+    trainingCommunityServiceLeadershipDesc: "Develop skills to organize and lead impactful local projects. Learn to mobilize communities for positive change.",
+    trainingCommunityServiceLeadershipDuration: "4 weeks",
+    trainingPrayerHealingMinistry: "Prayer and Healing Ministry",
+    trainingPrayerHealingMinistryDesc: "Gain understanding of intercessory prayer and how to minister healing. Develop spiritual discernment and compassionate care.",
+    trainingPrayerHealingMinistryDuration: "8 weeks",
+    trainingCreativeArtsMinistry: "Creative Arts in Ministry",
+    trainingCreativeArtsMinistryDesc: "Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.",
+    trainingCreativeArtsMinistryDuration: "1-day workshop"
   }
 };

@@ -8,42 +8,37 @@ const TrainingPrograms = () => {
   const trainingPrograms = [
     {
       id: 1,
-      title: 'Evangelism Essentials',
-      description:
-        'Learn practical and spiritual tools to share your faith with confidence. Build meaningful connections through compassionate outreach.',
-      duration: '6 weeks',
+      title: t('trainingEvangelismEssentials'),
+      description: t('trainingEvangelismEssentialsDesc'),
+      duration: t('trainingEvangelismEssentialsDuration'),
       image: '/images/img_img_192x336.png',
     },
     {
       id: 2,
-      title: 'Community Service Leadership',
-      description:
-        'Develop skills to organize and lead impactful local projects. Learn to mobilize communities for positive change.',
-      duration: '4 weeks',
+      title: t('trainingCommunityServiceLeadership'),
+      description: t('trainingCommunityServiceLeadershipDesc'),
+      duration: t('trainingCommunityServiceLeadershipDuration'),
       image: '/images/img_img_1.png',
     },
     {
       id: 3,
-      title: 'Prayer and Healing Ministry',
-      description:
-        'Gain understanding of intercessory prayer and how to minister healing. Develop spiritual discernment and compassionate care.',
-      duration: '8 weeks',
+      title: t('trainingPrayerHealingMinistry'),
+      description: t('trainingPrayerHealingMinistryDesc'),
+      duration: t('trainingPrayerHealingMinistryDuration'),
       image: '/images/img_img_2.png',
     },
     {
       id: 4,
-      title: 'Creative Arts in Ministry',
-      description:
-        'Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.',
-      duration: '1-day workshop',
+      title: t('trainingCreativeArtsMinistry'),
+      description: t('trainingCreativeArtsMinistryDesc'),
+      duration: t('trainingCreativeArtsMinistryDuration'),
       image: '/images/img_img_3.png',
     },
     {
       id: 5,
-      title: 'Church Support & Development',
-      description:
-        'Training for strengthening local churches and leaders. Build sustainable ministry foundations for lasting impact.',
-      duration: '12 weeks',
+      title: t('trainingChurchSupportDevelopment'),
+      description: t('trainingChurchSupportDevelopmentDesc'),
+      duration: t('trainingChurchSupportDevelopmentDuration'),
       image: '/images/img_img_4.png',
     },
   ];

@@ -48,7 +48,7 @@ const Home = () => {
               </h1>
 
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-[#4b5563] font-['Poppins'] mb-8 lg:mb-9">
-                {t('heroDescription')}
+                {t('We believe that true change happens when practical help and spiritual hope come together. Through acts of compassion, we deliver food, medical care, and essential resources to struggling communities, while also sharing the message of faith that brings strength and renewal.')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -56,14 +56,14 @@ const Home = () => {
                   variant="primary"
                   className="pt-[18px] pr-[28px] pb-[18px] pl-[28px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] w-full sm:w-auto"
                 >
-                  {t('supportMission')}
+                  {t('Support Our Mission')}
                 </Button>
 
                 <Button
                   variant="outline"
                   className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-[#3c8a7a] font-['Poppins'] border-2 border-[#3c8a7a] w-full sm:w-auto"
                 >
-                  {t('learnMore')}
+                  {t('learn More')}
                 </Button>
               </div>
             </div>

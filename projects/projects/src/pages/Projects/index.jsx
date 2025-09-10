@@ -2,6 +2,9 @@ import React from 'react';
 import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 
+// не понимаю как но тут импорт работает пускай тут торчит
+import heroBg from './public/projects.png';
+
 const Projects = () => {
   const projectsData = [
     {
@@ -63,8 +66,12 @@ const Projects = () => {
 
           {/* Hero Section */}
           <section className="relative w-full">
-            <div className="absolute inset-0 bg-[url('/images/img_img.png')] bg-cover bg-center z-0"></div>
-            <div className="absolute inset-0 bg-global-1 z-10"></div>
+            {/* ✅ Фон через импорт */}
+            <div
+              className="absolute inset-0 bg-center bg-cover z-0"
+              style={{ backgroundImage: `url(${heroBg})` }}
+            />
+            <div className="absolute inset-0 bg-global-1 z-10" />
             <div className="relative z-20 w-full">
               <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-center items-start w-full pt-[56px] sm:pt-[80px] md:pt-[100px] lg:pt-[112px] pb-[56px] sm:pb-[80px] md:pb-[100px] lg:pb-[112px]">

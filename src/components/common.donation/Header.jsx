@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Button from '../ui/Button';
 
+// ВАЖНО: путь относительный к файлу Header.jsx (скорее всего src/components/common/Header.jsx)
+import capIcon from '../common.donation/public/images/cap.png';
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,7 +12,7 @@ const Header = () => {
     { label: 'Projects', href: '#projects' },
     { label: 'About', href: '#about' },
     { label: 'Get Involved', href: '#get-involved' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -23,9 +26,9 @@ const Header = () => {
             </h1>
           </div>
 
-          {/* Hamburger Menu Icon (Mobile only) */}
-          <button 
-            className="block lg:hidden p-2" 
+          {/* Hamburger (mobile) */}
+          <button
+            className="block lg:hidden p-2"
             aria-label="Open menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -34,20 +37,21 @@ const Header = () => {
             </svg>
           </button>
 
-          {/* Desktop Navigation */}
+          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-[54px]">
-            {menuItems?.map((item, index) => (
-              <button
-                key={index}
+            {menuItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
                 role="menuitem"
                 className="text-[14px] font-inter font-medium leading-[17px] text-global-3 hover:text-global-2 transition-colors duration-200"
               >
-                {item?.label}
-              </button>
+                {item.label}
+              </a>
             ))}
           </nav>
 
-          {/* Desktop Donate Button */}
+          {/* Donate (desktop) */}
           <div className="hidden lg:block">
             <Button
               variant="primary"
@@ -58,17 +62,18 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile nav */}
         <nav className={`${menuOpen ? 'block' : 'hidden'} lg:hidden mt-4 pb-4 border-t border-global-2 pt-4`}>
           <div className="flex flex-col space-y-3">
-            {menuItems?.map((item, index) => (
-              <button
-                key={index}
+            {menuItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
                 role="menuitem"
                 className="text-[14px] font-inter font-medium leading-[17px] text-global-3 hover:text-global-2 transition-colors duration-200 text-left py-2"
               >
-                {item?.label}
-              </button>
+                {item.label}
+              </a>
             ))}
             <div className="pt-2">
               <Button
@@ -81,6 +86,21 @@ const Header = () => {
             </div>
           </div>
         </nav>
+
+        {/* Карточка доната с картинкой cap.png */}
+        <div className="mt-6 p-4 bg-white shadow-md rounded-lg flex items-center gap-4 max-w-[520px]">
+          <img
+            src={capIcon}
+            alt="Clean water"
+            className="w-12 h-12 object-contain"
+          />
+          <div>
+            <p className="text-[16px] font-semibold text-global-2">$25</p>
+            <p className="text-[14px] text-global-3">
+              Clean water for a family of 5 for one month
+            </p>
+          </div>
+        </div>
       </div>
     </header>
   );
