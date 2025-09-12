@@ -76,7 +76,7 @@ const DonationPage = () => {
               </div>
               <div className="w-full">
                 <img
-                  src="/images/img_img.png"
+                  src="/images/donat.png"
                   alt="Mission impact"
                   className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] object-cover rounded-[16px]"
                 />
@@ -182,13 +182,13 @@ const DonationPage = () => {
                         className="w-full bg-global-1 text-global-7 py-4 px-8 rounded-[8px] text-[18px] font-inter font-bold flex items-center justify-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {t('proceedToPayment')}
-                        <img src="/images/img_i.svg" alt="arrow" className="w-[14px] h-[20px] ml-1" />
+
                       </Button>
 
                       <div className="flex justify-center items-end gap-4 py-2">
-                        <img src="/images/img_frame.svg" alt="payment method" className="w-[30px] h-[24px]" />
-                        <img src="/images/img_frame_blue_gray_100.svg" alt="payment method" className="w-[18px] h-[24px]" />
-                        <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="payment method" className="w-[26px] h-[24px]" />
+                        <img src="/images/stripe.png" alt="payment method" className="w-[35px] h-[24px]" />
+                        <img src="/images/paypal.png" alt="payment method" className="w-[18px] h-[24px]" />
+                        <img src="/images/fondy.png" alt="payment method" className="w-[27px] h-[24px]" />
                       </div>
                     </>
                   ) : (
@@ -248,12 +248,6 @@ const DonationPage = () => {
                       )}
                     </div>
                   )}
-
-                  <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-center">
-                    <button className="text-[14px] font-inter text-global-2 hover:underline">{t('isGiftSecure')}</button>
-                    <button className="text-[14px] font-inter text-global-2 hover:underline">{t('taxDeductible')}</button>
-                    <button className="text-[14px] font-inter text-global-2 hover:underline">{t('otherWaysToGive')}</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -261,41 +255,7 @@ const DonationPage = () => {
         </div>
       </div> 
 
-      {/* Impact Section */}
-      <section className="w-full bg-global-1 py-12 sm:py-16 lg:py-20">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-12 sm:gap-16">
-            <div className="text-center px-4 sm:px-8 lg:px-14">
-              <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-inter font-bold text-global-7 mb-3">
-                {t('yourImpact')}
-              </h2>
-              <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-inter text-global-7 max-w-2xl mx-auto">
-                {t('impactDescription')}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <div className="bg-global-4 rounded-[16px] p-6 sm:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center gap-4 sm:gap-5">
-                <img src="/images/img_div.svg" alt="water drop icon" className="w-[36px] h-[44px]" />
-                <h3 className="text-[24px] font-inter font-bold text-global-2 mb-3">$25</h3>
-                <p className="text-[16px] font-inter text-global-3">{t('impact25')}</p>
-              </div>
-
-              <div className="bg-global-4 rounded-[16px] p-6 sm:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center gap-4 sm:gap-5">
-                <img src="/images/img_vector.svg" alt="medical supplies icon" className="w-[36px] h-[44px]" />
-                <h3 className="text-[24px] font-inter font-bold text-global-2 mb-3">$50</h3>
-                <p className="text-[16px] font-inter text-global-3">{t('impact50')}</p>
-              </div>
-
-              <div className="bg-global-4 rounded-[16px] p-6 sm:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center gap-4 sm:gap-5">
-                <img src="/images/img_i_orange_900.svg" alt="community center icon" className="w-[36px] h-[44px]" />
-                <h3 className="text-[24px] font-inter font-bold text-global-2 mb-3">$100</h3>
-                <p className="text-[16px] font-inter text-global-3">{t('impact100')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       {/* FOOTER */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">
@@ -312,7 +272,7 @@ const DonationPage = () => {
               <div className="flex items-center gap-3">
                 <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
                 <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
               </div>
             </div>
 

@@ -28,7 +28,6 @@ const Home = () => {
         <div className="hero-bg-blur" />
         <div className="hero-bg-overlay" />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(30,34,45,0.18)', zIndex: 2 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.6)', opacity: 1, zIndex: 3 }} />
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 4 }}>
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-16 py-8 sm:py-12 lg:py-16">
             {/* Logo */}
@@ -42,12 +41,12 @@ const Home = () => {
 
             {/* Content */}
             <div className="w-full lg:w-[64%] flex flex-col items-center lg:items-start text-center lg:text-left">
-              <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[40px] sm:leading-[50px] lg:leading-[60px] text-[#1f2937] font-['Poppins'] mb-4">
-                <span className="text-[#1f2937]">{t('heroTitle')} </span>
+              <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[40px] sm:leading-[50px] lg:leading-[60px] text-white font-['Poppins'] mb-4">
+                <span className="text-white">{t('heroTitle')} </span>
                 <span className="text-[#3b8a79]">{t('heroTitleHighlight')}</span>
               </h1>
 
-              <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-[#4b5563] font-['Poppins'] mb-8 lg:mb-9">
+              <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-white font-['Poppins'] mb-8 lg:mb-9">
                 {t('We believe that true change happens when practical help and spiritual hope come together. Through acts of compassion, we deliver food, medical care, and essential resources to struggling communities, while also sharing the message of faith that brings strength and renewal.')}
               </p>
 
@@ -61,7 +60,7 @@ const Home = () => {
 
                 <Button
                   variant="outline"
-                  className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-[#3c8a7a] font-['Poppins'] border-2 border-[#3c8a7a] w-full sm:w-auto"
+                  className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto"
                 >
                   {t('learn More')}
                 </Button>
@@ -174,15 +173,15 @@ const Home = () => {
 
             <div className="w-full flex flex-wrap gap-6 justify-center">
               <button className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
-                <img src="/images/img_i.svg" alt="PayPal" className="w-[20px] h-[24px]" />
+                <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
               </button>
               <button className="bg-white text-[#635BFF] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
-                <img src="/images/img_i_deep_purple_a200.svg" alt="Stripe" className="w-[24px] h-[24px]" />
+                <img src="/images/stripe.svg" alt="Stripe" className="w-[24px] h-[24px]" />
                 Stripe
               </button>
               <button className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
-                <img src="/images/img_i_orange_900.svg" alt="Fondy" className="w-[22px] h-[24px]" />
+                <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px]" />
                 Fondy
               </button>
             </div>
@@ -362,7 +361,7 @@ const Home = () => {
               <div className="flex items-center gap-3">
                 <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
                 <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px]" />
               </div>
             </div>
 
@@ -373,7 +372,7 @@ const Home = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
+                  {['About', 'Projects','Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
                     (item) => (
                       <p key={item} className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
                         {item}
@@ -439,4 +438,3 @@ const Home = () => {
 };
 
 export default Home;
-

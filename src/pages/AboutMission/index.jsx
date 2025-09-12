@@ -8,7 +8,6 @@ import aboutHero from './public/images/about.png';
 // Иконки для блоков Core Values
 // faith:  src/pages/AboutMission/public/images/fait.png
 // compassion: src/pages/AboutMission/compassion.png  (именно тут!)
-// service: src/pages/AboutMission/public/images/service.png
 import faithIcon from './public/images/fait.png';
 import compassionIcon from './compassion.png';
 import serviceIcon from './public/images/service.png';
@@ -111,6 +110,97 @@ const AboutMission = () => {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="w-full bg-[#333333] py-8 lg:py-10">
+        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
+            {/* Brand */}
+            <div className="w-full lg:w-[22%]">
+              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
+                Raphael Mission
+              </h3>
+              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
+                {t('footerDesc')}
+              </p>
+              <div className="flex items-center gap-3">
+                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
+                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
+                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+              </div>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
+              {/* Navigation */}
+              <div className="w-full lg:w-[18%]">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                  {t('navigation')}
+                </h4>
+                <div className="space-y-2">
+                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
+                    (item) => (
+                      <p
+                        key={item}
+                        className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']"
+                      >
+                        {item}
+                      </p>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              {/* Contact */}
+              <div className="w-full lg:w-[48%]">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                  {t('contact')}
+                </h4>
+                <div className="space-y-2 max-w-[84%]">
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    +1 (555) 123-4567
+                  </p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    info@raphaelmission.org
+                  </p>
+                  <div>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      123 Mission Street
+                    </p>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      Faith City, FC 12345
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Legal */}
+              <div className="w-full lg:w-[42%]">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                  {t('legal')}
+                </h4>
+                <div className="space-y-2">
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('privacyPolicy')}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('termsOfService')}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('cookiePolicy')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-center pt-6 border-t border-gray-600">
+            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+              {t('copyright')}
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

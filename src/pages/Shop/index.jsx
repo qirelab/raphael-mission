@@ -22,7 +22,7 @@ const Shop = () => {
       description:
         'Daily reflections and guided prayers for spiritual growth and mindfulness.',
       price: '$24',
-      image: '/images/shop/img_img_6.png',
+      image: '/images/bible.png',
     },
     {
       id: 3,
@@ -30,8 +30,8 @@ const Shop = () => {
       description:
         'Comfortable organic cotton tee featuring our mission logo and values.',
       price: '$28',
-      // вернул исходную картинку, чтобы не дублировать с бутылкой
-      image: '/images/shop/img_img_7.png',
+
+      image: '/images/t.shurt.png',
     },
     {
       id: 4,
@@ -46,19 +46,19 @@ const Shop = () => {
 
   const impactAreas = [
     {
-      icon: '/assets/img_div_white_a700.svg',
+      icon: '/images/cleanwater.png',
       title: 'Clean Water Access',
       description:
         '25% of proceeds fund water wells and purification systems in underserved communities.',
     },
     {
-      icon: '/assets/img_div_white_a700_64x64.svg',
+      icon: '/images/human.png',
       title: 'Humanitarian Aid',
       description:
         '35% supports emergency relief, food programs, and medical assistance worldwide.',
     },
     {
-      icon: '/assets/img_div_64x64.svg',
+      icon: '/images/community.png',
       title: 'Community Building',
       description:
         '40% funds education programs, spiritual guidance, and local development projects.',
@@ -69,14 +69,14 @@ const Shop = () => {
     {
       name: 'Maria Santos',
       role: 'Community Leader, Guatemala',
-      image: '/images/shop/img_img_48x48.png',
+      image: '/images/saramit.png',
       testimonial:
         'Thanks to the water bottle sales, our village now has clean drinking water for the first time. My children no longer get sick from contaminated water. This mission truly cares about our wellbeing.',
     },
     {
       name: 'David Chen',
       role: 'Customer & Supporter',
-      image: '/images/shop/img_img_9.png',
+      image: '/images/davidch.png',
       testimonial:
         'I bought the prayer journal and it has transformed my daily spiritual practice. Knowing that my purchase also helps fund humanitarian projects makes it even more meaningful.',
     },
@@ -130,87 +130,9 @@ const Shop = () => {
                       {p.price}
                     </span>
 
-                    <button
-                      className="inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] lg:text-[14px] font-medium text-white bg-[#22c55e] hover:bg-[#16a34a] transition shadow-[0_2px_6px_rgba(22,163,74,0.35)]"
-                      type="button"
-                    >
-                      Add to Cart
-                    </button>
+                    
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* IMPACT */}
-      <section className="w-full bg-[#efefef] py-10 sm:py-12 lg:py-14">
-        <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center text-center gap-2 mb-8">
-            <h2 className="text-[22px] sm:text-[26px] lg:text-[28px] font-poppins font-bold text-[#1f2937]">
-              Your Purchase Makes a Difference
-            </h2>
-            <p className="text-[14px] sm:text-[16px] lg:text-[18px] font-poppins text-[#6b7280] max-w-[860px]">
-              Every item you buy directly funds our mission projects around the
-              world
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {impactAreas.map((a, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center px-4">
-                <div className="w-[64px] h-[64px] rounded-full bg-[#e8f5ee] flex items-center justify-center mb-4 shadow-[inset_0_0_0_2px_#b9e2cf]">
-                  <img src={a.icon} alt={a.title} className="w-7 h-7" />
-                </div>
-                <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#1f2937]">
-                  {a.title}
-                </h3>
-                <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mt-2 max-w-[380px]">
-                  {a.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* STORIES */}
-      <section className="w-full bg-white py-10 sm:py-12 lg:py-14">
-        <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center text-center gap-2 mb-8">
-            <h2 className="text-[22px] sm:text-[26px] lg:text-[28px] font-poppins font-bold text-[#1f2937]">
-              Stories of Impact
-            </h2>
-            <p className="text-[14px] sm:text-[16px] lg:text-[18px] font-poppins text-[#6b7280] max-w-[760px]">
-              See how your purchases are changing lives around the world
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {testimonials.map((tst, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-[10px] shadow-[0_2px_10px_rgba(0,0,0,0.08)] border border-[#eef0f3] p-6"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={tst.image}
-                    alt={tst.name}
-                    className="w-12 h-12 rounded-full"
-                  />
-                  <div>
-                    <h4 className="text-[14px] lg:text-[16px] font-poppins font-semibold text-[#0f172a]">
-                      {tst.name}
-                    </h4>
-                    <p className="text-[12px] lg:text-[13px] font-poppins text-[#6b7280]">
-                      {tst.role}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[22px]">
-                  “{tst.testimonial}”
-                </p>
               </div>
             ))}
           </div>
@@ -232,7 +154,7 @@ const Shop = () => {
               <div className="flex items-center gap-3">
                 <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
                 <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
               </div>
             </div>
 

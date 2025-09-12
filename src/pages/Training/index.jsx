@@ -11,7 +11,7 @@ const TrainingPrograms = () => {
       title: t('trainingEvangelismEssentials'),
       description: t('trainingEvangelismEssentialsDesc'),
       duration: t('trainingEvangelismEssentialsDuration'),
-      image: '/images/img_img_192x336.png',
+      image: '/images/evangelizm.png',
     },
     {
       id: 2,
@@ -44,22 +44,7 @@ const TrainingPrograms = () => {
   ];
 
   const testimonials = [
-    {
-      id: 1,
-      name: 'Sarah Mitchell',
-      role: 'Community Service Leadership Graduate',
-      image: '/images/img_img_64x64.png',
-      text:
-        'The training gave me the confidence and tools I needed to start a food distribution program in my neighborhood. We have now served over 500 families in need.',
-    },
-    {
-      id: 2,
-      name: 'David Rodriguez',
-      role: 'Evangelism Essentials Graduate',
-      image: '/images/img_img_5.png',
-      text:
-        'This program transformed how I share my faith. I learned to listen with compassion and speak with love. It has changed countless conversations and relationships.',
-    },
+    
   ];
 
   return (
@@ -74,25 +59,19 @@ const TrainingPrograms = () => {
             alt="Training"
             className="w-full h-[420px] sm:h-[520px] lg:h-[600px] object-cover"
           />
-          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-white/60" />
         </div>
 
         <div className="relative z-10 max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="min-h-[420px] sm:min-h-[520px] lg:min-h-[600px] flex flex-col justify-center">
-            <h1 className="text-white font-bold font-[Poppins] text-[28px] sm:text-[40px] lg:text-[56px] leading-tight mb-3">
+            <h1 className="text-black font-bold font-[Poppins] text-[28px] sm:text-[40px] lg:text-[56px] leading-tight mb-3">
               Equipping Believers for Service
             </h1>
-            <p className="text-[#e5f3ed] text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] max-w-[780px]">
+            <p className="text-black text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] lg:leading-[28px] max-w-none">
               Faith-based training programs to inspire, empower, and prepare you for ministry and community impact.
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4">
-              <button className="inline-flex items-center justify-center rounded-md bg-[#22c55e] hover:bg-[#16a34a] text-white font-semibold px-6 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
-                Enroll Now
-              </button>
-              <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 bg-transparent hover:bg-white/10">
-                Learn More
-              </button>
             </div>
           </div>
         </div>
@@ -184,9 +163,6 @@ const TrainingPrograms = () => {
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center rounded-md bg-white text-[#275a3a] font-semibold px-6 py-3 shadow-[0_4px_18px_rgba(0,0,0,0.10)]">
-                Enroll Today
-              </button>
               <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10">
                 Contact Us for Info
               </button>
@@ -210,7 +186,7 @@ const TrainingPrograms = () => {
               <div className="flex items-center gap-3">
                 <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
                 <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
               </div>
             </div>
 

@@ -69,7 +69,7 @@ const TestimoniesPage = () => {
         />
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-[100px] sm:py-[150px] md:py-[194px] text-center">
-            <div className="max-w-4xl mx-auto">
+            <div className="mx-auto lg:max-w-none">
               <h1 className="text-[30px] sm:text-[45px] md:text-[60px] font-bold leading-tight mb-4 sm:mb-6">
                 <span className="text-global-2">Stories of Faith and</span>
                 <span className="text-global-3"> Transformation</span>

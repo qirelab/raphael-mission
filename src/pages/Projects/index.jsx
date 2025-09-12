@@ -68,7 +68,7 @@ const Projects = () => {
 
           {/* Hero Section */}
           <section className="relative w-full min-h-[400px]">
-            <div className="absolute inset-0 bg-[url('/images/testimonies.jpg')] bg-cover bg-center z-0"></div>
+            <div className="absolute inset-0 bg-[url('/images/projects.png')] bg-cover bg-center z-0"></div>
             <div className="absolute inset-0 bg-[rgba(18,60,52,0.6)] z-10"></div>
             <div className="relative z-20 w-full">
               <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
