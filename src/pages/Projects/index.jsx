@@ -205,7 +205,7 @@ const Projects = () => {
                 {/* Brand Section */}
                 <div className="w-full lg:w-[22%]">
                   <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-[#ffffff] font-['Poppins'] mb-4">
-                    Raphael Mission
+                    {t('brandName')}
                   </h3>
                   <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                     {t('footerDesc')}
@@ -224,39 +224,21 @@ const Projects = () => {
                       {t('navigation')}
                     </h4>
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          About
-                        </span>
-                        <img src="/images/img_arrow_down_white_a700.svg" alt="dropdown" className="w-[10px] h-[6px]" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          Projects
-                        </span>
-                        <img src="/images/img_arrow_down_white_a700.svg" alt="dropdown" className="w-[10px] h-[6px]" />
-                      </div>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Fund
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Testimonies
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Training
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Story
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Shop
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Contact
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Donate
-                      </p>
+                      {[
+                        t('about'),
+                        t('projects'),
+                        t('fund'),
+                        t('testimonies'),
+                        t('training'),
+                        t('story'),
+                        t('shop'),
+                        t('contact'),
+                        t('donate')
+                      ].map((item) => (
+                        <p key={item} className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                          {item}
+                        </p>
+                      ))}
                     </div>
                   </div>
 

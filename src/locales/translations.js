@@ -27,6 +27,17 @@ export const translations = {
     supportMission: "Support Our Mission",
     learnMore: "Learn More",
 
+    // Home - Support section
+    supportOurMission: "Support Our Mission",
+    supportMissionDesc: "Your generous donation helps us reach more people with God's love, healing, and hope. Every contribution makes a difference in transforming lives and communities.",
+
+    // Home - Testimonies section
+    testimoniesDesc: "Stories of faith and transformation that show how God's love is changing lives through Raphael Mission",
+
+    // Home - Contact section
+    contactUsTitle: "Contact Us",
+    contactUsDesc: "We'd love to hear from you. Get in touch with us to learn more about our mission or to get involved.",
+
     // Mission Section
     missionTitle: "Our Mission",
     missionDescription: "We are called to serve humanity with compassion, bringing hope and healing to communities worldwide through faith-based initiatives.",
@@ -178,6 +189,17 @@ export const translations = {
     heroDescription: "Мы верим, что настоящие перемены происходят, когда практическая помощь и духовная надежда объединяются. Через акты сострадания мы доставляем еду, медицинскую помощь и необходимые ресурсы нуждающимся сообществам, а также делимся посланием веры, которое приносит силу и обновление.",
     supportMission: "Поддержать нашу миссию",
     learnMore: "Узнать больше",
+
+    // Home - Support section
+    supportOurMission: "Поддержите нашу миссию",
+    supportMissionDesc: "Ваше щедрое пожертвование помогает нам достичь большего количества людей с Божьей любовью, исцелением и надеждой. Каждый вклад важен и меняет жизни и сообщества.",
+
+    // Home - Testimonies section
+    testimoniesDesc: "Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Рафаэля",
+
+    // Home - Contact section
+    contactUsTitle: "Свяжитесь с нами",
+    contactUsDesc: "Мы будем рады вам помочь. Свяжитесь с нами, чтобы узнать больше о нашей миссии или присоединиться к служению.",
 
     // Mission Section
     missionTitle: "Наша миссия",
@@ -482,6 +504,17 @@ export const translations = {
     heroDescription: "Wierzymy, że prawdziwa zmiana następuje, gdy praktyczna pomoc i duchowa nadzieja łączą się razem. Poprzez akty współczucia dostarczamy żywność, opiekę medyczną i niezbędne zasoby do walczących społeczności, jednocześnie dzieląc się przesłaniem wiary, które przynosi siłę i odnowę.",
     supportMission: "Wesprzyj naszą misję",
     learnMore: "Dowiedz się więcej",
+
+    // Home - Support section
+    supportOurMission: "Wesprzyj naszą misję",
+    supportMissionDesc: "Twoja hojna darowizna pomaga nam dotrzeć do większej liczby osób z Bożą miłością, uzdrowieniem i nadzieją. Każdy wkład ma znaczenie w przemianie życia i społeczności.",
+
+    // Home - Testimonies section
+    testimoniesDesc: "Historie wiary i transformacji, które pokazują, jak Boża miłość zmienia życie poprzez Misję Rafaela",
+
+    // Home - Contact section
+    contactUsTitle: "Skontaktuj się z nami",
+    contactUsDesc: "Chętnie od Ciebie usłyszymy. Skontaktuj się z nami, aby dowiedzieć się więcej o naszej misji lub włączyć się w działanie.",
 
     // Mission Section
     missionTitle: "Nasza misja",

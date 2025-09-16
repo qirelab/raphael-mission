@@ -118,7 +118,7 @@ const TestimoniesPage = () => {
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-[#ffffff] font-['Poppins'] mb-4">
-                Raphael Mission
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 Spreading God's love through evangelism, healing, and church support.
@@ -133,10 +133,20 @@ const TestimoniesPage = () => {
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
               <div className="w-full lg:w-[18%]">
                 <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-[#ffffff] font-['Poppins'] mb-4">
-                  Navigation
+                  {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About','Projects','Fund','Testimonies','Training','Story','Shop','Contact','Donate'].map((item)=>(
+                  {[
+                    t('about'),
+                    t('projects'),
+                    t('fund'),
+                    t('testimonies'),
+                    t('training'),
+                    t('story'),
+                    t('shop'),
+                    t('contact'),
+                    t('donate')
+                  ].map((item)=>(
                     <p key={item} className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{item}</p>
                   ))}
                 </div>

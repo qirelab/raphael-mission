@@ -65,10 +65,10 @@ const TrainingPrograms = () => {
         <div className="relative z-10 max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="min-h-[420px] sm:min-h-[520px] lg:min-h-[600px] flex flex-col justify-center">
             <h1 className="text-black font-bold font-[Poppins] text-[28px] sm:text-[40px] lg:text-[56px] leading-tight mb-3">
-              Equipping Believers for Service
+              {t('trainingHeroTitle')}
             </h1>
             <p className="text-black text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] lg:leading-[28px] max-w-none">
-              Faith-based training programs to inspire, empower, and prepare you for ministry and community impact.
+              {t('trainingHeroDescription')}
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4">
@@ -82,10 +82,10 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-[#0f172a] font-bold font-[Poppins] text-[24px] sm:text-[28px] lg:text-[32px]">
-              Our Training Programs
+              {t('trainingProgramsTitle')}
             </h2>
             <p className="mt-2 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[760px] mx-auto">
-              Comprehensive faith-based training designed to equip you for meaningful service and ministry
+              {t('trainingProgramsDescription')}
             </p>
           </div>
 
@@ -117,11 +117,10 @@ const TrainingPrograms = () => {
               2,500+
             </h2>
             <h3 className="mt-2 text-[#0f172a] font-semibold text-[18px] sm:text-[20px]">
-              Believers Equipped for Global Service
+              {t('trainingStatsTitle')}
             </h3>
             <p className="mt-3 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[900px] mx-auto">
-              Our comprehensive training programs have prepared thousands of individuals to serve effectively in their
-              communities and beyond, creating lasting impact through faith-driven action.
+              {t('trainingStatsDescription')}
             </p>
           </div>
         </div>
@@ -155,16 +154,15 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-white font-bold font-[Poppins] text-[22px] sm:text-[26px]">
-              Ready to grow in faith and service?
+              {t('trainingCtaTitle')}
             </h2>
             <p className="mt-2 text-white/90 text-[14px] sm:text-[16px] max-w-[820px] mx-auto">
-              Join thousands of believers who have been equipped through our training programs to make a lasting impact
-              in their communities.
+              {t('trainingCtaDescription')}
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
               <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10">
-                Contact Us for Info
+                {t('trainingContactButton')}
               </button>
             </div>
           </div>

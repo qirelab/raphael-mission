@@ -55,14 +55,14 @@ const Home = () => {
                   variant="primary"
                   className="pt-[18px] pr-[28px] pb-[18px] pl-[28px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] w-full sm:w-auto"
                 >
-                  {t('Support Our Mission')}
+                  {t('supportMission')}
                 </Button>
 
                 <Button
                   variant="outline"
                   className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto"
                 >
-                  {t('learn More')}
+                  {t('learnMore')}
                 </Button>
               </div>
             </div>
@@ -165,10 +165,10 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-6">
-              {t('Support Our Mission')}
+              {t('supportOurMission')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-white/90 font-['Poppins'] max-w-[62%] mx-auto mb-12">
-              Your generous donation helps us reach more people with God's love, healing, and hope. Every contribution makes a difference in transforming lives and communities.
+              {t('supportMissionDesc')}
             </p>
 
             <div className="w-full flex flex-wrap gap-6 justify-center">
@@ -197,7 +197,7 @@ const Home = () => {
               {t('testimonies')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-['Poppins'] max-w-[44%]">
-              {t('Stories of faith and transformation that show how God’s love is changing lives through Raphael Mission')}
+              {t('testimoniesDesc')}
             </p>
           </div>
 
@@ -235,10 +235,10 @@ const Home = () => {
             {/* Info */}
             <div className="w-full lg:w-1/2">
               <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-3">
-                Contact Us
+                {t('contactUsTitle')}
               </h2>
               <p className="max-w-[82%] mb-8 text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#dcfce7] font-['Poppins']">
-                We'd love to hear from you. Get in touch with us to learn more about our mission or to get involved.
+                {t('contactUsDesc')}
               </p>
 
               <div className="space-y-6">
@@ -353,7 +353,7 @@ const Home = () => {
             {/* Brand */}
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                Raphael Mission
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 {t('footerDesc')}
@@ -372,13 +372,20 @@ const Home = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About', 'Projects','Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
-                    (item) => (
-                      <p key={item} className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {item}
-                      </p>
-                    ),
-                  )}
+                  {[
+                    t('about'),
+                    t('projects'),
+                    t('testimonies'),
+                    t('training'),
+                    t('story'),
+                    t('shop'),
+                    t('contact'),
+                    t('donate')
+                  ].map((item) => (
+                    <p key={item} className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      {item}
+                    </p>
+                  ))}
                 </div>
               </div>
 
