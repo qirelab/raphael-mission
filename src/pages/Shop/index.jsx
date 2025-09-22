@@ -9,11 +9,6 @@ const Shop = () => {
   const products = [
     {
       id: 1,
-      name: 'Handcrafted Prayer',
-      description:
-        'Beautiful wooden cross made by local artisans in our partner communities.',
-      price: '$35',
-      // ✅ как просили
       image: '/images/shop/img_img_192x280.png',
     },
     {
@@ -30,8 +25,7 @@ const Shop = () => {
       description:
         'Comfortable organic cotton tee featuring our mission logo and values.',
       price: '$28',
-
-      image: '/images/t.shurt.png',
+      image: '/images/t.shirt.png', // фикс опечатки
     },
     {
       id: 4,
@@ -39,29 +33,7 @@ const Shop = () => {
       description:
         'Eco-friendly bottle supporting our clean water initiatives worldwide.',
       price: '$32',
-      // ✅ как просили
       image: '/images/shop/img_img_8.png',
-    },
-  ];
-
-  const impactAreas = [
-    {
-      icon: '/images/cleanwater.png',
-      title: 'Clean Water Access',
-      description:
-        '25% of proceeds fund water wells and purification systems in underserved communities.',
-    },
-    {
-      icon: '/images/human.png',
-      title: 'Humanitarian Aid',
-      description:
-        '35% supports emergency relief, food programs, and medical assistance worldwide.',
-    },
-    {
-      icon: '/images/community.png',
-      title: 'Community Building',
-      description:
-        '40% funds education programs, spiritual guidance, and local development projects.',
     },
   ];
 
@@ -91,13 +63,10 @@ const Shop = () => {
         <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
           <div className="flex flex-col items-center text-center gap-4 sm:gap-5">
             <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-poppins font-bold leading-tight text-[#275a3a]">
-              Support Our Mission Through Your
-              <br className="hidden sm:block" /> Purchase
+              {t('shopHeroTitle')}
             </h1>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-poppins font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-[#6b7280] max-w-[760px]">
-              Every purchase you make helps fund our humanitarian aid programs,
-              spiritual guidance initiatives, and community building projects
-              around the world
+              {t('shopHeroDesc')}
             </p>
           </div>
         </div>
@@ -107,31 +76,88 @@ const Shop = () => {
       <section className="w-full bg-white py-8 sm:py-10 lg:py-12">
         <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
-            {products.map((p) => (
+            {products.map((p, idx) => (
               <div
                 key={p.id}
                 className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden"
               >
                 <img
                   src={p.image}
-                  alt={p.name}
+                  alt={idx === 0 ? t('shopProductPrayerTitle') : p.name}
                   className="w-full h-[190px] object-cover"
                 />
                 <div className="p-5">
-                  <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                    {p.name}
-                  </h3>
-                  <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                    {p.description}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                      {p.price}
-                    </span>
-
-                    
-                  </div>
+                  {idx === 0 ? (
+                    <>
+                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                        {t('shopProductPrayerTitle')}
+                      </h3>
+                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
+                        {t('shopProductPrayerDesc')}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                          {t('shopProductPrayerPrice')}
+                        </span>
+                      </div>
+                    </>
+                  ) : idx === 1 ? (
+                    <>
+                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                        {t('shopProductJournalTitle')}
+                      </h3>
+                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
+                        {t('shopProductJournalDesc')}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                          {t('shopProductJournalPrice')}
+                        </span>
+                      </div>
+                    </>
+                  ) : idx === 2 ? (
+                    <>
+                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                        {t('shopProductTshirtTitle')}
+                      </h3>
+                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
+                        {t('shopProductTshirtDesc')}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                          {t('shopProductTshirtPrice')}
+                        </span>
+                      </div>
+                    </>
+                  ) : idx === 3 ? (
+                    <>
+                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                        {t('shopProductBottleTitle')}
+                      </h3>
+                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
+                        {t('shopProductBottleDesc')}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                          {t('shopProductBottlePrice')}
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                        {p.name}
+                      </h3>
+                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
+                        {p.description}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                          {p.price}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
@@ -146,7 +172,7 @@ const Shop = () => {
             {/* Brand */}
             <div className="w-full lg:w-[28%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                Raphael Mission
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[22px] text-[#d1d5db] font-['Poppins'] mb-6">
                 {t('footerDesc')}
@@ -166,8 +192,10 @@ const Shop = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About','Projects','Fund','Testimonies','Training','Story','Shop','Contact','Donate'].map(x=>(
-                    <p key={x} className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{x}</p>
+                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map((x) => (
+                    <p key={x} className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">
+                      {x}
+                    </p>
                   ))}
                 </div>
               </div>
@@ -214,5 +242,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-

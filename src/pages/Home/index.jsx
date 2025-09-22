@@ -34,7 +34,7 @@ const Home = () => {
             <div className="w-full lg:w-auto flex justify-center lg:justify-start">
               <img
                 src="/images/img_logo_2.png"
-                alt="Raphael Mission Logo"
+                alt={t('brandName') + ' Logo'}
                 className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px]"
               />
             </div>
@@ -47,7 +47,7 @@ const Home = () => {
               </h1>
 
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-white font-['Poppins'] mb-8 lg:mb-9">
-                {t('We believe that true change happens when practical help and spiritual hope come together. Through acts of compassion, we deliver food, medical care, and essential resources to struggling communities, while also sharing the message of faith that brings strength and renewal.')}
+                {t('heroDescription')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -127,10 +127,10 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
-              Current Projects
+              {t('currentProjects')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-[60%]">
-              Discover the impactful work we're doing around the world to bring hope and healing to communities in need.
+              {t('currentProjectsDesc')}
             </p>
           </div>
 
@@ -205,7 +205,7 @@ const Home = () => {
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019]">
                 <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px]">
-                  {t('“Through this mission, I discovered God’s love in a way I never imagined. My life has found new meaning”.') || '“Through this mission, I discovered God’s love in a way I never imagined. My life has found new meaning”.'}
+                  {t('quoteSarahJohnson')}
                 </p>
 
                 <div className="flex items-center gap-4">
@@ -353,7 +353,6 @@ const Home = () => {
             {/* Brand */}
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 {t('footerDesc')}

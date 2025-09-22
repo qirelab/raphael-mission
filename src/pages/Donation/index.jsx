@@ -1,45 +1,17 @@
 import React, { useState } from 'react';
 import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
-import Dropdown from '../../components/ui.donation/Dropdown';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
 
 const DonationPage = () => {
   const { t } = useLanguage();
-  const [selectedAmount, setSelectedAmount] = useState(null);
-  const [customAmount, setCustomAmount] = useState('');
-  const [donationType, setDonationType] = useState('once');
-  const [selectedCategory, setSelectedCategory] = useState('most-needed');
+
+  // фиксированная сумма пожертвования (измени при необходимости)
+  const FIXED_AMOUNT = 25;
+
   const [showPayment, setShowPayment] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState(null); // 'success', 'error', null
-
-  const donationOptions = [
-    { value: 'most-needed', label: t('mostNeeded') },
-    { value: 'clean-water', label: t('cleanWater') },
-    { value: 'medical-supplies', label: t('medicalSupplies') },
-    { value: 'community-programs', label: t('communityPrograms') },
-    { value: 'emergency-relief', label: t('emergencyRelief') },
-  ];
-
-  const presetAmounts = [25, 50, 100, 250];
-
-  const handleAmountSelect = (amount) => {
-    setSelectedAmount(amount);
-    setCustomAmount('');
-  };
-
-  const handleCustomAmountChange = (e) => {
-    const value = e?.target?.value?.replace(/[^0-9]/g, '');
-    setCustomAmount(value);
-    setSelectedAmount(null);
-  };
-
-  const getTotalAmount = () => {
-    if (selectedAmount) return selectedAmount;
-    if (customAmount) return parseInt(customAmount);
-    return 0;
-  };
+  const [paymentStatus, setPaymentStatus] = useState(null); // 'success' | 'error' | null
 
   const handlePaymentSuccess = (result) => {
     console.log('Payment successful:', result);
@@ -51,20 +23,15 @@ const DonationPage = () => {
     setPaymentStatus('error');
   };
 
-  const handleProceedToPayment = () => {
-    const amount = getTotalAmount();
-    if (amount > 0) setShowPayment(true);
-  };
-
   return (
     <div className="w-full bg-global-4">
       <Header />
 
-      {/* Main Content */}
+      {/* Основной контент */}
       <div className="w-full bg-global-4">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-start">
-            {/* Left Section - Hero Content */}
+            {/* Левая часть (герой) */}
             <div className="w-full lg:w-1/2 flex flex-col gap-6 sm:gap-8">
               <div className="flex flex-col gap-3 sm:gap-4">
                 <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-inter font-bold leading-[28px] sm:leading-[36px] md:leading-[44px] lg:leading-[48px] text-global-1">
@@ -83,118 +50,30 @@ const DonationPage = () => {
               </div>
             </div>
 
-            {/* Right Section - Donation Form */}
+            {/* Правая часть — только кнопка и платёж */}
             <div className="w-full lg:w-1/2 lg:self-center">
               <div className="bg-global-4 border border-global-2 rounded-[16px] p-6 sm:p-8 shadow-[0px_20px_25px_#00000019]">
                 <div className="flex flex-col gap-6">
-                  <h2 className="text-[20px] sm:text-[24px] font-inter font-bold leading-[24px] sm:leading-[30px] text-global-1">
-                    {t('chooseAmountTitle')}
-                  </h2>
-
-                  {/* Category Selection */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-inter font-medium leading-[17px] text-global-3">
-                      {t('whereGiftGo')}
-                    </label>
-                    <Dropdown
-                      options={donationOptions}
-                      value={selectedCategory}
-                      onChange={(option) => setSelectedCategory(option?.value)}
-                      placeholder={t('mostNeeded')}
-                      rightIcon={{ src: '/images/img_arrow_down.svg', width: 32, height: 32 }}
-                      className="w-full"
-                    />
-                  </div>
-
-                  {/* Donation Type Toggle */}
-                  <div className="bg-global-2 rounded-[8px] p-1.5">
-                    <div className="flex">
-                      <button
-                        onClick={() => setDonationType('once')}
-                        className={`flex-1 py-2 px-4 text-[14px] font-inter font-medium leading-[17px] rounded-[6px] transition-colors duration-200 ${
-                          donationType === 'once' ? 'bg-global-1 text-global-7' : 'bg-transparent text-global-4'
-                        }`}
-                      >
-                        {t('giveOnce')}
-                      </button>
-                      <button
-                        onClick={() => setDonationType('monthly')}
-                        className={`flex-1 py-2 px-4 text-[14px] font-inter font-medium leading-[17px] rounded-[6px] transition-colors duration-200 ${
-                          donationType === 'monthly' ? 'bg-global-1 text-global-7' : 'bg-transparent text-global-4'
-                        }`}
-                      >
-                        {t('giveMonthly')}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Amount Selection */}
-                  <div className="flex flex-col gap-3">
-                    <div className="grid grid-cols-2 gap-3">
-                      {presetAmounts.map((amount) => (
-                        <button
-                          key={amount}
-                          onClick={() => handleAmountSelect(amount)}
-                          className={`py-3 px-4 text-[18px] font-inter font-semibold leading-[22px] text-center rounded-[8px] border-2 transition-colors duration-200 ${
-                            selectedAmount === amount
-                              ? 'border-global-1 bg-global-1 text-global-7'
-                              : 'border-[#d1d5db] bg-global-4 text-global-8 hover:border-global-1'
-                          }`}
-                        >
-                          ${amount}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Custom Amount */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-inter font-medium leading-[17px] text-global-3">
-                      {t('otherAmount')}
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[16px] font-inter text-global-5">$</span>
-                      <input
-                        type="text"
-                        value={customAmount}
-                        onChange={handleCustomAmountChange}
-                        placeholder="0"
-                        className="w-full pl-8 pr-4 py-3 text-[16px] font-inter bg-global-4 border border-[#d1d5db] rounded-[8px] text-global-6 placeholder-global-6 focus:outline-none focus:ring-2 focus:ring-global-1 focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Total Display */}
-                  <div className="bg-global-3 rounded-[8px] p-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[18px] font-inter font-medium text-global-3">{t('total')}</span>
-                      <span className="text-[24px] font-inter font-bold text-global-2">${getTotalAmount()}</span>
-                    </div>
-                  </div>
-
-                  {/* Payment Section */}
                   {!showPayment ? (
                     <>
                       <Button
                         variant="primary"
-                        onClick={handleProceedToPayment}
-                        disabled={getTotalAmount() === 0}
-                        className="w-full bg-global-1 text-global-7 py-4 px-8 rounded-[8px] text-[18px] font-inter font-bold flex items-center justify-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => setShowPayment(true)}
+                        className="w-full bg-global-1 text-global-7 py-4 px-8 rounded-[8px] text-[18px] font-inter font-bold flex items-center justify-center gap-1"
                       >
                         {t('proceedToPayment')}
-
                       </Button>
 
                       <div className="flex justify-center items-end gap-4 py-2">
-                        <img src="/images/stripe.png" alt="payment method" className="w-[35px] h-[24px]" />
-                        <img src="/images/paypal.png" alt="payment method" className="w-[18px] h-[24px]" />
-                        <img src="/images/fondy.png" alt="payment method" className="w-[27px] h-[24px]" />
+                        <img src="/images/stripe.svg" alt="payment method" className="w-[35px] h-[24px]" />
+                        <img src="/images/paypal.svg" alt="payment method" className="w-[18px] h-[24px]" />
+                        <img src="/images/fondy.svg" alt="payment method" className="w-[27px] h-[24px]" />
                       </div>
                     </>
                   ) : (
                     <div className="space-y-4">
                       <button
-                        onClick={() => setShowPayment(false)}
+                        onClick={() => { setShowPayment(false); setPaymentStatus(null); }}
                         className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
                       >
                         ← {t('backToDonationDetails')}
@@ -213,7 +92,7 @@ const DonationPage = () => {
                             <div>
                               <h4 className="text-green-800 font-medium">{t('paymentSuccessful')}</h4>
                               <p className="text-green-700 text-sm">
-                                {t('thankYouDonation')} ${getTotalAmount()}.
+                                {/* при желании можно вывести сумму */}
                               </p>
                             </div>
                           </div>
@@ -240,7 +119,7 @@ const DonationPage = () => {
 
                       {paymentStatus !== 'success' && (
                         <PaymentSelector
-                          amount={getTotalAmount()}
+                          amount={FIXED_AMOUNT}
                           currency="USD"
                           onSuccess={handlePaymentSuccess}
                           onError={handlePaymentError}
@@ -253,9 +132,7 @@ const DonationPage = () => {
             </div>
           </div>
         </div>
-      </div> 
-
-    
+      </div>
 
       {/* FOOTER */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">

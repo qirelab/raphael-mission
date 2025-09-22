@@ -9,17 +9,17 @@ const TestimoniesPage = () => {
 
   const testimonials = [
     { id: 1, name: "Maria Santos", location: "São Paulo, Brazil", image: "/images/mariasantos.png",
-      quote: "The mission's food program saved my family during our darkest hour. Their compassion gave us hope when we had none left." },
+      quote: t('shopTestimonialFoodProgram') },
     { id: 2, name: "James Wilson", location: "Chicago, USA", image: "/images/jameswilson.png",
-      quote: "Through their mentorship program, I found direction and purpose. Today I am helping others the same way they helped me." },
+      quote: t('shopTestimonialMentorship') },
     { id: 3, name: "Amara Okafor", location: "Lagos, Nigeria", image: "/images/amaraokafar.png",
-      quote: "The educational support changed my daughter's life. She is now studying medicine and wants to serve others." },
+      quote: t('shopTestimonialEducation') },
     { id: 4, name: "Carlos Rodriguez", location: "Mexico City, Mexico", image: "/images/carlos.png",
-      quote: "Their disaster relief team was there when the earthquake hit. They did not just rebuild our homes, they rebuilt our community." },
+      quote: t('shopTestimonialDisasterRelief') },
     { id: 5, name: "Sarah Kim", location: "Seoul, South Korea", image: "/images/sarakim.png",
-      quote: "The mission's healthcare initiative brought medical care to our remote village. My grandmother received life-saving treatment." },
+      quote: t('shopTestimonialHealthcare') },
     { id: 6, name: "David Thompson", location: "London, UK", image: "/images/davidtompson.png",
-      quote: "Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entire worldview." }
+      quote: t('shopTestimonialVolunteering') }
   ];
 
   const featuredTestimonial = {
@@ -181,7 +181,7 @@ const TestimoniesPage = () => {
 
           <div className="text-center pt-6 border-t border-gray-600">
             <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              © Raphael Mission 2025. All rights reserved
+              © {t('brandName')} 2025. All rights reserved
             </p>
           </div>
         </div>

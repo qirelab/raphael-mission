@@ -1,5 +1,23 @@
 export const translations = {
   en: {
+  shopTestimonialDisasterRelief: "Their disaster relief team was there when the earthquake hit. They did not just rebuild our homes, they rebuilt our community.",
+  shopTestimonialEducation: "The educational support changed my daughter's life. She is now studying medicine and wants to serve others.",
+  shopTestimonialMentorship: "Through their mentorship program, I found direction and purpose. Today I am helping others the same way they helped me.",
+  shopTestimonialFoodProgram: "The mission's food program saved my family during our darkest hour. Their compassion gave us hope when we had none left.",
+  shopProductBottleTitle: "Clean Water Bottle",
+  shopProductBottleDesc: "Eco-friendly bottle supporting our clean water initiatives worldwide.",
+  shopProductBottlePrice: "$32",
+  shopProductTshirtTitle: "Mission T-Shirt",
+  shopProductTshirtDesc: "Comfortable organic cotton tee featuring our mission logo and values.",
+  shopProductTshirtPrice: "$28",
+  shopProductJournalTitle: "Faith & Purpose Journal",
+  shopProductJournalDesc: "Daily reflections and guided prayers for spiritual growth and mindfulness.",
+  shopProductJournalPrice: "$24",
+  shopProductPrayerTitle: "Handcrafted Prayer",
+  shopProductPrayerDesc: "Beautiful wooden cross made by local artisans in our partner communities.",
+  shopProductPrayerPrice: "$35",
+  shopHeroTitle: "Support Our Mission Through Your Purchase",
+  shopHeroDesc: "Every purchase you make helps fund our humanitarian aid programs, spiritual guidance initiatives, and community building projects around the world.",
     // Header
     brandName: "Raphael Mission",
     projects: "Projects",
@@ -33,6 +51,13 @@ export const translations = {
 
     // Home - Testimonies section
     testimoniesDesc: "Stories of faith and transformation that show how God's love is changing lives through Raphael Mission",
+
+  currentProjects: "Current Projects",
+  currentProjectsDesc: "Discover the impactful work we're doing around the world to bring hope and healing to communities in need.",
+
+  quoteSarahJohnson: "\"Through this mission, I discovered God’s love in a way I never imagined. My life has found new meaning\".",
+  sarahJohnson: "Sarah Johnson",
+  torontoCanada: "Toronto, Canada",
 
     // Home - Contact section
     contactUsTitle: "Contact Us",
@@ -163,6 +188,24 @@ export const translations = {
   },
 
   ru: {
+  shopTestimonialDisasterRelief: "Их команда помощи при стихийных бедствиях была рядом, когда случилось землетрясение. Они восстановили не только наши дома, но и наше сообщество.",
+  shopTestimonialEducation: "Образовательная поддержка изменила жизнь моей дочери. Теперь она учится на врача и хочет помогать другим.",
+  shopTestimonialMentorship: "Благодаря их программе наставничества я нашёл цель и направление. Теперь я помогаю другим так же, как они помогли мне.",
+  shopTestimonialFoodProgram: "Программа питания миссии спасла мою семью в самый трудный момент. Их сострадание подарило нам надежду, когда её уже не было.",
+  shopProductBottleTitle: "Бутылка для чистой воды",
+  shopProductBottleDesc: "Экологичная бутылка, поддерживающая наши инициативы по обеспечению чистой воды по всему миру.",
+  shopProductBottlePrice: "$32",
+  shopProductTshirtTitle: "Футболка миссии",
+  shopProductTshirtDesc: "Удобная футболка из органического хлопка с логотипом и ценностями нашей миссии.",
+  shopProductTshirtPrice: "$28",
+  shopProductJournalTitle: "Дневник веры и цели",
+  shopProductJournalDesc: "Ежедневные размышления и молитвы для духовного роста и осознанности.",
+  shopProductJournalPrice: "$24",
+  shopProductPrayerTitle: "Резной крест",
+  shopProductPrayerDesc: "Красивый деревянный крест, изготовленный местными мастерами в наших партнерских сообществах.",
+  shopProductPrayerPrice: "$35",
+  shopHeroTitle: "Поддержите нашу миссию через покупку",
+  shopHeroDesc: "Каждая ваша покупка помогает финансировать наши гуманитарные программы, духовные инициативы и проекты по развитию сообществ по всему миру.",
     // Header
     brandName: "Миссия Рафаэля",
     projects: "Проекты",
@@ -196,6 +239,13 @@ export const translations = {
 
     // Home - Testimonies section
     testimoniesDesc: "Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Рафаэля",
+
+  currentProjects: "Текущие проекты",
+  currentProjectsDesc: "Узнайте о значимых инициативах, которые мы реализуем по всему миру, чтобы приносить надежду и исцеление нуждающимся сообществам.",
+
+  quoteSarahJohnson: "\"Благодаря этой миссии я открыла Божью любовь так, как никогда не представляла. Моя жизнь обрела новый смысл\".",
+  sarahJohnson: "Сара Джонсон",
+  torontoCanada: "Торонто, Канада",
 
     // Home - Contact section
     contactUsTitle: "Свяжитесь с нами",
@@ -478,6 +528,24 @@ export const translations = {
   },
 
   pl: {
+  shopTestimonialDisasterRelief: "Ich zespół pomocy w katastrofach był z nami, gdy uderzyło trzęsienie ziemi. Odbudowali nie tylko nasze domy, ale i całą społeczność.",
+  shopTestimonialEducation: "Wsparcie edukacyjne zmieniło życie mojej córki. Teraz studiuje medycynę i chce pomagać innym.",
+  shopTestimonialMentorship: "Dzięki ich programowi mentoringowemu odnalazłem cel i sens. Dziś pomagam innym tak, jak oni pomogli mnie.",
+  shopTestimonialFoodProgram: "Program żywnościowy misji uratował moją rodzinę w najtrudniejszej chwili. Ich współczucie dało nam nadzieję, gdy już jej nie mieliśmy.",
+  shopProductBottleTitle: "Butelka na czystą wodę",
+  shopProductBottleDesc: "Ekologiczna butelka wspierająca nasze inicjatywy czystej wody na całym świecie.",
+  shopProductBottlePrice: "$32",
+  shopProductTshirtTitle: "Koszulka Misji",
+  shopProductTshirtDesc: "Wygodny t-shirt z organicznej bawełny z logo i wartościami naszej misji.",
+  shopProductTshirtPrice: "$28",
+  shopProductJournalTitle: "Dziennik Wiary i Celu",
+  shopProductJournalDesc: "Codzienne refleksje i modlitwy prowadzące do duchowego rozwoju i uważności.",
+  shopProductJournalPrice: "$24",
+  shopProductPrayerTitle: "Ręcznie rzeźbiony krzyż",
+  shopProductPrayerDesc: "Piękny drewniany krzyż wykonany przez lokalnych rzemieślników w naszych partnerskich społecznościach.",
+  shopProductPrayerPrice: "$35",
+  shopHeroTitle: "Wesprzyj naszą misję poprzez zakup",
+  shopHeroDesc: "Każdy Twój zakup pomaga finansować nasze programy pomocy humanitarnej, inicjatywy duchowego wsparcia i projekty budowania społeczności na całym świecie.",
     // Header
     brandName: "Misja Rafaela",
     projects: "Projekty",
@@ -511,6 +579,13 @@ export const translations = {
 
     // Home - Testimonies section
     testimoniesDesc: "Historie wiary i transformacji, które pokazują, jak Boża miłość zmienia życie poprzez Misję Rafaela",
+
+  currentProjects: "Aktualne projekty",
+  currentProjectsDesc: "Poznaj wpływowe działania, które prowadzimy na całym świecie, aby nieść nadzieję i uzdrowienie potrzebującym społecznościom.",
+
+  quoteSarahJohnson: "\"Dzięki tej misji odkryłam Bożą miłość w sposób, którego nigdy sobie nie wyobrażałam. Moje życie nabrało nowego sensu\".",
+  sarahJohnson: "Sarah Johnson",
+  torontoCanada: "Toronto, Kanada",
 
     // Home - Contact section
     contactUsTitle: "Skontaktuj się z nami",
