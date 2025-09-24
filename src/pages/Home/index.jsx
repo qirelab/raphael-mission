@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
@@ -12,6 +13,7 @@ const Home = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e?.preventDefault();
@@ -54,6 +56,7 @@ const Home = () => {
                 <Button
                   variant="primary"
                   className="pt-[18px] pr-[28px] pb-[18px] pl-[28px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] w-full sm:w-auto"
+                  onClick={() => navigate('/donate')}
                 >
                   {t('supportMission')}
                 </Button>
@@ -61,6 +64,7 @@ const Home = () => {
                 <Button
                   variant="outline"
                   className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto"
+                  onClick={() => navigate('/about-mission')}
                 >
                   {t('learnMore')}
                 </Button>
@@ -141,10 +145,10 @@ const Home = () => {
                 <div className="p-5 lg:p-6 flex flex-col flex-1">
                   <div className="flex-1">
                     <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
-                      Clean Water Initiative
+                      {t('cleanWaterInitiative')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
-                      Providing access to clean, safe drinking water for families in remote areas.
+                      {t('Offering prayer and spiritual care for physical and emotional healing through divine grace.')}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 mt-auto pt-4">
@@ -172,15 +176,24 @@ const Home = () => {
             </p>
 
             <div className="w-full flex flex-wrap gap-6 justify-center">
-              <button className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
+              <button
+                className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
+                onClick={() => navigate('/donation?method=paypal')}
+              >
                 <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
               </button>
-              <button className="bg-white text-[#635BFF] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
+              <button
+                className="bg-white text-[#635BFF] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
+                onClick={() => navigate('/donation?method=stripe')}
+              >
                 <img src="/images/stripe.svg" alt="Stripe" className="w-[24px] h-[24px]" />
                 Stripe
               </button>
-              <button className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3">
+              <button
+                className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
+                onClick={() => navigate('/donation?method=fondy')}
+              >
                 <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px]" />
                 Fondy
               </button>
@@ -371,20 +384,14 @@ const Home = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {[
-                    t('about'),
-                    t('projects'),
-                    t('testimonies'),
-                    t('training'),
-                    t('story'),
-                    t('shop'),
-                    t('contact'),
-                    t('donate')
-                  ].map((item) => (
-                    <p key={item} className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {item}
-                    </p>
-                  ))}
+                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 

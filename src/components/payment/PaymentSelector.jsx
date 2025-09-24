@@ -1,79 +1,43 @@
-import React, { useState } from 'react';
+// src/components/payment/PaymentSelector.jsx
+import React, { useEffect, useState } from 'react';
 import StripePayment from './StripePayment';
 import PayPalPayment from './PayPalPayment';
 import FondyPayment from './FondyPayment';
 
-const PaymentSelector = ({ amount, currency = 'USD', onSuccess, onError }) => {
-  // по умолчанию выбран Stripe (можешь сменить на 'paypal' или 'fondy')
-  const [selectedMethod, setSelectedMethod] = useState('stripe');
+const PaymentSelector = ({
+  amount,
+  currency = 'USD',
+  onSuccess,
+  onError,
+  initialMethod = 'stripe',   // ✅ НОВОЕ: начальный способ оплаты
+}) => {
+  const [selectedMethod, setSelectedMethod] = useState(initialMethod);
 
-  // бейджи убраны — оставляем иконку, название и описание
+  // если родитель сменил initialMethod — синхронизируем
+  useEffect(() => {
+    setSelectedMethod(initialMethod);
+  }, [initialMethod]);
+
   const paymentMethods = [
-    {
-      id: 'stripe',
-      name: 'Stripe',
-      description: 'Modern UI, supports multiple currencies worldwide',
-      icon: '/images/stripe.svg',
-    },
-    {
-      id: 'paypal',
-      name: 'PayPal',
-      description: 'Trusted brand, simple setup, widely recognized',
-      icon: '/images/paypal.svg',
-    },
-    {
-      id: 'fondy',
-      name: 'Fondy',
-      description: 'Perfect for Poland, Ukraine, Eastern Europe',
-      icon: '/images/fondy.svg',
-    },
+    { id: 'stripe', name: 'Stripe',  description: 'Modern UI, supports multiple currencies worldwide', icon: '/images/stripe.svg' },
+    { id: 'paypal', name: 'PayPal',  description: 'Trusted brand, simple setup, widely recognized',   icon: '/images/paypal.svg' },
+    { id: 'fondy',  name: 'Fondy',   description: 'Perfect for Poland, Ukraine, Eastern Europe',      icon: '/images/fondy.svg' },
   ];
 
-  const handlePaymentSuccess = (result) => {
-    onSuccess &&
-      onSuccess({
-        ...result,
-        paymentMethod: selectedMethod,
-      });
-  };
+  const handlePaymentSuccess = (result) =>
+    onSuccess?.({ ...result, paymentMethod: selectedMethod });
 
-  const handlePaymentError = (error) => {
-    onError &&
-      onError({
-        error,
-        paymentMethod: selectedMethod,
-      });
-  };
+  const handlePaymentError = (error) =>
+    onError?.({ error, paymentMethod: selectedMethod });
 
   const renderPaymentForm = () => {
     switch (selectedMethod) {
       case 'stripe':
-        return (
-          <StripePayment
-            amount={amount}
-            currency={currency}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-          />
-        );
+        return <StripePayment amount={amount} currency={currency} onSuccess={handlePaymentSuccess} onError={handlePaymentError} />;
       case 'paypal':
-        return (
-          <PayPalPayment
-            amount={amount}
-            currency={currency}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-          />
-        );
+        return <PayPalPayment amount={amount} currency={currency} onSuccess={handlePaymentSuccess} onError={handlePaymentError} />;
       case 'fondy':
-        return (
-          <FondyPayment
-            amount={amount}
-            currency={currency}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-          />
-        );
+        return <FondyPayment  amount={amount} currency={currency} onSuccess={handlePaymentSuccess} onError={handlePaymentError} />;
       default:
         return null;
     }
@@ -81,69 +45,30 @@ const PaymentSelector = ({ amount, currency = 'USD', onSuccess, onError }) => {
 
   return (
     <div className="space-y-6">
-      {/* Выбор способа оплаты */}
       <div>
-        <h3 className="text-lg font-semibold text-global-1 mb-4">
-          Choose Payment Method
-        </h3>
-
+        <h3 className="text-lg font-semibold text-global-1 mb-4">Choose Payment Method</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {paymentMethods.map((method) => (
+          {paymentMethods.map((m) => (
             <button
-              key={method.id}
-              onClick={() => setSelectedMethod(method.id)}
-              className={`p-4 rounded-lg border-2 text-left transition-all duration-200
-                ${
-                  selectedMethod === method.id
-                    ? 'border-global-1 bg-global-3 shadow-md'
-                    : 'border-gray-200 bg-white hover:border-global-2 hover:shadow-sm'
-                }`}
+              key={m.id}
+              onClick={() => setSelectedMethod(m.id)}
+              className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
+                selectedMethod === m.id ? 'border-global-1 bg-global-3 shadow-md' : 'border-gray-200 bg-white hover:border-global-2 hover:shadow-sm'
+              }`}
             >
               <div className="flex items-center mb-2">
-                <img
-                  src={method.icon}
-                  alt={method.name}
-                  className="w-6 h-5 mr-2"
-                />
-                <span className="font-medium text-global-1">{method.name}</span>
+                <img src={m.icon} alt={m.name} className="w-6 h-5 mr-2" />
+                <span className="font-medium text-global-1">{m.name}</span>
               </div>
-              <p className="text-sm text-global-4">{method.description}</p>
+              <p className="text-sm text-global-4">{m.description}</p>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Форма выбранной оплаты */}
       <div>
-        <h3 className="text-lg font-semibold text-global-1 mb-4">
-          Complete Your Donation
-        </h3>
+        <h3 className="text-lg font-semibold text-global-1 mb-4">Complete Your Donation</h3>
         {renderPaymentForm()}
-      </div>
-
-      {/* Блок "Secure Payment" — если не нужен, просто удали его */}
-      <div className="bg-global-3 p-4 rounded-lg">
-        <div className="flex items-start">
-          <svg
-            className="w-5 h-5 text-global-1 mr-2 mt-0.5 flex-shrink-0"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <div>
-            <h4 className="font-medium text-global-1 mb-1">Secure Payment</h4>
-            <p className="text-sm text-global-4">
-              All payments are processed securely using industry-standard
-              encryption. Your financial information is never stored on our
-              servers.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

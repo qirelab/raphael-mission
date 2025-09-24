@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
-import Button from '../../components/ui/Button';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
 
 const DonationPage = () => {
   const { t } = useLanguage();
+  const location = useLocation();
 
-  // фиксированная сумма пожертвования (измени при необходимости)
   const FIXED_AMOUNT = 25;
-
   const [showPayment, setShowPayment] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(null); // 'success' | 'error' | null
+  const [paymentMethod, setPaymentMethod] = useState('stripe'); // какой провайдер открыть
+
+  // Чтение query-параметра method при загрузке
+  React.useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const method = params.get('method');
+    if (['paypal', 'stripe', 'fondy'].includes(method)) {
+      setPaymentMethod(method);
+      setShowPayment(true);
+    }
+  }, [location.search]);
 
   const handlePaymentSuccess = (result) => {
     console.log('Payment successful:', result);
@@ -27,114 +37,122 @@ const DonationPage = () => {
     <div className="w-full bg-global-4">
       <Header />
 
-      {/* Основной контент */}
+      {/* HERO + выбор оплаты */}
       <div className="w-full bg-global-4">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-start">
-            {/* Левая часть (герой) */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-6 sm:gap-8">
-              <div className="flex flex-col gap-3 sm:gap-4">
-                <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-inter font-bold leading-[28px] sm:leading-[36px] md:leading-[44px] lg:leading-[48px] text-global-1">
-                  {t('donationPageTitle')}
-                </h1>
-                <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-inter font-normal leading-[24px] sm:leading-[28px] lg:leading-[33px] text-global-4">
-                  {t('donationPageDescription')}
-                </p>
-              </div>
-              <div className="w-full">
-                <img
-                  src="/images/donat.png"
-                  alt="Mission impact"
-                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] object-cover rounded-[16px]"
-                />
+        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+            {/* Левый столбец: заголовок/описание/выбор метода */}
+            <div className="w-full lg:w-1/2">
+              <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-inter font-bold leading-tight text-global-1">
+                {t('donationPageTitle')}
+              </h1>
+              <p className="mt-3 text-[16px] sm:text-[18px] lg:text-[20px] font-inter text-global-4 max-w-[720px]">
+                {t('donationPageDescription')}
+              </p>
+
+              {/* Карточка с логотипами */}
+              <div className="mt-6 bg-global-4 border border-global-2 rounded-[16px] p-6 shadow-[0px_20px_25px_#00000019]">
+                {!showPayment ? (
+                  <div className="flex justify-center items-center gap-10 sm:gap-12">
+                    <button
+                      type="button"
+                      onClick={() => { setPaymentMethod('stripe'); setShowPayment(true); }}
+                      className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
+                      title="Stripe"
+                      aria-label="Pay with Stripe"
+                    >
+                      <img src="/images/stripe.svg" alt="Stripe" className="w-[72px] h-[44px]" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => { setPaymentMethod('paypal'); setShowPayment(true); }}
+                      className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
+                      title="PayPal"
+                      aria-label="Pay with PayPal"
+                    >
+                      <img src="/images/payp.svg" alt="PayPal" className="w-[62px] h-[44px]" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => { setPaymentMethod('fondy'); setShowPayment(true); }}
+                      className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
+                      title="Fondy"
+                      aria-label="Pay with Fondy"
+                    >
+                      <img src="/images/stripe1.svg" alt="Fondy" className="w-[66px] h-[44px]" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => { setShowPayment(false); setPaymentStatus(null); }}
+                      className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
+                    >
+                      ← {t('backToDonationDetails')}
+                    </button>
+
+                    {paymentStatus === 'success' && (
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div className="flex items-center">
+                          <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <h4 className="text-green-800 font-medium">{t('paymentSuccessful')}</h4>
+                        </div>
+                      </div>
+                    )}
+
+                    {paymentStatus === 'error' && (
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div className="flex items-center">
+                          <svg className="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <div>
+                            <h4 className="text-red-800 font-medium">{t('paymentFailed')}</h4>
+                            <p className="text-red-700 text-sm">{t('paymentError')}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {paymentStatus !== 'success' && (
+                      <PaymentSelector
+                        amount={FIXED_AMOUNT}
+                        currency="USD"
+                        initialMethod={paymentMethod}
+                        onSuccess={handlePaymentSuccess}
+                        onError={handlePaymentError}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Правая часть — только кнопка и платёж */}
-            <div className="w-full lg:w-1/2 lg:self-center">
-              <div className="bg-global-4 border border-global-2 rounded-[16px] p-6 sm:p-8 shadow-[0px_20px_25px_#00000019]">
-                <div className="flex flex-col gap-6">
-                  {!showPayment ? (
-                    <>
-                      <Button
-                        variant="primary"
-                        onClick={() => setShowPayment(true)}
-                        className="w-full bg-global-1 text-global-7 py-4 px-8 rounded-[8px] text-[18px] font-inter font-bold flex items-center justify-center gap-1"
-                      >
-                        {t('proceedToPayment')}
-                      </Button>
-
-                      <div className="flex justify-center items-end gap-4 py-2">
-                        <img src="/images/stripe.svg" alt="payment method" className="w-[35px] h-[24px]" />
-                        <img src="/images/paypal.svg" alt="payment method" className="w-[18px] h-[24px]" />
-                        <img src="/images/fondy.svg" alt="payment method" className="w-[27px] h-[24px]" />
-                      </div>
-                    </>
-                  ) : (
-                    <div className="space-y-4">
-                      <button
-                        onClick={() => { setShowPayment(false); setPaymentStatus(null); }}
-                        className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
-                      >
-                        ← {t('backToDonationDetails')}
-                      </button>
-
-                      {paymentStatus === 'success' && (
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                          <div className="flex items-center">
-                            <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <div>
-                              <h4 className="text-green-800 font-medium">{t('paymentSuccessful')}</h4>
-                              <p className="text-green-700 text-sm">
-                                {/* при желании можно вывести сумму */}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {paymentStatus === 'error' && (
-                        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                          <div className="flex items-center">
-                            <svg className="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <div>
-                              <h4 className="text-red-800 font-medium">{t('paymentFailed')}</h4>
-                              <p className="text-red-700 text-sm">{t('paymentError')}</p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {paymentStatus !== 'success' && (
-                        <PaymentSelector
-                          amount={FIXED_AMOUNT}
-                          currency="USD"
-                          onSuccess={handlePaymentSuccess}
-                          onError={handlePaymentError}
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+            {/* Правый столбец: картинка */}
+            <div className="w-full lg:w-1/2">
+              <img
+                src="/images/money .jpg"
+                alt="Mission impact"
+                className="w-full h-[280px] sm:h-[360px] md:h-[440px] lg:h-[520px] object-cover rounded-[12px]"
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* FOOTER */}
+      {/* ПРЕЖНИЙ ПОЛНЫЙ ФУТЕР */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
@@ -160,16 +178,15 @@ const DonationPage = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
-                    (item) => (
-                      <p
-                        key={item}
-                        className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']"
-                      >
-                        {item}
-                      </p>
-                    ),
-                  )}
+                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
+                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 

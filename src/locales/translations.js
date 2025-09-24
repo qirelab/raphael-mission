@@ -1,5 +1,16 @@
 export const translations = {
   en: {
+  missionTitle: "Our Mission",
+  missionDescription: "We are called to serve humanity with compassion, bringing hope and healing to communities worldwide through faith-based initiatives.",
+  trainingProgramsTitle: "Our Training Programs",
+  trainingProgramsDescription: "Comprehensive faith-based training designed to equip you for meaningful service and ministry.",
+  trainingStatsTitle: "Believers Equipped for Global Service",
+  trainingStatsDesc: "Our comprehensive training programs have prepared thousands of individuals to serve effectively in their communities and beyond, creating lasting impact through faith-driven action.",
+  trainingCtaTitle: "Ready to grow in faith and service?",
+  trainingCtaDesc: "Join thousands of believers who have been equipped through our training programs to make a lasting impact in their communities.",
+  trainingCtaButton: "Contact Us for Info",
+  trainingHeroTitle: "Equipping Believers for Service",
+  trainingHeroDescription: "Faith-based training programs to inspire, empower, and prepare you for ministry and community impact.",
   shopTestimonialDisasterRelief: "Their disaster relief team was there when the earthquake hit. They did not just rebuild our homes, they rebuilt our community.",
   shopTestimonialEducation: "The educational support changed my daughter's life. She is now studying medicine and wants to serve others.",
   shopTestimonialMentorship: "Through their mentorship program, I found direction and purpose. Today I am helping others the same way they helped me.",
@@ -109,6 +120,135 @@ export const translations = {
     impact25: "Clean water for a family of 5 for one month",
     impact50: "Medical supplies for mobile clinics",
     impact100: "Community center programs for children",
+    // ===== Home / Mission section =====
+    missionTitle: "Наша миссия",
+    missionDescription:
+      "Мы призваны служить человечеству с состраданием, принося надежду и исцеление сообществам по всему миру через инициативы, основанные на вере.",
+    humanitarianAid: "Гуманитарная помощь",
+    humanitarianAidDesc: "Предоставление необходимых ресурсов и поддержки нуждающимся",
+    spiritualGuidance: "Духовное руководство",
+    spiritualGuidanceDesc:
+      "Консультирование на основе веры и духовная поддержка для укрепления сообществ",
+    communityBuilding: "Развитие сообщества",
+    communityBuildingDesc: "Создание устойчивых программ, которые расширяют возможности",
+
+    // ===== Home / Current Projects =====
+    currentProjects: "Текущие проекты",
+    currentProjectsDesc:
+      "Узнайте о значимых инициативах, которые мы реализуем по всему миру, чтобы приносить надежду и исцеление нуждающимся сообществам.",
+
+    // ===== Home / Support Our Mission block =====
+    supportOurMission: "Поддержите нашу миссию",
+    supportMissionDesc:
+      "Ваше щедрое пожертвование помогает нам достигать больше людей Божьей любовью, исцелением и надеждой. Каждый вклад меняет жизни и сообщества.",
+
+    // ===== Home / Testimonies =====
+    testimoniesDesc:
+      "Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Рафаэля",
+    quoteSarahJohnson:
+      "\"Благодаря этой миссии я открыла Божью любовь так, как никогда не представляла. Моя жизнь обрела новый смысл\".",
+    sarahJohnson: "Сара Джонсон",
+    "Sarah Johnson": "Сара Джонсон",
+    torontoCanada: "Торонто, Канада",
+    "toronto,Canada": "Торонто, Канада",
+
+    // ===== Home / Contact =====
+    contactUsTitle: "Свяжитесь с нами",
+    contactUsDesc:
+      "Мы будем рады вам помочь. Свяжитесь с нами, чтобы узнать больше о нашей миссии или присоединиться к служению.",
+    Address: "Адрес",
+    Phone: "Телефон",
+    Email: "Эл. почта",
+    "123 Mission Street, Hope City, HC 12345":
+      "123 Mission Street, Hope City, HC 12345",
+    "+1 (555) 123-4567": "+1 (555) 123-4567",
+    "info@raphaelmission.org": "info@raphaelmission.org",
+    "Send Message": "Отправить сообщение",
+    "First Name": "Имя",
+    "last Name": "Фамилия",
+    "Email Address": "Электронная почта",
+    subject: "Тема",
+    "Your Message": "Ваше сообщение",
+    "send Message": "Отправить сообщение",
+
+    // ===== Shop =====
+    shopHeroTitle: "Поддержите нашу миссию через покупку",
+    shopHeroDesc:
+      "Каждая ваша покупка помогает финансировать наши гуманитарные программы, духовные инициативы и проекты по развитию сообществ по всему миру.",
+    shopProductBottleTitle: "Бутылка для чистой воды",
+    shopProductBottleDesc:
+      "Экологичная бутылка, поддерживающая наши инициативы по обеспечению чистой воды по всему миру.",
+    shopProductBottlePrice: "$32",
+    shopProductTshirtTitle: "Футболка миссии",
+    shopProductTshirtDesc:
+      "Удобная футболка из органического хлопка с логотипом и ценностями нашей миссии.",
+    shopProductTshirtPrice: "$28",
+    shopProductJournalTitle: "Дневник веры и цели",
+    shopProductJournalDesc:
+      "Ежедневные размышления и молитвы для духовного роста и осознанности.",
+    shopProductJournalPrice: "$24",
+    shopProductPrayerTitle: "Резной крест",
+    shopProductPrayerDesc:
+      "Красивый деревянный крест, изготовленный местными мастерами в наших партнёрских сообществах.",
+    shopProductPrayerPrice: "$35",
+    shopTestimonialDisasterRelief:
+      "Их команда помощи при стихийных бедствиях была рядом, когда случилось землетрясение. Они восстановили не только наши дома, но и наше сообщество.",
+    shopTestimonialEducation:
+      "Образовательная поддержка изменила жизнь моей дочери. Теперь она учится на врача и хочет помогать другим.",
+    shopTestimonialMentorship:
+      "Благодаря их программе наставничества я нашёл цель и направление. Теперь я помогаю другим так же, как они помогли мне.",
+    shopTestimonialFoodProgram:
+      "Программа питания миссии спасла мою семью в самый трудный момент. Их сострадание подарило нам надежду, когда её уже не было.",
+
+    // ===== Projects Page =====
+    projectsPageTitle: "Наши проекты",
+    projectsPageDescription:
+      "Служение сообществам по всему миру через веру, сострадание и действие.",
+    streetEvangelismTitle: "Уличная евангелизация",
+    streetEvangelismDesc:
+      "Делимся посланием надежды и веры в общественных местах, встречаясь с людьми там, где они находятся.",
+    tentEvangelismTitle: "Палаточная евангелизация",
+    tentEvangelismDesc:
+      "Проведение собраний во временных палатках, чтобы с любовью и целью достичь местные сообщества.",
+    personalEvangelismTitle: "Личная евангелизация",
+    personalEvangelismDesc:
+      "Индивидуальные беседы для укрепления веры и ободрения, построение значимых отношений.",
+    socialProjectsTitle: "Социальные проекты",
+    socialProjectsDesc:
+      "Практическая помощь и поддержка нуждающимся — любовь в действии.",
+    artEvangelismTitle: "Художественная евангелизация",
+    artEvangelismDesc:
+      "Музыка, живопись и творчество, вдохновляющие и соединяющие сердца с божественной красотой.",
+    churchSupportTitle: "Поддержка церквей",
+    churchSupportDesc:
+      "Ресурсы, обучение и ободрение для укрепления церковных служений.",
+    healingMinistryTitle: "Служение исцеления",
+    healingMinistryDesc:
+      "Молитва и духовная забота для физического и эмоционального исцеления по благодати Божьей.",
+    livesTouched: "Затронутых жизней",
+    communitiesServed: "Обслуженных сообществ",
+    activeProjects: "Активных проектов",
+    transformingLivesTitle: "Преобразование жизней, строительство сообществ",
+    transformingLivesDesc:
+      "Каждый проект — мост надежды, соединяющий сердца с верой и сообщества с устойчивыми изменениями. Мы видим преображённые жизни, укреплённые семьи и процветающие общины, отражающие Божью любовь и сострадание.",
+    joinUsTitle: "Присоединяйтесь к нам в изменении мира",
+    joinUsDesc:
+      "Ваша поддержка и участие помогают нам охватывать больше сообществ и преобразовывать больше жизней. Вместе мы несём надежду и сострадание тем, кто особенно нуждается.",
+    getInvolved: "Принять участие",
+    donateNow: "Пожертвовать сейчас",
+    learnMoreBtn: "Узнать больше",
+
+    // ===== Testimonies Page =====
+    testimoniesPageTitle: "Истории веры и",
+    testimoniesPageTitleHighlight: " преобразования",
+    testimoniesPageDescription:
+      "Реальные истории людей, чьи жизни были затронуты и изменены благодаря работе миссии.",
+    shareYourStoryTitle: "Поделитесь своей историей",
+    shareYourStoryDesc:
+      "Коснулась ли Миссия Рафаэля вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.",
+    shareYourStoryBtn: "Поделиться историей",
+    readFullStory: "Читать полностью",
+    
 
     // Projects Page
     projectsPageTitle: "Our Projects",
@@ -186,8 +326,18 @@ export const translations = {
     trainingCreativeArtsMinistryDesc: "Explore how art, music, and drama can be used to reach communities. Combine creativity with spiritual purpose.",
     trainingCreativeArtsMinistryDuration: "1-day workshop"
   },
+  
 
   ru: {
+  trainingProgramsTitle: "Наши обучающие программы",
+  trainingProgramsDescription: "Комплексные программы обучения на основе веры, которые готовят вас к значимому служению и работе в обществе.",
+  trainingStatsTitle: "Верующие, подготовленные к служению по всему миру",
+  trainingStatsDesc: "Наши комплексные обучающие программы подготовили тысячи людей к эффективному служению в своих сообществах и за их пределами, создавая долгосрочное влияние через действия, основанные на вере.",
+  trainingCtaTitle: "Готовы расти в вере и служении?",
+  trainingCtaDesc: "Присоединяйтесь к тысячам верующих, которые прошли обучение и теперь оказывают влияние в своих сообществах.",
+  trainingCtaButton: "Связаться для информации",
+  currentProjects: "Текущие проекты",
+  currentProjectsDesc: "Узнайте о значимых инициативах, которые мы реализуем по всему миру, чтобы приносить надежду и исцеление нуждающимся сообществам.",
   shopTestimonialDisasterRelief: "Их команда помощи при стихийных бедствиях была рядом, когда случилось землетрясение. Они восстановили не только наши дома, но и наше сообщество.",
   shopTestimonialEducation: "Образовательная поддержка изменила жизнь моей дочери. Теперь она учится на врача и хочет помогать другим.",
   shopTestimonialMentorship: "Благодаря их программе наставничества я нашёл цель и направление. Теперь я помогаю другим так же, как они помогли мне.",
@@ -376,6 +526,8 @@ export const translations = {
   },
 
   ru: {
+    trainingHeroTitle: "Подготовка верующих к служению",
+    trainingHeroDescription: "Программы обучения, основанные на вере, вдохновляющие, расширяющие возможности и подготавливающие вас к служению и оказанию влияния на общество.",
     // Header
     brandName: "Миссия Рафаэля",
     projects: "Проекты",
@@ -528,6 +680,15 @@ export const translations = {
   },
 
   pl: {
+  trainingProgramsTitle: "Nasze programy szkoleniowe",
+  trainingProgramsDescription: "Kompleksowe szkolenia oparte na wierze, które przygotowują Cię do znaczącej służby i pracy w społeczności.",
+  trainingStatsTitle: "Wierzący przygotowani do służby na całym świecie",
+  trainingStatsDesc: "Nasze kompleksowe programy szkoleniowe przygotowały tysiące osób do skutecznej służby w swoich społecznościach i poza nimi, tworząc trwały wpływ poprzez działania oparte na wierze.",
+  trainingCtaTitle: "Gotowy, by wzrastać w wierze i służbie?",
+  trainingCtaDesc: "Dołącz do tysięcy wierzących, którzy zostali wyposażeni przez nasze szkolenia, aby wywierać trwały wpływ w swoich społecznościach.",
+  trainingCtaButton: "Skontaktuj się po informacje",
+  trainingHeroTitle: "Wyposażanie wierzących do służby",
+  trainingHeroDescription: "Programy szkoleniowe oparte na wierze, które inspirują, wzmacniają i przygotowują do służby oraz wpływu na społeczność.",
   shopTestimonialDisasterRelief: "Ich zespół pomocy w katastrofach był z nami, gdy uderzyło trzęsienie ziemi. Odbudowali nie tylko nasze domy, ale i całą społeczność.",
   shopTestimonialEducation: "Wsparcie edukacyjne zmieniło życie mojej córki. Teraz studiuje medycynę i chce pomagać innym.",
   shopTestimonialMentorship: "Dzięki ich programowi mentoringowemu odnalazłem cel i sens. Dziś pomagam innym tak, jak oni pomogli mnie.",

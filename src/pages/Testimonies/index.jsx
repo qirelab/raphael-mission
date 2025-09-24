@@ -136,19 +136,15 @@ const TestimoniesPage = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {[
-                    t('about'),
-                    t('projects'),
-                    t('fund'),
-                    t('testimonies'),
-                    t('training'),
-                    t('story'),
-                    t('shop'),
-                    t('contact'),
-                    t('donate')
-                  ].map((item)=>(
-                    <p key={item} className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{item}</p>
-                  ))}
+                  <a href="/about" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="/projects" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="/donation" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
+                  <a href="/testimonies" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="/training" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="/story" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="/shop" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="/contact" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="/donation" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 

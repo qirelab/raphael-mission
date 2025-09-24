@@ -36,9 +36,9 @@ const TrainingPrograms = () => {
     },
     {
       id: 5,
-      title: t('trainingChurchSupportDevelopment'),
-      description: t('trainingChurchSupportDevelopmentDesc'),
-      duration: t('trainingChurchSupportDevelopmentDuration'),
+      title: t('Church Support & Development'),
+      description: t('Training for strengthening local churches and leaders. Build sustainable ministry foundations for lasting impact.'),
+      duration: t('12 weeks'),
       image: '/images/img_img_4.png',
     },
   ];
@@ -65,10 +65,10 @@ const TrainingPrograms = () => {
         <div className="relative z-10 max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="min-h-[420px] sm:min-h-[520px] lg:min-h-[600px] flex flex-col justify-center">
             <h1 className="text-black font-bold font-[Poppins] text-[28px] sm:text-[40px] lg:text-[56px] leading-tight mb-3">
-              {t('trainingHeroTitle')}
+              {t('Equipping Believers for Service')}
             </h1>
             <p className="text-black text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] lg:leading-[28px] max-w-none">
-              {t('trainingHeroDescription')}
+              {t('Faith-based training programs to inspire, empower, and prepare you for ministry and community impact.')}
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4">
@@ -82,10 +82,10 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-[#0f172a] font-bold font-[Poppins] text-[24px] sm:text-[28px] lg:text-[32px]">
-              {t('trainingProgramsTitle')}
+              {t('Our Training Programs')}
             </h2>
             <p className="mt-2 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[760px] mx-auto">
-              {t('trainingProgramsDescription')}
+              {t('Comprehensive faith-based training designed to equip you for meaningful service and ministry')}
             </p>
           </div>
 
@@ -93,7 +93,7 @@ const TrainingPrograms = () => {
             {trainingPrograms.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-[12px] border border-[#eef0f3] shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col"
+                className="bg-white rounded-[12px] border border-[#eef0f3] shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
               >
                 <img src={p.image} alt={p.title} className="w-full h-[170px] object-cover" />
                 <div className="p-5 flex-1 flex flex-col">
@@ -117,10 +117,10 @@ const TrainingPrograms = () => {
               2,500+
             </h2>
             <h3 className="mt-2 text-[#0f172a] font-semibold text-[18px] sm:text-[20px]">
-              {t('trainingStatsTitle')}
+              {t('Believers Equipped for Global Service')}
             </h3>
             <p className="mt-3 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[900px] mx-auto">
-              {t('trainingStatsDescription')}
+              {t('Our comprehensive training programs have prepared thousands of individuals to serve effectively in their communities and beyond, creating lasting impact through faith-driven action.')}
             </p>
           </div>
         </div>
@@ -154,15 +154,16 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-white font-bold font-[Poppins] text-[22px] sm:text-[26px]">
-              {t('trainingCtaTitle')}
+              {t('Ready to grow in faith and service?')}
             </h2>
             <p className="mt-2 text-white/90 text-[14px] sm:text-[16px] max-w-[820px] mx-auto">
-              {t('trainingCtaDescription')}
+              {t('Join thousands of believers who have been equipped through our training.')}
+              {t('programs to make a lasting impact in their communities.')}
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
               <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10">
-                {t('trainingContactButton')}
+                {t('Contact Us for Info')}
               </button>
             </div>
           </div>
@@ -195,16 +196,15 @@ const TrainingPrograms = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map(
-                    (item) => (
-                      <p
-                        key={item}
-                        className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']"
-                      >
-                        {item}
-                      </p>
-                    ),
-                  )}
+                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
+                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 

@@ -13,44 +13,39 @@ const Shop = () => {
     },
     {
       id: 2,
-      name: 'Faith & Purpose Journal',
-      description:
-        'Daily reflections and guided prayers for spiritual growth and mindfulness.',
-      price: '$24',
+      name: t('shopProductJournalTitle'),
+      description: t('shopProductJournalDesc'),
+      price: t('shopProductJournalPrice'),
       image: '/images/bible.png',
     },
     {
       id: 3,
-      name: 'Mission T-Shirt',
-      description:
-        'Comfortable organic cotton tee featuring our mission logo and values.',
-      price: '$28',
-      image: '/images/t.shirt.png', // фикс опечатки
+      name: t('shopProductTshirtTitle'),
+      description: t('shopProductTshirtDesc'),
+      price: t('shopProductTshirtPrice'),
+      image: '/images/shurt.png', // фикс опечатки
     },
     {
       id: 4,
-      name: 'Clean Water Bottle',
-      description:
-        'Eco-friendly bottle supporting our clean water initiatives worldwide.',
-      price: '$32',
+      name: t('shopProductBottleTitle'),
+      description: t('shopProductBottleDesc'),
+      price: t('shopProductBottlePrice'),
       image: '/images/shop/img_img_8.png',
     },
   ];
 
   const testimonials = [
     {
-      name: 'Maria Santos',
-      role: 'Community Leader, Guatemala',
+      name: t('shopTestimonialMariaName'),
+      role: t('shopTestimonialMariaRole'),
       image: '/images/saramit.png',
-      testimonial:
-        'Thanks to the water bottle sales, our village now has clean drinking water for the first time. My children no longer get sick from contaminated water. This mission truly cares about our wellbeing.',
+      testimonial: t('shopTestimonialMariaText'),
     },
     {
-      name: 'David Chen',
-      role: 'Customer & Supporter',
+      name: t('shopTestimonialDavidName'),
+      role: t('shopTestimonialDavidRole'),
       image: '/images/davidch.png',
-      testimonial:
-        'I bought the prayer journal and it has transformed my daily spiritual practice. Knowing that my purchase also helps fund humanitarian projects makes it even more meaningful.',
+      testimonial: t('shopTestimonialDavidText'),
     },
   ];
 
@@ -79,7 +74,7 @@ const Shop = () => {
             {products.map((p, idx) => (
               <div
                 key={p.id}
-                className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden"
+                className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden transition-transform duration-300 ease-in-out hover:scale-[1.05] hover:shadow-xl"
               >
                 <img
                   src={p.image}
@@ -192,11 +187,15 @@ const Shop = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  {['About', 'Projects', 'Fund', 'Testimonies', 'Training', 'Story', 'Shop', 'Contact', 'Donate'].map((x) => (
-                    <p key={x} className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">
-                      {x}
-                    </p>
-                  ))}
+                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
+                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 
