@@ -165,7 +165,6 @@ const TrainingPrograms = () => {
                 <div className="space-y-2">
                   <a href="/about-mission" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
                   <a href="/projects" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="/fund" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
                   <a href="/testimonies" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
                   <a href="/training" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
                   <a href="/story" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>

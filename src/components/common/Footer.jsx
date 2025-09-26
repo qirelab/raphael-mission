@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   const navigationLinks = [
-    'About', 'Projects', 'Fund', 'Testimonies', 
+    'About', 'Projects', 'Testimonies', 
     'Training', 'Story', 'Shop', 'Contact', 'Donate'
   ];
 
@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="flex flex-col justify-start items-start">
             <div className="mb-[16px] sm:mb-[20px] md:mb-[24px]">
               <img 
-                src="/images/img_logo_3.png" 
+                src="/images/logoheader.svg" 
                 alt="Raphael Mission" 
                 className="h-[40px] sm:h-[48px] md:h-[56px] w-auto"
               />

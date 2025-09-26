@@ -214,7 +214,7 @@ const Projects = () => {
                   <div className="flex items-center gap-3">
                     <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
                     <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                    <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                    <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
                   </div>
                 </div>
 
@@ -227,7 +227,6 @@ const Projects = () => {
                     <div className="space-y-2">
                       <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('about')}</a>
                       <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('projects')}</a>
-                      <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('fund')}</a>
                       <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('testimonies')}</a>
                       <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('training')}</a>
                       <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('story')}</a>
