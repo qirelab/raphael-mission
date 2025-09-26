@@ -93,16 +93,18 @@ const Projects = () => {
                 <div className="w-full px-[16px] sm:px-[24px] md:px-[32px]">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px] w-full">
                     {projectsData?.map((project, index) => (
-                      <div 
+                      <a
                         key={project?.id}
-                        className={`flex flex-col justify-start items-center w-full bg-global-6 rounded-[12px] shadow-[0px_10px_15px_#00000019] h-full ${
+                        href="/projects"
+                        className={`group flex flex-col justify-start items-center w-full bg-global-6 rounded-[12px] shadow-[0px_10px_15px_#00000019] h-full overflow-hidden transform transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/15 focus-within:-translate-y-1 ${
                           index === 6 ? 'sm:col-span-2 lg:col-span-1' : ''
                         }`}
+                        style={{ textDecoration: 'none' }}
                       >
-                        <img 
-                          src={project?.image} 
+                        <img
+                          src={project?.image}
                           alt={t(project?.titleKey)}
-                          className="w-full h-[120px] sm:h-[150px] md:h-[180px] lg:h-[192px] object-cover rounded-t-[12px]" 
+                          className="w-full h-[120px] sm:h-[150px] md:h-[180px] lg:h-[192px] object-cover rounded-t-[12px] transition-transform duration-300 ease-out group-hover:scale-105 cursor-pointer"
                         />
                         <div className="flex flex-col justify-between items-start w-full flex-1 pt-[16px] sm:pt-[18px] md:pt-[20px] lg:pt-[22px] pr-[18px] sm:pr-[20px] md:pr-[22px] lg:pr-[24px] pb-[16px] sm:pb-[18px] md:pb-[20px] lg:pb-[22px] pl-[18px] sm:pl-[20px] md:pl-[22px] lg:pl-[24px]">
                           <div className="flex flex-col w-full">
@@ -116,13 +118,12 @@ const Projects = () => {
                           <Button
                             variant="primary"
                             size="small"
-                            onClick={() => {}}
-                            className="pt-[4px] sm:pt-[5px] md:pt-[5px] lg:pt-[6px] pr-[10px] sm:pr-[12px] md:pr-[13px] lg:pr-[14px] pb-[4px] sm:pb-[5px] md:pb-[5px] lg:pb-[6px] pl-[14px] sm:pl-[16px] md:pl-[18px] lg:pl-[20px] rounded-[8px] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px] font-medium leading-[18px] sm:leading-[19px] md:leading-[20px] lg:leading-[21px] mt-auto"
+                            className="pt-[4px] sm:pt-[5px] md:pt-[5px] lg:pt-[6px] pr-[10px] sm:pr-[12px] md:pr-[13px] lg:pr-[14px] pb-[4px] sm:pb-[5px] md:pb-[5px] lg:pb-[6px] pl-[14px] sm:pl-[16px] md:pl-[18px] lg:pl-[20px] rounded-[8px] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px] font-medium leading-[18px] sm:leading-[19px] md:leading-[20px] lg:leading-[21px] mt-auto transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F7D6D]/50 cursor-pointer"
                           >
                             {t('learnMoreBtn')}
                           </Button>
                         </div>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -180,15 +181,15 @@ const Projects = () => {
                   <div className="flex flex-col sm:flex-row gap-[16px] justify-center items-center w-full mt-[16px] sm:mt-[20px] md:mt-[24px]">
                     <Button
                       variant="outline"
-                      onClick={() => {}}
-                      className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[24px] sm:leading-[26px] md:leading-[28px] w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200"
+                      onClick={() => window.location.href = '/training'}
+                      className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[24px] sm:leading-[26px] md:leading-[28px] w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('getInvolved')}
                     </Button>
                     <Button
                       variant="primary"
                       onClick={() => navigate('/donate')}
-                      className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[24px] sm:leading-[26px] md:leading-[28px] w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200"
+                      className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold leading-[24px] sm:leading-[26px] md:leading-[28px] w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('donateNow')}
                     </Button>
@@ -224,15 +225,15 @@ const Projects = () => {
                       {t('navigation')}
                     </h4>
                     <div className="space-y-2">
-                      <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                      <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                      <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
-                      <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                      <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                      <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                      <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                      <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                      <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                      <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('about')}</a>
+                      <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('projects')}</a>
+                      <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('fund')}</a>
+                      <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('testimonies')}</a>
+                      <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('training')}</a>
+                      <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('story')}</a>
+                      <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('shop')}</a>
+                      <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('contact')}</a>
+                      <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white hover:underline underline-offset-4 transition-colors">{t('donate')}</a>
                     </div>
                   </div>
 

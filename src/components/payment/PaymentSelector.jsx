@@ -19,8 +19,8 @@ const PaymentSelector = ({
   }, [initialMethod]);
 
   const paymentMethods = [
-    { id: 'stripe', name: 'Stripe',  description: 'Modern UI, supports multiple currencies worldwide', icon: '/images/stripe.svg' },
-    { id: 'paypal', name: 'PayPal',  description: 'Trusted brand, simple setup, widely recognized',   icon: '/images/paypal.svg' },
+    { id: 'stripe', name: 'Stripe',  description: 'Modern UI, supports multiple currencies worldwide', icon: '/images/stripe1.svg' },
+    { id: 'paypal', name: 'PayPal',  description: 'Trusted brand, simple setup, widely recognized',   icon: '/images/i.svg' },
     { id: 'fondy',  name: 'Fondy',   description: 'Perfect for Poland, Ukraine, Eastern Europe',      icon: '/images/fondy.svg' },
   ];
 

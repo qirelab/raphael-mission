@@ -5,7 +5,7 @@ const StripePayment = () => {
     <div className="bg-white p-6 rounded-lg border">
       <div className="flex items-center mb-4">
         <img 
-          src="/images/stripe.svg" 
+          src="/images/stripe1.svg" 
           alt="Stripe" 
           className="w-8 h-6 mr-2"
         />

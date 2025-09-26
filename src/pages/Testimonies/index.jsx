@@ -17,9 +17,9 @@ const TestimoniesPage = () => {
     { id: 4, name: "Carlos Rodriguez", location: "Mexico City, Mexico", image: "/images/carlos.png",
       quote: t('shopTestimonialDisasterRelief') },
     { id: 5, name: "Sarah Kim", location: "Seoul, South Korea", image: "/images/sarakim.png",
-      quote: t('shopTestimonialHealthcare') },
+      quote: t('brought medical care to our remote village. My grandmother received life-saving treatment.') },
     { id: 6, name: "David Thompson", location: "London, UK", image: "/images/davidtompson.png",
-      quote: t('shopTestimonialVolunteering') }
+      quote: t('Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entireworldview.') }
   ];
 
   const featuredTestimonial = {

@@ -38,7 +38,7 @@ const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
       <div className="bg-white p-6 rounded-lg border">
         <div className="flex items-center mb-3">
           <img
-            src="/images/paypal.svg"
+            src="/images/i.svg"
             alt="PayPal"
             className="w-8 h-6 mr-2"
           />

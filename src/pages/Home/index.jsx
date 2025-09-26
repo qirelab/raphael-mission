@@ -36,8 +36,8 @@ const Home = () => {
             <div className="w-full lg:w-auto flex justify-center lg:justify-start">
               <img
                 src="/images/img_logo_2.png"
-                alt={t('brandName') + ' Logo'}
-                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px]"
+                alt={`${t('brandName')} Logo`}
+                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px] transition-transform duration-500 hover:scale-105"
               />
             </div>
 
@@ -88,7 +88,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[44px]">
             {/* Card 1 */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
                   {t('humanitarianAid')}
@@ -100,7 +100,7 @@ const Home = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
                   {t('spiritualGuidance')}
@@ -112,7 +112,7 @@ const Home = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full">
+            <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
                   {t('communityBuilding')}
@@ -140,22 +140,38 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col">
-                <img src="/images/img_img.png" alt="project" className="w-full h-[160px] sm:h-[180px] lg:h-[192px] object-cover" />
+              <div
+                key={i}
+                className="group bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                {/* image with hover overlay */}
+                <div className="relative w-full h-[160px] sm:h-[180px] lg:h-[192px] overflow-hidden">
+                  <img
+                    src="/images/img_img.png"
+                    alt="project"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/25 flex items-center justify-center">
+                    <a href="/projects" className="text-white text-[14px] sm:text-[16px] font-semibold underline">
+                      {t('learnMore')}
+                    </a>
+                  </div>
+                </div>
+
                 <div className="p-5 lg:p-6 flex flex-col flex-1">
                   <div className="flex-1">
                     <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
                       {t('cleanWaterInitiative')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
-                      {t('Offering prayer and spiritual care for physical and emotional healing through divine grace.')}
+                      {t('impact25')}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 mt-auto pt-4">
-                    <span className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins']">
+                    <a href="/projects" className="flex items-center gap-2 text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins'] hover:underline">
                       {t('learnMore')}
-                    </span>
-                    <img src="/images/img_frame.svg" alt="arrow" className="w-[14px] h-[16px]" />
+                      <img src="/images/img_frame.svg" alt="arrow" className="w-[14px] h-[16px]" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -180,21 +196,21 @@ const Home = () => {
                 className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=paypal')}
               >
-                <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
+                <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px] transition-transform duration-300 hover:scale-110" />
                 PayPal
               </button>
               <button
-                className="bg-white text-[#635BFF] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
+                className="bg-white text-[#8454ec] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=stripe')}
               >
-                <img src="/images/stripe.svg" alt="Stripe" className="w-[24px] h-[24px]" />
+                <img src="/images/stripe1.svg" alt="Stripe" className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
                 Stripe
               </button>
               <button
                 className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=fondy')}
               >
-                <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px]" />
+                <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px] transition-transform duration-300 hover:scale-110" />
                 Fondy
               </button>
             </div>
@@ -216,22 +232,29 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019]">
+              <div
+                key={i}
+                className="group bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
                 <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px]">
                   {t('quoteSarahJohnson')}
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <img src="/images/img_ellipse_1.png" alt={t('sarahJohnson')} className="w-[52px] h-[52px] rounded-[26px]" />
+                  <img
+                    src="/images/img_ellipse_1.png"
+                    alt={t('sarahJohnson')}
+                    className="w-[52px] h-[52px] rounded-[26px] transition-transform duration-300 group-hover:scale-110"
+                  />
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
                       <h4 className="text-[16px] lg:text-[18px] font-semibold leading-[24px] lg:leading-[27px] text-[#111827] font-['Poppins']">
-                        {t('Sarah Johnson')}
+                        {t('sarahJohnson')}
                       </h4>
                       <img src="/images/img_vector.svg" alt="quote" className="w-[12px] h-[18px]" />
                     </div>
                     <p className="text-[12px] lg:text-[14px] font-normal leading-[18px] lg:leading-[21px] text-[#6b7280] font-['Poppins']">
-                      {t('toronto,Canada')}
+                      {t('torontoCanada')}
                     </p>
                   </div>
                 </div>
@@ -258,14 +281,14 @@ const Home = () => {
                 {/* Address */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_div_blue_gray_600.svg" alt="Address" className="w-[24px] h-[24px]" />
+                    <img src="/images/img_div_blue_gray_600.svg" alt={t('addressLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('Address')}
+                      {t('addressLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('123 Mission Street, Hope City, HC 12345')}
+                      {t('addressLine')}
                     </p>
                   </div>
                 </div>
@@ -273,14 +296,14 @@ const Home = () => {
                 {/* Phone */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_div_blue_gray_600_48x48.svg" alt="Phone" className="w-[24px] h-[24px]" />
+                    <img src="/images/img_div_blue_gray_600_48x48.svg" alt={t('phoneLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('Phone')}
+                      {t('phoneLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('+1 (555) 123-4567')}
+                      {t('phoneNumber')}
                     </p>
                   </div>
                 </div>
@@ -288,14 +311,14 @@ const Home = () => {
                 {/* Email */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_vector_blue_gray_600.svg" alt="Email" className="w-[24px] h-[24px]" />
+                    <img src="/images/img_vector_blue_gray_600.svg" alt={t('emailLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('Email')}
+                      {t('emailLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('info@raphaelmission.org')}
+                      {t('emailAddress')}
                     </p>
                   </div>
                 </div>
@@ -305,19 +328,19 @@ const Home = () => {
             {/* Form */}
             <div className="w-full lg:w-[46%] bg-white rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019]">
               <h3 className="text-[20px] lg:text-[24px] font-semibold leading-[30px] lg:leading-[36px] text-[#1f2937] font-['Poppins'] mb-4">
-                {t('Send Message')}
+                {t('sendMessage')}
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <EditText
-                    placeholder={t('First Name')}
+                    placeholder={t('firstName')}
                     value={firstName}
                     onChange={(e) => setFirstName(e?.target?.value)}
                     fullWidth
                   />
                   <EditText
-                    placeholder={t('last Name')}
+                    placeholder={t('lastName')}
                     value={lastName}
                     onChange={(e) => setLastName(e?.target?.value)}
                     fullWidth
@@ -325,7 +348,7 @@ const Home = () => {
                 </div>
 
                 <EditText
-                  placeholder={t('Email Address')}
+                  placeholder={t('emailField')}
                   value={email}
                   onChange={(e) => setEmail(e?.target?.value)}
                   fullWidth
@@ -339,7 +362,7 @@ const Home = () => {
                 />
 
                 <TextArea
-                  placeholder={t('Your Message')}
+                  placeholder={t('yourMessage')}
                   value={message}
                   onChange={(e) => setMessage(e?.target?.value)}
                   rows={6}
@@ -349,7 +372,7 @@ const Home = () => {
                 <div className="flex justify-center">
                   <button type="submit" className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center">
                     <span className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-center text-white font-['Poppins'] py-1.5">
-                      {t('send Message')}
+                      {t('sendMessage')}
                     </span>
                   </button>
                 </div>
@@ -366,6 +389,7 @@ const Home = () => {
             {/* Brand */}
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 {t('footerDesc')}
@@ -402,14 +426,14 @@ const Home = () => {
                 </h4>
                 <div className="space-y-2 max-w-[84%]">
                   <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    +1 (555) 123-4567
+                    {t('phoneNumber')}
                   </p>
                   <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    info@raphaelmission.org
+                    {t('emailAddress')}
                   </p>
                   <div>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      123 Mission Street
+                      {t('addressLine')}
                     </p>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
                       Faith City, FC 12345

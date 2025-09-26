@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import PaymentSelector from '../../components/payment/PaymentSelector';
@@ -14,7 +14,7 @@ const DonationPage = () => {
   const [paymentMethod, setPaymentMethod] = useState('stripe'); // какой провайдер открыть
 
   // Чтение query-параметра method при загрузке
-  React.useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const method = params.get('method');
     if (['paypal', 'stripe', 'fondy'].includes(method)) {
@@ -61,7 +61,7 @@ const DonationPage = () => {
                       title="Stripe"
                       aria-label="Pay with Stripe"
                     >
-                      <img src="/images/stripe.svg" alt="Stripe" className="w-[72px] h-[44px]" />
+                      <img src="/images/stripe1.svg" alt="Stripe" className="w-[72px] h-[44px]" />
                     </button>
 
                     <button
@@ -81,7 +81,7 @@ const DonationPage = () => {
                       title="Fondy"
                       aria-label="Pay with Fondy"
                     >
-                      <img src="/images/stripe1.svg" alt="Fondy" className="w-[66px] h-[44px]" />
+                      <img src="/images/fondy.svg" alt="Fondy" className="w-[66px] h-[44px]" />
                     </button>
                   </div>
                 ) : (
@@ -142,11 +142,30 @@ const DonationPage = () => {
 
             {/* Правый столбец: картинка */}
             <div className="w-full lg:w-1/2">
+              {/* Вариант А: тень полностью убрана */}
               <img
                 src="/images/money .jpg"
                 alt="Mission impact"
-                className="w-full h-[280px] sm:h-[360px] md:h-[440px] lg:h-[520px] object-cover rounded-[12px]"
+                className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-[12px] shadow-none drop-shadow-none filter-none"
               />
+
+              {/*
+              --- Альтернативы ---
+
+              // Вариант B: аккуратная мягкая тень
+              <img
+                src="/images/money .jpg"
+                alt="Mission impact"
+                className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-[12px] shadow-md"
+              />
+
+              // Вариант C: немного меньше/больше, чтобы «встроенная» тень на самом изображении выглядела естественнее
+              <img
+                src="/images/money .jpg"
+                alt="Mission impact"
+                className="w-full h-[220px] sm:h-[320px] md:h-[400px] lg:h-[460px] object-cover rounded-[12px] shadow-none drop-shadow-none"
+              />
+              */}
             </div>
           </div>
         </div>

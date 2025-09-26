@@ -37,7 +37,7 @@ const QuestionsContact = () => {
                {/* Address */}
              <div className="w-full max-w-[350px] rounded-2xl bg-[#EEF6FF] border border-[#E6F0FF] p-6 sm:p-8 text-center">
                <div className="mx-auto mb-4 sm:mb-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#DFEAFF] flex items-center justify-center">
-                 <img src="/images/addres.svg" alt="Address icon" className="w-6 h-6 sm:w-7 sm:h-7" />
+                 <img src="/images/div.svg" alt="Address icon" className="w-14 h-14 sm:w-16 sm:h-16 object-contain" />
               </div>
                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">Address</h3>
                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">

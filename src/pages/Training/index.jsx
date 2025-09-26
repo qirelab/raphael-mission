@@ -36,15 +36,11 @@ const TrainingPrograms = () => {
     },
     {
       id: 5,
-      title: t('Church Support & Development'),
-      description: t('Training for strengthening local churches and leaders. Build sustainable ministry foundations for lasting impact.'),
-      duration: t('12 weeks'),
+      title: t('trainingChurchSupportTitle'),
+      description: t('trainingChurchSupportDesc'),
+      duration: t('trainingChurchSupportDuration'),
       image: '/images/img_img_4.png',
     },
-  ];
-
-  const testimonials = [
-    
   ];
 
   return (
@@ -54,25 +50,18 @@ const TrainingPrograms = () => {
       {/* HERO */}
       <section className="relative w-full">
         <div className="absolute inset-0">
-          <img
-            src="/images/img_img.png"
-            alt="Training"
-            className="w-full h-[420px] sm:h-[520px] lg:h-[600px] object-cover"
-          />
+          <img src="/images/img_img.png" alt="Training" className="w-full h-[420px] sm:h-[520px] lg:h-[600px] object-cover" />
           <div className="absolute inset-0 bg-white/60" />
         </div>
 
         <div className="relative z-10 max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="min-h-[420px] sm:min-h-[520px] lg:min-h-[600px] flex flex-col justify-center">
             <h1 className="text-black font-bold font-[Poppins] text-[28px] sm:text-[40px] lg:text-[56px] leading-tight mb-3">
-              {t('Equipping Believers for Service')}
+              {t('trainingHeroTitle')}
             </h1>
-            <p className="text-black text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] lg:leading-[28px] max-w-none">
-              {t('Faith-based training programs to inspire, empower, and prepare you for ministry and community impact.')}
+            <p className="text-black text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[26px] lg:leading-[28px]">
+              {t('trainingHeroDescription')}
             </p>
-
-            <div className="mt-6 flex flex-col sm:flex-row gap-4">
-            </div>
           </div>
         </div>
       </section>
@@ -82,10 +71,10 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-[#0f172a] font-bold font-[Poppins] text-[24px] sm:text-[28px] lg:text-[32px]">
-              {t('Our Training Programs')}
+              {t('trainingProgramsTitle')}
             </h2>
             <p className="mt-2 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[760px] mx-auto">
-              {t('Comprehensive faith-based training designed to equip you for meaningful service and ministry')}
+              {t('trainingProgramsDescription')}
             </p>
           </div>
 
@@ -117,34 +106,11 @@ const TrainingPrograms = () => {
               2,500+
             </h2>
             <h3 className="mt-2 text-[#0f172a] font-semibold text-[18px] sm:text-[20px]">
-              {t('Believers Equipped for Global Service')}
+              {t('trainingStatsTitle')}
             </h3>
             <p className="mt-3 text-[#6b7280] text-[14px] sm:text-[16px] max-w-[900px] mx-auto">
-              {t('Our comprehensive training programs have prepared thousands of individuals to serve effectively in their communities and beyond, creating lasting impact through faith-driven action.')}
+              {t('trainingStatsDesc')}
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {testimonials.map((t) => (
-              <div
-                key={t.id}
-                className="bg-white rounded-[12px] border border-[#eef0f3] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-6"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
-                  <div>
-                    <p className="text-[#0f172a] font-semibold">{t.name}</p>
-                    <p className="text-[#6b7280] text-[13px]">{t.role}</p>
-                  </div>
-                </div>
-                <p className="text-[#6b7280] text-[14px] leading-[22px]">&quot;{t.text}&quot;</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -154,17 +120,18 @@ const TrainingPrograms = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-white font-bold font-[Poppins] text-[22px] sm:text-[26px]">
-              {t('Ready to grow in faith and service?')}
+              {t('trainingCtaTitle')}
             </h2>
             <p className="mt-2 text-white/90 text-[14px] sm:text-[16px] max-w-[820px] mx-auto">
-              {t('Join thousands of believers who have been equipped through our training.')}
-              {t('programs to make a lasting impact in their communities.')}
+              {t('trainingCtaDesc')}
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10">
-                {t('Contact Us for Info')}
-              </button>
+              <a href="/questions-contact">
+                <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10">
+                  {t('trainingCtaButton')}
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -177,7 +144,7 @@ const TrainingPrograms = () => {
             {/* Brand */}
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                Raphael Mission
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 {t('footerDesc')}
@@ -192,68 +159,53 @@ const TrainingPrograms = () => {
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
               {/* Navigation */}
               <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="http://localhost:4028/fund" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
-                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                  <a href="/about-mission" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
+                  <a href="/projects" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
+                  <a href="/fund" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('fund')}</a>
+                  <a href="/testimonies" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
+                  <a href="/training" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
+                  <a href="/story" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
+                  <a href="/shop" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
+                  <a href="/questions-contact" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
+                  <a href="/donation" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
                 </div>
               </div>
 
               {/* Contact */}
               <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
                   {t('contact')}
                 </h4>
                 <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    +1 (555) 123-4567
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    info@raphaelmission.org
-                  </p>
+                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('phoneNumber')}</p>
+                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('emailAddress')}</p>
                   <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      123 Mission Street
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
+                    <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">123 Mission Street</p>
+                    <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">Faith City, FC 12345</p>
                   </div>
                 </div>
               </div>
 
               {/* Legal */}
               <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
                   {t('legal')}
                 </h4>
                 <div className="space-y-2">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('privacyPolicy')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('termsOfService')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('cookiePolicy')}
-                  </p>
+                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('privacyPolicy')}</p>
+                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('termsOfService')}</p>
+                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('cookiePolicy')}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Copyright */}
           <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+            <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">
               {t('copyright')}
             </p>
           </div>
