@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/common/Header';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -35,7 +34,6 @@ const DonationPage = () => {
 
   return (
     <div className="w-full bg-global-4">
-      <Header />
 
       {/* HERO + выбор оплаты */}
       <div className="w-full bg-global-4">
@@ -141,70 +139,67 @@ const DonationPage = () => {
             </div>
 
             {/* Правый столбец: картинка */}
-            <div className="w-full lg:w-1/2">
-              {/* Вариант А: тень полностью убрана */}
+            <div className="w-full lg:w-1/2 flex justify-center">
               <img
                 src="/images/money .jpg"
                 alt="Mission impact"
-                className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-[12px] shadow-none drop-shadow-none filter-none"
+                className="
+                  block w-full h-auto
+                  max-h-[220px] sm:max-h-[300px] md:max-h-[360px] lg:max-h-[420px]
+                  object-contain rounded-[12px]
+                  shadow-none drop-shadow-none filter-none
+                "
               />
-
-              {/*
-              --- Альтернативы ---
-
-              // Вариант B: аккуратная мягкая тень
-              <img
-                src="/images/money .jpg"
-                alt="Mission impact"
-                className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-[12px] shadow-md"
-              />
-
-              // Вариант C: немного меньше/больше, чтобы «встроенная» тень на самом изображении выглядела естественнее
-              <img
-                src="/images/money .jpg"
-                alt="Mission impact"
-                className="w-full h-[220px] sm:h-[320px] md:h-[400px] lg:h-[460px] object-cover rounded-[12px] shadow-none drop-shadow-none"
-              />
-              */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ПРЕЖНИЙ ПОЛНЫЙ ФУТЕР */}
+      {/* Footer */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
             {/* Brand */}
             <div className="w-full lg:w-[22%]">
               <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                Raphael Mission
+                {t('brandName')}
               </h3>
               <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
+              {/* Navigation (с hover-эффектом) */}
               <div className="w-full lg:w-[18%]">
                 <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                  {[
+                    { href: '/about-mission', label: t('about') },
+                    { href: '/projects', label: t('projects') },
+                    { href: '/testimonies', label: t('testimonies') },
+                    { href: '/training', label: t('training') },
+                    { href: '/story', label: t('story') },
+                    { href: '/shop', label: t('shop') },
+                    { href: '/questions-contact', label: t('contact') },
+                    { href: '/donation', label: t('donate') },
+                  ].map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
 
@@ -215,14 +210,14 @@ const DonationPage = () => {
                 </h4>
                 <div className="space-y-2 max-w-[84%]">
                   <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    +1 (555) 123-4567
+                    {t('phoneNumber')}
                   </p>
                   <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    info@raphaelmission.org
+                    {t('emailAddress')}
                   </p>
                   <div>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      123 Mission Street
+                      {t('addressLine')}
                     </p>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
                       Faith City, FC 12345
@@ -237,15 +232,20 @@ const DonationPage = () => {
                   {t('legal')}
                 </h4>
                 <div className="space-y-2">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('privacyPolicy')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('termsOfService')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('cookiePolicy')}
-                  </p>
+                  {[
+                    { href: '#', label: t('privacyPolicy') },
+                    { href: '#', label: t('termsOfService') },
+                    { href: '#', label: t('cookiePolicy') },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

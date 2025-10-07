@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../components/common/Header';
 import { useLanguage } from '../../context/LanguageContext';
 
 const TrainingPrograms = () => {
@@ -45,7 +44,6 @@ const TrainingPrograms = () => {
 
   return (
     <div className="w-full bg-white">
-      <Header />
 
       {/* HERO */}
       <section className="relative w-full">
@@ -137,7 +135,7 @@ const TrainingPrograms = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* Footer */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
@@ -150,61 +148,92 @@ const TrainingPrograms = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/youtube.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
+              {/* Navigation (с hover-эффектом) */}
               <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  <a href="/about-mission" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                  <a href="/projects" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="/testimonies" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                  <a href="/training" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                  <a href="/story" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                  <a href="/shop" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                  <a href="/questions-contact" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                  <a href="/donation" className="block text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                  {[
+                    { href: '/about-mission', label: t('about') },
+                    { href: '/projects', label: t('projects') },
+                    { href: '/testimonies', label: t('testimonies') },
+                    { href: '/training', label: t('training') },
+                    { href: '/story', label: t('story') },
+                    { href: '/shop', label: t('shop') },
+                    { href: '/questions-contact', label: t('contact') },
+                    { href: '/donation', label: t('donate') },
+                  ].map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
 
               {/* Contact */}
               <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('contact')}
                 </h4>
                 <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('phoneNumber')}</p>
-                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('emailAddress')}</p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('phoneNumber')}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('emailAddress')}
+                  </p>
                   <div>
-                    <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">123 Mission Street</p>
-                    <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">Faith City, FC 12345</p>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      {t('addressLine')}
+                    </p>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      Faith City, FC 12345
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Legal */}
               <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold text-white font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('legal')}
                 </h4>
                 <div className="space-y-2">
-                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('privacyPolicy')}</p>
-                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('termsOfService')}</p>
-                  <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">{t('cookiePolicy')}</p>
+                  {[
+                    { href: '#', label: t('privacyPolicy') },
+                    { href: '#', label: t('termsOfService') },
+                    { href: '#', label: t('cookiePolicy') },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Copyright */}
           <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-['Poppins']">
+            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
               {t('copyright')}
             </p>
           </div>

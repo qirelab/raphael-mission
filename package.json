@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@dhiwise/component-tagger": "^1.0.10",
+    "@emailjs/browser": "^4.4.1",
     "@paypal/react-paypal-js": "^8.8.3",
     "@stripe/react-stripe-js": "^3.9.0",
     "@stripe/stripe-js": "^7.8.0",

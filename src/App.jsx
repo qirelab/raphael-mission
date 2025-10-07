@@ -1,12 +1,4 @@
+import React from 'react';
+import Header from './components/common/Header';
 import Routes from './Routes';
-import { LanguageProvider } from './context/LanguageContext';
-
-function App() {
-  return (
-    <LanguageProvider>
-      <Routes />
-    </LanguageProvider>
-  );
-}
-
-export default App;
+export default function App() { return (<><Header /><Routes /></>); }

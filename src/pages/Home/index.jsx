@@ -1,29 +1,81 @@
+// src/pages/Home/index.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
 import TextArea from '../../components/ui/TextArea';
 import { useLanguage } from '../../context/LanguageContext';
 
+// --- EmailJS ---
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const Home = () => {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [lastName, setLastName]   = useState('');
+  const [email, setEmail]         = useState('');
+  const [subject, setSubject]     = useState('');
+  const [message, setMessage]     = useState('');
+  const [isSending, setIsSending] = useState(false);
+
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const validateEmail = (val) => {
+    // простая проверка email
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(val).toLowerCase());
+  };
+
+  const handleSubmit = async (e) => {
     e?.preventDefault();
-    console.log({ firstName, lastName, email, subject, message });
+
+    // Валидация полей (минимальная, без изменения UI)
+    if (!firstName.trim()) return alert('Введите имя');
+    if (!lastName.trim())  return alert('Введите фамилию');
+    if (!email.trim() || !validateEmail(email)) return alert('Введите корректный email');
+    if (!subject.trim())  return alert('Укажите тему сообщения');
+    if (!message.trim())  return alert('Напишите сообщение');
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      return alert('EmailJS не настроен: проверьте переменные окружения VITE_EMAILJS_*');
+    }
+
+    setIsSending(true);
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          firstName,
+          lastName,
+          email,
+          subject,
+          message,
+          reply_to: email, // чтобы можно было ответить прямо из письма
+        },
+        { publicKey: PUBLIC_KEY }
+      );
+
+      alert('Спасибо! Ваше сообщение отправлено.');
+      // очистить форму
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      alert('Не удалось отправить сообщение. Попробуйте еще раз позже.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div className="w-full bg-[#ffffff]">
-      {/* Header */}
-      <Header />
 
       {/* Hero Section */}
       <section className="w-full bg-[#ffffff] relative overflow-hidden" style={{ position: 'relative' }}>
@@ -32,12 +84,12 @@ const Home = () => {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(30,34,45,0.18)', zIndex: 2 }} />
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 4 }}>
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-16 py-8 sm:py-12 lg:py-16">
-            {/* Logo */}
+            {/* Logo (без hover) */}
             <div className="w-full lg:w-auto flex justify-center lg:justify-start">
               <img
                 src="/images/img_logo_2.png"
                 alt={`${t('brandName')} Logo`}
-                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px] transition-transform duration-500 hover:scale-105"
+                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px]"
               />
             </div>
 
@@ -63,7 +115,7 @@ const Home = () => {
 
                 <Button
                   variant="outline"
-                  className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto"
+                  className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto hover:bg-white/90 hover:text-gray-900 hover:shadow-lg transition-colors"
                   onClick={() => navigate('/about-mission')}
                 >
                   {t('learnMore')}
@@ -81,7 +133,7 @@ const Home = () => {
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
               {t('missionTitle')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#374151] font-['Poppins'] max-w-[56%]">
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#374151] font-['Poppins'] max-w-full md:max-w-[56%]">
               {t('missionDescription')}
             </p>
           </div>
@@ -117,7 +169,7 @@ const Home = () => {
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
                   {t('communityBuilding')}
                 </h3>
-                <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
+                <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sанс']">
                   {t('communityBuildingDesc')}
                 </p>
               </div>
@@ -133,7 +185,7 @@ const Home = () => {
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
               {t('currentProjects')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-[60%]">
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[60%]">
               {t('currentProjectsDesc')}
             </p>
           </div>
@@ -187,7 +239,7 @@ const Home = () => {
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-6">
               {t('supportOurMission')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-white/90 font-['Poppins'] max-w-[62%] mx-auto mb-12">
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-white/90 font-['Poppins'] max-w-full md:max-w-[62%] mx-auto mb-12">
               {t('supportMissionDesc')}
             </p>
 
@@ -196,21 +248,21 @@ const Home = () => {
                 className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=paypal')}
               >
-                <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
               </button>
               <button
                 className="bg-white text-[#8454ec] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=stripe')}
               >
-                <img src="/images/stripe1.svg" alt="Stripe" className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                <img src="/images/stripe1.svg" alt="Stripe" className="w-[24px] h-[24px]" />
                 Stripe
               </button>
               <button
                 className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate('/donation?method=fondy')}
               >
-                <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px]" />
                 Fondy
               </button>
             </div>
@@ -225,7 +277,7 @@ const Home = () => {
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[36px] sm:leading-[42px] lg:leading-[48px] text-[#111827] font-['Poppins'] mb-4">
               {t('testimonies')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-['Poppins'] max-w-[44%]">
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[44%]">
               {t('testimoniesDesc')}
             </p>
           </div>
@@ -273,7 +325,7 @@ const Home = () => {
               <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-3">
                 {t('contactUsTitle')}
               </h2>
-              <p className="max-w-[82%] mb-8 text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#dcfce7] font-['Poppins']">
+              <p className="max-w-full lg:max-w-[82%] mb-8 text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#dcfce7] font-['Poppins']">
                 {t('contactUsDesc')}
               </p>
 
@@ -370,9 +422,13 @@ const Home = () => {
                 />
 
                 <div className="flex justify-center">
-                  <button type="submit" className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center">
+                  <button
+                    type="submit"
+                    disabled={isSending}
+                    className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
                     <span className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-center text-white font-['Poppins'] py-1.5">
-                      {t('sendMessage')}
+                      {isSending ? 'Отправка…' : t('sendMessage')}
                     </span>
                   </button>
                 </div>
@@ -382,7 +438,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer (с лёгкими hover для ссылок/иконок) */}
       <footer className="w-full bg-[#333333] py-8 lg:py-10">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
@@ -395,9 +451,9 @@ const Home = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px]" />
+                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
               </div>
             </div>
 
@@ -408,14 +464,25 @@ const Home = () => {
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  <a href="http://localhost:4028/about-mission" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                  <a href="http://localhost:4028/projects" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="http://localhost:4028/testimonies" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                  <a href="http://localhost:4028/training" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                  <a href="http://localhost:4028/story" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                  <a href="http://localhost:4028/shop" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                  <a href="http://localhost:4028/questions-contact" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                  <a href="http://localhost:4028/donation" className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                  {[
+                    { href: 'http://localhost:4028/about-mission', label: t('about') },
+                    { href: 'http://localhost:4028/projects', label: t('projects') },
+                    { href: 'http://localhost:4028/testimonies', label: t('testimonies') },
+                    { href: 'http://localhost:4028/training', label: t('training') },
+                    { href: 'http://localhost:4028/story', label: t('story') },
+                    { href: 'http://localhost:4028/shop', label: t('shop') },
+                    { href: 'http://localhost:4028/questions-contact', label: t('contact') },
+                    { href: 'http://localhost:4028/donation', label: t('donate') },
+                  ].map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
 
@@ -441,22 +508,26 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-
               {/* Legal */}
               <div className="w-full lg:w-[42%]">
                 <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('legal')}
                 </h4>
                 <div className="space-y-2">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('privacyPolicy')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('termsOfService')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('cookiePolicy')}
-                  </p>
+                  {[
+                    { href: '#', label: t('privacyPolicy') },
+                    { href: '#', label: t('termsOfService') },
+                    { href: '#', label: t('cookiePolicy') },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

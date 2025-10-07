@@ -77,7 +77,8 @@ export const translations = {
     missionDescription:
       "We are called to serve humanity with compassion, bringing hope and healing to communities worldwide through faith-based initiatives.",
     humanitarianAid: "Humanitarian Aid",
-    humanitarianAidDesc: "Providing essential resources and support to those in hardship",
+    humanitarianAidDesc:
+      "Providing essential resources and support to those in hardship",
     spiritualGuidance: "Spiritual Guidance",
     spiritualGuidanceDesc:
       "Offering faith-based counseling and spiritual support to strengthen communities",
@@ -121,6 +122,43 @@ export const translations = {
     impact25: "Clean water for a family of 5 for one month",
     impact50: "Medical supplies for mobile clinics",
     impact100: "Community center programs for children",
+
+    // ===== Payment selector (labels) =====
+    // новые ключи, которыми пользуется PaymentSelector
+    choosePaymentMethod: "Choose Payment Method",
+    completeYourDonation: "Complete Your Donation",
+    providerStripeDesc: "Modern UI, supports multiple currencies worldwide",
+    providerPayPalDesc: "Trusted brand, simple setup, widely recognized",
+    providerFondyDesc: "Perfect for Poland, Ukraine, Eastern Europe",
+
+    // (оставляем старые — если где-то используются)
+    paymentChooseMethod: "Choose Payment Method",
+    paymentCompleteTitle: "Complete Your Donation",
+    paymentStripeName: "Stripe",
+    paymentPayPalName: "PayPal",
+    paymentFondyName: "Fondy",
+    paymentStripeDesc: "Modern UI, supports multiple currencies worldwide",
+    paymentPayPalDesc: "Trusted brand, simple setup, widely recognized",
+    paymentFondyDesc: "Perfect for Poland, Ukraine, Eastern Europe",
+
+    // ===== Payment providers (inside forms) =====
+    paymentPayWithStripe: "Pay with Stripe",
+    paymentPayWithPayPal: "Pay with PayPal",
+    paymentPayWithFondy: "Pay with Fondy",
+    paymentStripeLongDesc:
+      "Secure payment processing with support for multiple currencies.",
+    paymentPayPalLongDesc:
+      "Trusted by millions worldwide. Pay securely with your PayPal account or credit card.",
+    paymentFondyLongDesc:
+      "Perfect for Eastern European donors. Supports local banking and multiple languages including Polish.",
+    paymentDonateVia: "Donate via",
+    paymentStripeLinkText: "Stripe Payment Link",
+    paymentSupportedMethodsTitle: "Supported Payment Methods:",
+    paymentMethodVisaMastercard: "Visa, Mastercard, Maestro",
+    paymentMethodLocalPolishBanks: "Local Polish banks",
+    paymentMethodBLIKPoland: "BLIK (Poland)",
+    paymentMethodBankTransfers: "Bank transfers",
+    donationOrderDescription: "Donation to Raphael Mission",
 
     // ===== Shop =====
     shopHeroTitle: "Support Our Mission Through Your Purchase",
@@ -200,6 +238,28 @@ export const translations = {
     shareYourStoryBtn: "Share Your Story",
     readFullStory: "Read Full Story",
 
+    // === Testimonies: names & locations ===
+nameMariaSantos: "Maria Santos",
+nameJamesWilson: "James Wilson",
+nameAmaraOkafor: "Amara Okafor",
+nameCarlosRodriguez: "Carlos Rodriguez",
+nameSarahKim: "Sarah Kim",
+nameDavidThompson: "David Thompson",
+
+locSaoPauloBrazil: "São Paulo, Brazil",
+locChicagoUSA: "Chicago, USA",
+locLagosNigeria: "Lagos, Nigeria",
+locMexicoCityMexico: "Mexico City, Mexico",
+locSeoulSouthKorea: "Seoul, South Korea",
+locLondonUK: "London, UK",
+
+// === Extra quotes (cards 5–6) ===
+testimonySarahKimQuote:
+  "They brought medical care to our remote village. My grandmother received life-saving treatment.",
+testimonyDavidThompsonQuote:
+  "Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entire worldview.",
+
+
     // ===== Footer =====
     footerDesc:
       "Spreading God's love through evangelism, healing, and church support.",
@@ -208,7 +268,7 @@ export const translations = {
     privacyPolicy: "Privacy Policy",
     termsOfService: "Terms of Service",
     cookiePolicy: "Cookie Policy",
-    copyright: "© 2024 Raphael Mission. All rights reserved.",
+    copyright: "© 2025 Raphael Mission. All rights reserved.",
 
     // ===== About =====
     aboutHeroTitle: "We bring hope through",
@@ -396,6 +456,47 @@ export const translations = {
     impact50: "Медицинские принадлежности для мобильных клиник",
     impact100: "Программы общественного центра для детей",
 
+    // ===== Payment selector (labels) =====
+    choosePaymentMethod: "Выберите способ оплаты",
+    completeYourDonation: "Завершите пожертвование",
+    providerStripeDesc:
+      "Современный интерфейс, поддержка множества валют по всему миру",
+    providerPayPalDesc:
+      "Надёжный бренд, простой запуск, широкое признание",
+    providerFondyDesc:
+      "Идеально для Польши, Украины и Восточной Европы",
+    // старые алиасы
+    paymentChooseMethod: "Выберите способ оплаты",
+    paymentCompleteTitle: "Завершите пожертвование",
+    paymentStripeName: "Stripe",
+    paymentPayPalName: "PayPal",
+    paymentFondyName: "Fondy",
+    paymentStripeDesc:
+      "Современный интерфейс, поддержка множества валют по всему миру",
+    paymentPayPalDesc:
+      "Надёжный бренд, простой запуск, широкое признание",
+    paymentFondyDesc:
+      "Идеально для Польши, Украины и Восточной Европы",
+
+    // ===== Payment providers (inside forms) =====
+    paymentPayWithStripe: "Оплатить через Stripe",
+    paymentPayWithPayPal: "Оплатить через PayPal",
+    paymentPayWithFondy: "Оплатить через Fondy",
+    paymentStripeLongDesc:
+      "Безопасная обработка платежей с поддержкой множества валют.",
+    paymentPayPalLongDesc:
+      "Доверяют миллионы по всему миру. Платите безопасно через аккаунт PayPal или банковскую карту.",
+    paymentFondyLongDesc:
+      "Идеально для жертвователей из Восточной Европы. Поддерживает локальные банки и несколько языков, включая польский.",
+    paymentDonateVia: "Пожертвовать через",
+    paymentStripeLinkText: "Ссылка для оплаты Stripe",
+    paymentSupportedMethodsTitle: "Поддерживаемые способы оплаты:",
+    paymentMethodVisaMastercard: "Visa, Mastercard, Maestro",
+    paymentMethodLocalPolishBanks: "Местные польские банки",
+    paymentMethodBLIKPoland: "BLIK (Польша)",
+    paymentMethodBankTransfers: "Банковские переводы",
+    donationOrderDescription: "Пожертвование Миссии Рафаэля",
+
     // ===== Shop =====
     shopHeroTitle: "Поддержите нашу миссию через покупку",
     shopHeroDesc:
@@ -474,6 +575,27 @@ export const translations = {
       "Коснулась ли Миссия Рафаэля вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.",
     shareYourStoryBtn: "Поделиться историей",
     readFullStory: "Читать полностью",
+    // === Свидетельства: имена и города ===
+nameMariaSantos: "Мария Сантос",
+nameJamesWilson: "Джеймс Уилсон",
+nameAmaraOkafor: "Амара Окафор",
+nameCarlosRodriguez: "Карлос Родригес",
+nameSarahKim: "Сара Ким",
+nameDavidThompson: "Дэвид Томпсон",
+
+locSaoPauloBrazil: "Сан-Паулу, Бразилия",
+locChicagoUSA: "Чикаго, США",
+locLagosNigeria: "Лагос, Нигерия",
+locMexicoCityMexico: "Мехико, Мексика",
+locSeoulSouthKorea: "Сеул, Республика Корея",
+locLondonUK: "Лондон, Великобритания",
+
+// === Доп. цитаты (5–6) ===
+testimonySarahKimQuote:
+  "Они привезли медицинскую помощь в нашу отдалённую деревню. Моя бабушка получила лечение, спасшее жизнь.",
+testimonyDavidThompsonQuote:
+  "Волонтёрство в Миссии Рафаэля открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.",
+
 
     // ===== Footer =====
     footerDesc:
@@ -484,7 +606,7 @@ export const translations = {
     termsOfService: "Условия обслуживания",
     cookiePolicy: "Политика файлов cookie",
     copyright:
-      "© 2024 Миссия Рафаэля. Все права защищены.",
+      "© 2025 Миссия Рафаэля. Все права защищены.",
 
     // ===== About =====
     aboutHeroTitle: "Мы приносим надежду через",
@@ -551,7 +673,7 @@ export const translations = {
   },
 
   pl: {
-    // (контактные данные в шапке)
+    // контакты
     phoneNumber: "(555) 123-4567",
     workHours: "8:30 – 17:00 czasu wschodniego",
     addressValue: "123 Mission Street Hope City, HC 12345",
@@ -681,6 +803,47 @@ export const translations = {
     impact50: "Zaopatrzenie medyczne dla mobilnych klinik",
     impact100: "Programy centrum społecznego dla dzieci",
 
+    // ===== Payment selector (labels) =====
+    choosePaymentMethod: "Wybierz metodę płatności",
+    completeYourDonation: "Zakończ darowiznę",
+    providerStripeDesc:
+      "Nowoczesny interfejs, wsparcie wielu walut na całym świecie",
+    providerPayPalDesc:
+      "Zaufana marka, prosta konfiguracja, szeroko rozpoznawalna",
+    providerFondyDesc:
+      "Idealne dla Polski, Ukrainy i Europy Wschodniej",
+    // алиасы
+    paymentChooseMethod: "Wybierz metodę płatności",
+    paymentCompleteTitle: "Zakończ darowiznę",
+    paymentStripeName: "Stripe",
+    paymentPayPalName: "PayPal",
+    paymentFondyName: "Fondy",
+    paymentStripeDesc:
+      "Nowoczesny interfejs, wsparcie wielu walut na całym świecie",
+    paymentPayPalDesc:
+      "Zaufana marka, prosta konfiguracja, szeroko rozpoznawalna",
+    paymentFondyDesc:
+      "Idealne dla Polski, Ukrainy i Europy Wschodniej",
+
+    // ===== Payment providers (inside forms) =====
+    paymentPayWithStripe: "Zapłać przez Stripe",
+    paymentPayWithPayPal: "Zapłać przez PayPal",
+    paymentPayWithFondy: "Zapłać przez Fondy",
+    paymentStripeLongDesc:
+      "Bezpieczna obsługa płatności z obsługą wielu walut.",
+    paymentPayPalLongDesc:
+      "Zaufany przez miliony na całym świecie. Płać bezpiecznie kontem PayPal lub kartą.",
+    paymentFondyLongDesc:
+      "Idealne dla darczyńców z Europy Wschodniej. Obsługuje lokalne banki i wiele języków, w tym polski.",
+    paymentDonateVia: "Wesprzyj przez",
+    paymentStripeLinkText: "Link płatności Stripe",
+    paymentSupportedMethodsTitle: "Obsługiwane metody płatności:",
+    paymentMethodVisaMastercard: "Visa, Mastercard, Maestro",
+    paymentMethodLocalPolishBanks: "Lokalne polskie banki",
+    paymentMethodBLIKPoland: "BLIK (Polska)",
+    paymentMethodBankTransfers: "Przelewy bankowe",
+    donationOrderDescription: "Darowizna dla Misji Rafaela",
+
     // ===== Shop =====
     shopHeroTitle: "Wesprzyj naszą misję poprzez zakup",
     shopHeroDesc:
@@ -758,6 +921,27 @@ export const translations = {
       "Czy Misja Rafaela dotknęła twojego życia? Chętnie poznamy twoje świadectwo i podzielimy się nim z tymi, którzy potrzebują nadziei.",
     shareYourStoryBtn: "Podziel się historią",
     readFullStory: "Przeczytaj pełną historię",
+    // === Świadectwa: imiona i miasta ===
+nameMariaSantos: "Maria Santos",
+nameJamesWilson: "James Wilson",
+nameAmaraOkafor: "Amara Okafor",
+nameCarlosRodriguez: "Carlos Rodriguez",
+nameSarahKim: "Sarah Kim",
+nameDavidThompson: "David Thompson",
+
+locSaoPauloBrazil: "São Paulo, Brazylia",
+locChicagoUSA: "Chicago, USA",
+locLagosNigeria: "Lagos, Nigeria",
+locMexicoCityMexico: "Meksyk, Meksyk",
+locSeoulSouthKorea: "Seul, Korea Południowa",
+locLondonUK: "Londyn, Wielka Brytania",
+
+// === Dodatkowe cytaty (5–6) ===
+testimonySarahKimQuote:
+  "Przywieźli opiekę medyczną do naszej odległej wioski. Moja babcia otrzymała leczenie ratujące życie.",
+testimonyDavidThompsonQuote:
+  "Wolontariat w Misji Rafaela otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.",
+
 
     // ===== Footer =====
     footerDesc:
@@ -768,7 +952,7 @@ export const translations = {
     termsOfService: "Warunki usługi",
     cookiePolicy: "Polityka plików cookie",
     copyright:
-      "© 2024 Misja Rafaela. Wszystkie prawa zastrzeżone.",
+      "© 2025 Misja Rafaela. Wszystkie prawa zastrzeżone.",
 
     // ===== About =====
     aboutHeroTitle: "Przynosimy nadzieję przez",

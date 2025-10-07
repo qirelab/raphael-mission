@@ -1,9 +1,12 @@
 import React from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { useLanguage } from '../../context/LanguageContext';
 
 const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
+  const { t } = useLanguage();
+
   const initialOptions = {
-    'client-id': 'your_paypal_client_id_here', // <-- замени на реальный
+    'client-id': 'your_paypal_client_id_here', // TODO: замените на реальный ID
     currency,
     intent: 'capture',
   };
@@ -13,7 +16,7 @@ const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
       purchase_units: [
         {
           amount: { value: amount.toString(), currency_code: currency },
-          description: 'Donation to Raphael Mission',
+          description: t('donationOrderDescription'),
         },
       ],
     });
@@ -42,16 +45,17 @@ const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
             alt="PayPal"
             className="w-8 h-6 mr-2"
           />
-          <h3 className="text-lg font-semibold text-global-1">Pay with PayPal</h3>
+          <h3 className="text-lg font-semibold text-global-1">
+            {t('paymentPayWithPayPal')}
+          </h3>
         </div>
 
         <p className="text-sm text-global-4">
-          Trusted by millions worldwide. Pay securely with your PayPal account or credit card.
+          {t('paymentPayPalLongDesc')}
         </p>
 
-        {/* ССЫЛКА — ТОЛЬКО ДЛЯ PAYPAL */}
         <p className="text-sm text-global-4 mt-2 mb-4">
-          Donate via{' '}
+          {t('paymentDonateVia')}{' '}
           <a
             href="https://paypal.me/Raphaelmission"
             target="_blank"

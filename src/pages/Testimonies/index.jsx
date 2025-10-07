@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -8,32 +7,60 @@ const TestimoniesPage = () => {
   const { t } = useLanguage();
 
   const testimonials = [
-    { id: 1, name: "Maria Santos", location: "São Paulo, Brazil", image: "/images/mariasantos.png",
-      quote: t('shopTestimonialFoodProgram') },
-    { id: 2, name: "James Wilson", location: "Chicago, USA", image: "/images/jameswilson.png",
-      quote: t('shopTestimonialMentorship') },
-    { id: 3, name: "Amara Okafor", location: "Lagos, Nigeria", image: "/images/amaraokafar.png",
-      quote: t('shopTestimonialEducation') },
-    { id: 4, name: "Carlos Rodriguez", location: "Mexico City, Mexico", image: "/images/carlos.png",
-      quote: t('shopTestimonialDisasterRelief') },
-    { id: 5, name: "Sarah Kim", location: "Seoul, South Korea", image: "/images/sarakim.png",
-      quote: t('brought medical care to our remote village. My grandmother received life-saving treatment.') },
-    { id: 6, name: "David Thompson", location: "London, UK", image: "/images/davidtompson.png",
-      quote: t('Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entireworldview.') }
+    {
+      id: 1,
+      name: t('nameMariaSantos'),
+      location: t('locSaoPauloBrazil'),
+      image: '/images/mariasantos.png',
+      quote: t('shopTestimonialFoodProgram'),
+    },
+    {
+      id: 2,
+      name: t('nameJamesWilson'),
+      location: t('locChicagoUSA'),
+      image: '/images/jameswilson.png',
+      quote: t('shopTestimonialMentorship'),
+    },
+    {
+      id: 3,
+      name: t('nameAmaraOkafor'),
+      location: t('locLagosNigeria'),
+      image: '/images/amaraokafar.png',
+      quote: t('shopTestimonialEducation'),
+    },
+    {
+      id: 4,
+      name: t('nameCarlosRodriguez'),
+      location: t('locMexicoCityMexico'),
+      image: '/images/carlos.png',
+      quote: t('shopTestimonialDisasterRelief'),
+    },
+    {
+      id: 5,
+      name: t('nameSarahKim'),
+      location: t('locSeoulSouthKorea'),
+      image: '/images/sarakim.png',
+      quote: t('testimonySarahKimQuote'),
+    },
+    {
+      id: 6,
+      name: t('nameDavidThompson'),
+      location: t('locLondonUK'),
+      image: '/images/davidtompson.png',
+      quote: t('testimonyDavidThompsonQuote'),
+    },
   ];
 
   const featuredTestimonial = {
-    name: "Elena Vasquez",
-    location: "Guatemala City, Guatemala",
-    image: "/images/elenavaskiez.png",
+    name: 'Elena Vasquez',
+    location: 'Guatemala City, Guatemala',
+    image: '/images/elenavaskiez.png',
     quote:
-      "When Hurricane Maria destroyed everything we had, I thought our family would never recover. The Raphael Mission team arrived within days, bringing not just supplies but hope. They helped us rebuild our home, but more importantly, they helped rebuild our faith. Today, three years later, I work alongside them helping other families in crisis. What started as receiving help became a calling to serve others."
+      'When Hurricane Maria destroyed everything we had, I thought our family would never recover. The Raphael Mission team arrived within days, bringing not just supplies but hope. They helped us rebuild our home, but more importantly, they helped rebuild our faith. Today, three years later, I work alongside them helping other families in crisis. What started as receiving help became a calling to serve others.',
   };
 
   return (
     <div className="w-full bg-global-7">
-      {/* Header */}
-      <Header />
 
       {/* ===== HERO ===== */}
       <section className="relative isolate w-full overflow-hidden">
@@ -75,14 +102,23 @@ const TestimoniesPage = () => {
                 className="bg-global-7 rounded-[12px] p-[24px] sm:p-[28px] md:p-[32px] shadow-[0px_10px_15px_rgba(0,0,0,0.1)] hover:shadow-[0px_15px_25px_rgba(0,0,0,0.15)] transition-shadow duration-300"
               >
                 <div className="flex items-center mb-[20px] sm:mb-[24px]">
-                  <img src={testimonial.image} alt={testimonial.name} className="w-[64px] h-[64px] rounded-[32px] object-cover" />
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-[64px] h-[64px] rounded-[32px] object-cover"
+                  />
                   <div className="ml-[16px]">
-                    <h3 className="text-[16px] font-semibold leading-[24px] text-global-2 mb-[2px]">{testimonial.name}</h3>
-                    <p className="text-[14px] font-normal leading-[21px] text-global-5">{testimonial.location}</p>
+                    <h3 className="text-[16px] font-semibold leading-[24px] text-global-2 mb-[2px]">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-[14px] font-normal leading-[21px] text-global-5">
+                      {testimonial.location}
+                    </p>
                   </div>
                 </div>
+
                 <blockquote className="text-[16px] font-normal leading-[24px] text-global-4">
-                  "{testimonial.quote}"
+                  “{testimonial.quote}”
                 </blockquote>
               </div>
             ))}
@@ -90,7 +126,6 @@ const TestimoniesPage = () => {
         </div>
       </section>
 
-    
       {/* Share Your Story Section */}
       <section className="w-full bg-global-1 py-[32px] sm:py-[48px] md:py-[64px] mt-[16px]">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,71 +147,106 @@ const TestimoniesPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
+     {/* Footer */}
+     <footer className="w-full bg-[#333333] py-8 lg:py-10">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
+            {/* Brand */}
             <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-[#ffffff] font-['Poppins'] mb-4">
+              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
                 {t('brandName')}
               </h3>
-              <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                Spreading God's love through evangelism, healing, and church support.
+              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
+                {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px]" />
-                <img src="/images/img_frame_blue_gray_100_16x18.svg" alt="Instagram" className="w-[18px] h-[16px]" />
+                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
+              {/* Navigation (с hover-эффектом) */}
               <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-[#ffffff] font-['Poppins'] mb-4">
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
                   {t('navigation')}
                 </h4>
                 <div className="space-y-2">
-                  <a href="/about" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('about')}</a>
-                  <a href="/projects" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('projects')}</a>
-                  <a href="/testimonies" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('testimonies')}</a>
-                  <a href="/training" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('training')}</a>
-                  <a href="/story" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('story')}</a>
-                  <a href="/shop" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('shop')}</a>
-                  <a href="/contact" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('contact')}</a>
-                  <a href="/donation" className="block text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">{t('donate')}</a>
+                  {[
+                    { href: '/about-mission', label: t('about') },
+                    { href: '/projects', label: t('projects') },
+                    { href: '/testimonies', label: t('testimonies') },
+                    { href: '/training', label: t('training') },
+                    { href: '/story', label: t('story') },
+                    { href: '/shop', label: t('shop') },
+                    { href: '/questions-contact', label: t('contact') },
+                    { href: '/donation', label: t('donate') },
+                  ].map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
 
+              {/* Contact */}
               <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-[#ffffff] font-['Poppins'] mb-4">
-                  Contact
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                  {t('contact')}
                 </h4>
                 <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">+1 (555) 123-4567</p>
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">info@raphaelmission.org</p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('phoneNumber')}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    {t('emailAddress')}
+                  </p>
                   <div>
-                    <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">123 Mission Street</p>
-                    <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">Faith City, FC 12345</p>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      {t('addressLine')}
+                    </p>
+                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                      Faith City, FC 12345
+                    </p>
                   </div>
                 </div>
               </div>
 
+              {/* Legal */}
               <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-[#ffffff] font-['Poppins'] mb-4">
-                  Legal
+                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                  {t('legal')}
                 </h4>
                 <div className="space-y-2">
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">Privacy Policy</p>
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">Terms of Service</p>
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">Cookie Policy</p>
+                  {[
+                    { href: '#', label: t('privacyPolicy') },
+                    { href: '#', label: t('termsOfService') },
+                    { href: '#', label: t('cookiePolicy') },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
+                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Copyright */}
           <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              © {t('brandName')} 2025. All rights reserved
+            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+              {t('copyright')}
             </p>
           </div>
         </div>
@@ -184,5 +254,6 @@ const TestimoniesPage = () => {
     </div>
   );
 };
+
 
 export default TestimoniesPage;

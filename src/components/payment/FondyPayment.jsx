@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const FondyPayment = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-white p-6 rounded-lg border">
       <div className="flex items-center mb-3">
@@ -9,25 +12,28 @@ const FondyPayment = () => {
           alt="Fondy"
           className="w-8 h-6 mr-2"
         />
-        <h3 className="text-lg font-semibold text-global-1">Pay with Fondy</h3>
+        <h3 className="text-lg font-semibold text-global-1">
+          {t('paymentPayWithFondy')}
+        </h3>
       </div>
 
       <p className="text-sm text-global-4 mb-3">
-        Perfect for Eastern European donors. Supports local banking and multiple languages including Polish.
+        {t('paymentFondyLongDesc')}
       </p>
 
       <div className="bg-gray-50 border rounded-lg p-4">
         <h4 className="text-sm font-semibold text-global-1 mb-2">
-          Supported Payment Methods:
+          {t('paymentSupportedMethodsTitle')}
         </h4>
         <ul className="text-sm text-global-4 space-y-1">
-          <li>• Visa, Mastercard, Maestro</li>
-          <li>• Local Polish banks</li>
-          <li>• BLIK (Poland)</li>
+          <li>• {t('paymentMethodVisaMastercard')}</li>
+          <li>• {t('paymentMethodLocalPolishBanks')}</li>
+          <li>• {t('paymentMethodBLIKPoland')}</li>
           <li>
-            • Bank transfers <br />
+            • {t('paymentMethodBankTransfers')}
+            <br />
             <span className="ml-4">
-              Donate via{' '}
+              {t('paymentDonateVia')}{' '}
               <a
                 href="https://pay.fondy.eu/s/xeUJsd"
                 target="_blank"
