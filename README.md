@@ -1,53 +1,99 @@
-# React + Vite + Tailwind CSS Project
+# Raphael Mission Website
 
-A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
+A modern React-based multilingual website for Raphael Mission, featuring content management, e-commerce, and testimonials.
 
 ## 🚀 Features
 
-- **React 18** - React version with improved rendering and concurrent features
+- **React 18** - Modern React with concurrent features
 - **Vite** - Lightning-fast build tool and development server
-- **TailwindCSS** - Utility-first CSS framework with extensive customization
-- **React Router** - Declarative routing for React applications
+- **TailwindCSS** - Utility-first CSS framework with custom design
+- **React Router** - Client-side routing
+- **Supabase** - Backend-as-a-Service (PostgreSQL database, authentication, real-time)
+- **Multi-language Support** - English, Russian, Polish
+- **Admin Panel** - Full CMS for managing content
+- **E-commerce** - Shop functionality for products
+- **Responsive Design** - Mobile-first approach
 
 ## 📋 Prerequisites
 
-- Node.js (v14.x or higher)
+- Node.js (v16.x or higher)
 - npm or yarn
-
+- Supabase account (free tier available)
 
 ## 🛠️ Installation
 
-1. Install dependencies:
-  ```bash
-  npm install
-  # or
-  yarn install
-  ```
+### 1. Clone and Install Dependencies
 
-2. Start the server:
-  ```bash
-  npm run start
-  # or
-  yarn start
-  ```
+```bash
+npm install
+```
+
+### 2. Setup Supabase
+
+Follow the detailed guide in [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
+
+Quick steps:
+
+1. Create a Supabase project at [supabase.com](https://supabase.com)
+2. Copy your project URL and anon key
+3. Create `.env` file from `ENV_TEMPLATE.txt`
+4. Run the database schema in Supabase SQL Editor
+5. Create an admin user in Supabase Authentication
+
+### 3. Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_SUPABASE_URL=https://xxxxx.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGc...
+```
+
+See `ENV_TEMPLATE.txt` for complete template.
+
+### 4. Start Development Server
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5173`
 
 ## 📁 Project Structure
 
 ```
 /
-├── public/              # Static assets
+├── public/              # Static assets (images, icons)
 ├── src/
 │   ├── components/      # Reusable UI components
 │   ├── pages/           # Page components
-│   ├── styles/          # Global styles and Tailwind configuration
-│   ├── App.jsx          # Main application component
-│   ├── main.jsx         # Application entry point
-│   └── Routes.jsx       # Application routes
+│   │   ├── Admin/       # Admin panel pages
+│   │   ├── Home/        # Homepage
+│   │   ├── Projects/    # Projects listing and details
+│   │   ├── Shop/        # E-commerce pages
+│   │   ├── Testimonies/ # Testimonials page
+│   │   └── ...          # Other pages
+│   ├── services/        # Supabase service layer
+│   │   ├── supabase.js  # Supabase client
+│   │   ├── projectsService.js
+│   │   ├── testimoniesService.js
+│   │   ├── shopService.js
+│   │   ├── trainingService.js
+│   │   ├── contactService.js
+│   │   └── authService.js
+│   ├── hooks/           # Custom React hooks
+│   ├── context/         # React context providers
+│   ├── locales/         # Translation files
+│   ├── styles/          # Global styles
+│   ├── App.jsx          # Main app component
+│   ├── main.jsx         # Entry point
+│   └── Routes.jsx       # Route definitions
+├── SUPABASE_SETUP.md    # Detailed Supabase setup guide
+├── ENV_TEMPLATE.txt     # Environment variables template
 ├── index.html           # HTML template
-├── package.json         # Project dependencies and scripts
-├── postcss.config.js    # PostCSS configuration for Tailwind
-├── tailwind.config.js   # Tailwind CSS configuration
-├── vite.config.js       # Vite configuration
+├── package.json         # Dependencies and scripts
+├── tailwind.config.js   # Tailwind configuration
+└── vite.config.js       # Vite configuration
 ```
 
 ## 🧩 Adding Routes
@@ -59,8 +105,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import page components
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
 const AppRoutes = () => {
   return (
@@ -100,4 +146,5 @@ npm run build
 - Styled with Tailwind CSS
 
 Built with ❤️ on Rocket.new
+
 # raphael-mission

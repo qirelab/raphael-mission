@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -34,7 +34,6 @@ const DonationPage = () => {
 
   return (
     <div className="w-full bg-global-4">
-
       {/* HERO + выбор оплаты */}
       <div className="w-full bg-global-4">
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
@@ -54,7 +53,10 @@ const DonationPage = () => {
                   <div className="flex justify-center items-center gap-10 sm:gap-12">
                     <button
                       type="button"
-                      onClick={() => { setPaymentMethod('stripe'); setShowPayment(true); }}
+                      onClick={() => {
+                        setPaymentMethod('stripe');
+                        setShowPayment(true);
+                      }}
                       className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
                       title="Stripe"
                       aria-label="Pay with Stripe"
@@ -64,7 +66,10 @@ const DonationPage = () => {
 
                     <button
                       type="button"
-                      onClick={() => { setPaymentMethod('paypal'); setShowPayment(true); }}
+                      onClick={() => {
+                        setPaymentMethod('paypal');
+                        setShowPayment(true);
+                      }}
                       className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
                       title="PayPal"
                       aria-label="Pay with PayPal"
@@ -74,7 +79,10 @@ const DonationPage = () => {
 
                     <button
                       type="button"
-                      onClick={() => { setPaymentMethod('fondy'); setShowPayment(true); }}
+                      onClick={() => {
+                        setPaymentMethod('fondy');
+                        setShowPayment(true);
+                      }}
                       className="opacity-80 hover:opacity-100 transition-transform duration-200 hover:scale-110 focus:outline-none"
                       title="Fondy"
                       aria-label="Pay with Fondy"
@@ -85,7 +93,10 @@ const DonationPage = () => {
                 ) : (
                   <div className="space-y-4">
                     <button
-                      onClick={() => { setShowPayment(false); setPaymentStatus(null); }}
+                      onClick={() => {
+                        setShowPayment(false);
+                        setPaymentStatus(null);
+                      }}
                       className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
                     >
                       ← {t('backToDonationDetails')}
@@ -94,7 +105,11 @@ const DonationPage = () => {
                     {paymentStatus === 'success' && (
                       <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                         <div className="flex items-center">
-                          <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <svg
+                            className="w-5 h-5 text-green-600 mr-2"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
                             <path
                               fillRule="evenodd"
                               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -109,7 +124,11 @@ const DonationPage = () => {
                     {paymentStatus === 'error' && (
                       <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                         <div className="flex items-center">
-                          <svg className="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <svg
+                            className="w-5 h-5 text-red-600 mr-2"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
                             <path
                               fillRule="evenodd"
                               d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -168,9 +187,21 @@ const DonationPage = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img
+                  src="/images/img_frame_blue_gray_100.svg"
+                  alt="Facebook"
+                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/img_frame_blue_gray_100_16x14.svg"
+                  alt="Twitter"
+                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/youtube.svg"
+                  alt="Youtube"
+                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
               </div>
             </div>
 
@@ -233,18 +264,18 @@ const DonationPage = () => {
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { href: '#', label: t('privacyPolicy') },
-                    { href: '#', label: t('termsOfService') },
-                    { href: '#', label: t('cookiePolicy') },
+                    { href: '/privacy-policy', label: t('privacyPolicy') },
+                    { href: '/terms-of-service', label: t('termsOfService') },
+                    { href: '/cookie-policy', label: t('cookiePolicy') },
                   ].map((l) => (
-                    <a
+                    <Link
                       key={l.label}
-                      href={l.href}
+                      to={l.href}
                       className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                  after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

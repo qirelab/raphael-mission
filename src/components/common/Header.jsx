@@ -1,15 +1,17 @@
 // src/components/common/Header.jsx
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '../ui/Button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../../context/LanguageContext';
+import { projectsService } from '../../services/projectsService';
 import MobileMenu from '../MobileMenu';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [projectLinks, setProjectLinks] = useState([]);
   const closeTimeout = useRef(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const menuItems = [
     { name: t('projects'), href: '/projects' },
@@ -21,15 +23,24 @@ const Header = () => {
     { name: t('contact'), href: '/questions-contact' },
   ];
 
-  const projectLinks = [
-    { name: t('streetEvangelismTitle'), href: '/projects/street-evangelism' },
-    { name: t('tentEvangelismTitle'), href: '/projects/tent-evangelism' },
-    { name: t('personalEvangelismTitle'), href: '/projects/personal-evangelism' },
-    { name: t('socialProjectsTitle'), href: '/projects/social-projects' },
-    { name: t('artEvangelismTitle'), href: '/projects/art-evangelism' },
-    { name: t('churchSupportTitle'), href: '/projects/church-support' },
-    { name: t('healingMinistryTitle'), href: '/projects/healing-ministry' },
-  ];
+  // Load projects from database
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const projects = await projectsService.getActive();
+        const links = projects.map((project) => ({
+          name: project[`title_${language}`] || project.title_en,
+          href: `/projects/${project.slug}`,
+        }));
+        setProjectLinks(links);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+        setProjectLinks([]);
+      }
+    };
+
+    loadProjects();
+  }, [language]);
 
   const openProjects = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
@@ -51,7 +62,7 @@ const Header = () => {
               className="flex items-center gap-3 sm:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-header-1/40 rounded-md"
             >
               <img
-                src="/images/img_logo_3.png"
+                src="/images/logo.svg"
                 alt="Raphael Mission Logo"
                 className="w-[40px] h-[40px] sm:w-[46px] sm:h-[46px]"
               />
@@ -89,7 +100,12 @@ const Header = () => {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </a>
 
@@ -156,7 +172,12 @@ const Header = () => {
             onClick={() => setOpen(true)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>

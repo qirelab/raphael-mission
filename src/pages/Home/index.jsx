@@ -1,28 +1,76 @@
 // src/pages/Home/index.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
 import TextArea from '../../components/ui/TextArea';
 import { useLanguage } from '../../context/LanguageContext';
+import { projectsService } from '../../services/projectsService';
+import { testimoniesService } from '../../services/testimoniesService';
 
 // --- EmailJS ---
 import emailjs from '@emailjs/browser';
 
-const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const Home = () => {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName]   = useState('');
-  const [email, setEmail]         = useState('');
-  const [subject, setSubject]     = useState('');
-  const [message, setMessage]     = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const { t } = useLanguage();
+  const [randomProjects, setRandomProjects] = useState([]);
+  const [randomTestimonies, setRandomTestimonies] = useState([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [loadingTestimonies, setLoadingTestimonies] = useState(true);
+
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Load random projects and testimonies
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoadingProjects(true);
+        const projects = await projectsService.getRandom(3);
+        setRandomProjects(projects);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoadingProjects(false);
+      }
+
+      try {
+        setLoadingTestimonies(true);
+        const testimonies = await testimoniesService.getRandom(3);
+        setRandomTestimonies(testimonies);
+      } catch (error) {
+        console.error('Error loading testimonies:', error);
+      } finally {
+        setLoadingTestimonies(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Обработка якоря при загрузке страницы
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const validateEmail = (val) => {
     // простая проверка email
@@ -34,10 +82,10 @@ const Home = () => {
 
     // Валидация полей (минимальная, без изменения UI)
     if (!firstName.trim()) return alert('Введите имя');
-    if (!lastName.trim())  return alert('Введите фамилию');
+    if (!lastName.trim()) return alert('Введите фамилию');
     if (!email.trim() || !validateEmail(email)) return alert('Введите корректный email');
-    if (!subject.trim())  return alert('Укажите тему сообщения');
-    if (!message.trim())  return alert('Напишите сообщение');
+    if (!subject.trim()) return alert('Укажите тему сообщения');
+    if (!message.trim()) return alert('Напишите сообщение');
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
       return alert('EmailJS не настроен: проверьте переменные окружения VITE_EMAILJS_*');
@@ -76,13 +124,20 @@ const Home = () => {
 
   return (
     <div className="w-full bg-[#ffffff]">
-
       {/* Hero Section */}
-      <section className="w-full bg-[#ffffff] relative overflow-hidden" style={{ position: 'relative' }}>
+      <section
+        className="w-full bg-[#ffffff] relative overflow-hidden"
+        style={{ position: 'relative' }}
+      >
         <div className="hero-bg-blur" />
         <div className="hero-bg-overlay" />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(30,34,45,0.18)', zIndex: 2 }} />
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 4 }}>
+        <div
+          style={{ position: 'absolute', inset: 0, background: 'rgba(30,34,45,0.18)', zIndex: 2 }}
+        />
+        <div
+          className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8"
+          style={{ position: 'relative', zIndex: 4 }}
+        >
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-16 py-8 sm:py-12 lg:py-16">
             {/* Logo (без hover) */}
             <div className="w-full lg:w-auto flex justify-center lg:justify-start">
@@ -191,43 +246,69 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="group bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                {/* image with hover overlay */}
-                <div className="relative w-full h-[160px] sm:h-[180px] lg:h-[192px] overflow-hidden">
-                  <img
-                    src="/images/img_img.png"
-                    alt="project"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/25 flex items-center justify-center">
-                    <a href="/projects" className="text-white text-[14px] sm:text-[16px] font-semibold underline">
-                      {t('learnMore')}
-                    </a>
+            {loadingProjects ? (
+              // Loading skeleton
+              [1, 2, 3].map((i) => (
+                <div key={i} className="bg-[#f9fafb] rounded-[12px] shadow-sm animate-pulse">
+                  <div className="w-full h-[192px] bg-gray-300"></div>
+                  <div className="p-6 space-y-3">
+                    <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
                   </div>
                 </div>
+              ))
+            ) : randomProjects.length > 0 ? (
+              randomProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="group bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="relative w-full h-[160px] sm:h-[180px] lg:h-[192px] overflow-hidden">
+                    <img
+                      src={project.image_url || '/images/img_img.png'}
+                      alt={project[`title_${language}`] || project.title_en}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/25 flex items-center justify-center">
+                      <Link
+                        to={`/projects/${project.slug}`}
+                        className="text-white text-[14px] sm:text-[16px] font-semibold underline"
+                      >
+                        {t('learnMore')}
+                      </Link>
+                    </div>
+                  </div>
 
-                <div className="p-5 lg:p-6 flex flex-col flex-1">
-                  <div className="flex-1">
-                    <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
-                      {t('cleanWaterInitiative')}
-                    </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins']">
-                      {t('impact25')}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mt-auto pt-4">
-                    <a href="/projects" className="flex items-center gap-2 text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins'] hover:underline">
-                      {t('learnMore')}
-                      <img src="/images/img_frame.svg" alt="arrow" className="w-[14px] h-[16px]" />
-                    </a>
+                  <div className="p-5 lg:p-6 flex flex-col flex-1">
+                    <div className="flex-1">
+                      <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-[#1f2937] font-['Poppins'] mb-3">
+                        {project[`title_${language}`] || project.title_en}
+                      </h3>
+                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#4b5563] font-['Poppins'] line-clamp-2">
+                        {project[`description_${language}`] || project.description_en}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 mt-auto pt-4">
+                      <Link
+                        to={`/projects/${project.slug}`}
+                        className="flex items-center gap-2 text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins'] hover:underline"
+                      >
+                        {t('learnMore')}
+                        <img
+                          src="/images/img_frame.svg"
+                          alt="arrow"
+                          className="w-[14px] h-[16px]"
+                        />
+                      </Link>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12 text-gray-500 font-poppins">
+                {t('noProjectsYet') || 'No projects yet. Add some in the admin panel!'}
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -283,35 +364,59 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="group bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px]">
-                  {t('quoteSarahJohnson')}
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <img
-                    src="/images/img_ellipse_1.png"
-                    alt={t('sarahJohnson')}
-                    className="w-[52px] h-[52px] rounded-[26px] transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start mb-1">
-                      <h4 className="text-[16px] lg:text-[18px] font-semibold leading-[24px] lg:leading-[27px] text-[#111827] font-['Poppins']">
-                        {t('sarahJohnson')}
-                      </h4>
-                      <img src="/images/img_vector.svg" alt="quote" className="w-[12px] h-[18px]" />
+            {loadingTestimonies ? (
+              // Loading skeleton
+              [1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-[16px] p-6 lg:p-7 shadow-sm animate-pulse">
+                  <div className="h-20 bg-gray-300 rounded mb-16"></div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-[52px] h-[52px] rounded-full bg-gray-300"></div>
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                      <div className="h-3 bg-gray-300 rounded w-1/3"></div>
                     </div>
-                    <p className="text-[12px] lg:text-[14px] font-normal leading-[18px] lg:leading-[21px] text-[#6b7280] font-['Poppins']">
-                      {t('torontoCanada')}
-                    </p>
                   </div>
                 </div>
+              ))
+            ) : randomTestimonies.length > 0 ? (
+              randomTestimonies.map((testimony) => (
+                <div
+                  key={testimony.id}
+                  className="group bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px] line-clamp-4">
+                    {testimony[`testimony_${language}`] || testimony.testimony_en}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={testimony.image_url || '/images/img_ellipse_1.png'}
+                      alt={testimony.name}
+                      className="w-[52px] h-[52px] rounded-[26px] object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="text-[16px] lg:text-[18px] font-semibold leading-[24px] lg:leading-[27px] text-[#111827] font-['Poppins']">
+                          {testimony.name}
+                        </h4>
+                        <img
+                          src="/images/img_vector.svg"
+                          alt="quote"
+                          className="w-[12px] h-[18px]"
+                        />
+                      </div>
+                      <p className="text-[12px] lg:text-[14px] font-normal leading-[18px] lg:leading-[21px] text-[#6b7280] font-['Poppins']">
+                        {testimony[`title_${language}`] || testimony.title_en || ''}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12 text-gray-500 font-poppins">
+                {t('noTestimoniesYet') || 'No testimonies yet. Add some in the admin panel!'}
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -333,7 +438,11 @@ const Home = () => {
                 {/* Address */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_div_blue_gray_600.svg" alt={t('addressLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                    <img
+                      src="/images/img_div_blue_gray_600.svg"
+                      alt={t('addressLabel')}
+                      className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
+                    />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
@@ -348,7 +457,11 @@ const Home = () => {
                 {/* Phone */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_div_blue_gray_600_48x48.svg" alt={t('phoneLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                    <img
+                      src="/images/img_div_blue_gray_600_48x48.svg"
+                      alt={t('phoneLabel')}
+                      className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
+                    />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
@@ -363,7 +476,11 @@ const Home = () => {
                 {/* Email */}
                 <div className="flex items-center gap-4">
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
-                    <img src="/images/img_vector_blue_gray_600.svg" alt={t('emailLabel')} className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110" />
+                    <img
+                      src="/images/img_vector_blue_gray_600.svg"
+                      alt={t('emailLabel')}
+                      className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
+                    />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
@@ -451,9 +568,21 @@ const Home = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img
+                  src="/images/img_frame_blue_gray_100.svg"
+                  alt="Facebook"
+                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/img_frame_blue_gray_100_16x14.svg"
+                  alt="Twitter"
+                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/youtube.svg"
+                  alt="Youtube"
+                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
               </div>
             </div>
 
@@ -515,18 +644,18 @@ const Home = () => {
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { href: '#', label: t('privacyPolicy') },
-                    { href: '#', label: t('termsOfService') },
-                    { href: '#', label: t('cookiePolicy') },
+                    { href: '/privacy-policy', label: t('privacyPolicy') },
+                    { href: '/terms-of-service', label: t('termsOfService') },
+                    { href: '/cookie-policy', label: t('cookiePolicy') },
                   ].map((l) => (
-                    <a
+                    <Link
                       key={l.label}
-                      href={l.href}
+                      to={l.href}
                       className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                  after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

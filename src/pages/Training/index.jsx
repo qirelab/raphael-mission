@@ -1,54 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import { trainingService } from '../../services/trainingService';
 
 const TrainingPrograms = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [trainingPrograms, setTrainingPrograms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const trainingPrograms = [
-    {
-      id: 1,
-      title: t('trainingEvangelismEssentials'),
-      description: t('trainingEvangelismEssentialsDesc'),
-      duration: t('trainingEvangelismEssentialsDuration'),
-      image: '/images/evangelizm.png',
-    },
-    {
-      id: 2,
-      title: t('trainingCommunityServiceLeadership'),
-      description: t('trainingCommunityServiceLeadershipDesc'),
-      duration: t('trainingCommunityServiceLeadershipDuration'),
-      image: '/images/img_img_1.png',
-    },
-    {
-      id: 3,
-      title: t('trainingPrayerHealingMinistry'),
-      description: t('trainingPrayerHealingMinistryDesc'),
-      duration: t('trainingPrayerHealingMinistryDuration'),
-      image: '/images/img_img_2.png',
-    },
-    {
-      id: 4,
-      title: t('trainingCreativeArtsMinistry'),
-      description: t('trainingCreativeArtsMinistryDesc'),
-      duration: t('trainingCreativeArtsMinistryDuration'),
-      image: '/images/img_img_3.png',
-    },
-    {
-      id: 5,
-      title: t('trainingChurchSupportTitle'),
-      description: t('trainingChurchSupportDesc'),
-      duration: t('trainingChurchSupportDuration'),
-      image: '/images/img_img_4.png',
-    },
-  ];
+  useEffect(() => {
+    const loadPrograms = async () => {
+      try {
+        setLoading(true);
+        const data = await trainingService.getActive();
+        setTrainingPrograms(data);
+      } catch (error) {
+        console.error('Error loading training programs:', error);
+        setTrainingPrograms([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPrograms();
+  }, []);
 
   return (
     <div className="w-full bg-white">
-
       {/* HERO */}
       <section className="relative w-full">
         <div className="absolute inset-0">
-          <img src="/images/img_img.png" alt="Training" className="w-full h-[420px] sm:h-[520px] lg:h-[600px] object-cover" />
+          <img
+            src="/images/img_img.png"
+            alt="Training"
+            className="w-full h-[420px] sm:h-[520px] lg:h-[600px] object-cover"
+          />
           <div className="absolute inset-0 bg-white/60" />
         </div>
 
@@ -76,23 +62,56 @@ const TrainingPrograms = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trainingPrograms.map((p) => (
-              <div
-                key={p.id}
-                className="bg-white rounded-[12px] border border-[#eef0f3] shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
-              >
-                <img src={p.image} alt={p.title} className="w-full h-[170px] object-cover" />
-                <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-[#0f172a] font-semibold font-[Poppins] text-[16px] sm:text-[18px] mb-2">
-                    {p.title}
-                  </h3>
-                  <p className="text-[#6b7280] text-[13px] sm:text-[14px] leading-[20px] mb-4">{p.description}</p>
-                  <p className="text-[#3c8a7a] font-medium text-[12px]">{p.duration}</p>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-[12px] shadow-sm animate-pulse overflow-hidden"
+                >
+                  <div className="w-full h-[170px] bg-gray-300"></div>
+                  <div className="p-5 space-y-3">
+                    <div className="h-5 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : trainingPrograms.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {trainingPrograms.map((p) => (
+                <div
+                  key={p.id}
+                  className="bg-white rounded-[12px] border border-[#eef0f3] shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+                >
+                  <img
+                    src={p.image_url || '/images/evangelizm.png'}
+                    alt={p[`title_${language}`] || p.title_en}
+                    className="w-full h-[170px] object-cover"
+                  />
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="text-[#0f172a] font-semibold font-[Poppins] text-[16px] sm:text-[18px] mb-2">
+                      {p[`title_${language}`] || p.title_en}
+                    </h3>
+                    <p className="text-[#6b7280] text-[13px] sm:text-[14px] leading-[20px] mb-4 line-clamp-3">
+                      {p[`description_${language}`] || p.description_en}
+                    </p>
+                    <p className="text-[#3c8a7a] font-medium text-[12px] mt-auto">
+                      {p.duration
+                        ? `${p.duration} ${t('weeks') || 'weeks'}`
+                        : t('contactForDuration') || 'Contact for details'}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-gray-500 font-poppins">
+              {t('noTrainingPrograms') ||
+                'No training programs available. Add some in the admin panel!'}
+            </div>
+          )}
         </div>
       </section>
 
@@ -148,9 +167,21 @@ const TrainingPrograms = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img
+                  src="/images/img_frame_blue_gray_100.svg"
+                  alt="Facebook"
+                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/img_frame_blue_gray_100_16x14.svg"
+                  alt="Twitter"
+                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/youtube.svg"
+                  alt="Youtube"
+                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
               </div>
             </div>
 
@@ -213,18 +244,18 @@ const TrainingPrograms = () => {
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { href: '#', label: t('privacyPolicy') },
-                    { href: '#', label: t('termsOfService') },
-                    { href: '#', label: t('cookiePolicy') },
+                    { href: '/privacy-policy', label: t('privacyPolicy') },
+                    { href: '/terms-of-service', label: t('termsOfService') },
+                    { href: '/cookie-policy', label: t('cookiePolicy') },
                   ].map((l) => (
-                    <a
+                    <Link
                       key={l.label}
-                      href={l.href}
+                      to={l.href}
                       className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                  after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

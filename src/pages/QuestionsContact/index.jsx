@@ -1,5 +1,6 @@
 // src/pages/QuestionsContact/index.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 
 const QuestionsContact = () => {
@@ -26,30 +27,58 @@ const QuestionsContact = () => {
               {/* Call Us */}
               <div className="group w-full max-w-[350px] rounded-2xl bg-[#EEF6FF] border border-[#E6F0FF] p-6 sm:p-8 text-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(59,130,246,0.15)] hover:border-[#CFE3FF] hover:bg-[#EAF2FF]">
                 <div className="mx-auto mb-4 sm:mb-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#DFEAFF] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#D3E4FF]">
-                  <img src="/images/callus.png" alt="Phone icon" className="w-15 h-15 sm:w-15 sm:h-15" />
+                  <img
+                    src="/images/callus.png"
+                    alt="Phone icon"
+                    className="w-15 h-15 sm:w-15 sm:h-15"
+                  />
                 </div>
-                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">{t('callUs')}</h3>
-                <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">{t('phoneNumber')}</p>
-                <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">{t('phoneWorkHoursShort')}</p>
+                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
+                  {t('callUs')}
+                </h3>
+                <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
+                  {t('phoneNumber')}
+                </p>
+                <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">
+                  {t('phoneWorkHoursShort')}
+                </p>
               </div>
 
               {/* Address */}
               <div className="group w-full max-w-[350px] rounded-2xl bg-[#EEF6FF] border border-[#E6F0FF] p-6 sm:p-8 text-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(59,130,246,0.15)] hover:border-[#CFE3FF] hover:bg-[#EAF2FF]">
                 <div className="mx-auto mb-4 sm:mb-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#DFEAFF] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#D3E4FF]">
-                  <img src="/images/div.svg" alt="Address icon" className="w-14 h-14 sm:w-16 sm:h-16 object-contain" />
+                  <img
+                    src="/images/div.svg"
+                    alt="Address icon"
+                    className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+                  />
                 </div>
-                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">{t('address')}</h3>
-                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">{t('addressLine')}</p>
+                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
+                  {t('address')}
+                </h3>
+                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
+                  {t('addressLine')}
+                </p>
               </div>
 
               {/* Email Us */}
               <div className="group w-full max-w-[350px] rounded-2xl bg-[#EEF6FF] border border-[#E6F0FF] p-6 sm:p-8 text-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(59,130,246,0.15)] hover:border-[#CFE3FF] hover:bg-[#EAF2FF]">
                 <div className="mx-auto mb-4 sm:mb-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#DFEAFF] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#D3E4FF]">
-                  <img src="/images/emailas.png" alt="Email icon" className="w-15 h-15 sm:w-15 sm:h-15" />
+                  <img
+                    src="/images/emailas.png"
+                    alt="Email icon"
+                    className="w-15 h-15 sm:w-15 sm:h-15"
+                  />
                 </div>
-                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">{t('emailUs')}</h3>
-                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">{t('emailAddress')}</p>
-                <p className="mt-1 text-[12px] sm:text-[14px] font-[Poppins] text-[#64748b]">{t('weRespondSoon')}</p>
+                <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
+                  {t('emailUs')}
+                </h3>
+                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
+                  {t('emailAddress')}
+                </p>
+                <p className="mt-1 text-[12px] sm:text-[14px] font-[Poppins] text-[#64748b]">
+                  {t('weRespondSoon')}
+                </p>
               </div>
             </div>
           </div>
@@ -68,9 +97,21 @@ const QuestionsContact = () => {
                   {t('footerDesc')}
                 </p>
                 <div className="flex items-center gap-3">
-                  <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                  <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                  <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                  <img
+                    src="/images/img_frame_blue_gray_100.svg"
+                    alt="Facebook"
+                    className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                  />
+                  <img
+                    src="/images/img_frame_blue_gray_100_16x14.svg"
+                    alt="Twitter"
+                    className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                  />
+                  <img
+                    src="/images/youtube.svg"
+                    alt="Youtube"
+                    className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                  />
                 </div>
               </div>
 
@@ -133,18 +174,18 @@ const QuestionsContact = () => {
                   </h4>
                   <div className="space-y-2">
                     {[
-                      { href: '#', label: t('privacyPolicy') },
-                      { href: '#', label: t('termsOfService') },
-                      { href: '#', label: t('cookiePolicy') },
+                      { href: '/privacy-policy', label: t('privacyPolicy') },
+                      { href: '/terms-of-service', label: t('termsOfService') },
+                      { href: '/cookie-policy', label: t('cookiePolicy') },
                     ].map((l) => (
-                      <a
+                      <Link
                         key={l.label}
-                        href={l.href}
+                        to={l.href}
                         className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                    after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                       >
                         {l.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>

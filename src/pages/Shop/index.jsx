@@ -1,37 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/shop.css';
 import { useLanguage } from '../../context/LanguageContext';
+import { shopService } from '../../services/shopService';
 
 const Shop = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const products = [
-    {
-      id: 1,
-      image: '/images/shop/img_img_192x280.png',
-    },
-    {
-      id: 2,
-      name: t('shopProductJournalTitle'),
-      description: t('shopProductJournalDesc'),
-      price: t('shopProductJournalPrice'),
-      image: '/images/bible.png',
-    },
-    {
-      id: 3,
-      name: t('shopProductTshirtTitle'),
-      description: t('shopProductTshirtDesc'),
-      price: t('shopProductTshirtPrice'),
-      image: '/images/shurt.png', // фикс опечатки
-    },
-    {
-      id: 4,
-      name: t('shopProductBottleTitle'),
-      description: t('shopProductBottleDesc'),
-      price: t('shopProductBottlePrice'),
-      image: '/images/shop/img_img_8.png',
-    },
-  ];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await shopService.getActive();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error loading products:', error);
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const testimonials = [
     {
@@ -67,93 +60,58 @@ const Shop = () => {
       {/* PRODUCTS */}
       <section className="w-full bg-white py-8 sm:py-10 lg:py-12">
         <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
-            {products.map((p, idx) => (
-              <div
-                key={p.id}
-                className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden transition-transform duration-300 ease-in-out hover:scale-[1.05] hover:shadow-xl flex flex-col h-full"
-              >
-                <img
-                  src={p.image}
-                  alt={idx === 0 ? t('shopProductPrayerTitle') : p.name}
-                  className="w-full h-[190px] object-cover"
-                />
-                <div className="p-5 flex flex-col h-full">
-                  {idx === 0 ? (
-                    <>
-                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                        {t('shopProductPrayerTitle')}
-                      </h3>
-                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                        {t('shopProductPrayerDesc')}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                          {t('shopProductPrayerPrice')}
-                        </span>
-                      </div>
-                    </>
-                  ) : idx === 1 ? (
-                    <>
-                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                        {t('shopProductJournalTitle')}
-                      </h3>
-                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                        {t('shopProductJournalDesc')}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                          {t('shopProductJournalPrice')}
-                        </span>
-                      </div>
-                    </>
-                  ) : idx === 2 ? (
-                    <>
-                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                        {t('shopProductTshirtTitle')}
-                      </h3>
-                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                        {t('shopProductTshirtDesc')}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                          {t('shopProductTshirtPrice')}
-                        </span>
-                      </div>
-                    </>
-                  ) : idx === 3 ? (
-                    <>
-                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                        {t('shopProductBottleTitle')}
-                      </h3>
-                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                        {t('shopProductBottleDesc')}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                          {t('shopProductBottlePrice')}
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
-                        {p.name}
-                      </h3>
-                      <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4">
-                        {p.description}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
-                          {p.price}
-                        </span>
-                      </div>
-                    </>
-                  )}
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="bg-white rounded-[10px] shadow-sm animate-pulse">
+                  <div className="w-full h-[190px] bg-gray-300"></div>
+                  <div className="p-5 space-y-3">
+                    <div className="h-6 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-5 bg-gray-300 rounded w-1/2"></div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : products.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
+              {products.map((p) => (
+                <div
+                  key={p.id}
+                  className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden transition-transform duration-300 ease-in-out hover:scale-[1.05] hover:shadow-xl flex flex-col h-full"
+                >
+                  <img
+                    src={p.image_url || '/images/shop/img_img_192x280.png'}
+                    alt={p[`name_${language}`] || p.name_en}
+                    className="w-full h-[190px] object-cover"
+                  />
+                  <div className="p-5 flex flex-col h-full">
+                    <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
+                      {p[`name_${language}`] || p.name_en}
+                    </h3>
+                    <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4 line-clamp-2">
+                      {p[`description_${language}`] || p.description_en}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between">
+                      <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
+                        {p.currency === 'USD' ? '$' : p.currency === 'EUR' ? '€' : ''}
+                        {p.price}
+                      </span>
+                      {p.stock_quantity === 0 && (
+                        <span className="text-xs text-red-600 font-poppins">
+                          {t('outOfStock') || 'Out of stock'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-gray-500 font-poppins">
+              {t('noProducts') || 'No products available. Add some in the admin panel!'}
+            </div>
+          )}
         </div>
       </section>
 
@@ -170,9 +128,21 @@ const Shop = () => {
                 {t('footerDesc')}
               </p>
               <div className="flex items-center gap-3">
-                <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                <img
+                  src="/images/img_frame_blue_gray_100.svg"
+                  alt="Facebook"
+                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/img_frame_blue_gray_100_16x14.svg"
+                  alt="Twitter"
+                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
+                <img
+                  src="/images/youtube.svg"
+                  alt="Youtube"
+                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                />
               </div>
             </div>
 
@@ -235,18 +205,18 @@ const Shop = () => {
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { href: '#', label: t('privacyPolicy') },
-                    { href: '#', label: t('termsOfService') },
-                    { href: '#', label: t('cookiePolicy') },
+                    { href: '/privacy-policy', label: t('privacyPolicy') },
+                    { href: '/terms-of-service', label: t('termsOfService') },
+                    { href: '/cookie-policy', label: t('cookiePolicy') },
                   ].map((l) => (
-                    <a
+                    <Link
                       key={l.label}
-                      href={l.href}
+                      to={l.href}
                       className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                  after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

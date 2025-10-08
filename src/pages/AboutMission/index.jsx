@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 
 // HERO фото (лежит: src/pages/AboutMission/public/images/about.png)
@@ -15,7 +16,6 @@ const AboutMission = () => {
   const { t } = useLanguage();
   return (
     <div className="w-full bg-[#F6F7F9]">
-
       {/* HERO */}
       <section className="w-full">
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20 grid lg:grid-cols-2 gap-10 items-start">
@@ -76,24 +76,24 @@ const AboutMission = () => {
               <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
                 {t('aboutFaith')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">
-                {t('aboutFaithDesc')}
-              </p>
+              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutFaithDesc')}</p>
             </div>
 
             {/* Compassion */}
             <div className="bg-white rounded-xl shadow-md p-6 text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-14 h-14 bg-[#1F7A5B] rounded-md flex items-center justify-center">
-                  <img src={compassionIcon} alt="Compassion icon" className="w-8 h-8 object-contain" />
+                  <img
+                    src={compassionIcon}
+                    alt="Compassion icon"
+                    className="w-8 h-8 object-contain"
+                  />
                 </div>
               </div>
               <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
                 {t('aboutCompassion')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">
-                {t('aboutCompassionDesc')}
-              </p>
+              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutCompassionDesc')}</p>
             </div>
 
             {/* Service */}
@@ -106,9 +106,7 @@ const AboutMission = () => {
               <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
                 {t('aboutService')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">
-                {t('aboutServiceDesc')}
-              </p>
+              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutServiceDesc')}</p>
             </div>
           </div>
         </div>
@@ -204,18 +202,18 @@ const AboutMission = () => {
                 </h4>
                 <div className="space-y-2">
                   {[
-                    { href: '#', label: t('privacyPolicy') },
-                    { href: '#', label: t('termsOfService') },
-                    { href: '#', label: t('cookiePolicy') },
+                    { href: '/privacy-policy', label: t('privacyPolicy') },
+                    { href: '/terms-of-service', label: t('termsOfService') },
+                    { href: '/cookie-policy', label: t('cookiePolicy') },
                   ].map((l) => (
-                    <a
+                    <Link
                       key={l.label}
-                      href={l.href}
+                      to={l.href}
                       className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                  after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -235,4 +233,3 @@ const AboutMission = () => {
 };
 
 export default AboutMission;
-

@@ -1,21 +1,90 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
+import { projectsService } from '../../services/projectsService';
 
 const Projects = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
+  const [projectsData, setProjectsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const projectsData = [
-    { id: 1, titleKey: 'streetEvangelismTitle', descriptionKey: 'streetEvangelismDesc', image: '/images/img_img_192x384.png' },
-    { id: 2, titleKey: 'tentEvangelismTitle', descriptionKey: 'tentEvangelismDesc', image: '/images/img_img_1.png' },
-    { id: 3, titleKey: 'personalEvangelismTitle', descriptionKey: 'personalEvangelismDesc', image: '/images/img_img_2.png' },
-    { id: 4, titleKey: 'socialProjectsTitle', descriptionKey: 'socialProjectsDesc', image: '/images/img_img_3.png' },
-    { id: 5, titleKey: 'artEvangelismTitle', descriptionKey: 'artEvangelismDesc', image: '/images/img_img_4.png' },
-    { id: 6, titleKey: 'churchSupportTitle', descriptionKey: 'churchSupportDesc', image: '/images/img_img_5.png' },
-    { id: 7, titleKey: 'healingMinistryTitle', descriptionKey: 'healingMinistryDesc', image: '/images/img_img_6.png' },
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await projectsService.getActive();
+        const activeProjects = data
+          .filter((p) => p.is_active)
+          .map((p) => ({
+            id: p.id,
+            title: p[`title_${language}`] || p.title_en,
+            description: p[`description_${language}`] || p.description_en,
+            image: p.image_url || '/images/img_img_192x384.png',
+            link: `/projects/${p.slug}`,
+          }));
+        setProjectsData(activeProjects);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        // Fallback to default projects if API fails
+        setProjectsData([
+          {
+            id: 1,
+            titleKey: 'streetEvangelismTitle',
+            descriptionKey: 'streetEvangelismDesc',
+            image: '/images/img_img_192x384.png',
+            link: '/projects/street-evangelism',
+          },
+          {
+            id: 2,
+            titleKey: 'tentEvangelismTitle',
+            descriptionKey: 'tentEvangelismDesc',
+            image: '/images/img_img_1.png',
+            link: '/projects/tent-evangelism',
+          },
+          {
+            id: 3,
+            titleKey: 'personalEvangelismTitle',
+            descriptionKey: 'personalEvangelismDesc',
+            image: '/images/img_img_2.png',
+            link: '/projects/personal-evangelism',
+          },
+          {
+            id: 4,
+            titleKey: 'socialProjectsTitle',
+            descriptionKey: 'socialProjectsDesc',
+            image: '/images/img_img_3.png',
+            link: '/projects/social-projects',
+          },
+          {
+            id: 5,
+            titleKey: 'artEvangelismTitle',
+            descriptionKey: 'artEvangelismDesc',
+            image: '/images/img_img_4.png',
+            link: '/projects/art-evangelism',
+          },
+          {
+            id: 6,
+            titleKey: 'churchSupportTitle',
+            descriptionKey: 'churchSupportDesc',
+            image: '/images/img_img_5.png',
+            link: '/projects/church-support',
+          },
+          {
+            id: 7,
+            titleKey: 'healingMinistryTitle',
+            descriptionKey: 'healingMinistryDesc',
+            image: '/images/img_img_6.png',
+            link: '/projects/healing-ministry',
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [language]);
 
   const statsData = [
     { number: '500+', labelKey: 'livesTouched' },
@@ -56,7 +125,7 @@ const Projects = () => {
                     {projectsData.map((project, index) => (
                       <a
                         key={project.id}
-                        href="/projects"
+                        href={project.link}
                         className={`group flex flex-col justify-start items-center w-full bg-global-6 rounded-[12px] shadow-[0px_10px_15px_#00000019] h-full overflow-hidden transform transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/15 focus-within:-translate-y-1 ${
                           index === 6 ? 'sm:col-span-2 lg:col-span-1' : ''
                         }`}
@@ -64,16 +133,16 @@ const Projects = () => {
                       >
                         <img
                           src={project.image}
-                          alt={t(project.titleKey)}
+                          alt={project.title || t(project.titleKey)}
                           className="w-full h-[120px] sm:h-[150px] md:h-[180px] lg:h-[192px] object-cover rounded-t-[12px] transition-transform duration-300 ease-out group-hover:scale-105 cursor-pointer"
                         />
                         <div className="flex flex-col justify-between items-start w-full flex-1 pt-[16px] sm:pt-[18px] md:pt-[20px] lg:pt-[22px] pr-[18px] sm:pr-[20px] md:pr-[22px] lg:pr-[24px] pb-[16px] sm:pb-[18px] md:pb-[20px] lg:pb-[22px] pl-[18px] sm:pl-[20px] md:pl-[22px] lg:pl-[24px]">
                           <div className="flex flex-col w-full">
                             <h3 className="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-poppins font-bold leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] text-left text-global-1 mb-[6px]">
-                              {t(project.titleKey)}
+                              {project.title || t(project.titleKey)}
                             </h3>
                             <p className="text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] md:leading-[23px] lg:leading-[24px] text-left text-global-3 w-full mb-[12px] sm:mb-[14px] md:mb-[15px] lg:mb-[16px]">
-                              {t(project.descriptionKey)}
+                              {project.description || t(project.descriptionKey)}
                             </p>
                           </div>
                           <Button
@@ -106,7 +175,10 @@ const Projects = () => {
 
                   <div className="flex flex-col sm:flex-row gap-[40px] sm:gap-[60px] md:gap-[80px] lg:gap-[100px] w-full justify-center items-center">
                     {statsData.map((stat, index) => (
-                      <div key={index} className="flex flex-col justify-center items-center text-center">
+                      <div
+                        key={index}
+                        className="flex flex-col justify-center items-center text-center"
+                      >
                         <div className="flex justify-center items-center mb-[8px] sm:mb-[10px] md:mb-[12px]">
                           <span className="text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-poppins font-bold leading-tight text-[#2F7D6D]">
                             {stat.number}
@@ -171,9 +243,21 @@ const Projects = () => {
                     {t('footerDesc')}
                   </p>
                   <div className="flex items-center gap-3">
-                    <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                    <img src="/images/img_frame_blue_gray_100_16x14.svg" alt="Twitter" className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110" />
-                    <img src="/images/youtube.svg" alt="Youtube" className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110" />
+                    <img
+                      src="/images/img_frame_blue_gray_100.svg"
+                      alt="Facebook"
+                      className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
+                    />
+                    <img
+                      src="/images/img_frame_blue_gray_100_16x14.svg"
+                      alt="Twitter"
+                      className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
+                    />
+                    <img
+                      src="/images/youtube.svg"
+                      alt="Youtube"
+                      className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
+                    />
                   </div>
                 </div>
 
@@ -185,23 +269,23 @@ const Projects = () => {
                     </h4>
                     <div className="space-y-2">
                       {[
-                        { href: 'http://localhost:4028/about-mission', label: t('about') },
-                        { href: 'http://localhost:4028/projects', label: t('projects') },
-                        { href: 'http://localhost:4028/testimonies', label: t('testimonies') },
-                        { href: 'http://localhost:4028/training', label: t('training') },
-                        { href: 'http://localhost:4028/story', label: t('story') },
-                        { href: 'http://localhost:4028/shop', label: t('shop') },
-                        { href: 'http://localhost:4028/questions-contact', label: t('contact') },
-                        { href: 'http://localhost:4028/donation', label: t('donate') },
+                        { href: '/about-mission', label: t('about') },
+                        { href: '/projects', label: t('projects') },
+                        { href: '/testimonies', label: t('testimonies') },
+                        { href: '/training', label: t('training') },
+                        { href: '/story', label: t('story') },
+                        { href: '/shop', label: t('shop') },
+                        { href: '/questions-contact', label: t('contact') },
+                        { href: '/donation', label: t('donate') },
                       ].map((l) => (
-                        <a
+                        <Link
                           key={l.href}
-                          href={l.href}
+                          to={l.href}
                           className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                      after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                         >
                           {l.label}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -236,18 +320,18 @@ const Projects = () => {
                     </h4>
                     <div className="space-y-2">
                       {[
-                        { href: '#', label: t('privacyPolicy') },
-                        { href: '#', label: t('termsOfService') },
-                        { href: '#', label: t('cookiePolicy') },
+                        { href: '/privacy-policy', label: t('privacyPolicy') },
+                        { href: '/terms-of-service', label: t('termsOfService') },
+                        { href: '/cookie-policy', label: t('cookiePolicy') },
                       ].map((l) => (
-                        <a
+                        <Link
                           key={l.label}
-                          href={l.href}
+                          to={l.href}
                           className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
                                      after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
                         >
                           {l.label}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
