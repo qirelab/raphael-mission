@@ -52,7 +52,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full bg-global-6 shadow-[0px_1px_2px_#0000000c]">
+    <header className="sticky top-0 z-50 w-full bg-global-6 shadow-[0px_1px_2px_#0000000c] backdrop-blur-sm bg-white/95">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4 py-2.5 min-h-[60px]">
           {/* Left: Logo + Brand */}

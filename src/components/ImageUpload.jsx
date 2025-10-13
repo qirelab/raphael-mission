@@ -13,13 +13,13 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError('Please select an image file');
+      setError('Пожалуйста, выберите файл изображения');
       return;
     }
 
     // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      setError('Image size should be less than 5MB');
+      setError('Размер изображения должен быть менее 5МБ');
       return;
     }
 
@@ -40,7 +40,7 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
       // Notify parent component
       onImageUpload(url);
     } catch (err) {
-      setError(err.message || 'Failed to upload image');
+      setError(err.message || 'Не удалось загрузить изображение');
       setPreview(currentImage || '');
     } finally {
       setUploading(false);
@@ -82,7 +82,7 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2F7D6D]"></div>
-              <span className="text-sm text-gray-500 font-poppins">Uploading...</span>
+              <span className="text-sm text-gray-500 font-poppins">Загрузка...</span>
             </div>
           ) : (
             <>
@@ -99,8 +99,8 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span className="text-sm text-gray-500 font-poppins">Click to upload</span>
-              <span className="text-xs text-gray-400 font-poppins">PNG, JPG up to 5MB</span>
+              <span className="text-sm text-gray-500 font-poppins">Нажмите для загрузки</span>
+              <span className="text-xs text-gray-400 font-poppins">PNG, JPG до 5МБ</span>
             </>
           )}
         </div>
@@ -117,7 +117,7 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
       {error && <p className="text-sm text-red-600 font-poppins">{error}</p>}
 
       <p className="text-xs text-gray-500 font-poppins">
-        Upload an image or leave empty to use current image
+        Загрузите изображение или оставьте пустым для использования текущего
       </p>
     </div>
   );

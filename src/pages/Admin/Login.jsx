@@ -55,7 +55,7 @@ const AdminLogin = () => {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          <span>Back to Site</span>
+          <span>Вернуться на сайт</span>
         </button>
       </div>
 
@@ -82,10 +82,10 @@ const AdminLogin = () => {
               </div>
             </div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-white font-poppins">
-              Admin Panel
+              Панель администратора
             </h2>
             <p className="mt-2 text-center text-sm text-white/80 font-poppins">
-              Raphael Mission Management System
+              Система управления Raphael Mission
             </p>
           </div>
 
@@ -116,7 +116,7 @@ const AdminLogin = () => {
                   htmlFor="email"
                   className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
                 >
-                  Email
+                  Эл. почта
                 </label>
                 <input
                   id="email"
@@ -126,7 +126,7 @@ const AdminLogin = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-                  placeholder="Enter your email"
+                  placeholder="Введите ваш email"
                   disabled={loading}
                 />
               </div>
@@ -136,7 +136,7 @@ const AdminLogin = () => {
                   htmlFor="password"
                   className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
                 >
-                  Password
+                  Пароль
                 </label>
                 <input
                   id="password"
@@ -146,7 +146,7 @@ const AdminLogin = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-                  placeholder="Enter your password"
+                  placeholder="Введите ваш пароль"
                   disabled={loading}
                 />
               </div>
@@ -177,10 +177,10 @@ const AdminLogin = () => {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       />
                     </svg>
-                    Signing in...
+                    Вход...
                   </span>
                 ) : (
-                  'Sign In'
+                  'Войти'
                 )}
               </button>
             </div>

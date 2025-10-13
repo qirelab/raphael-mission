@@ -20,7 +20,6 @@ const ProductForm = () => {
     price: '',
     currency: 'USD',
     image_url: '',
-    stock_quantity: 0,
     is_active: true,
   });
 
@@ -66,7 +65,6 @@ const ProductForm = () => {
       const dataToSend = {
         ...formData,
         price: parseFloat(formData.price),
-        stock_quantity: parseInt(formData.stock_quantity),
       };
 
       if (isEdit) {
@@ -93,7 +91,7 @@ const ProductForm = () => {
     <div className="max-w-4xl">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 font-poppins">
-          {isEdit ? 'Edit Product' : 'Create New Product'}
+          {isEdit ? 'Редактировать товар' : 'Создать новый товар'}
         </h1>
       </div>
 
@@ -105,11 +103,11 @@ const ProductForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Basic Information</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Name (English)
+                Название (Английский)
               </label>
               <input
                 type="text"
@@ -122,7 +120,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Name (Russian)
+                Название (Русский)
               </label>
               <input
                 type="text"
@@ -135,7 +133,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Name (Polish)
+                Название (Польский)
               </label>
               <input
                 type="text"
@@ -152,17 +150,17 @@ const ProductForm = () => {
               currentImage={formData.image_url}
               onImageUpload={handleImageUpload}
               folder="products"
-              label="Product Image"
+              label="Изображение товара"
             />
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Pricing & Inventory</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Цена</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Price
+                Цена
               </label>
               <input
                 type="number"
@@ -176,7 +174,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Currency
+                Валюта
               </label>
               <select
                 name="currency"
@@ -190,19 +188,6 @@ const ProductForm = () => {
                 <option value="RUB">RUB</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Stock Quantity
-              </label>
-              <input
-                type="number"
-                name="stock_quantity"
-                value={formData.stock_quantity}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
           </div>
           <div className="mt-6">
             <label className="flex items-center">
@@ -213,17 +198,17 @@ const ProductForm = () => {
                 onChange={handleChange}
                 className="w-4 h-4 text-[#2F7D6D] border-gray-300 rounded focus:ring-[#2F7D6D]"
               />
-              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Active</span>
+              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Активно</span>
             </label>
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Description</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описание</h2>
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (English)
+                Описание (Английский)
               </label>
               <textarea
                 name="description_en"
@@ -235,7 +220,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (Russian)
+                Описание (Русский)
               </label>
               <textarea
                 name="description_ru"
@@ -247,7 +232,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (Polish)
+                Описание (Польский)
               </label>
               <textarea
                 name="description_pl"
@@ -266,14 +251,14 @@ const ProductForm = () => {
             disabled={loading}
             className="px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] disabled:opacity-50 font-poppins"
           >
-            {loading ? 'Saving...' : isEdit ? 'Update Product' : 'Create Product'}
+            {loading ? 'Сохранение...' : isEdit ? 'Обновить товар' : 'Создать товар'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/admin/shop')}
             className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 font-poppins"
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </form>

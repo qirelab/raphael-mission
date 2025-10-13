@@ -24,7 +24,7 @@ const Shop = () => {
     };
 
     loadProducts();
-  }, []);
+  }, [language]);
 
   const testimonials = [
     {
@@ -92,16 +92,11 @@ const Shop = () => {
                     <p className="text-[13px] lg:text-[14px] font-poppins text-[#6b7280] leading-[20px] mb-4 line-clamp-2">
                       {p[`description_${language}`] || p.description_en}
                     </p>
-                    <div className="mt-auto flex items-center justify-between">
+                    <div className="mt-auto">
                       <span className="text-[18px] lg:text-[20px] font-poppins font-bold text-[#0f172a]">
                         {p.currency === 'USD' ? '$' : p.currency === 'EUR' ? '€' : ''}
                         {p.price}
                       </span>
-                      {p.stock_quantity === 0 && (
-                        <span className="text-xs text-red-600 font-poppins">
-                          {t('outOfStock') || 'Out of stock'}
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>

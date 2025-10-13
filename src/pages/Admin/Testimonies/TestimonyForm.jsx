@@ -86,7 +86,7 @@ const TestimonyForm = () => {
     <div className="max-w-4xl">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 font-poppins">
-          {isEdit ? 'Edit Testimony' : 'Create New Testimony'}
+          {isEdit ? 'Редактировать свидетельство' : 'Создать новое свидетельство'}
         </h1>
       </div>
 
@@ -98,11 +98,11 @@ const TestimonyForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Basic Information</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Name *
+                Имя *
               </label>
               <input
                 type="text"
@@ -116,7 +116,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Location
+                Местоположение
               </label>
               <input
                 type="text"
@@ -133,13 +133,13 @@ const TestimonyForm = () => {
               currentImage={formData.image_url}
               onImageUpload={handleImageUpload}
               folder="testimonies"
-              label="Testimony Image"
+              label="Изображение свидительства"
             />
           </div>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (EN)
+                Заголовок (АНГ)
               </label>
               <input
                 type="text"
@@ -151,7 +151,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (RU)
+                Заголовок (РУС)
               </label>
               <input
                 type="text"
@@ -163,7 +163,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (PL)
+                Заголовок (ПОЛ)
               </label>
               <input
                 type="text"
@@ -183,17 +183,19 @@ const TestimonyForm = () => {
                 onChange={handleChange}
                 className="w-4 h-4 text-[#2F7D6D] border-gray-300 rounded focus:ring-[#2F7D6D]"
               />
-              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Active</span>
+              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Активно</span>
             </label>
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Testimony Content</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">
+            Содержание свидительства
+          </h2>
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Testimony (English)
+                Свидительство (Английский)
               </label>
               <textarea
                 name="testimony_en"
@@ -206,7 +208,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Testimony (Russian)
+                Свидительство (Русский)
               </label>
               <textarea
                 name="testimony_ru"
@@ -219,7 +221,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Testimony (Polish)
+                Свидительство (Польский)
               </label>
               <textarea
                 name="testimony_pl"
@@ -239,14 +241,18 @@ const TestimonyForm = () => {
             disabled={loading}
             className="px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] disabled:opacity-50 font-poppins"
           >
-            {loading ? 'Saving...' : isEdit ? 'Update Testimony' : 'Create Testimony'}
+            {loading
+              ? 'Сохранение...'
+              : isEdit
+                ? 'Обновить свидетельство'
+                : 'Создать свидетельство'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/admin/testimonies')}
             className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 font-poppins"
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </form>

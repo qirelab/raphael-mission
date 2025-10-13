@@ -26,7 +26,7 @@ const TestimoniesPage = () => {
     name: testimony.name,
     location: testimony.location || '',
     image: testimony.image_url || '/images/mariasantos.png',
-    quote: testimony.testimony || '',
+    quote: testimony.testimony || '', // Already language-aware from useTestimonies hook
   }));
 
   if (loading) {

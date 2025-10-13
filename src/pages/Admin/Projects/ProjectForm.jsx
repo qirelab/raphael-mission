@@ -143,10 +143,10 @@ const ProjectForm = () => {
     <div className="max-w-5xl">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 font-poppins">
-          {isEdit ? 'Edit Project' : 'Create New Project'}
+          {isEdit ? 'Редактировать проект' : 'Создать новый проект'}
         </h1>
         <p className="mt-2 text-gray-600 font-poppins">
-          Fill in the project information in all languages
+          Заполните информацию о проекте на всех языках
         </p>
       </div>
 
@@ -159,11 +159,11 @@ const ProjectForm = () => {
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic Info */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Basic Information</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {renderInput('Title (English)', 'title_en', 'Street Evangelism')}
-            {renderInput('Title (Russian)', 'title_ru', 'Уличная Евангелизация')}
-            {renderInput('Title (Polish)', 'title_pl', 'Ewangelizacja Uliczna')}
+            {renderInput('Название (Английский)', 'title_en', 'Street Evangelism')}
+            {renderInput('Название (Русский)', 'title_ru', 'Уличная Евангелизация')}
+            {renderInput('Название (Польский)', 'title_pl', 'Ewangelizacja Uliczna')}
           </div>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             {renderInput('Slug', 'slug', 'street-evangelism')}
@@ -173,7 +173,7 @@ const ProjectForm = () => {
               currentImage={formData.image_url}
               onImageUpload={handleImageUpload}
               folder="projects"
-              label="Project Image"
+              label="Изображение проекта"
             />
           </div>
           <div className="mt-6">
@@ -185,86 +185,88 @@ const ProjectForm = () => {
                 onChange={handleChange}
                 className="w-4 h-4 text-[#2F7D6D] border-gray-300 rounded focus:ring-[#2F7D6D]"
               />
-              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Active</span>
+              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Активен</span>
             </label>
           </div>
         </div>
 
         {/* Descriptions */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Descriptions</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описания</h2>
           <div className="space-y-6">
-            {renderInput('Description (English)', 'description_en', '', 3)}
-            {renderInput('Description (Russian)', 'description_ru', '', 3)}
-            {renderInput('Description (Polish)', 'description_pl', '', 3)}
+            {renderInput('Описание (Английский)', 'description_en', '', 3)}
+            {renderInput('Описание (Русский)', 'description_ru', '', 3)}
+            {renderInput('Описание (Польский)', 'description_pl', '', 3)}
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Hero Section</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Главная секция</h2>
           <div className="space-y-6">
-            {renderInput('Hero Description (English)', 'hero_description_en', '', 2)}
-            {renderInput('Hero Description (Russian)', 'hero_description_ru', '', 2)}
-            {renderInput('Hero Description (Polish)', 'hero_description_pl', '', 2)}
+            {renderInput('Описание главной секции (Английский)', 'hero_description_en', '', 2)}
+            {renderInput('Описание главной секции (Русский)', 'hero_description_ru', '', 2)}
+            {renderInput('Описание главной секции (Польский)', 'hero_description_pl', '', 2)}
           </div>
         </div>
 
         {/* What We Do */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">What We Do</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Чем мы занимаемся</h2>
           <div className="space-y-6">
-            {renderInput('What We Do (English)', 'what_we_do_en', '', 4)}
-            {renderInput('What We Do (Russian)', 'what_we_do_ru', '', 4)}
-            {renderInput('What We Do (Polish)', 'what_we_do_pl', '', 4)}
+            {renderInput('Чем мы занимаемся (Английский)', 'what_we_do_en', '', 4)}
+            {renderInput('Чем мы занимаемся (Русский)', 'what_we_do_ru', '', 4)}
+            {renderInput('Чем мы занимаемся (Польский)', 'what_we_do_pl', '', 4)}
           </div>
         </div>
 
         {/* Impact & Statistics */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Impact & Results</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">
+            Влияние и результаты
+          </h2>
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Impact Title (EN)', 'impact_title_en')}
-              {renderInput('Impact Title (RU)', 'impact_title_ru')}
-              {renderInput('Impact Title (PL)', 'impact_title_pl')}
+              {renderInput('Заголовок влияния (АНГ)', 'impact_title_en')}
+              {renderInput('Заголовок влияния (РУС)', 'impact_title_ru')}
+              {renderInput('Заголовок влияния (ПОЛ)', 'impact_title_pl')}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Stat 1 (EN)', 'stat1_en', '500+ people reached')}
-              {renderInput('Stat 1 (RU)', 'stat1_ru')}
-              {renderInput('Stat 1 (PL)', 'stat1_pl')}
+              {renderInput('Статистика 1 (АНГ)', 'stat1_en', '500+ people reached')}
+              {renderInput('Статистика 1 (РУС)', 'stat1_ru')}
+              {renderInput('Статистика 1 (ПОЛ)', 'stat1_pl')}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Stat 2 (EN)', 'stat2_en')}
-              {renderInput('Stat 2 (RU)', 'stat2_ru')}
-              {renderInput('Stat 2 (PL)', 'stat2_pl')}
+              {renderInput('Статистика 2 (АНГ)', 'stat2_en')}
+              {renderInput('Статистика 2 (РУС)', 'stat2_ru')}
+              {renderInput('Статистика 2 (ПОЛ)', 'stat2_pl')}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Stat 3 (EN)', 'stat3_en')}
-              {renderInput('Stat 3 (RU)', 'stat3_ru')}
-              {renderInput('Stat 3 (PL)', 'stat3_pl')}
+              {renderInput('Статистика 3 (АНГ)', 'stat3_en')}
+              {renderInput('Статистика 3 (РУС)', 'stat3_ru')}
+              {renderInput('Статистика 3 (ПОЛ)', 'stat3_pl')}
             </div>
           </div>
         </div>
 
         {/* Our Approach */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Our Approach</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Наш подход</h2>
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Approach Title (EN)', 'approach_title_en')}
-              {renderInput('Approach Title (RU)', 'approach_title_ru')}
-              {renderInput('Approach Title (PL)', 'approach_title_pl')}
+              {renderInput('Заголовок подхода (АНГ)', 'approach_title_en')}
+              {renderInput('Заголовок подхода (РУС)', 'approach_title_ru')}
+              {renderInput('Заголовок подхода (ПОЛ)', 'approach_title_pl')}
             </div>
             {[1, 2, 3, 4].map((num) => (
               <div key={num} className="border-t pt-6">
                 <h3 className="text-sm font-semibold text-gray-700 mb-4 font-poppins">
-                  Approach Point {num}
+                  Пункт подхода {num}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {renderInput(`Approach ${num} (EN)`, `approach${num}_en`, '', 2)}
-                  {renderInput(`Approach ${num} (RU)`, `approach${num}_ru`, '', 2)}
-                  {renderInput(`Approach ${num} (PL)`, `approach${num}_pl`, '', 2)}
+                  {renderInput(`Подход ${num} (АНГ)`, `approach${num}_en`, '', 2)}
+                  {renderInput(`Подход ${num} (РУС)`, `approach${num}_ru`, '', 2)}
+                  {renderInput(`Подход ${num} (ПОЛ)`, `approach${num}_pl`, '', 2)}
                 </div>
               </div>
             ))}
@@ -278,14 +280,14 @@ const ProjectForm = () => {
             disabled={loading}
             className="px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2F7D6D] disabled:opacity-50 font-poppins"
           >
-            {loading ? 'Saving...' : isEdit ? 'Update Project' : 'Create Project'}
+            {loading ? 'Сохранение...' : isEdit ? 'Обновить проект' : 'Создать проект'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/admin/projects')}
             className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 font-poppins"
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </form>

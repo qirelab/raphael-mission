@@ -23,7 +23,7 @@ const TrainingPrograms = () => {
     };
 
     loadPrograms();
-  }, []);
+  }, [language]);
 
   return (
     <div className="w-full bg-white">
@@ -98,9 +98,10 @@ const TrainingPrograms = () => {
                       {p[`description_${language}`] || p.description_en}
                     </p>
                     <p className="text-[#3c8a7a] font-medium text-[12px] mt-auto">
-                      {p.duration
-                        ? `${p.duration} ${t('weeks') || 'weeks'}`
-                        : t('contactForDuration') || 'Contact for details'}
+                      {p[`duration_${language}`] ||
+                        p.duration_en ||
+                        t('contactForDuration') ||
+                        'Contact for details'}
                     </p>
                   </div>
                 </div>

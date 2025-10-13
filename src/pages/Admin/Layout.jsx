@@ -52,7 +52,7 @@ const AdminLayout = () => {
 
   const navItems = [
     {
-      name: 'Dashboard',
+      name: 'Панель управления',
       path: '/admin',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Projects',
+      name: 'Проекты',
       path: '/admin/projects',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Testimonies',
+      name: 'Свидетельства',
       path: '/admin/testimonies',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Training Programs',
+      name: 'Программы обучения',
       path: '/admin/training',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +108,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Shop Products',
+      name: 'Товары',
       path: '/admin/shop',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Contact Info',
+      name: 'Контактная информация',
       path: '/admin/contact',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +136,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Settings',
+      name: 'Настройки',
       path: '/admin/settings',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,13 +184,13 @@ const AdminLayout = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Logo */}
-        <div className="flex items-center justify-between h-16 px-6 bg-[#2F7D6D]">
-          <h1 className="text-xl font-bold text-white font-poppins">Admin Panel</h1>
+        <div className="flex items-center justify-between h-16 px-4 sm:px-6 bg-[#2F7D6D] flex-shrink-0">
+          <h1 className="text-lg sm:text-xl font-bold text-white font-poppins">Админ-панель</h1>
           <button
             onClick={() => setSidebarOpen(false)}
             className="lg:hidden text-white hover:text-gray-200"
@@ -207,7 +207,7 @@ const AdminLayout = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 px-3">
+        <nav className="flex-1 overflow-y-auto mt-6 px-3 pb-4">
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -226,23 +226,28 @@ const AdminLayout = () => {
         </nav>
 
         {/* User Info & Logout */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
-          <div className="flex items-center gap-3 mb-3 px-2">
-            <div className="w-10 h-10 rounded-full bg-[#2F7D6D] flex items-center justify-center text-white font-bold">
+        <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 bg-white">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 px-1 sm:px-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#2F7D6D] flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0">
               {user?.email?.charAt(0).toUpperCase() || 'A'}
             </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-800 font-poppins">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm font-semibold text-gray-800 font-poppins truncate">
                 {user?.email?.split('@')[0] || 'Admin'}
               </p>
-              <p className="text-xs text-gray-500 font-poppins">{user?.email}</p>
+              <p className="text-xs text-gray-500 font-poppins truncate">{user?.email}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors duration-200 font-poppins"
+            className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors duration-200 font-poppins text-sm sm:text-base"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -250,7 +255,7 @@ const AdminLayout = () => {
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>
-            <span className="font-medium">Logout</span>
+            <span className="font-medium">Выйти</span>
           </button>
         </div>
       </aside>
@@ -288,14 +293,14 @@ const AdminLayout = () => {
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-                View Site
+                Просмотр сайта
               </Link>
             </div>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="p-4 sm:p-6 lg:p-8">
+        <main className="p-3 sm:p-4 md:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>

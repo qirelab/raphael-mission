@@ -1,10 +1,29 @@
 // src/pages/QuestionsContact/index.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import { contactService } from '../../services/contactService';
 
 const QuestionsContact = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [contactData, setContactData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadContactData = async () => {
+      try {
+        setLoading(true);
+        const data = await contactService.get();
+        setContactData(data);
+      } catch (error) {
+        console.error('Error loading contact data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContactData();
+  }, []);
 
   return (
     <div className="w-full bg-[#F6F7F9]">
@@ -37,7 +56,10 @@ const QuestionsContact = () => {
                   {t('callUs')}
                 </h3>
                 <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
-                  {t('phoneNumber')}
+                  {contactData?.[`phone_number_${language}`] ||
+                    contactData?.phone_number_en ||
+                    contactData?.phone_number ||
+                    t('phoneNumber')}
                 </p>
                 <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">
                   {t('phoneWorkHoursShort')}
@@ -57,7 +79,10 @@ const QuestionsContact = () => {
                   {t('address')}
                 </h3>
                 <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {t('addressLine')}
+                  {contactData?.[`address_line1_${language}`] ||
+                    contactData?.address_line1_en ||
+                    contactData?.address_line1 ||
+                    t('addressLine')}
                 </p>
               </div>
 
@@ -74,7 +99,10 @@ const QuestionsContact = () => {
                   {t('emailUs')}
                 </h3>
                 <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {t('emailAddress')}
+                  {contactData?.[`email_${language}`] ||
+                    contactData?.email_en ||
+                    contactData?.email ||
+                    t('emailAddress')}
                 </p>
                 <p className="mt-1 text-[12px] sm:text-[14px] font-[Poppins] text-[#64748b]">
                   {t('weRespondSoon')}

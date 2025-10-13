@@ -94,8 +94,8 @@ export const useTrainingPrograms = () => {
             id: p.id,
             title: p[`title_${language}`] || p.title_en,
             description: p[`description_${language}`] || p.description_en,
-            duration: p[`duration_${language}`] || p.duration_en,
-            image: p.image_url,
+            duration: p[`duration_${language}`] || p.duration_en || '',
+            image_url: p.image_url,
           }));
         setData(mapped);
       } catch (err) {

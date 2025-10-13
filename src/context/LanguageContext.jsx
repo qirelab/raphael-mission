@@ -36,14 +36,11 @@ export const LanguageProvider = ({ children }) => {
 
   const value = {
     currentLanguage,
+    language: currentLanguage, // Alias for backwards compatibility
     changeLanguage,
     t,
-    translations: translations[currentLanguage]
+    translations: translations[currentLanguage],
   };
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };

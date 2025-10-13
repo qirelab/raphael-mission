@@ -22,12 +22,12 @@ const Settings = () => {
     setMessage({ type: '', text: '' });
 
     if (formData.newPassword !== formData.confirmPassword) {
-      setMessage({ type: 'error', text: 'New passwords do not match' });
+      setMessage({ type: 'error', text: 'Пароли не совпадают' });
       return;
     }
 
     if (formData.newPassword.length < 8) {
-      setMessage({ type: 'error', text: 'Password must be at least 8 characters' });
+      setMessage({ type: 'error', text: 'Пароль должен содержать минимум 8 символов' });
       return;
     }
 
@@ -35,13 +35,13 @@ const Settings = () => {
 
     try {
       await authService.updatePassword(formData.newPassword);
-      setMessage({ type: 'success', text: 'Password changed successfully!' });
+      setMessage({ type: 'success', text: 'Пароль успешно изменен!' });
       setFormData({
         newPassword: '',
         confirmPassword: '',
       });
     } catch (error) {
-      setMessage({ type: 'error', text: error.message || 'Failed to change password' });
+      setMessage({ type: 'error', text: error.message || 'Не удалось изменить пароль' });
     } finally {
       setLoading(false);
     }
@@ -51,13 +51,13 @@ const Settings = () => {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 font-poppins">Settings</h1>
-        <p className="mt-2 text-gray-600 font-poppins">Manage your account settings</p>
+        <h1 className="text-3xl font-bold text-gray-900 font-poppins">Настройки</h1>
+        <p className="mt-2 text-gray-600 font-poppins">Управление настройками учетной записи</p>
       </div>
 
       {/* Change Password Section */}
       <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-gray-100">
-        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Change Password</h2>
+        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Изменить пароль</h2>
 
         {message.text && (
           <div
@@ -106,7 +106,7 @@ const Settings = () => {
               htmlFor="newPassword"
               className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
             >
-              New Password
+              Новый пароль
             </label>
             <input
               type="password"
@@ -116,7 +116,7 @@ const Settings = () => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-              placeholder="Enter new password (min 8 characters)"
+              placeholder="Введите новый пароль (минимум 8 символов)"
               disabled={loading}
             />
           </div>
@@ -126,7 +126,7 @@ const Settings = () => {
               htmlFor="confirmPassword"
               className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
             >
-              Confirm New Password
+              Подтвердите новый пароль
             </label>
             <input
               type="password"
@@ -136,7 +136,7 @@ const Settings = () => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-              placeholder="Confirm your new password"
+              placeholder="Подтвердите новый пароль"
               disabled={loading}
             />
           </div>
@@ -146,7 +146,7 @@ const Settings = () => {
             disabled={loading}
             className="w-full sm:w-auto px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2F7D6D] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-poppins"
           >
-            {loading ? 'Updating...' : 'Update Password'}
+            {loading ? 'Обновление...' : 'Обновить пароль'}
           </button>
         </form>
       </div>

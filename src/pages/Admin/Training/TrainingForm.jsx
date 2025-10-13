@@ -87,7 +87,7 @@ const TrainingForm = () => {
     <div className="max-w-4xl">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 font-poppins">
-          {isEdit ? 'Edit Training Program' : 'Create New Training Program'}
+          {isEdit ? 'Редактировать программу обучения' : 'Создать новую программу обучения'}
         </h1>
       </div>
 
@@ -99,11 +99,11 @@ const TrainingForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Basic Information</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (English)
+                Название (Английский)
               </label>
               <input
                 type="text"
@@ -116,7 +116,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (Russian)
+                Название (Русский)
               </label>
               <input
                 type="text"
@@ -129,7 +129,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Title (Polish)
+                Название (Польский)
               </label>
               <input
                 type="text"
@@ -146,7 +146,7 @@ const TrainingForm = () => {
               currentImage={formData.image_url}
               onImageUpload={handleImageUpload}
               folder="training"
-              label="Training Program Image"
+              label="Изображение программы обучения"
             />
           </div>
           <div className="mt-6">
@@ -158,17 +158,17 @@ const TrainingForm = () => {
                 onChange={handleChange}
                 className="w-4 h-4 text-[#2F7D6D] border-gray-300 rounded focus:ring-[#2F7D6D]"
               />
-              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Active</span>
+              <span className="ml-2 text-sm font-medium text-gray-700 font-poppins">Активно</span>
             </label>
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Duration</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Продолжительность</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Duration (English)
+                Продолжительность (Английский)
               </label>
               <input
                 type="text"
@@ -181,7 +181,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Duration (Russian)
+                Продолжительность (Русский)
               </label>
               <input
                 type="text"
@@ -194,7 +194,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Duration (Polish)
+                Продолжительность (Польский)
               </label>
               <input
                 type="text"
@@ -209,11 +209,11 @@ const TrainingForm = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Description</h2>
+          <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описание</h2>
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (English)
+                Описание (Английский)
               </label>
               <textarea
                 name="description_en"
@@ -226,7 +226,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (Russian)
+                Описание (Русский)
               </label>
               <textarea
                 name="description_ru"
@@ -239,7 +239,7 @@ const TrainingForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Description (Polish)
+                Описание (Польский)
               </label>
               <textarea
                 name="description_pl"
@@ -259,14 +259,14 @@ const TrainingForm = () => {
             disabled={loading}
             className="px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] disabled:opacity-50 font-poppins"
           >
-            {loading ? 'Saving...' : isEdit ? 'Update Program' : 'Create Program'}
+            {loading ? 'Сохранение...' : isEdit ? 'Обновить программу' : 'Создать программу'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/admin/training')}
             className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 font-poppins"
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </form>

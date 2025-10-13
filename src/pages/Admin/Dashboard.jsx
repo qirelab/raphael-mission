@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   const statCards = [
     {
-      title: 'Projects',
+      title: 'Проекты',
       value: stats.projects,
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ const Dashboard = () => {
       link: '/admin/projects',
     },
     {
-      title: 'Testimonies',
+      title: 'Свидетельства',
       value: stats.testimonies,
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ const Dashboard = () => {
       link: '/admin/testimonies',
     },
     {
-      title: 'Training Programs',
+      title: 'Программы обучения',
       value: stats.training,
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ const Dashboard = () => {
       link: '/admin/training',
     },
     {
-      title: 'Shop Products',
+      title: 'Товары',
       value: stats.products,
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,43 +116,55 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 font-poppins">Dashboard</h1>
-        <p className="mt-2 text-gray-600 font-poppins">Welcome to Raphael Mission Admin Panel</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">
+          Панель управления
+        </h1>
+        <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 font-poppins">
+          Добро пожаловать в панель администратора Raphael Mission
+        </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {statCards.map((card) => (
           <Link
             key={card.title}
             to={card.link}
-            className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-100"
+            className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-6 border border-gray-100 hover:border-[#2F7D6D]/30"
           >
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 font-poppins">{card.title}</p>
-                <p className="mt-2 text-3xl font-bold text-gray-900 font-poppins">{card.value}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600 font-poppins truncate">
+                  {card.title}
+                </p>
+                <p className="mt-1 sm:mt-2 text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">
+                  {card.value}
+                </p>
               </div>
-              <div className={`${card.color} p-3 rounded-lg text-white`}>{card.icon}</div>
+              <div className={`${card.color} p-2 sm:p-3 rounded-lg text-white flex-shrink-0 ml-3`}>
+                {card.icon}
+              </div>
             </div>
           </Link>
         ))}
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-gray-100">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 font-poppins mb-3 sm:mb-4">
+          Быстрые действия
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <Link
-            to="/admin/projects"
-            className="flex items-center gap-3 p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] transition-colors duration-200"
+            to="/admin/projects/new"
+            className="flex items-center gap-3 p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] hover:bg-blue-50/30 transition-all duration-200"
           >
-            <div className="bg-blue-100 p-2 rounded-lg">
+            <div className="bg-blue-100 p-2 rounded-lg flex-shrink-0">
               <svg
-                className="w-6 h-6 text-blue-600"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -165,16 +177,18 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <span className="font-medium text-gray-700 font-poppins">Add New Project</span>
+            <span className="text-sm sm:text-base font-medium text-gray-700 font-poppins">
+              Добавить новый проект
+            </span>
           </Link>
 
           <Link
-            to="/admin/testimonies"
-            className="flex items-center gap-3 p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] transition-colors duration-200"
+            to="/admin/testimonies/new"
+            className="flex items-center gap-3 p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] hover:bg-green-50/30 transition-all duration-200"
           >
-            <div className="bg-green-100 p-2 rounded-lg">
+            <div className="bg-green-100 p-2 rounded-lg flex-shrink-0">
               <svg
-                className="w-6 h-6 text-green-600"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-green-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -187,16 +201,18 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <span className="font-medium text-gray-700 font-poppins">Add New Testimony</span>
+            <span className="text-sm sm:text-base font-medium text-gray-700 font-poppins">
+              Добавить новое свидетельство
+            </span>
           </Link>
 
           <Link
             to="/admin/contact"
-            className="flex items-center gap-3 p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] transition-colors duration-200"
+            className="flex items-center gap-3 p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-[#2F7D6D] hover:bg-purple-50/30 transition-all duration-200"
           >
-            <div className="bg-purple-100 p-2 rounded-lg">
+            <div className="bg-purple-100 p-2 rounded-lg flex-shrink-0">
               <svg
-                className="w-6 h-6 text-purple-600"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -209,7 +225,9 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <span className="font-medium text-gray-700 font-poppins">Update Contact Info</span>
+            <span className="text-sm sm:text-base font-medium text-gray-700 font-poppins">
+              Обновить контакты
+            </span>
           </Link>
         </div>
       </div>

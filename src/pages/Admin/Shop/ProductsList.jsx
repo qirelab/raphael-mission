@@ -24,7 +24,7 @@ const ProductsList = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) {
+    if (!window.confirm('Вы уверены, что хотите удалить этот товар?')) {
       return;
     }
 
@@ -32,7 +32,7 @@ const ProductsList = () => {
       await shopService.delete(id);
       setProducts(products.filter((p) => p.id !== id));
     } catch (err) {
-      alert(err.message || 'Failed to delete product');
+      alert(err.message || 'Не удалось удалить товар');
     }
   };
 
@@ -45,15 +45,19 @@ const ProductsList = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 font-poppins">Shop Products</h1>
-          <p className="mt-2 text-gray-600 font-poppins">Manage shop inventory</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">
+            Товары магазина
+          </h1>
+          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 font-poppins">
+            Управление товарами магазина
+          </p>
         </div>
         <Link
           to="/admin/shop/new"
-          className="inline-flex items-center px-4 py-2 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -63,51 +67,120 @@ const ProductsList = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-          Add New Product
+          Добавить новый товар
         </Link>
       </div>
 
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
-          <p className="text-red-700 font-poppins">{error}</p>
+        <div className="bg-red-50 border-l-4 border-red-500 p-3 sm:p-4 rounded">
+          <p className="text-sm sm:text-base text-red-700 font-poppins">{error}</p>
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      {/* Mobile Cards View */}
+      <div className="block lg:hidden space-y-4">
+        {products.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+            <p className="text-gray-500 font-poppins">
+              Товары не найдены. Создайте свой первый товар!
+            </p>
+          </div>
+        ) : (
+          products.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-3"
+            >
+              <div className="flex items-start gap-3">
+                {product.image_url && (
+                  <img
+                    src={product.image_url}
+                    alt={product.name_en}
+                    className="w-16 h-16 rounded object-cover flex-shrink-0"
+                  />
+                )}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-semibold text-gray-900 font-poppins truncate">
+                    {product.name_en}
+                  </h3>
+                  <p className="text-sm text-gray-500 font-poppins line-clamp-2 mt-1">
+                    {product.description_en}
+                  </p>
+                  <p className="text-sm font-semibold text-[#2F7D6D] mt-2">
+                    {product.price} {product.currency}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full font-poppins ${
+                      product.is_active
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {product.is_active ? 'Активен' : 'Неактивен'}
+                  </span>
+                  <span className="text-xs text-gray-500 font-poppins">
+                    {new Date(product.created_at).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <Link
+                  to={`/admin/shop/edit/${product.id}`}
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-blue-50 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors font-poppins"
+                >
+                  Редактировать
+                </Link>
+                <button
+                  onClick={() => handleDelete(product.id)}
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors font-poppins"
+                >
+                  Удалить
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden lg:block bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Product
+                  Товар
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Price
+                  Цена
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Stock
+                  Статус
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Created
+                  Создан
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Actions
+                  Действия
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="px-6 py-8 text-center text-gray-500 font-poppins">
-                    No products found. Create your first product!
+                  <td colSpan="5" className="px-6 py-8 text-center text-gray-500 font-poppins">
+                    Товары не найдены. Создайте свой первый товар!
                   </td>
                 </tr>
               ) : (
                 products.map((product) => (
-                  <tr key={product.id} className="hover:bg-gray-50">
+                  <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         {product.image_url && (
@@ -134,26 +207,13 @@ const ProductsList = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`text-sm font-poppins ${
-                          product.stock_quantity > 10
-                            ? 'text-green-600'
-                            : product.stock_quantity > 0
-                              ? 'text-yellow-600'
-                              : 'text-red-600'
-                        }`}
-                      >
-                        {product.stock_quantity} units
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
                         className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full font-poppins ${
                           product.is_active
                             ? 'bg-green-100 text-green-800'
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        {product.is_active ? 'Active' : 'Inactive'}
+                        {product.is_active ? 'Активен' : 'Неактивен'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-poppins">
@@ -162,15 +222,15 @@ const ProductsList = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
                         to={`/admin/shop/edit/${product.id}`}
-                        className="text-blue-600 hover:text-blue-900 mr-4 font-poppins"
+                        className="text-blue-600 hover:text-blue-900 mr-4 font-poppins transition-colors"
                       >
-                        Edit
+                        Редактировать
                       </Link>
                       <button
                         onClick={() => handleDelete(product.id)}
-                        className="text-red-600 hover:text-red-900 font-poppins"
+                        className="text-red-600 hover:text-red-900 font-poppins transition-colors"
                       >
-                        Delete
+                        Удалить
                       </button>
                     </td>
                   </tr>

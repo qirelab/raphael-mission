@@ -24,7 +24,7 @@ const TrainingList = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this training program?')) {
+    if (!window.confirm('Вы уверены, что хотите удалить эту программу обучения?')) {
       return;
     }
 
@@ -32,7 +32,7 @@ const TrainingList = () => {
       await trainingService.delete(id);
       setPrograms(programs.filter((p) => p.id !== id));
     } catch (err) {
-      alert(err.message || 'Failed to delete training program');
+      alert(err.message || 'Не удалось удалить программу обучения');
     }
   };
 
@@ -45,15 +45,19 @@ const TrainingList = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 font-poppins">Training Programs</h1>
-          <p className="mt-2 text-gray-600 font-poppins">Manage training programs</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">
+            Программы обучения
+          </h1>
+          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 font-poppins">
+            Управление программами обучения
+          </p>
         </div>
         <Link
           to="/admin/training/new"
-          className="inline-flex items-center px-4 py-2 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -63,35 +67,109 @@ const TrainingList = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-          Add New Program
+          Добавить новую программу
         </Link>
       </div>
 
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
-          <p className="text-red-700 font-poppins">{error}</p>
+        <div className="bg-red-50 border-l-4 border-red-500 p-3 sm:p-4 rounded">
+          <p className="text-sm sm:text-base text-red-700 font-poppins">{error}</p>
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      {/* Mobile Cards View */}
+      <div className="block lg:hidden space-y-4">
+        {programs.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+            <p className="text-gray-500 font-poppins">
+              Программы обучения не найдены. Создайте свою первую программу!
+            </p>
+          </div>
+        ) : (
+          programs.map((program) => (
+            <div
+              key={program.id}
+              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-3"
+            >
+              <div className="flex items-start gap-3">
+                {program.image_url && (
+                  <img
+                    src={program.image_url}
+                    alt={program.title_en}
+                    className="w-16 h-16 rounded object-cover flex-shrink-0"
+                  />
+                )}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-semibold text-gray-900 font-poppins truncate">
+                    {program.title_en}
+                  </h3>
+                  <p className="text-sm text-gray-500 font-poppins line-clamp-2 mt-1">
+                    {program.description_en}
+                  </p>
+                  {program.duration_en && (
+                    <p className="text-xs text-[#2F7D6D] font-medium mt-2">
+                      📅 {program.duration_en}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full font-poppins ${
+                      program.is_active
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {program.is_active ? 'Активна' : 'Неактивна'}
+                  </span>
+                  <span className="text-xs text-gray-500 font-poppins">
+                    {new Date(program.created_at).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-2">
+                <Link
+                  to={`/admin/training/edit/${program.id}`}
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-blue-50 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors font-poppins"
+                >
+                  Редактировать
+                </Link>
+                <button
+                  onClick={() => handleDelete(program.id)}
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors font-poppins"
+                >
+                  Удалить
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden lg:block bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Program
+                  Программа
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Duration
+                  Продолжительность
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Status
+                  Статус
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Created
+                  Создан
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Actions
+                  Действия
                 </th>
               </tr>
             </thead>
@@ -99,12 +177,12 @@ const TrainingList = () => {
               {programs.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="px-6 py-8 text-center text-gray-500 font-poppins">
-                    No training programs found. Create your first program!
+                    Программы обучения не найдены. Создайте свою первую программу!
                   </td>
                 </tr>
               ) : (
                 programs.map((program) => (
-                  <tr key={program.id} className="hover:bg-gray-50">
+                  <tr key={program.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         {program.image_url && (
@@ -137,7 +215,7 @@ const TrainingList = () => {
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        {program.is_active ? 'Active' : 'Inactive'}
+                        {program.is_active ? 'Активна' : 'Неактивна'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-poppins">
@@ -146,15 +224,15 @@ const TrainingList = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
                         to={`/admin/training/edit/${program.id}`}
-                        className="text-blue-600 hover:text-blue-900 mr-4 font-poppins"
+                        className="text-blue-600 hover:text-blue-900 mr-4 font-poppins transition-colors"
                       >
-                        Edit
+                        Редактировать
                       </Link>
                       <button
                         onClick={() => handleDelete(program.id)}
-                        className="text-red-600 hover:text-red-900 font-poppins"
+                        className="text-red-600 hover:text-red-900 font-poppins transition-colors"
                       >
-                        Delete
+                        Удалить
                       </button>
                     </td>
                   </tr>
