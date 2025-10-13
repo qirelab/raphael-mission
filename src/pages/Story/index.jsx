@@ -20,7 +20,7 @@ const Story = () => {
   return (
     <div className="w-full bg-[#ffffff]">
       {/* Hero Section */}
-      <section className="relative w-full min-h-[500px] bg-[url('/images/about.png')] bg-cover bg-center">
+      <section className="relative w-full min-h-[500px] bg-[url('/images/ludi.jpg')] bg-cover bg-center">
         <div className="absolute inset-0 bg-[rgba(31,71,91,0.75)] z-10" />
         <div className="relative z-20 w-full">
           <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@ const Story = () => {
             </div>
             <div className="flex items-center justify-center">
               <img
-                src="/images/praying-man.jpg"
+                src="/images/comanda.jpg"
                 alt="Founding"
                 className="w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover rounded-[16px] shadow-lg transition-transform duration-300 hover:scale-105"
               />
@@ -72,7 +72,7 @@ const Story = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
             <div className="flex items-center justify-center order-2 lg:order-1">
               <img
-                src="/images/community.png"
+                src="/images/volontery.jpg"
                 alt="Growing Impact"
                 className="w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover rounded-[16px] shadow-lg transition-transform duration-300 hover:scale-105"
               />
@@ -109,7 +109,7 @@ const Story = () => {
             </div>
             <div className="flex items-center justify-center">
               <img
-                src="/images/womenpraying.jpg"
+                src="/images/mission.jpg"
                 alt="Today"
                 className="w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover rounded-[16px] shadow-lg transition-transform duration-300 hover:scale-105"
               />
