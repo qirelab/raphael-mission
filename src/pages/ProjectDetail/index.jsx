@@ -75,6 +75,16 @@ const ProjectDetail = () => {
     project[`approach4_${language}`] || project.approach4_en,
   ].filter(Boolean);
 
+  // Галерея для Project Gallery
+  const galleryImages = [
+    '/images/about.png',
+    '/images/projects.png',
+    '/images/img_frame_blue_gray_100.svg',
+    '/images/img_frame_blue_gray_100_16x14.svg',
+    '/images/youtube.svg',
+    '/images/public/images/service.png',
+  ];
+
   return (
     <div className="w-full bg-[#ffffff]">
       {/* Hero Section */}
@@ -103,89 +113,59 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* What We Do */}
-      <section className="w-full bg-white py-16 sm:py-20 lg:py-24">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-[900px] mx-auto">
-            <h2 className="text-[32px] sm:text-[36px] lg:text-[40px] font-bold text-center text-[#1f2937] font-poppins mb-8">
-              {t('whatWeDo') || 'What We Do'}
-            </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] leading-[26px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-poppins text-center whitespace-pre-wrap">
-              {whatWeDo || description}
-            </p>
+      {/* About This Project */}
+      <section className="w-full bg-white py-10">
+        <div className="max-w-[900px] mx-auto px-4">
+          <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+            <h2 className="text-[28px] sm:text-[32px] font-bold mb-4 text-[#1f2937]">About This Project</h2>
+            <p className="text-[16px] sm:text-[18px] text-[#374151] mb-2">The Mobile Medical Clinics initiative delivers essential healthcare directly to underserved communities through specially equipped vehicles. These clinics provide basic medical services, vaccinations, health screenings, and emergency care to remote and urban areas alike.</p>
+            <p className="text-[16px] sm:text-[18px] text-[#374151] mb-2">Our mobile units help bridge the gap in healthcare access where hospitals and clinics are scarce or inaccessible.</p>
+            <p className="text-[16px] sm:text-[18px] text-[#374151]">By partnering with local health authorities and professionals, Raphael Mission ensures timely, compassionate care reaches those who need it most—especially children, the elderly, and people with chronic conditions.</p>
           </div>
         </div>
       </section>
 
-      {/* Impact & Results */}
-      <section className="w-full bg-[#F6F7F9] py-16 sm:py-20 lg:py-24">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[32px] sm:text-[36px] lg:text-[40px] font-bold text-center text-[#1f2937] font-poppins mb-12 lg:mb-16">
-            {impactTitle || t('ourImpact') || 'Our Impact'}
-          </h2>
-
-          {stats.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-[16px] p-8 shadow-md text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-16 h-16 bg-[#3c8a7a] rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <p className="text-[18px] sm:text-[20px] lg:text-[24px] font-bold text-[#3c8a7a] font-poppins mb-2">
-                    {stat}
-                  </p>
-                </div>
-              ))}
+      {/* Project Impact */}
+      <section className="w-full bg-[#fafbfc] py-10">
+        <div className="max-w-[900px] mx-auto px-4">
+          <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+            <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">Project Impact</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="bg-[#2eaf7d] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="text-[28px] font-bold mb-1">8,000+</div>
+                <div className="text-[16px]">Patients Served</div>
+              </div>
+              <div className="bg-[#3b82f6] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="text-[28px] font-bold mb-1">15</div>
+                <div className="text-[16px]">Mobile Units Deployed</div>
+              </div>
+              <div className="bg-[#8b5cf6] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="text-[28px] font-bold mb-1">10</div>
+                <div className="text-[16px]">Regions Covered</div>
+              </div>
+              <div className="bg-[#f97316] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="text-[28px] font-bold mb-1">5 hrs</div>
+                <div className="text-[16px]">Avg. Time Saved per Visit</div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* Our Approach */}
-      <section className="w-full bg-white py-16 sm:py-20 lg:py-24">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[32px] sm:text-[36px] lg:text-[40px] font-bold text-center text-[#1f2937] font-poppins mb-12 lg:mb-16">
-            {approachTitle || t('ourApproach') || 'Our Approach'}
-          </h2>
-
-          {approaches.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto">
-              {approaches.map((approach, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-4 p-6 bg-[#f9fafb] rounded-[12px] transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 bg-[#3c8a7a] rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold font-poppins text-[16px]">
-                        {index + 1}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-[16px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-[#374151] font-poppins flex-1">
-                    {approach}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+      {/* Project Gallery */}
+      <section className="w-full bg-white py-10">
+        <div className="max-w-[1100px] mx-auto px-4">
+          <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">Project Gallery</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+            {galleryImages.map((src, idx) => (
+              <img
+                key={idx}
+                src={src}
+                alt={`Gallery ${idx + 1}`}
+                className="rounded-lg object-cover w-full h-[160px] sm:h-[140px] md:h-[160px] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              />
+            ))}
+          </div>
         </div>
       </section>
 
