@@ -5,6 +5,8 @@ const Settings = () => {
   const [formData, setFormData] = useState({
     newPassword: '',
     confirmPassword: '',
+    newEmail: '',
+    currentPassword: '',
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ const Settings = () => {
     setMessage({ type: '', text: '' });
   };
 
-  const handleSubmit = async (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setMessage({ type: '', text: '' });
 
@@ -36,12 +38,47 @@ const Settings = () => {
     try {
       await authService.updatePassword(formData.newPassword);
       setMessage({ type: 'success', text: 'Пароль успешно изменен!' });
-      setFormData({
+      setFormData((prev) => ({
+        ...prev,
         newPassword: '',
         confirmPassword: '',
-      });
+      }));
     } catch (error) {
       setMessage({ type: 'error', text: error.message || 'Не удалось изменить пароль' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    setMessage({ type: '', text: '' });
+
+    if (!formData.newEmail) {
+      setMessage({ type: 'error', text: 'Введите новый email' });
+      return;
+    }
+
+    if (!formData.currentPassword) {
+      setMessage({ type: 'error', text: 'Введите текущий пароль для подтверждения' });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await authService.updateEmail(formData.newEmail);
+      setMessage({
+        type: 'success',
+        text: 'Email успешно изменен! Проверьте новую почту для подтверждения.',
+      });
+      setFormData((prev) => ({
+        ...prev,
+        newEmail: '',
+        currentPassword: '',
+      }));
+    } catch (error) {
+      setMessage({ type: 'error', text: error.message || 'Не удалось изменить email' });
     } finally {
       setLoading(false);
     }
@@ -55,9 +92,9 @@ const Settings = () => {
         <p className="mt-2 text-gray-600 font-poppins">Управление настройками учетной записи</p>
       </div>
 
-      {/* Change Password Section */}
-      <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-gray-100">
-        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Изменить пароль</h2>
+      {/* Change Email Section */}
+      <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-gray-100 mb-6">
+        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Изменить email</h2>
 
         {message.text && (
           <div
@@ -68,31 +105,8 @@ const Settings = () => {
             }`}
           >
             <div className="flex items-center">
-              {message.type === 'success' ? (
-                <svg
-                  className="w-5 h-5 text-green-500 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
               <p
-                className={`text-sm font-medium ${
-                  message.type === 'success' ? 'text-green-700' : 'text-red-700'
-                }`}
+                className={`font-poppins ${message.type === 'success' ? 'text-green-700' : 'text-red-700'}`}
               >
                 {message.text}
               </p>
@@ -100,53 +114,88 @@ const Settings = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleEmailSubmit} className="space-y-6">
           <div>
-            <label
-              htmlFor="newPassword"
-              className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
-            >
-              Новый пароль
+            <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+              Новый email
             </label>
             <input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              value={formData.newPassword}
+              type="email"
+              name="newEmail"
+              value={formData.newEmail}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-              placeholder="Введите новый пароль (минимум 8 символов)"
-              disabled={loading}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+              placeholder="new@example.com"
             />
           </div>
 
           <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-semibold text-gray-700 mb-2 font-poppins"
-            >
-              Подтвердите новый пароль
+            <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+              Текущий пароль (для подтверждения)
             </label>
             <input
               type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
+              name="currentPassword"
+              value={formData.currentPassword}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent transition-all duration-200 font-poppins"
-              placeholder="Подтвердите новый пароль"
-              disabled={loading}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+              placeholder="Введите текущий пароль"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-6 py-3 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2F7D6D] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-poppins"
+            className="w-full sm:w-auto px-6 py-2 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Обновление...' : 'Обновить пароль'}
+            {loading ? 'Изменение...' : 'Изменить email'}
+          </button>
+        </form>
+      </div>
+
+      {/* Change Password Section */}
+      <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-gray-100">
+        <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Изменить пароль</h2>
+
+        <form onSubmit={handlePasswordSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+              Новый пароль
+            </label>
+            <input
+              type="password"
+              name="newPassword"
+              value={formData.newPassword}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+              placeholder="Минимум 8 символов"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+              Подтвердите пароль
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+              placeholder="Повторите новый пароль"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full sm:w-auto px-6 py-2 bg-[#2F7D6D] text-white font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Изменение...' : 'Изменить пароль'}
           </button>
         </form>
       </div>

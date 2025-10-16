@@ -6,7 +6,7 @@ import { useTestimonies } from '../../hooks/useApiData';
 
 const TestimoniesPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { data: apiTestimonies, loading } = useTestimonies();
 
@@ -24,9 +24,9 @@ const TestimoniesPage = () => {
   const testimonials = apiTestimonies.map((testimony) => ({
     id: testimony.id,
     name: testimony.name,
-    location: testimony.location || '',
+    location: testimony.location,
     image: testimony.image_url || '/images/mariasantos.png',
-    quote: testimony.testimony || '', // Already language-aware from useTestimonies hook
+    quote: testimony.testimony,
   }));
 
   if (loading) {

@@ -57,10 +57,11 @@ const ProjectDetail = () => {
 
   const title = project[`title_${language}`] || project.title_en;
   const description = project[`description_${language}`] || project.description_en;
-  const heroDescription = project[`hero_description_${language}`] || project.hero_description_en;
+  const aboutProject = project[`about_project_${language}`] || project.about_project_en;
   const whatWeDo = project[`what_we_do_${language}`] || project.what_we_do_en;
   const impactTitle = project[`impact_title_${language}`] || project.impact_title_en;
-  const approachTitle = project[`approach_title_${language}`] || project.approach_title_en;
+  const impactDescription =
+    project[`impact_description_${language}`] || project.impact_description_en;
 
   const stats = [
     project[`stat1_${language}`] || project.stat1_en,
@@ -68,22 +69,18 @@ const ProjectDetail = () => {
     project[`stat3_${language}`] || project.stat3_en,
   ].filter(Boolean);
 
-  const approaches = [
-    project[`approach1_${language}`] || project.approach1_en,
-    project[`approach2_${language}`] || project.approach2_en,
-    project[`approach3_${language}`] || project.approach3_en,
-    project[`approach4_${language}`] || project.approach4_en,
-  ].filter(Boolean);
-
   // Галерея для Project Gallery
-  const galleryImages = [
-    '/images/about.png',
-    '/images/projects.png',
-    '/images/img_frame_blue_gray_100.svg',
-    '/images/img_frame_blue_gray_100_16x14.svg',
-    '/images/youtube.svg',
-    '/images/public/images/service.png',
-  ];
+  const galleryImages =
+    project.gallery_images && project.gallery_images.length > 0
+      ? project.gallery_images
+      : [
+          '/images/about.png',
+          '/images/projects.png',
+          '/images/img_frame_blue_gray_100.svg',
+          '/images/img_frame_blue_gray_100_16x14.svg',
+          '/images/youtube.svg',
+          '/images/public/images/service.png',
+        ];
 
   return (
     <div className="w-full bg-[#ffffff]">
@@ -105,7 +102,7 @@ const ProjectDetail = () => {
                   {title}
                 </h1>
                 <p className="text-[16px] sm:text-[18px] md:text-[20px] font-poppins font-normal leading-[24px] sm:leading-[28px] md:leading-[30px] text-white max-w-[800px]">
-                  {heroDescription || description}
+                  {description}
                 </p>
               </div>
             </div>
@@ -117,10 +114,21 @@ const ProjectDetail = () => {
       <section className="w-full bg-white py-10">
         <div className="max-w-[900px] mx-auto px-4">
           <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-            <h2 className="text-[28px] sm:text-[32px] font-bold mb-4 text-[#1f2937]">About This Project</h2>
-            <p className="text-[16px] sm:text-[18px] text-[#374151] mb-2">The Mobile Medical Clinics initiative delivers essential healthcare directly to underserved communities through specially equipped vehicles. These clinics provide basic medical services, vaccinations, health screenings, and emergency care to remote and urban areas alike.</p>
-            <p className="text-[16px] sm:text-[18px] text-[#374151] mb-2">Our mobile units help bridge the gap in healthcare access where hospitals and clinics are scarce or inaccessible.</p>
-            <p className="text-[16px] sm:text-[18px] text-[#374151]">By partnering with local health authorities and professionals, Raphael Mission ensures timely, compassionate care reaches those who need it most—especially children, the elderly, and people with chronic conditions.</p>
+            <h2 className="text-[28px] sm:text-[32px] font-bold mb-4 text-[#1f2937]">
+              {language === 'ru'
+                ? 'Об этом проекте'
+                : language === 'pl'
+                  ? 'O tym projekcie'
+                  : 'About This Project'}
+            </h2>
+            <div className="text-[16px] sm:text-[18px] text-[#374151] whitespace-pre-line">
+              {aboutProject ||
+                (language === 'ru'
+                  ? 'Подробная информация о проекте будет добавлена в ближайшее время.'
+                  : language === 'pl'
+                    ? 'Szczegółowe informacje o projekcie zostaną dodane wkrótce.'
+                    : 'Detailed project information will be added soon.')}
+            </div>
           </div>
         </div>
       </section>
@@ -129,25 +137,39 @@ const ProjectDetail = () => {
       <section className="w-full bg-[#fafbfc] py-10">
         <div className="max-w-[900px] mx-auto px-4">
           <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-            <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">Project Impact</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-[#2eaf7d] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="text-[28px] font-bold mb-1">8,000+</div>
-                <div className="text-[16px]">Patients Served</div>
+            <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">
+              {impactTitle ||
+                (language === 'ru'
+                  ? 'Влияние проекта'
+                  : language === 'pl'
+                    ? 'Wpływ projektu'
+                    : 'Project Impact')}
+            </h2>
+            {impactDescription && (
+              <div className="mb-8 text-[16px] sm:text-[18px] text-[#374151] text-center">
+                {impactDescription}
               </div>
-              <div className="bg-[#3b82f6] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="text-[28px] font-bold mb-1">15</div>
-                <div className="text-[16px]">Mobile Units Deployed</div>
+            )}
+            {stats.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {stats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className={`rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                      index % 4 === 0
+                        ? 'bg-[#2eaf7d]'
+                        : index % 4 === 1
+                          ? 'bg-[#3b82f6]'
+                          : index % 4 === 2
+                            ? 'bg-[#8b5cf6]'
+                            : 'bg-[#f97316]'
+                    }`}
+                  >
+                    <div className="text-[28px] font-bold mb-1">{stat}</div>
+                  </div>
+                ))}
               </div>
-              <div className="bg-[#8b5cf6] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="text-[28px] font-bold mb-1">10</div>
-                <div className="text-[16px]">Regions Covered</div>
-              </div>
-              <div className="bg-[#f97316] rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="text-[28px] font-bold mb-1">5 hrs</div>
-                <div className="text-[16px]">Avg. Time Saved per Visit</div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -155,7 +177,13 @@ const ProjectDetail = () => {
       {/* Project Gallery */}
       <section className="w-full bg-white py-10">
         <div className="max-w-[1100px] mx-auto px-4">
-          <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">Project Gallery</h2>
+          <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">
+            {language === 'ru'
+              ? 'Галерея проекта'
+              : language === 'pl'
+                ? 'Galeria projektu'
+                : 'Project Gallery'}
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {galleryImages.map((src, idx) => (
               <img

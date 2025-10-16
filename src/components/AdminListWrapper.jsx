@@ -36,3 +36,9 @@ const AdminListWrapper = ({ title, description, addButtonText, addButtonLink, ch
 };
 
 export default AdminListWrapper;
+
+
+
+
+
+

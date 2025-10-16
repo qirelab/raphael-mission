@@ -391,13 +391,13 @@ const Home = () => {
                   <div className="flex items-center gap-4">
                     <img
                       src={testimony.image_url || '/images/img_ellipse_1.png'}
-                      alt={testimony.name}
+                      alt={testimony[`name_${language}`] || testimony.name_en}
                       className="w-[52px] h-[52px] rounded-[26px] object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-1">
                         <h4 className="text-[16px] lg:text-[18px] font-semibold leading-[24px] lg:leading-[27px] text-[#111827] font-['Poppins']">
-                          {testimony.name}
+                          {testimony[`name_${language}`] || testimony.name_en}
                         </h4>
                         <img
                           src="/images/img_vector.svg"

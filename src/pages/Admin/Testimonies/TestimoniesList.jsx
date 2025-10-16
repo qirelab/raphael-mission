@@ -95,13 +95,13 @@ const TestimoniesList = () => {
                 {testimony.image_url && (
                   <img
                     src={testimony.image_url}
-                    alt={testimony.name}
+                    alt={testimony.name_en}
                     className="w-16 h-16 rounded-full object-cover flex-shrink-0"
                   />
                 )}
                 <div className="flex-1 min-w-0">
                   <h3 className="text-base font-semibold text-gray-900 font-poppins">
-                    {testimony.name}
+                    {testimony.name_en}
                   </h3>
                   {testimony.title_en && (
                     <p className="text-sm text-gray-500 font-poppins mt-0.5">
@@ -189,13 +189,13 @@ const TestimoniesList = () => {
                         {testimony.image_url && (
                           <img
                             src={testimony.image_url}
-                            alt={testimony.name}
+                            alt={testimony.name_en}
                             className="w-10 h-10 rounded-full object-cover mr-3"
                           />
                         )}
                         <div>
                           <div className="text-sm font-medium text-gray-900 font-poppins">
-                            {testimony.name}
+                            {testimony.name_en}
                           </div>
                           <div className="text-sm text-gray-500 font-poppins">
                             {testimony.title_en}

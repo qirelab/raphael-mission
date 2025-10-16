@@ -11,8 +11,9 @@ const TestimonyForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    name: '',
-    location: '',
+    name_en: '',
+    name_ru: '',
+    name_pl: '',
     title_en: '',
     title_ru: '',
     title_pl: '',
@@ -99,33 +100,50 @@ const TestimonyForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Имя *
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-                placeholder="e.g., John Smith"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Местоположение
-              </label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-                placeholder="e.g., New York, USA"
-              />
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+                  Имя (Английский) *
+                </label>
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+                  placeholder="e.g., John Smith"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+                  Имя (Русский) *
+                </label>
+                <input
+                  type="text"
+                  name="name_ru"
+                  value={formData.name_ru}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+                  placeholder="e.g., Джон Смит"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+                  Имя (Польский) *
+                </label>
+                <input
+                  type="text"
+                  name="name_pl"
+                  value={formData.name_pl}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
+                  placeholder="e.g., Jan Kowalski"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-6">
@@ -139,7 +157,7 @@ const TestimonyForm = () => {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Заголовок (АНГ)
+                Местоположение (АНГ)
               </label>
               <input
                 type="text"
@@ -151,7 +169,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Заголовок (РУС)
+                Местоположение (РУС)
               </label>
               <input
                 type="text"
@@ -163,7 +181,7 @@ const TestimonyForm = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Заголовок (ПОЛ)
+                Местоположение (ПОЛ)
               </label>
               <input
                 type="text"

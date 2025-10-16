@@ -57,8 +57,8 @@ export const useTestimonies = () => {
           .filter((t) => t.is_active)
           .map((t) => ({
             id: t.id,
-            name: t.name,
-            location: t.location || '',
+            name: t[`name_${language}`] || t.name_en,
+            location: t[`title_${language}`] || t.title_en || '',
             testimony: t[`testimony_${language}`] || t.testimony_en,
             image_url: t.image_url,
           }));
