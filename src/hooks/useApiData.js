@@ -53,15 +53,13 @@ export const useTestimonies = () => {
       try {
         setLoading(true);
         const testimonies = await testimoniesService.getActive();
-        const mapped = testimonies
-          .filter((t) => t.is_approved)
-          .map((t) => ({
-            id: t.id,
-            name: t[`name_${language}`] || t.name_en || t.name,
-            location: t[`title_${language}`] || t.title_en || '',
-            testimony: t[`content_${language}`] || t.content_en,
-            image: t.image_url,
-          }));
+        const mapped = testimonies.map((t) => ({
+          id: t.id,
+          name: t[`name_${language}`] || t.name_en || t.name,
+          location: t[`title_${language}`] || t.title_en || '',
+          testimony: t[`content_${language}`] || t.content_en,
+          image: t.image_url,
+        }));
         setData(mapped);
       } catch (err) {
         setError(err);

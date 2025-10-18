@@ -26,7 +26,6 @@ import CookiePolicy from './pages/CookiePolicy';
 import AdminLogin from './pages/Admin/Login';
 import AdminLayout from './pages/Admin/Layout';
 import Dashboard from './pages/Admin/Dashboard';
-import Settings from './pages/Admin/Settings';
 import ProjectsList from './pages/Admin/Projects/ProjectsList';
 import ProjectForm from './pages/Admin/Projects/ProjectForm';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
@@ -81,7 +80,6 @@ const AppRoutes = () => {
         <Route path="shop/new" element={<ProductForm />} />
         <Route path="shop/edit/:id" element={<ProductForm />} />
         <Route path="contact" element={<ContactInfo />} />
-        <Route path="settings" element={<Settings />} />
       </Route>
 
       {/* 404 Route */}

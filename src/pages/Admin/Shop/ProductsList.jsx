@@ -7,20 +7,27 @@ const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [deletingId, setDeletingId] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (isRefresh = false) => {
     try {
-      setLoading(true);
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
+      }
       const data = await shopService.getAll();
       setProducts(data);
     } catch (err) {
       setError(err.message || 'Failed to fetch products');
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -30,10 +37,14 @@ const ProductsList = () => {
     }
 
     try {
+      setDeletingId(id);
       await shopService.delete(id);
-      setProducts(products.filter((p) => p.id !== id));
+      // Refresh data instead of just filtering to ensure consistency
+      await fetchProducts(true);
     } catch (err) {
       alert(err.message || 'Не удалось удалить товар');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -45,6 +56,45 @@ const ProductsList = () => {
           <div className="animate-pulse bg-gray-200 rounded h-10 w-32"></div>
         </div>
         <ListSkeleton count={5} />
+      </div>
+    );
+  }
+
+  // Show skeleton overlay when refreshing
+  if (refreshing) {
+    return (
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">Товары</h1>
+            <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 font-poppins">
+              Управление товарами магазина
+            </p>
+          </div>
+          <Link
+            to="/admin/shop/new"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            Добавить новый товар
+          </Link>
+        </div>
+        <div className="relative">
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex items-center justify-center">
+            <div className="flex items-center gap-2 text-[#2F7D6D] font-poppins">
+              <div className="animate-spin rounded-full h-5 w-5 border-2 border-[#2F7D6D] border-t-transparent"></div>
+              Обновление данных...
+            </div>
+          </div>
+          <ListSkeleton count={products.length || 5} />
+        </div>
       </div>
     );
   }
@@ -121,7 +171,7 @@ const ProductsList = () => {
                           : 'bg-gray-100 text-gray-800'
                       }`}
                     >
-                      {product.is_active ? 'В наличии' : 'Нет в наличии'}
+                      {product.is_active ? 'Активно' : 'Неактивно'}
                     </span>
                   </div>
                 </div>
@@ -150,22 +200,32 @@ const ProductsList = () => {
                   </Link>
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors duration-200 font-poppins"
+                    disabled={deletingId === product.id}
+                    className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors duration-200 font-poppins disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <svg
-                      className="w-3 h-3 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
-                    Удалить
+                    {deletingId === product.id ? (
+                      <>
+                        <div className="animate-spin rounded-full h-3 w-3 mr-1 border border-red-600 border-t-transparent"></div>
+                        Удаление...
+                      </>
+                    ) : (
+                      <>
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                        Удалить
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -239,7 +299,7 @@ const ProductsList = () => {
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        {product.is_active ? 'В наличии' : 'Нет в наличии'}
+                        {product.is_active ? 'Активно' : 'Неактивно'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-poppins">
@@ -267,21 +327,26 @@ const ProductsList = () => {
                         </Link>
                         <button
                           onClick={() => handleDelete(product.id)}
-                          className="text-red-600 hover:text-red-900 transition-colors duration-200"
+                          disabled={deletingId === product.id}
+                          className="text-red-600 hover:text-red-900 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
+                          {deletingId === product.id ? (
+                            <div className="animate-spin rounded-full h-4 w-4 border border-red-600 border-t-transparent"></div>
+                          ) : (
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                              />
+                            </svg>
+                          )}
                         </button>
                       </div>
                     </td>

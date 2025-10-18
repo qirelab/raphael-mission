@@ -38,7 +38,7 @@ export const neonTestimoniesService = {
     }
   },
 
-  // Get active testimonies (using is_approved instead of is_active)
+  // Get active testimonies (approved testimonies)
   async getActive() {
     checkNeonClient();
 

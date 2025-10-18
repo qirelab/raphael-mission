@@ -81,7 +81,7 @@ const ProjectDetail = () => {
           '/images/img_frame_blue_gray_100.svg',
           '/images/img_frame_blue_gray_100_16x14.svg',
           '/images/youtube.svg',
-          '/images/public/images/service.png',
+          '/images/service.png',
         ];
 
   return (
