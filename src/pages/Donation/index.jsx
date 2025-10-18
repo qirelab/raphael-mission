@@ -2,15 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
+import Footer from '../../components/common/Footer';
+import { DonationSkeleton } from '../../components/skeletons';
 
 const DonationPage = () => {
   const { t } = useLanguage();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
 
   const FIXED_AMOUNT = 25;
   const [showPayment, setShowPayment] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(null); // 'success' | 'error' | null
   const [paymentMethod, setPaymentMethod] = useState('stripe'); // какой провайдер открыть
+
+  // Simulate loading for better UX
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Чтение query-параметра method при загрузке
   useEffect(() => {
@@ -31,6 +42,15 @@ const DonationPage = () => {
     console.error('Payment error:', error);
     setPaymentStatus('error');
   };
+
+  if (isLoading) {
+    return (
+      <div className="w-full bg-white">
+        <DonationSkeleton />
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-global-4">
@@ -174,122 +194,7 @@ const DonationPage = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                {t('footerDesc')}
-              </p>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame_blue_gray_100.svg"
-                  alt="Facebook"
-                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/img_frame_blue_gray_100_16x14.svg"
-                  alt="Twitter"
-                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/youtube.svg"
-                  alt="Youtube"
-                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation (с hover-эффектом) */}
-              <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('navigation')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/about-mission', label: t('about') },
-                    { href: '/projects', label: t('projects') },
-                    { href: '/testimonies', label: t('testimonies') },
-                    { href: '/training', label: t('training') },
-                    { href: '/story', label: t('story') },
-                    { href: '/shop', label: t('shop') },
-                    { href: '/questions-contact', label: t('contact') },
-                    { href: '/donation', label: t('donate') },
-                  ].map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('contact')}
-                </h4>
-                <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('phoneNumber')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('emailAddress')}
-                  </p>
-                  <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('addressLine')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Legal */}
-              <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('legal')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/privacy-policy', label: t('privacyPolicy') },
-                    { href: '/terms-of-service', label: t('termsOfService') },
-                    { href: '/cookie-policy', label: t('cookiePolicy') },
-                  ].map((l) => (
-                    <Link
-                      key={l.label}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

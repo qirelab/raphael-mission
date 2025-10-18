@@ -1,40 +1,19 @@
-import { supabase } from './supabase';
+import { neonContactService } from './neonContactService';
 
+// Simple, reliable contact service with immediate updates
 export const contactService = {
-  // Get contact info
+  // Get contact info - simple and direct
   async get() {
-    const { data, error } = await supabase.from('contact_info').select('*').limit(1).single();
-
-    if (error) throw error;
-    return data;
+    return await neonContactService.get();
   },
 
-  // Update contact info
+  // Update contact info - target the single existing record
   async update(contactData) {
-    // First, get the existing record
-    const { data: existing } = await supabase.from('contact_info').select('id').limit(1).single();
+    return await neonContactService.update(contactData);
+  },
 
-    if (existing) {
-      // Update existing record
-      const { data, error } = await supabase
-        .from('contact_info')
-        .update(contactData)
-        .eq('id', existing.id)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
-    } else {
-      // Create new record if none exists
-      const { data, error } = await supabase
-        .from('contact_info')
-        .insert([contactData])
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
-    }
+  // Delete all contact info (for admin use)
+  async clear() {
+    return await neonContactService.clear();
   },
 };

@@ -12,14 +12,15 @@ const AdminLayout = () => {
     // Check auth on mount
     const checkAuth = async () => {
       try {
-        const session = await authService.getSession();
-        if (!session) {
+        const sessionResult = await authService.getSession();
+        if (!sessionResult.data.session) {
           navigate('/admin/login');
           return;
         }
-        const userData = await authService.getUser();
-        setUser(userData);
+        const userResult = await authService.getUser();
+        setUser(userResult.data.user);
       } catch (error) {
+        console.error('Auth check error:', error);
         navigate('/admin/login');
       }
     };
@@ -43,10 +44,15 @@ const AdminLayout = () => {
 
   const handleLogout = async () => {
     try {
-      await authService.signOut();
+      const sessionToken = localStorage.getItem('session_token');
+      await authService.signOut(sessionToken);
+      localStorage.removeItem('session_token');
       navigate('/admin/login');
     } catch (error) {
       console.error('Logout error:', error);
+      // Clear session even if logout fails
+      localStorage.removeItem('session_token');
+      navigate('/admin/login');
     }
   };
 

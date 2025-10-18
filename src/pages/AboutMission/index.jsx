@@ -1,19 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import Footer from '../../components/common/Footer';
+import { AboutSkeleton } from '../../components/skeletons';
 
-// HERO фото (лежит: src/pages/AboutMission/public/images/about.png)
-import aboutHero from './public/images/about.png';
-
-// Иконки для блоков Core Values
-// faith:  src/pages/AboutMission/public/images/fait.png
-// compassion: src/pages/AboutMission/compassion.png  (именно тут!)
-import faithIcon from './public/images/fait.png';
-import compassionIcon from './compassion.png';
-import serviceIcon from './public/images/service.png';
+const aboutHero = '/images/aboutus.jpeg';
 
 const AboutMission = () => {
   const { t } = useLanguage();
+  const [imagesLoaded, setImagesLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const imageUrls = [aboutHero];
+    let loadedCount = 0;
+
+    imageUrls.forEach((url) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === imageUrls.length) {
+          setImagesLoaded(true);
+        }
+      };
+      img.src = url;
+    });
+  }, []);
+
+  if (!imagesLoaded) {
+    return (
+      <div className="w-full bg-[#F6F7F9]">
+        <AboutSkeleton />
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full bg-[#F6F7F9]">
       {/* HERO */}
@@ -21,13 +41,13 @@ const AboutMission = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20 grid lg:grid-cols-2 gap-10 items-start">
           {/* Левая колонка */}
           <div>
-            <h1 className="font-[Poppins] font-normal leading-[1.05] text-[28px] sm:text-[40px] lg:text-[56px] text-left">
+            <h1 className="font-[Poppins] font-normal leading-[1.05] text-[28px] sm:text-[40px] lg:text-[56px] text-left text-[#1f2937]">
               {t('aboutHeroTitle')}
-              <span className="text-[#1F475B] font-medium"> {t('aboutFaith')}</span>
-              <span className="text-[#1F475B] font-medium"> , </span>
-              <span className="text-[#1F7A5B] font-medium">{t('aboutCompassion')}</span>
-              <span className="text-[#1F475B] font-medium"> , {t('aboutAnd')} </span>
-              <span className="text-[#1F7A5B] font-medium">{t('aboutService')}</span>
+              <span className="text-[#3c8a7a] font-medium"> {t('aboutFaith')}</span>
+              <span className="text-[#1f2937] font-medium"> , </span>
+              <span className="text-[#3c8a7a] font-medium">{t('aboutCompassion')}</span>
+              <span className="text-[#1f2937] font-medium"> , {t('aboutAnd')} </span>
+              <span className="text-[#3c8a7a] font-medium">{t('aboutService')}</span>
             </h1>
 
             <p className="mt-6 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins] max-w-[680px]">
@@ -67,43 +87,45 @@ const AboutMission = () => {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Faith */}
-            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+            <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#1F7A5B] rounded-md flex items-center justify-center">
-                  <img src={faithIcon} alt="Faith icon" className="w-8 h-8 object-contain" />
+                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
+              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
                 {t('aboutFaith')}
               </h3>
               <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutFaithDesc')}</p>
             </div>
 
             {/* Compassion */}
-            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+            <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#1F7A5B] rounded-md flex items-center justify-center">
-                  <img
-                    src={compassionIcon}
-                    alt="Compassion icon"
-                    className="w-8 h-8 object-contain"
-                  />
+                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
+              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
                 {t('aboutCompassion')}
               </h3>
               <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutCompassionDesc')}</p>
             </div>
 
             {/* Service */}
-            <div className="bg-white rounded-xl shadow-md p-6 text-center">
+            <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#1F7A5B] rounded-md flex items-center justify-center">
-                  <img src={serviceIcon} alt="Service icon" className="w-8 h-8 object-contain" />
+                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                  </svg>
                 </div>
               </div>
-              <h3 className="text-[18px] font-semibold text-[#0f172a] capitalize">
+              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
                 {t('aboutService')}
               </h3>
               <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutServiceDesc')}</p>
@@ -112,122 +134,7 @@ const AboutMission = () => {
         </div>
       </section>
 
-      {/* Footer (с лёгкими hover для ссылок/иконок) */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                {t('footerDesc')}
-              </p>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame_blue_gray_100.svg"
-                  alt="Facebook"
-                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/img_frame_blue_gray_100_16x14.svg"
-                  alt="Twitter"
-                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/youtube.svg"
-                  alt="Youtube"
-                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
-              <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('navigation')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/about-mission', label: t('about') },
-                    { href: '/projects', label: t('projects') },
-                    { href: '/testimonies', label: t('testimonies') },
-                    { href: '/training', label: t('training') },
-                    { href: '/story', label: t('story') },
-                    { href: '/shop', label: t('shop') },
-                    { href: '/questions-contact', label: t('contact') },
-                    { href: '/donation', label: t('donate') },
-                  ].map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('contact')}
-                </h4>
-                <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('phoneNumber')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('emailAddress')}
-                  </p>
-                  <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('addressLine')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Legal */}
-              <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('legal')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/privacy-policy', label: t('privacyPolicy') },
-                    { href: '/terms-of-service', label: t('termsOfService') },
-                    { href: '/cookie-policy', label: t('cookiePolicy') },
-                  ].map((l) => (
-                    <Link
-                      key={l.label}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

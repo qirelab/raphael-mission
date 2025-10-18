@@ -1,82 +1,49 @@
-import { supabase } from './supabase';
+import { neonTestimoniesService } from './neonTestimoniesService';
 
 export const testimoniesService = {
   // Get all testimonies
   async getAll() {
-    const { data, error } = await supabase
-      .from('testimonies')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data;
+    return await neonTestimoniesService.getAll();
   },
 
-  // Get active testimonies only
-  async getActive() {
-    const { data, error } = await supabase
-      .from('testimonies')
-      .select('*')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false });
+  // Get approved testimonies only
+  async getApproved() {
+    return await neonTestimoniesService.getApproved();
+  },
 
-    if (error) throw error;
-    return data;
+  // Get active testimonies (alias for getApproved)
+  async getActive() {
+    return await neonTestimoniesService.getApproved();
   },
 
   // Get testimony by ID
   async getById(id) {
-    const { data, error } = await supabase.from('testimonies').select('*').eq('id', id).single();
-
-    if (error) throw error;
-    return data;
+    return await neonTestimoniesService.getById(id);
   },
 
   // Create testimony
   async create(testimonyData) {
-    const { data, error } = await supabase
-      .from('testimonies')
-      .insert([testimonyData])
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+    return await neonTestimoniesService.create(testimonyData);
   },
 
   // Update testimony
   async update(id, testimonyData) {
-    const { data, error } = await supabase
-      .from('testimonies')
-      .update(testimonyData)
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+    return await neonTestimoniesService.update(id, testimonyData);
   },
 
   // Delete testimony
   async delete(id) {
-    const { error } = await supabase.from('testimonies').delete().eq('id', id);
-
-    if (error) throw error;
+    await neonTestimoniesService.delete(id);
     return { message: 'Testimony deleted successfully' };
   },
 
-  // Get random testimonies (for homepage)
-  async getRandom(limit = 3) {
-    const { data, error } = await supabase
-      .from('testimonies')
-      .select('*')
-      .eq('is_active', true)
-      .limit(limit * 3); // Get more to randomize
+  // Approve testimony
+  async approve(id) {
+    return await neonTestimoniesService.approve(id);
+  },
 
-    if (error) throw error;
-
-    // Shuffle and return limited results
-    const shuffled = data.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, limit);
+  // Reject testimony
+  async reject(id) {
+    return await neonTestimoniesService.reject(id);
   },
 };

@@ -54,13 +54,13 @@ export const useTestimonies = () => {
         setLoading(true);
         const testimonies = await testimoniesService.getActive();
         const mapped = testimonies
-          .filter((t) => t.is_active)
+          .filter((t) => t.is_approved)
           .map((t) => ({
             id: t.id,
-            name: t[`name_${language}`] || t.name_en,
+            name: t[`name_${language}`] || t.name_en || t.name,
             location: t[`title_${language}`] || t.title_en || '',
-            testimony: t[`testimony_${language}`] || t.testimony_en,
-            image_url: t.image_url,
+            testimony: t[`content_${language}`] || t.content_en,
+            image: t.image_url,
           }));
         setData(mapped);
       } catch (err) {
@@ -95,7 +95,7 @@ export const useTrainingPrograms = () => {
             title: p[`title_${language}`] || p.title_en,
             description: p[`description_${language}`] || p.description_en,
             duration: p[`duration_${language}`] || p.duration_en || '',
-            image_url: p.image_url,
+            image: p.image_url,
           }));
         setData(mapped);
       } catch (err) {
@@ -155,22 +155,22 @@ export const useContactInfo = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const contact = await contactService.get();
-        setData(contact);
-      } catch (err) {
-        setError(err);
-        console.error('Error fetching contact info:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const contact = await contactService.get();
+      setData(contact);
+    } catch (err) {
+      setError(err);
+      console.error('Error fetching contact info:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
-  return { data, loading, error };
+  return { data, loading, error, refetch: fetchData };
 };

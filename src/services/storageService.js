@@ -1,53 +1,34 @@
-import { supabase } from './supabase';
-
-const BUCKET_NAME = 'raphael-mission-images';
+// Simple storage service stub for Neon-only setup
+// Note: File uploads require Supabase Storage or custom implementation
 
 export const storageService = {
-  // Upload image to Supabase Storage
   async uploadImage(file, folder = 'general') {
-    try {
-      // Generate unique filename
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    // Simple stub - returns a placeholder URL
+    // In production, implement proper file upload
+    console.warn('⚠️ File upload is disabled - using stub service');
 
-      // Upload file
-      const { data, error } = await supabase.storage.from(BUCKET_NAME).upload(fileName, file, {
-        cacheControl: '3600',
-        upsert: false,
-      });
-
-      if (error) throw error;
-
-      // Get public URL
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from(BUCKET_NAME).getPublicUrl(fileName);
-
-      return { url: publicUrl, path: fileName };
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      throw error;
-    }
+    // Create a data URL for preview
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve({
+          url: reader.result,
+          path: `${folder}/stub-${Date.now()}-${file.name}`,
+        });
+      };
+      reader.readAsDataURL(file);
+    });
   },
 
-  // Delete image from Supabase Storage
   async deleteImage(path) {
-    try {
-      const { error } = await supabase.storage.from(BUCKET_NAME).remove([path]);
-
-      if (error) throw error;
-      return { success: true };
-    } catch (error) {
-      console.error('Error deleting image:', error);
-      throw error;
-    }
+    console.warn('⚠️ File deletion is disabled - using stub service');
+    return { success: true };
   },
 
-  // Get public URL for existing image
   getPublicUrl(path) {
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from(BUCKET_NAME).getPublicUrl(path);
-    return publicUrl;
+    // Return the path as-is for stub
+    return { data: { publicUrl: path } };
   },
 };
+
+

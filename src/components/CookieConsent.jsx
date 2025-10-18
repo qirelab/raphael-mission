@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useAlert } from '../hooks/useAlert';
 
 const CookieConsent = () => {
   const { t } = useLanguage();
+  const { success, info } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -21,12 +23,14 @@ const CookieConsent = () => {
 
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');
+    success(t('alertCookiesAccepted'), t('alertCookiesAcceptedTitle'));
     setIsAnimating(false);
     setTimeout(() => setIsVisible(false), 300);
   };
 
   const handleReject = () => {
     localStorage.setItem('cookieConsent', 'rejected');
+    info(t('alertCookiesRejected'), t('alertCookiesRejectedTitle'));
     setIsAnimating(false);
     setTimeout(() => setIsVisible(false), 300);
   };

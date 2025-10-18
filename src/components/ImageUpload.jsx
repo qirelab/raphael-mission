@@ -1,11 +1,24 @@
 import React, { useState, useRef } from 'react';
 import { storageService } from '../services/storageService';
+import { useLanguage } from '../context/LanguageContext';
 
 const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 'Image' }) => {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(currentImage || '');
   const [error, setError] = useState('');
   const fileInputRef = useRef(null);
+  const { language } = useLanguage();
+
+  const getPlaceholderText = () => {
+    switch (language) {
+      case 'ru':
+        return 'Фото отсутствует';
+      case 'pl':
+        return 'Brak zdjęcia';
+      default:
+        return 'No photo';
+    }
+  };
 
   const handleFileSelect = async (e) => {
     const file = e.target.files?.[0];
@@ -66,6 +79,21 @@ const ImageUpload = ({ currentImage, onImageUpload, folder = 'general', label = 
             alt="Preview"
             className="w-48 h-48 object-cover rounded-lg border-2 border-gray-200"
           />
+          <button
+            type="button"
+            onClick={handleRemove}
+            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition-colors"
+          >
+            ×
+          </button>
+        </div>
+      ) : currentImage ? (
+        <div className="relative inline-block">
+          <div className="w-48 h-48 bg-gray-200 rounded-lg border-2 border-gray-200 flex items-center justify-center">
+            <span className="text-sm font-medium text-gray-600 text-center px-4">
+              {getPlaceholderText()}
+            </span>
+          </div>
           <button
             type="button"
             onClick={handleRemove}

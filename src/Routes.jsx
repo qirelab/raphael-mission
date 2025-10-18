@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import LanguageRedirect from './components/LanguageRedirect';
+import NotFound from './components/NotFound';
 
 // Import page components
 import HomePage from './pages/Home';
@@ -38,28 +40,31 @@ import ProductForm from './pages/Admin/Shop/ProductForm';
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/projects" element={<ProjectsPage />} />
-      <Route path="/donation" element={<DonationPage />} />
-      <Route path="/donate" element={<DonationPage />} />
-      <Route path="/testimonies" element={<TestimoniesPage />} />
-      <Route path="/shop" element={<ShopPage />} />
-      <Route path="/training" element={<TrainingPrograms />} />
-      <Route path="/about" element={<AboutMission />} />
-      <Route path="/contact" element={<QuestionsContact />} />
-      <Route path="/about-mission" element={<AboutMission />} />
-      <Route path="/questions-contact" element={<QuestionsContact />} />
-      <Route path="/story" element={<Story />} />
+      {/* Root route - redirect to default language */}
+      <Route path="/" element={<LanguageRedirect />} />
+
+      {/* Language-specific routes */}
+      <Route path="/:lang" element={<HomePage />} />
+      <Route path="/:lang/projects" element={<ProjectsPage />} />
+      <Route path="/:lang/donation" element={<DonationPage />} />
+      <Route path="/:lang/donate" element={<DonationPage />} />
+      <Route path="/:lang/testimonies" element={<TestimoniesPage />} />
+      <Route path="/:lang/shop" element={<ShopPage />} />
+      <Route path="/:lang/training" element={<TrainingPrograms />} />
+      <Route path="/:lang/about" element={<AboutMission />} />
+      <Route path="/:lang/contact" element={<QuestionsContact />} />
+      <Route path="/:lang/about-mission" element={<AboutMission />} />
+      <Route path="/:lang/story" element={<Story />} />
 
       {/* Dynamic Project Detail Route */}
-      <Route path="/projects/:slug" element={<ProjectDetail />} />
+      <Route path="/:lang/projects/:slug" element={<ProjectDetail />} />
 
       {/* Legal Routes */}
-      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="/terms-of-service" element={<TermsOfService />} />
-      <Route path="/cookie-policy" element={<CookiePolicy />} />
+      <Route path="/:lang/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/:lang/terms-of-service" element={<TermsOfService />} />
+      <Route path="/:lang/cookie-policy" element={<CookiePolicy />} />
 
-      {/* Admin Routes */}
+      {/* Admin Routes (no language prefix) */}
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
@@ -78,6 +83,9 @@ const AppRoutes = () => {
         <Route path="contact" element={<ContactInfo />} />
         <Route path="settings" element={<Settings />} />
       </Route>
+
+      {/* 404 Route */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

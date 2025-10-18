@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import Footer from '../../components/common/Footer';
 import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
@@ -118,15 +119,7 @@ const PrivacyPolicy = () => {
       </section>
 
       {/* Footer */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-[14px] lg:text-[16px] text-[#d1d5db] font-poppins">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

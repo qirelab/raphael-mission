@@ -4,9 +4,13 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
 import TextArea from '../../components/ui/TextArea';
+import ButtonSkeleton from '../../components/ui/ButtonSkeleton';
 import { useLanguage } from '../../context/LanguageContext';
 import { projectsService } from '../../services/projectsService';
-import { testimoniesService } from '../../services/testimoniesService';
+import { useTestimonies, useContactInfo } from '../../hooks/useApiData';
+import { useAlert } from '../../hooks/useAlert';
+import Footer from '../../components/common/Footer';
+import { CardsGridSkeleton, TestimonialsGridSkeleton } from '../../components/skeletons';
 
 // --- EmailJS ---
 import emailjs from '@emailjs/browser';
@@ -23,36 +27,28 @@ const Home = () => {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const [randomProjects, setRandomProjects] = useState([]);
-  const [randomTestimonies, setRandomTestimonies] = useState([]);
+  const [firstProjects, setFirstProjects] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
-  const [loadingTestimonies, setLoadingTestimonies] = useState(true);
+
+  const { data: testimonies, loading: loadingTestimonies } = useTestimonies();
+  const { data: contactData } = useContactInfo();
 
   const { t, language } = useLanguage();
+  const { success, error, warning } = useAlert();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Load random projects and testimonies
+  // Load first projects and testimonies
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoadingProjects(true);
-        const projects = await projectsService.getRandom(3);
-        setRandomProjects(projects);
+        const projects = await projectsService.getFirst(3);
+        setFirstProjects(projects);
       } catch (error) {
         console.error('Error loading projects:', error);
       } finally {
         setLoadingProjects(false);
-      }
-
-      try {
-        setLoadingTestimonies(true);
-        const testimonies = await testimoniesService.getRandom(3);
-        setRandomTestimonies(testimonies);
-      } catch (error) {
-        console.error('Error loading testimonies:', error);
-      } finally {
-        setLoadingTestimonies(false);
       }
     };
 
@@ -81,14 +77,18 @@ const Home = () => {
     e?.preventDefault();
 
     // Валидация полей (минимальная, без изменения UI)
-    if (!firstName.trim()) return alert('Введите имя');
-    if (!lastName.trim()) return alert('Введите фамилию');
-    if (!email.trim() || !validateEmail(email)) return alert('Введите корректный email');
-    if (!subject.trim()) return alert('Укажите тему сообщения');
-    if (!message.trim()) return alert('Напишите сообщение');
+    if (!firstName.trim()) return warning('Введите имя', 'Поле обязательно');
+    if (!lastName.trim()) return warning('Введите фамилию', 'Поле обязательно');
+    if (!email.trim() || !validateEmail(email))
+      return warning('Введите корректный email', 'Неверный формат');
+    if (!subject.trim()) return warning('Укажите тему сообщения', 'Поле обязательно');
+    if (!message.trim()) return warning('Напишите сообщение', 'Поле обязательно');
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      return alert('EmailJS не настроен: проверьте переменные окружения VITE_EMAILJS_*');
+      return error(
+        'EmailJS не настроен: проверьте переменные окружения VITE_EMAILJS_*',
+        'Ошибка конфигурации'
+      );
     }
 
     setIsSending(true);
@@ -107,7 +107,7 @@ const Home = () => {
         { publicKey: PUBLIC_KEY }
       );
 
-      alert('Спасибо! Ваше сообщение отправлено.');
+      success('Спасибо! Ваше сообщение отправлено.', 'Сообщение отправлено');
       // очистить форму
       setFirstName('');
       setLastName('');
@@ -116,7 +116,7 @@ const Home = () => {
       setMessage('');
     } catch (err) {
       console.error('EmailJS error:', err);
-      alert('Не удалось отправить сообщение. Попробуйте еще раз позже.');
+      error('Не удалось отправить сообщение. Попробуйте еще раз позже.', 'Ошибка отправки');
     } finally {
       setIsSending(false);
     }
@@ -163,7 +163,7 @@ const Home = () => {
                 <Button
                   variant="primary"
                   className="pt-[18px] pr-[28px] pb-[18px] pl-[28px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] w-full sm:w-auto"
-                  onClick={() => navigate('/donate')}
+                  onClick={() => navigate(`/${language}/donate`)}
                 >
                   {t('supportMission')}
                 </Button>
@@ -171,7 +171,7 @@ const Home = () => {
                 <Button
                   variant="outline"
                   className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto hover:bg-white/90 hover:text-gray-900 hover:shadow-lg transition-colors"
-                  onClick={() => navigate('/about-mission')}
+                  onClick={() => navigate(`/${language}/about-mission`)}
                 >
                   {t('learnMore')}
                 </Button>
@@ -247,18 +247,14 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
             {loadingProjects ? (
-              // Loading skeleton
-              [1, 2, 3].map((i) => (
-                <div key={i} className="bg-[#f9fafb] rounded-[12px] shadow-sm animate-pulse">
-                  <div className="w-full h-[192px] bg-gray-300"></div>
-                  <div className="p-6 space-y-3">
-                    <div className="h-6 bg-gray-300 rounded w-3/4"></div>
-                    <div className="h-4 bg-gray-300 rounded"></div>
-                  </div>
-                </div>
-              ))
-            ) : randomProjects.length > 0 ? (
-              randomProjects.map((project) => (
+              <CardsGridSkeleton
+                count={3}
+                showImages={true}
+                showButtons={false}
+                className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]"
+              />
+            ) : firstProjects.length > 0 ? (
+              firstProjects.map((project) => (
                 <div
                   key={project.id}
                   className="group bg-[#f9fafb] rounded-[12px] shadow-[0px_10px_15px_#00000019] overflow-hidden h-full flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -271,7 +267,7 @@ const Home = () => {
                     />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/25 flex items-center justify-center">
                       <Link
-                        to={`/projects/${project.slug}`}
+                        to={`/${language}/projects/${project.slug}`}
                         className="text-white text-[14px] sm:text-[16px] font-semibold underline"
                       >
                         {t('learnMore')}
@@ -327,21 +323,21 @@ const Home = () => {
             <div className="w-full flex flex-wrap gap-6 justify-center">
               <button
                 className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
-                onClick={() => navigate('/donation?method=paypal')}
+                onClick={() => navigate(`/${language}/donation?method=paypal`)}
               >
                 <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
               </button>
               <button
                 className="bg-white text-[#8454ec] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
-                onClick={() => navigate('/donation?method=stripe')}
+                onClick={() => navigate(`/${language}/donation?method=stripe`)}
               >
                 <img src="/images/stripe1.svg" alt="Stripe" className="w-[24px] h-[24px]" />
                 Stripe
               </button>
               <button
                 className="bg-white text-[#EB5B0E] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
-                onClick={() => navigate('/donation?method=fondy')}
+                onClick={() => navigate(`/${language}/donation?method=fondy`)}
               >
                 <img src="/images/fondy.svg" alt="Fondy" className="w-[22px] h-[24px]" />
                 Fondy
@@ -363,61 +359,42 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[42px]">
-            {loadingTestimonies ? (
-              // Loading skeleton
-              [1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-[16px] p-6 lg:p-7 shadow-sm animate-pulse">
-                  <div className="h-20 bg-gray-300 rounded mb-16"></div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-[52px] h-[52px] rounded-full bg-gray-300"></div>
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-                      <div className="h-3 bg-gray-300 rounded w-1/3"></div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : randomTestimonies.length > 0 ? (
-              randomTestimonies.map((testimony) => (
+          {loadingTestimonies ? (
+            <TestimonialsGridSkeleton count={3} />
+          ) : testimonies && testimonies.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px]">
+              {testimonies.slice(0, 3).map((testimonial) => (
                 <div
-                  key={testimony.id}
-                  className="group bg-white rounded-[16px] p-6 lg:p-7 shadow-[0px_10px_15px_#00000019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  key={testimonial.id}
+                  className="bg-global-7 rounded-[12px] p-[24px] sm:p-[28px] md:p-[32px] shadow-[0px_10px_15px_rgba(0,0,0,0.1)] hover:shadow-[0px_15px_25px_rgba(0,0,0,0.15)] transition-shadow duration-300"
                 >
-                  <p className="text-[14px] lg:text-[16px] font-normal leading-[22px] lg:leading-[26px] text-[#374151] font-['Poppins'] mb-16 lg:mb-[74px] line-clamp-4">
-                    {testimony[`testimony_${language}`] || testimony.testimony_en}
-                  </p>
-
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center mb-[20px] sm:mb-[24px]">
                     <img
-                      src={testimony.image_url || '/images/img_ellipse_1.png'}
-                      alt={testimony[`name_${language}`] || testimony.name_en}
-                      className="w-[52px] h-[52px] rounded-[26px] object-cover transition-transform duration-300 group-hover:scale-110"
+                      src={testimonial.image || '/images/img_ellipse_1.png'}
+                      alt={testimonial.name}
+                      className="w-[64px] h-[64px] rounded-[32px] object-cover"
                     />
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="text-[16px] lg:text-[18px] font-semibold leading-[24px] lg:leading-[27px] text-[#111827] font-['Poppins']">
-                          {testimony[`name_${language}`] || testimony.name_en}
-                        </h4>
-                        <img
-                          src="/images/img_vector.svg"
-                          alt="quote"
-                          className="w-[12px] h-[18px]"
-                        />
-                      </div>
-                      <p className="text-[12px] lg:text-[14px] font-normal leading-[18px] lg:leading-[21px] text-[#6b7280] font-['Poppins']">
-                        {testimony[`title_${language}`] || testimony.title_en || ''}
+                    <div className="ml-[16px]">
+                      <h3 className="text-[16px] font-semibold leading-[24px] text-global-2 mb-[2px] font-['Poppins']">
+                        {testimonial.name}
+                      </h3>
+                      <p className="text-[14px] font-normal leading-[21px] text-global-5 font-['Poppins']">
+                        {testimonial.location}
                       </p>
                     </div>
                   </div>
+
+                  <blockquote className="text-[16px] font-normal leading-[24px] text-global-4 font-['Poppins']">
+                    "{testimonial.testimony}"
+                  </blockquote>
                 </div>
-              ))
-            ) : (
-              <div className="col-span-3 text-center py-12 text-gray-500 font-poppins">
-                {t('noTestimoniesYet') || 'No testimonies yet. Add some in the admin panel!'}
-              </div>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-gray-500 font-poppins">
+              {t('noTestimoniesYet') || 'No testimonies yet. Add some in the admin panel!'}
+            </div>
+          )}
         </div>
       </section>
 
@@ -449,7 +426,24 @@ const Home = () => {
                       {t('addressLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('addressLine')}
+                      {contactData?.[`address_line1_${language}`] ||
+                        contactData?.address_line1_en ||
+                        contactData?.address_line1 ||
+                        t('addressLine')}
+                      {(contactData?.[`address_line2_${language}`] ||
+                        contactData?.address_line2_en ||
+                        contactData?.address_line2) && (
+                        <>
+                          <br />
+                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line2_en ||
+                            contactData?.address_line2}
+                        </>
+                      )}
+                      <br />
+                      {contactData?.city && contactData?.country
+                        ? `${contactData.city}, ${contactData.country}`
+                        : contactData?.city || contactData?.country || 'Faith City, FC 12345'}
                     </p>
                   </div>
                 </div>
@@ -468,7 +462,7 @@ const Home = () => {
                       {t('phoneLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('phoneNumber')}
+                      {contactData?.phone_number || t('phoneNumber')}
                     </p>
                   </div>
                 </div>
@@ -487,7 +481,7 @@ const Home = () => {
                       {t('emailLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {t('emailAddress')}
+                      {contactData?.email || t('emailAddress')}
                     </p>
                   </div>
                 </div>
@@ -539,15 +533,27 @@ const Home = () => {
                 />
 
                 <div className="flex justify-center">
-                  <button
-                    type="submit"
-                    disabled={isSending}
-                    className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    <span className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-center text-white font-['Poppins'] py-1.5">
-                      {isSending ? 'Отправка…' : t('sendMessage')}
-                    </span>
-                  </button>
+                  {isSending ? (
+                    <div className="w-full bg-[#3c8a7a] rounded-[8px] px-4 py-2 flex justify-center items-center min-h-[48px]">
+                      <span className="flex items-center space-x-3">
+                        <div className="relative">
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        </div>
+                        <span className="text-white font-medium text-[14px] lg:text-[16px] font-['Poppins']">
+                          Отправка...
+                        </span>
+                      </span>
+                    </div>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center hover:bg-[#2f7d6d] transition-colors duration-200 min-h-[48px]"
+                    >
+                      <span className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-center text-white font-['Poppins'] py-1.5">
+                        {t('sendMessage')}
+                      </span>
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
@@ -555,121 +561,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer (с лёгкими hover для ссылок/иконок) */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                {t('footerDesc')}
-              </p>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame_blue_gray_100.svg"
-                  alt="Facebook"
-                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/img_frame_blue_gray_100_16x14.svg"
-                  alt="Twitter"
-                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/youtube.svg"
-                  alt="Youtube"
-                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
-              <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('navigation')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: 'http://localhost:4028/about-mission', label: t('about') },
-                    { href: 'http://localhost:4028/projects', label: t('projects') },
-                    { href: 'http://localhost:4028/testimonies', label: t('testimonies') },
-                    { href: 'http://localhost:4028/training', label: t('training') },
-                    { href: 'http://localhost:4028/story', label: t('story') },
-                    { href: 'http://localhost:4028/shop', label: t('shop') },
-                    { href: 'http://localhost:4028/questions-contact', label: t('contact') },
-                    { href: 'http://localhost:4028/donation', label: t('donate') },
-                  ].map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('contact')}
-                </h4>
-                <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('phoneNumber')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('emailAddress')}
-                  </p>
-                  <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('addressLine')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-              {/* Legal */}
-              <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('legal')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/privacy-policy', label: t('privacyPolicy') },
-                    { href: '/terms-of-service', label: t('termsOfService') },
-                    { href: '/cookie-policy', label: t('cookiePolicy') },
-                  ].map((l) => (
-                    <Link
-                      key={l.label}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

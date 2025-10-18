@@ -12,7 +12,7 @@ const Button = ({
   className = '',
   ...props 
 }) => {
-  const baseClasses = 'font-medium rounded-[8px] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
+  const baseClasses = 'font-medium rounded-[8px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg';
   
   const variants = {
     primary: 'bg-[#3c8a7a] text-[#ffffff] hover:bg-[#2d6b5e] disabled:bg-gray-400',

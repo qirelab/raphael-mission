@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { projectsService } from '../../services/projectsService';
+import Footer from '../../components/common/Footer';
+import { CardsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Projects = () => {
   const { t, language } = useLanguage();
@@ -92,6 +94,56 @@ const Projects = () => {
     { number: '7', labelKey: 'activeProjects' },
   ];
 
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col justify-start items-start w-full">
+          <div className="flex flex-col justify-start items-center w-full">
+            {/* Hero Section Skeleton */}
+            <section className="relative w-full min-h-[400px]">
+              <div className="absolute inset-0 bg-gray-200 z-0" />
+              <div className="relative z-20 w-full">
+                <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="flex justify-center items-center w-full py-[80px] sm:py-[96px] md:py-[112px] lg:py-[128px]">
+                    <div className="flex flex-col justify-center items-center w-full max-w-[900px] px-[22px] sm:px-[32px] md:px-[44px]">
+                      <HeroSkeleton />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Stats Section Skeleton */}
+            <section className="w-full bg-white py-12 lg:py-16">
+              <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                  {Array.from({ length: 3 }, (_, i) => (
+                    <div key={i} className="text-center">
+                      <div className="animate-pulse bg-gray-200 rounded h-12 w-24 mx-auto mb-2"></div>
+                      <div className="animate-pulse bg-gray-200 rounded h-6 w-32 mx-auto"></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Projects Section Skeleton */}
+            <section className="w-full bg-gray-50 py-12 lg:py-16">
+              <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <div className="animate-pulse bg-gray-200 rounded h-10 w-64 mx-auto mb-4"></div>
+                  <div className="animate-pulse bg-gray-200 rounded h-6 w-96 mx-auto"></div>
+                </div>
+                <CardsGridSkeleton count={6} />
+              </div>
+            </section>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <div className="flex flex-col justify-start items-start w-full">
@@ -122,39 +174,48 @@ const Projects = () => {
               <div className="flex justify-center items-center w-full">
                 <div className="w-full px-[16px] sm:px-[24px] md:px-[32px]">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px] w-full">
-                    {projectsData.map((project, index) => (
-                      <a
-                        key={project.id}
-                        href={project.link}
-                        className={`group flex flex-col justify-start items-center w-full bg-global-6 rounded-[12px] shadow-[0px_10px_15px_#00000019] h-full overflow-hidden transform transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/15 focus-within:-translate-y-1 ${
-                          index === 6 ? 'sm:col-span-2 lg:col-span-1' : ''
-                        }`}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        <img
-                          src={project.image}
-                          alt={project.title || t(project.titleKey)}
-                          className="w-full h-[120px] sm:h-[150px] md:h-[180px] lg:h-[192px] object-cover rounded-t-[12px] transition-transform duration-300 ease-out group-hover:scale-105 cursor-pointer"
-                        />
-                        <div className="flex flex-col justify-between items-start w-full flex-1 pt-[16px] sm:pt-[18px] md:pt-[20px] lg:pt-[22px] pr-[18px] sm:pr-[20px] md:pr-[22px] lg:pr-[24px] pb-[16px] sm:pb-[18px] md:pb-[20px] lg:pb-[22px] pl-[18px] sm:pl-[20px] md:pl-[22px] lg:pl-[24px]">
-                          <div className="flex flex-col w-full">
-                            <h3 className="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-poppins font-bold leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] text-left text-global-1 mb-[6px]">
-                              {project.title || t(project.titleKey)}
-                            </h3>
-                            <p className="text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] md:leading-[23px] lg:leading-[24px] text-left text-global-3 w-full mb-[12px] sm:mb-[14px] md:mb-[15px] lg:mb-[16px]">
-                              {project.description || t(project.descriptionKey)}
-                            </p>
+                    {loading ? (
+                      <CardsGridSkeleton
+                        count={6}
+                        showImages={true}
+                        showButtons={false}
+                        className="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px]"
+                      />
+                    ) : (
+                      projectsData.map((project, index) => (
+                        <a
+                          key={project.id}
+                          href={project.link}
+                          className={`group flex flex-col justify-start items-center w-full bg-global-6 rounded-[12px] shadow-[0px_10px_15px_#00000019] h-full overflow-hidden transform transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/15 focus-within:-translate-y-1 ${
+                            index === 6 ? 'sm:col-span-2 lg:col-span-1' : ''
+                          }`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <img
+                            src={project.image}
+                            alt={project.title || t(project.titleKey)}
+                            className="w-full h-[120px] sm:h-[150px] md:h-[180px] lg:h-[192px] object-cover rounded-t-[12px] transition-transform duration-300 ease-out group-hover:scale-105 cursor-pointer"
+                          />
+                          <div className="flex flex-col justify-between items-start w-full flex-1 pt-[16px] sm:pt-[18px] md:pt-[20px] lg:pt-[22px] pr-[18px] sm:pr-[20px] md:pr-[22px] lg:pr-[24px] pb-[16px] sm:pb-[18px] md:pb-[20px] lg:pb-[22px] pl-[18px] sm:pl-[20px] md:pl-[22px] lg:pl-[24px]">
+                            <div className="flex flex-col w-full">
+                              <h3 className="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-poppins font-bold leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] text-left text-global-1 mb-[6px]">
+                                {project.title || t(project.titleKey)}
+                              </h3>
+                              <p className="text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] md:leading-[23px] lg:leading-[24px] text-left text-global-3 w-full mb-[12px] sm:mb-[14px] md:mb-[15px] lg:mb-[16px]">
+                                {project.description || t(project.descriptionKey)}
+                              </p>
+                            </div>
+                            <Button
+                              variant="primary"
+                              size="small"
+                              className="pt-[4px] sm:pt-[5px] md:pt-[5px] lg:pt-[6px] pr-[10px] sm:pr-[12px] md:pr-[13px] lg:pr-[14px] pb-[4px] sm:pb-[5px] md:pb-[5px] lg:pb-[6px] pl-[14px] sm:pl-[16px] md:pl-[18px] lg:pl-[20px] rounded-[8px] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px] font-medium leading-[18px] sm:leading-[19px] md:leading-[20px] lg:leading-[21px] mt-auto transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F7D6D]/50 cursor-pointer"
+                            >
+                              {t('learnMoreBtn')}
+                            </Button>
                           </div>
-                          <Button
-                            variant="primary"
-                            size="small"
-                            className="pt-[4px] sm:pt-[5px] md:pt-[5px] lg:pt-[6px] pr-[10px] sm:pr-[12px] md:pr-[13px] lg:pr-[14px] pb-[4px] sm:pb-[5px] md:pb-[5px] lg:pb-[6px] pl-[14px] sm:pl-[16px] md:pl-[18px] lg:pl-[20px] rounded-[8px] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px] font-medium leading-[18px] sm:leading-[19px] md:leading-[20px] lg:leading-[21px] mt-auto transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F7D6D]/50 cursor-pointer"
-                          >
-                            {t('learnMoreBtn')}
-                          </Button>
-                        </div>
-                      </a>
-                    ))}
+                        </a>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
@@ -219,7 +280,7 @@ const Projects = () => {
                     </Button>
                     <Button
                       variant="primary"
-                      onClick={() => navigate('/donate')}
+                      onClick={() => navigate(`/${language}/donate`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('donateNow')}
@@ -230,122 +291,7 @@ const Projects = () => {
             </div>
           </section>
 
-          {/* Footer (с лёгкими hover для ссылок/иконок) */}
-          <footer className="w-full bg-[#333333] py-8 lg:py-10">
-            <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-                {/* Brand */}
-                <div className="w-full lg:w-[22%]">
-                  <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                    {t('brandName')}
-                  </h3>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                    {t('footerDesc')}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/images/img_frame_blue_gray_100.svg"
-                      alt="Facebook"
-                      className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                    />
-                    <img
-                      src="/images/img_frame_blue_gray_100_16x14.svg"
-                      alt="Twitter"
-                      className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                    />
-                    <img
-                      src="/images/youtube.svg"
-                      alt="Youtube"
-                      className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-                  {/* Navigation */}
-                  <div className="w-full lg:w-[18%]">
-                    <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                      {t('navigation')}
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        { href: '/about-mission', label: t('about') },
-                        { href: '/projects', label: t('projects') },
-                        { href: '/testimonies', label: t('testimonies') },
-                        { href: '/training', label: t('training') },
-                        { href: '/story', label: t('story') },
-                        { href: '/shop', label: t('shop') },
-                        { href: '/questions-contact', label: t('contact') },
-                        { href: '/donation', label: t('donate') },
-                      ].map((l) => (
-                        <Link
-                          key={l.href}
-                          to={l.href}
-                          className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                     after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                        >
-                          {l.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Contact */}
-                  <div className="w-full lg:w-[48%]">
-                    <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                      {t('contact')}
-                    </h4>
-                    <div className="space-y-2 max-w-[84%]">
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {t('phoneNumber')}
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {t('emailAddress')}
-                      </p>
-                      <div>
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {t('addressLine')}
-                        </p>
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          Faith City, FC 12345
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Legal */}
-                  <div className="w-full lg:w-[42%]">
-                    <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                      {t('legal')}
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        { href: '/privacy-policy', label: t('privacyPolicy') },
-                        { href: '/terms-of-service', label: t('termsOfService') },
-                        { href: '/cookie-policy', label: t('cookiePolicy') },
-                      ].map((l) => (
-                        <Link
-                          key={l.label}
-                          to={l.href}
-                          className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                     after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                        >
-                          {l.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Copyright */}
-              <div className="text-center pt-6 border-t border-gray-600">
-                <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                  {t('copyright')}
-                </p>
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </div>
     </div>

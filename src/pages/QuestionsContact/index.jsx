@@ -1,29 +1,23 @@
 // src/pages/QuestionsContact/index.jsx
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
-import { contactService } from '../../services/contactService';
+import { useContact } from '../../context/ContactContext';
+import Footer from '../../components/common/Footer';
+import { ContactInfoSkeleton, ContactSkeleton } from '../../components/skeletons';
 
 const QuestionsContact = () => {
   const { t, language } = useLanguage();
-  const [contactData, setContactData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { contactData, loading } = useContact();
 
-  useEffect(() => {
-    const loadContactData = async () => {
-      try {
-        setLoading(true);
-        const data = await contactService.get();
-        setContactData(data);
-      } catch (error) {
-        console.error('Error loading contact data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadContactData();
-  }, []);
+  if (loading) {
+    return (
+      <div className="w-full bg-[#F6F7F9]">
+        <ContactSkeleton />
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-[#F6F7F9]">
@@ -56,10 +50,11 @@ const QuestionsContact = () => {
                   {t('callUs')}
                 </h3>
                 <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
-                  {contactData?.[`phone_number_${language}`] ||
-                    contactData?.phone_number_en ||
-                    contactData?.phone_number ||
-                    t('phoneNumber')}
+                  {loading ? (
+                    <div className="animate-pulse bg-gray-200 rounded h-6 w-32 mx-auto"></div>
+                  ) : (
+                    contactData?.phone_number || t('phoneNumber')
+                  )}
                 </p>
                 <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">
                   {t('phoneWorkHoursShort')}
@@ -78,12 +73,38 @@ const QuestionsContact = () => {
                 <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
                   {t('address')}
                 </h3>
-                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {contactData?.[`address_line1_${language}`] ||
-                    contactData?.address_line1_en ||
-                    contactData?.address_line1 ||
-                    t('addressLine')}
-                </p>
+                <div className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
+                  {loading ? (
+                    <div className="space-y-2">
+                      <div className="animate-pulse bg-gray-200 rounded h-4 w-40 mx-auto"></div>
+                      <div className="animate-pulse bg-gray-200 rounded h-4 w-32 mx-auto"></div>
+                      <div className="animate-pulse bg-gray-200 rounded h-4 w-36 mx-auto"></div>
+                    </div>
+                  ) : (
+                    <>
+                      <p>
+                        {contactData?.[`address_line1_${language}`] ||
+                          contactData?.address_line1_en ||
+                          contactData?.address_line1 ||
+                          t('addressLine')}
+                      </p>
+                      {contactData?.[`address_line2_${language}`] ||
+                      contactData?.address_line2_en ||
+                      contactData?.address_line2 ? (
+                        <p>
+                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line2_en ||
+                            contactData?.address_line2}
+                        </p>
+                      ) : null}
+                      <p>
+                        {contactData?.city && contactData?.country
+                          ? `${contactData.city}, ${contactData.country}`
+                          : contactData?.city || contactData?.country || ''}
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
 
               {/* Email Us */}
@@ -99,10 +120,11 @@ const QuestionsContact = () => {
                   {t('emailUs')}
                 </h3>
                 <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {contactData?.[`email_${language}`] ||
-                    contactData?.email_en ||
-                    contactData?.email ||
-                    t('emailAddress')}
+                  {loading ? (
+                    <div className="animate-pulse bg-gray-200 rounded h-5 w-48 mx-auto"></div>
+                  ) : (
+                    contactData?.email || t('emailAddress')
+                  )}
                 </p>
                 <p className="mt-1 text-[12px] sm:text-[14px] font-[Poppins] text-[#64748b]">
                   {t('weRespondSoon')}
@@ -112,122 +134,7 @@ const QuestionsContact = () => {
           </div>
         </section>
 
-        {/* Footer (обновлённый с hover-эффектами) */}
-        <footer className="w-full bg-[#333333] py-8 lg:py-10">
-          <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-              {/* Brand */}
-              <div className="w-full lg:w-[22%]">
-                <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                  {t('brandName')}
-                </h3>
-                <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                  {t('footerDesc')}
-                </p>
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/images/img_frame_blue_gray_100.svg"
-                    alt="Facebook"
-                    className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                  />
-                  <img
-                    src="/images/img_frame_blue_gray_100_16x14.svg"
-                    alt="Twitter"
-                    className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                  />
-                  <img
-                    src="/images/youtube.svg"
-                    alt="Youtube"
-                    className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-                {/* Navigation */}
-                <div className="w-full lg:w-[18%]">
-                  <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                    {t('navigation')}
-                  </h4>
-                  <div className="space-y-2">
-                    {[
-                      { href: '/about-mission', label: t('about') },
-                      { href: '/projects', label: t('projects') },
-                      { href: '/testimonies', label: t('testimonies') },
-                      { href: '/training', label: t('training') },
-                      { href: '/story', label: t('story') },
-                      { href: '/shop', label: t('shop') },
-                      { href: '/questions-contact', label: t('contact') },
-                      { href: '/donation', label: t('donate') },
-                    ].map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                   after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                      >
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contact */}
-                <div className="w-full lg:w-[48%]">
-                  <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                    {t('contact')}
-                  </h4>
-                  <div className="space-y-2 max-w-[84%]">
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('phoneNumber')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('emailAddress')}
-                    </p>
-                    <div>
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {t('addressLine')}
-                      </p>
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        Faith City, FC 12345
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Legal */}
-                <div className="w-full lg:w-[42%]">
-                  <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                    {t('legal')}
-                  </h4>
-                  <div className="space-y-2">
-                    {[
-                      { href: '/privacy-policy', label: t('privacyPolicy') },
-                      { href: '/terms-of-service', label: t('termsOfService') },
-                      { href: '/cookie-policy', label: t('cookiePolicy') },
-                    ].map((l) => (
-                      <Link
-                        key={l.label}
-                        to={l.href}
-                        className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                   after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                      >
-                        {l.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Copyright */}
-            <div className="text-center pt-6 border-t border-gray-600">
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                {t('copyright')}
-              </p>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </div>
   );

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { projectsService } from '../../../services/projectsService';
+import { useAlert } from '../../../hooks/useAlert';
+import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
 import GalleryUploadSlot from '../../../components/GalleryUploadSlot';
 
 const ProjectForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { success, error: showError } = useAlert();
+  const { t } = useLanguage();
   const isEdit = Boolean(id);
 
   const [loading, setLoading] = useState(false);
@@ -24,9 +28,6 @@ const ProjectForm = () => {
     what_we_do_en: '',
     what_we_do_ru: '',
     what_we_do_pl: '',
-    impact_title_en: '',
-    impact_title_ru: '',
-    impact_title_pl: '',
     impact_description_en: '',
     impact_description_ru: '',
     impact_description_pl: '',
@@ -84,14 +85,25 @@ const ProjectForm = () => {
     setLoading(true);
 
     try {
+      // Базовая валидация
+      if (!formData.title_en?.trim()) {
+        throw new Error('Название на английском языке обязательно');
+      }
+      if (!formData.slug?.trim()) {
+        throw new Error('Slug обязателен');
+      }
+
       if (isEdit) {
         await projectsService.update(id, formData);
+        success('Проект успешно обновлен!', 'Успех');
       } else {
         await projectsService.create(formData);
+        success('Проект успешно создан!', 'Успех');
       }
       navigate('/admin/projects');
     } catch (err) {
-      setError(err.message || 'Failed to save project');
+      const errorMessage = err.message || 'Failed to save project';
+      showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }
   };
@@ -229,11 +241,6 @@ const ProjectForm = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Влияние проекта</h2>
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Заголовок влияния (АНГ)', 'impact_title_en', 'Project Impact')}
-              {renderInput('Заголовок влияния (РУС)', 'impact_title_ru', 'Влияние проекта')}
-              {renderInput('Заголовок влияния (ПОЛ)', 'impact_title_pl', 'Wpływ projektu')}
-            </div>
             <div className="space-y-6">
               {renderInput(
                 'Описание влияния (АНГ)',

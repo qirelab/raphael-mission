@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({ 
-  placeholder = '', 
-  value = '', 
-  onChange, 
+const TextArea = ({
+  placeholder = '',
+  value = '',
+  onChange,
   rows = 4,
   disabled = false,
   fullWidth = false,
   className = '',
-  ...props 
+  ...props
 }) => {
-  const baseClasses = 'border border-[#d1d5db] rounded-[8px] bg-[#ffffff] text-[#adaebc] font-normal transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical';
-  
+  const baseClasses =
+    'border border-[#d1d5db] rounded-[8px] bg-[#ffffff] text-[#1f2937] font-normal transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:border-[#2F7D6D] resize-vertical';
+
   const textareaClasses = `
     ${baseClasses}
     ${fullWidth ? 'w-full' : 'flex-1'}
@@ -20,8 +21,10 @@ const TextArea = ({
     pt-[12px] pr-[16px] pb-[12px] pl-[16px]
     text-[16px] leading-[24px]
     ${className}
-  `?.trim()?.replace(/\s+/g, ' ');
-  
+  `
+    ?.trim()
+    ?.replace(/\s+/g, ' ');
+
   return (
     <textarea
       placeholder={placeholder}

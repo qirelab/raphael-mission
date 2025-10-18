@@ -1,71 +1,34 @@
-import { supabase } from './supabase';
+import { neonTrainingService } from './neonTrainingService';
 
 export const trainingService = {
   // Get all training programs
   async getAll() {
-    const { data, error } = await supabase
-      .from('training_programs')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data;
+    return await neonTrainingService.getAll();
   },
 
   // Get active training programs only
   async getActive() {
-    const { data, error } = await supabase
-      .from('training_programs')
-      .select('*')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data;
+    return await neonTrainingService.getActive();
   },
 
   // Get training program by ID
   async getById(id) {
-    const { data, error } = await supabase
-      .from('training_programs')
-      .select('*')
-      .eq('id', id)
-      .single();
-
-    if (error) throw error;
-    return data;
+    return await neonTrainingService.getById(id);
   },
 
   // Create training program
-  async create(trainingData) {
-    const { data, error } = await supabase
-      .from('training_programs')
-      .insert([trainingData])
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async create(programData) {
+    return await neonTrainingService.create(programData);
   },
 
   // Update training program
-  async update(id, trainingData) {
-    const { data, error } = await supabase
-      .from('training_programs')
-      .update(trainingData)
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async update(id, programData) {
+    return await neonTrainingService.update(id, programData);
   },
 
   // Delete training program
   async delete(id) {
-    const { error } = await supabase.from('training_programs').delete().eq('id', id);
-
-    if (error) throw error;
+    await neonTrainingService.delete(id);
     return { message: 'Training program deleted successfully' };
   },
 };

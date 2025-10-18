@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useAlert } from '../hooks/useAlert';
 import { projectsService } from '../services/projectsService';
 
 export default function MobileMenu({ open, onClose }) {
-  const { t, language, setLanguage } = useLanguage();
+  const { t, language, changeLanguage } = useLanguage();
+  const { success } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [projectLinks, setProjectLinks] = useState([]);
@@ -17,7 +19,7 @@ export default function MobileMenu({ open, onClose }) {
         const projects = await projectsService.getActive();
         const links = projects.map((project) => ({
           label: project[`title_${language}`] || project.title_en,
-          to: `/projects/${project.slug}`,
+          to: `/${language}/projects/${project.slug}`,
         }));
         setProjectLinks(links);
       } catch (error) {
@@ -30,13 +32,18 @@ export default function MobileMenu({ open, onClose }) {
   }, [language]);
 
   const links = [
-    { labelKey: 'projects', to: '/projects', hasDropdown: true, dropdownItems: projectLinks },
-    { labelKey: 'about', to: '/about-mission' },
-    { labelKey: 'training', to: '/training' },
-    { labelKey: 'shop', to: '/shop' },
-    { labelKey: 'testimonies', to: '/testimonies' },
-    { labelKey: 'story', to: '/story' },
-    { labelKey: 'contact', to: '/questions-contact' },
+    {
+      labelKey: 'projects',
+      to: `/${language}/projects`,
+      hasDropdown: true,
+      dropdownItems: projectLinks,
+    },
+    { labelKey: 'about', to: `/${language}/about-mission` },
+    { labelKey: 'training', to: `/${language}/training` },
+    { labelKey: 'shop', to: `/${language}/shop` },
+    { labelKey: 'testimonies', to: `/${language}/testimonies` },
+    { labelKey: 'story', to: `/${language}/story` },
+    { labelKey: 'contact', to: `/${language}/contact` },
   ];
 
   const languages = [
@@ -73,7 +80,20 @@ export default function MobileMenu({ open, onClose }) {
   if (!open) return null;
 
   const handleLanguageChange = (code) => {
-    setLanguage(code);
+    const selectedLanguage = languages.find((lang) => lang.code === code);
+    changeLanguage(code);
+
+    // Показываем Alert с переводом на выбранном языке
+    const translations = {
+      en: { changed: 'Language changed to', title: 'Language changed' },
+      ru: { changed: 'Язык изменен на', title: 'Язык изменен' },
+      pl: { changed: 'Język zmieniony na', title: 'Język zmieniony' },
+    };
+
+    const translation = translations[code] || translations.en;
+    success(`${translation.changed} ${selectedLanguage?.label}`, translation.title);
+
+    onClose(); // Close menu after language change
   };
 
   const ui = (
@@ -90,7 +110,7 @@ export default function MobileMenu({ open, onClose }) {
         onClick={onClose}
         className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-all duration-300"
         style={{
-          backdropFilter: isVisible ? 'blur(8px)' : 'blur(0px)',
+          backdropFilter: 'blur(8px)',
         }}
       />
 
@@ -147,9 +167,10 @@ export default function MobileMenu({ open, onClose }) {
                       }
                       className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 hover:bg-[#3c8a7a]/10 hover:text-[#2F7D6D] transition-all duration-200 group font-poppins"
                       style={{
-                        animationDelay: `${index * 50}ms`,
-                        animation: isVisible ? 'slideInRight 0.4s ease-out forwards' : 'none',
+                        animationDelay: `${index * 80}ms`,
+                        animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
                         opacity: isVisible ? 1 : 0,
+                        transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
                       }}
                     >
                       <span className="text-base font-medium">{t(link.labelKey)}</span>
@@ -200,9 +221,10 @@ export default function MobileMenu({ open, onClose }) {
                     onClick={onClose}
                     className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 hover:bg-[#3c8a7a]/10 hover:text-[#2F7D6D] transition-all duration-200 group font-poppins"
                     style={{
-                      animationDelay: `${index * 50}ms`,
-                      animation: isVisible ? 'slideInRight 0.4s ease-out forwards' : 'none',
+                      animationDelay: `${index * 80}ms`,
+                      animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
                       opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
                     }}
                   >
                     <span className="text-base font-medium">{t(link.labelKey)}</span>
@@ -218,7 +240,7 @@ export default function MobileMenu({ open, onClose }) {
               {t('language')}
             </div>
             <div className="space-y-2">
-              {languages.map((lang) => (
+              {languages.map((lang, index) => (
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageChange(lang.code)}
@@ -227,6 +249,12 @@ export default function MobileMenu({ open, onClose }) {
                       ? 'bg-[#3c8a7a] text-white shadow-md'
                       : 'bg-white text-gray-700 hover:bg-gray-100'
                   }`}
+                  style={{
+                    animationDelay: `${(links.length + index) * 80}ms`,
+                    animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                  }}
                 >
                   <span className="text-2xl">{lang.flag}</span>
                   <span className="text-base font-medium flex-1 text-left">{lang.label}</span>
@@ -254,9 +282,15 @@ export default function MobileMenu({ open, onClose }) {
 
           {/* Donate Button */}
           <Link
-            to="/donation"
+            to={`/${language}/donation`}
             onClick={onClose}
             className="block text-center rounded-2xl py-4 shadow-lg bg-gradient-to-r from-[#3c8a7a] to-[#2F7D6D] text-white text-lg font-semibold hover:shadow-xl hover:scale-[1.02] transition-all duration-200 font-poppins"
+            style={{
+              animationDelay: `${(links.length + languages.length) * 80}ms`,
+              animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+            }}
           >
             {t('donate')}
           </Link>
@@ -264,30 +298,6 @@ export default function MobileMenu({ open, onClose }) {
 
         {/* Footer */}
         <div className="p-6 border-t border-gray-200 bg-white/80 backdrop-blur-md">
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#3c8a7a]/10 flex items-center justify-center transition-colors duration-200 group"
-            >
-              <img src="/images/img_frame_blue_gray_100.svg" alt="Facebook" className="w-4 h-4" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#3c8a7a]/10 flex items-center justify-center transition-colors duration-200 group"
-            >
-              <img
-                src="/images/img_frame_blue_gray_100_16x14.svg"
-                alt="Twitter"
-                className="w-4 h-4"
-              />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#3c8a7a]/10 flex items-center justify-center transition-colors duration-200 group"
-            >
-              <img src="/images/youtube.svg" alt="Youtube" className="w-5 h-4" />
-            </a>
-          </div>
           <div className="text-center text-xs text-gray-500 font-poppins">{t('copyright')}</div>
         </div>
       </div>
@@ -296,7 +306,7 @@ export default function MobileMenu({ open, onClose }) {
         @keyframes slideInRight {
           from {
             opacity: 0;
-            transform: translateX(20px);
+            transform: translateX(30px);
           }
           to {
             opacity: 1;

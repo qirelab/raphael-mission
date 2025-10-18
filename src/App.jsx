@@ -3,16 +3,38 @@ import { useLocation } from 'react-router-dom';
 import Header from './components/common/Header';
 import Routes from './Routes';
 import CookieConsent from './components/CookieConsent';
+import PageLoader from './components/common/PageLoader';
+import { ContactProvider } from './context/ContactContext';
+import { LoadingProvider, useLoading } from './context/LoadingContext';
+import { AlertProvider } from './context/AlertContext';
+import { useScrollToTop } from './hooks/useScrollToTop';
 
-export default function App() {
+function AppContent() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const { isLoading } = useLoading();
+
+  // Enable scroll to top on route changes (except admin routes and hash navigation)
+  useScrollToTop();
 
   return (
     <>
+      {isLoading && <PageLoader />}
       {!isAdminRoute && <Header />}
       <Routes />
       {!isAdminRoute && <CookieConsent />}
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <LoadingProvider>
+      <ContactProvider>
+        <AlertProvider>
+          <AppContent />
+        </AlertProvider>
+      </ContactProvider>
+    </LoadingProvider>
   );
 }

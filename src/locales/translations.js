@@ -72,26 +72,57 @@ export const translations = {
     phoneWorkHoursShort: '8:30 AM – 5:00 PM EST',
     weRespondSoon: 'We respond as soon as possible',
 
- // ===== Mission (home section) =====
-missionTitle: 'Our Goals',
-missionDescription:
-  'Our goals is to stay close to God and help people connect with Him. We preach the Gospel, bringing healing and restoration, carrying the light of Christ to the nations.',
-humanitarianAid: 'Closeness with God',
-humanitarianAidDesc:
-  'We strive to live in deep relationship with God and inspire others to seek His presence.',
-spiritualGuidance: 'Preach the Gospel',
-spiritualGuidanceDesc:
-  'We share the message of salvation with nations so that everyone may know the love and truth of Christ.',
-communityBuilding: 'Healing and Restoration',
-communityBuildingDesc:
-  'We serve people by bringing spiritual, emotional, and physical healing in the name of Jesus.',
-
+    // ===== Mission (home section) =====
+    missionTitle: 'Our Goals',
+    missionDescription:
+      'Our goals is to stay close to God and help people connect with Him. We preach the Gospel, bringing healing and restoration, carrying the light of Christ to the nations.',
+    humanitarianAid: 'Closeness with God',
+    humanitarianAidDesc:
+      'We strive to live in deep relationship with God and inspire others to seek His presence.',
+    spiritualGuidance: 'Preach the Gospel',
+    spiritualGuidanceDesc:
+      'We share the message of salvation with nations so that everyone may know the love and truth of Christ.',
+    communityBuilding: 'Healing and Restoration',
+    communityBuildingDesc:
+      'We serve people by bringing spiritual, emotional, and physical healing in the name of Jesus.',
 
     // ===== Language switcher =====
     language: 'Language',
     english: 'English',
     russian: 'Русский',
     polish: 'Polski',
+
+    // ===== Alert Messages =====
+    alertSuccess: 'Success',
+    alertError: 'Error',
+    alertWarning: 'Warning',
+    alertInfo: 'Info',
+    alertLanguageChanged: 'Language changed to',
+    alertMessageSent: 'Message sent successfully',
+    alertMessageSentTitle: 'Message sent',
+    alertContactUpdated: 'Contact information updated successfully',
+    alertContactUpdatedTitle: 'Success',
+    alertTestimonyCreated: 'Testimony created successfully',
+    alertTestimonyUpdated: 'Testimony updated successfully',
+    alertTestimonyDeleted: 'Testimony deleted successfully',
+    alertTestimonyDeletedTitle: 'Deleted',
+    alertProjectCreated: 'Project created successfully',
+    alertProjectUpdated: 'Project updated successfully',
+    alertProductCreated: 'Product created successfully',
+    alertProductUpdated: 'Product updated successfully',
+    alertLoginSuccess: 'Successfully logged in',
+    alertLoginSuccessTitle: 'Welcome',
+    alertLoginError: 'Login failed',
+    alertLoginErrorTitle: 'Login error',
+    alertCookiesAccepted: 'Thank you! Your cookie preferences have been saved.',
+    alertCookiesAcceptedTitle: 'Cookies accepted',
+    alertCookiesRejected: 'Your cookie preferences have been saved. Some features may be limited.',
+    alertCookiesRejectedTitle: 'Cookies rejected',
+    alertValidationError: 'Validation error',
+    alertSaveError: 'Save error',
+    alertDeleteError: 'Delete error',
+    required: 'is required',
+    invalid: 'is invalid',
 
     // ===== Donation Page =====
     donationPageTitle: 'Advance the Mission Through Your Gift',
@@ -265,25 +296,23 @@ communityBuildingDesc:
     cookiePolicy: 'Cookie Policy',
     copyright: '© 2025 Raphael Mission. All rights reserved.',
 
-   // ===== About =====
-aboutHeroTitle: 'We bring hope through',
-aboutFaith: 'faith',
-aboutCompassion: 'compassion',
-aboutService: 'service',
-aboutAnd: 'and',
-aboutDescription:
-  'Raphael Mission is a Christian movement of evangelists dedicated to spreading the Gospel and showing God’s love through action. Through evangelism, training, creative outreach, and social service, we bring hope, healing, and transformation to communities. Our passion is to make Jesus known and allow His miracles to be revealed everywhere the light of the Gospel can shine.',
-aboutMissionNote:
-  'With every mission, we walk alongside communities — listening, serving, and building together.',
-aboutCoreValuesTitle: 'Our Core Values',
-aboutCoreValuesDesc:
-  'Guided by faith and driven by compassion, these values shape every mission we undertake.',
-aboutFaithDesc:
-  "Our unwavering belief in Christ's love drives us to serve others with hope and purpose.",
-aboutCompassionDesc: 'We approach every person with empathy and care.',
-aboutServiceDesc:
-  'Through humble service, we work with communities to bring lasting change.',
-
+    // ===== About =====
+    aboutHeroTitle: 'We bring hope through',
+    aboutFaith: 'faith',
+    aboutCompassion: 'compassion',
+    aboutService: 'service',
+    aboutAnd: 'and',
+    aboutDescription:
+      'Raphael Mission is a Christian movement of evangelists dedicated to spreading the Gospel and showing God’s love through action. Through evangelism, training, creative outreach, and social service, we bring hope, healing, and transformation to communities. Our passion is to make Jesus known and allow His miracles to be revealed everywhere the light of the Gospel can shine.',
+    aboutMissionNote:
+      'With every mission, we walk alongside communities — listening, serving, and building together.',
+    aboutCoreValuesTitle: 'Our Core Values',
+    aboutCoreValuesDesc:
+      'Guided by faith and driven by compassion, these values shape every mission we undertake.',
+    aboutFaithDesc:
+      "Our unwavering belief in Christ's love drives us to serve others with hope and purpose.",
+    aboutCompassionDesc: 'We approach every person with empathy and care.',
+    aboutServiceDesc: 'Through humble service, we work with communities to bring lasting change.',
 
     // ===== Training (section + page) =====
     trainingProgramsTitle: 'Our Training Programs',
@@ -645,25 +674,57 @@ aboutServiceDesc:
     weRespondSoon: 'Отвечаем как можно скорее',
 
     // ===== Mission (home section) =====
-missionTitle: 'Наши Цели',
-missionDescription:
-  'Наша цель — быть близко с Богом и помогать людям соединяться с Ним. Мы проповедуем Евангелие, приносим исцеление и восстановление, неся свет Христа народам.',
-humanitarianAid: 'Близость с Богом',
-humanitarianAidDesc:
-  'Стремимся к личным отношениям с Богом и вдохновляем других искать Его присутствие.',
-spiritualGuidance: 'Проповедовать Евангелие',
-spiritualGuidanceDesc:
-  'Несём весть о спасении народам, чтобы каждый мог познать любовь и истину Христа.',
-communityBuilding: 'Исцеление и восстановление',
-communityBuildingDesc:
-  'Служим людям, принося духовное, эмоциональное и физическое исцеление во имя Иисуса.',
-
+    missionTitle: 'Наши Цели',
+    missionDescription:
+      'Наша цель — быть близко с Богом и помогать людям соединяться с Ним. Мы проповедуем Евангелие, приносим исцеление и восстановление, неся свет Христа народам.',
+    humanitarianAid: 'Близость с Богом',
+    humanitarianAidDesc:
+      'Стремимся к личным отношениям с Богом и вдохновляем других искать Его присутствие.',
+    spiritualGuidance: 'Проповедовать Евангелие',
+    spiritualGuidanceDesc:
+      'Несём весть о спасении народам, чтобы каждый мог познать любовь и истину Христа.',
+    communityBuilding: 'Исцеление и восстановление',
+    communityBuildingDesc:
+      'Служим людям, принося духовное, эмоциональное и физическое исцеление во имя Иисуса.',
 
     // ===== Language switcher =====
     language: 'Язык',
     english: 'English',
     russian: 'Русский',
     polish: 'Polski',
+
+    // ===== Alert Messages =====
+    alertSuccess: 'Успех',
+    alertError: 'Ошибка',
+    alertWarning: 'Предупреждение',
+    alertInfo: 'Информация',
+    alertLanguageChanged: 'Язык изменен на',
+    alertMessageSent: 'Сообщение успешно отправлено',
+    alertMessageSentTitle: 'Сообщение отправлено',
+    alertContactUpdated: 'Контактная информация успешно обновлена',
+    alertContactUpdatedTitle: 'Успех',
+    alertTestimonyCreated: 'Свидетельство успешно создано',
+    alertTestimonyUpdated: 'Свидетельство успешно обновлено',
+    alertTestimonyDeleted: 'Свидетельство успешно удалено',
+    alertTestimonyDeletedTitle: 'Удалено',
+    alertProjectCreated: 'Проект успешно создан',
+    alertProjectUpdated: 'Проект успешно обновлен',
+    alertProductCreated: 'Товар успешно создан',
+    alertProductUpdated: 'Товар успешно обновлен',
+    alertLoginSuccess: 'Успешный вход в систему',
+    alertLoginSuccessTitle: 'Добро пожаловать',
+    alertLoginError: 'Ошибка входа',
+    alertLoginErrorTitle: 'Ошибка входа',
+    alertCookiesAccepted: 'Спасибо! Ваши предпочтения по cookies сохранены.',
+    alertCookiesAcceptedTitle: 'Cookies приняты',
+    alertCookiesRejected:
+      'Ваши предпочтения по cookies сохранены. Некоторые функции могут быть ограничены.',
+    alertCookiesRejectedTitle: 'Cookies отклонены',
+    alertValidationError: 'Ошибка валидации',
+    alertSaveError: 'Ошибка сохранения',
+    alertDeleteError: 'Ошибка удаления',
+    required: 'обязательно',
+    invalid: 'неверный формат',
 
     // ===== Donation Page =====
     donationPageTitle: 'Продвигайте миссию через ваш дар',
@@ -835,25 +896,24 @@ communityBuildingDesc:
     cookiePolicy: 'Политика файлов cookie',
     copyright: '© 2025 Миссия Рафаэля. Все права защищены.',
 
-   // ===== About =====
-aboutHeroTitle: 'Мы приносим надежду через',
-aboutFaith: 'веру',
-aboutCompassion: 'сострадание',
-aboutService: 'служение',
-aboutAnd: 'и',
-aboutDescription:
-  'Raphael Mission — это христианское движение евангелистов, посвящённое распространению Евангелия и проявлению Божьей любви через действия. Через евангелизацию, обучение, творческие проекты и социальное служение мы приносим надежду, исцеление и преобразование обществу. Наша страсть — делать Иисуса известным и позволять Его чудесам проявляться повсюду, где может засиять свет Евангелия.',
-aboutMissionNote:
-  'В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.',
-aboutCoreValuesTitle: 'Наши ключевые ценности',
-aboutCoreValuesDesc:
-  'Руководствуясь верой и движимые состраданием, мы следуем этим ценностям в каждом нашем служении.',
-aboutFaithDesc:
-  'Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.',
-aboutCompassionDesc: 'Мы относимся к каждому человеку с эмпатией и заботой.',
-aboutServiceDesc:
-  'Через смиренное служение мы вместе с сообществами приносим устойчивые перемены.',
-
+    // ===== About =====
+    aboutHeroTitle: 'Мы приносим надежду через',
+    aboutFaith: 'веру',
+    aboutCompassion: 'сострадание',
+    aboutService: 'служение',
+    aboutAnd: 'и',
+    aboutDescription:
+      'Raphael Mission — это христианское движение евангелистов, посвящённое распространению Евангелия и проявлению Божьей любви через действия. Через евангелизацию, обучение, творческие проекты и социальное служение мы приносим надежду, исцеление и преобразование обществу. Наша страсть — делать Иисуса известным и позволять Его чудесам проявляться повсюду, где может засиять свет Евангелия.',
+    aboutMissionNote:
+      'В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.',
+    aboutCoreValuesTitle: 'Наши ключевые ценности',
+    aboutCoreValuesDesc:
+      'Руководствуясь верой и движимые состраданием, мы следуем этим ценностям в каждом нашем служении.',
+    aboutFaithDesc:
+      'Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.',
+    aboutCompassionDesc: 'Мы относимся к каждому человеку с эмпатией и заботой.',
+    aboutServiceDesc:
+      'Через смиренное служение мы вместе с сообществами приносим устойчивые перемены.',
 
     // ===== Training =====
     trainingProgramsTitle: 'Наши программы обучения',
@@ -1220,26 +1280,58 @@ aboutServiceDesc:
     phoneWorkHoursShort: '8:30 – 17:00 czasu wsch.',
     weRespondSoon: 'Odpowiadamy tak szybko, jak to możliwe',
 
-   // ===== Mission (home section) =====
-missionTitle: 'Nasze Cele',
-missionDescription:
-  'Naszą сel jest być blisko Boga i pomagać ludziom zbliżać się do Niego. Głosimy Ewangelię, niosąc uzdrowienie i odnowę, aby świat poznał światło Chrystusa.',
-humanitarianAid: 'Bliskość z Bogiem',
-humanitarianAidDesc:
-  'Dążymy do osobistej relacji z Bogiem i inspirujemy innych, by szukali Jego obecności.',
-spiritualGuidance: 'Głoszenie Ewangelii',
-spiritualGuidanceDesc:
-  'Zwiastujemy przesłanie zbawienia narodom, aby każdy mógł poznać miłość i prawdę Chrystusa.',
-communityBuilding: 'Uzdrowienie i odnowa',
-communityBuildingDesc:
-  'Służymy ludziom, przynosząc duchowe, emocjonalne i fizyczne uzdrowienie w imię Jezusa.',
-
+    // ===== Mission (home section) =====
+    missionTitle: 'Nasze Cele',
+    missionDescription:
+      'Naszą сel jest być blisko Boga i pomagać ludziom zbliżać się do Niego. Głosimy Ewangelię, niosąc uzdrowienie i odnowę, aby świat poznał światło Chrystusa.',
+    humanitarianAid: 'Bliskość z Bogiem',
+    humanitarianAidDesc:
+      'Dążymy do osobistej relacji z Bogiem i inspirujemy innych, by szukali Jego obecności.',
+    spiritualGuidance: 'Głoszenie Ewangelii',
+    spiritualGuidanceDesc:
+      'Zwiastujemy przesłanie zbawienia narodom, aby każdy mógł poznać miłość i prawdę Chrystusa.',
+    communityBuilding: 'Uzdrowienie i odnowa',
+    communityBuildingDesc:
+      'Służymy ludziom, przynosząc duchowe, emocjonalne i fizyczne uzdrowienie w imię Jezusa.',
 
     // ===== Language switcher =====
     language: 'Język',
     english: 'English',
     russian: 'Русский',
     polish: 'Polski',
+
+    // ===== Alert Messages =====
+    alertSuccess: 'Sukces',
+    alertError: 'Błąd',
+    alertWarning: 'Ostrzeżenie',
+    alertInfo: 'Informacja',
+    alertLanguageChanged: 'Język zmieniony na',
+    alertMessageSent: 'Wiadomość wysłana pomyślnie',
+    alertMessageSentTitle: 'Wiadomość wysłana',
+    alertContactUpdated: 'Informacje kontaktowe zaktualizowane pomyślnie',
+    alertContactUpdatedTitle: 'Sukces',
+    alertTestimonyCreated: 'Świadectwo utworzone pomyślnie',
+    alertTestimonyUpdated: 'Świadectwo zaktualizowane pomyślnie',
+    alertTestimonyDeleted: 'Świadectwo usunięte pomyślnie',
+    alertTestimonyDeletedTitle: 'Usunięto',
+    alertProjectCreated: 'Projekt utworzony pomyślnie',
+    alertProjectUpdated: 'Projekt zaktualizowany pomyślnie',
+    alertProductCreated: 'Produkt utworzony pomyślnie',
+    alertProductUpdated: 'Produkt zaktualizowany pomyślnie',
+    alertLoginSuccess: 'Pomyślne logowanie',
+    alertLoginSuccessTitle: 'Witamy',
+    alertLoginError: 'Błąd logowania',
+    alertLoginErrorTitle: 'Błąd logowania',
+    alertCookiesAccepted: 'Dziękujemy! Twoje preferencje dotyczące plików cookie zostały zapisane.',
+    alertCookiesAcceptedTitle: 'Pliki cookie zaakceptowane',
+    alertCookiesRejected:
+      'Twoje preferencje dotyczące plików cookie zostały zapisane. Niektóre funkcje mogą być ograniczone.',
+    alertCookiesRejectedTitle: 'Pliki cookie odrzucone',
+    alertValidationError: 'Błąd walidacji',
+    alertSaveError: 'Błąd zapisu',
+    alertDeleteError: 'Błąd usuwania',
+    required: 'jest wymagane',
+    invalid: 'nieprawidłowy format',
 
     // ===== Donation Page =====
     donationPageTitle: 'Wspieraj misję poprzez swój dar',
@@ -1410,25 +1502,24 @@ communityBuildingDesc:
     cookiePolicy: 'Polityka plików cookie',
     copyright: '© 2025 Misja Rafaela. Wszystkie prawa zastrzeżone.',
 
-   // ===== About =====
-aboutHeroTitle: 'Przynosimy nadzieję przez',
-aboutFaith: 'wiarę',
-aboutCompassion: 'współczucie',
-aboutService: 'służbę',
-aboutAnd: 'i',
-aboutDescription:
-  'Raphael Mission to chrześcijański ruch ewangelistów poświęcony głoszeniu Ewangelii i ukazywaniu Bożej miłości poprzez działanie. Poprzez ewangelizację, szkolenia, twórcze projekty i służbę społeczną przynosimy nadzieję, uzdrowienie i przemianę społecznościom. Naszą pasją jest sprawić, by Jezus był znany, i pozwolić, aby Jego cuda objawiały się wszędzie tam, gdzie może świecić światło Ewangelii.',
-aboutMissionNote:
-  'W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.',
-aboutCoreValuesTitle: 'Nasze kluczowe wartości',
-aboutCoreValuesDesc:
-  'Kierowani wiarą i poruszeni współczuciem, realizujemy te wartości w każdej misji.',
-aboutFaithDesc:
-  'Niezachwiana wiara w miłość Chrystusa motywuje nas do służby innym z nadzieją i celem.',
-aboutCompassionDesc: 'Podchodzimy do każdego człowieka z empatią i troską.',
-aboutServiceDesc:
-  'Przez pokorną służbę współpracujemy ze społecznościami, aby wprowadzać trwałe zmiany.',
-
+    // ===== About =====
+    aboutHeroTitle: 'Przynosimy nadzieję przez',
+    aboutFaith: 'wiarę',
+    aboutCompassion: 'współczucie',
+    aboutService: 'służbę',
+    aboutAnd: 'i',
+    aboutDescription:
+      'Raphael Mission to chrześcijański ruch ewangelistów poświęcony głoszeniu Ewangelii i ukazywaniu Bożej miłości poprzez działanie. Poprzez ewangelizację, szkolenia, twórcze projekty i służbę społeczną przynosimy nadzieję, uzdrowienie i przemianę społecznościom. Naszą pasją jest sprawić, by Jezus był znany, i pozwolić, aby Jego cuda objawiały się wszędzie tam, gdzie może świecić światło Ewangelii.',
+    aboutMissionNote:
+      'W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.',
+    aboutCoreValuesTitle: 'Nasze kluczowe wartości',
+    aboutCoreValuesDesc:
+      'Kierowani wiarą i poruszeni współczuciem, realizujemy te wartości w każdej misji.',
+    aboutFaithDesc:
+      'Niezachwiana wiara w miłość Chrystusa motywuje nas do służby innym z nadzieją i celem.',
+    aboutCompassionDesc: 'Podchodzimy do każdego człowieka z empatią i troską.',
+    aboutServiceDesc:
+      'Przez pokorną służbę współpracujemy ze społecznościami, aby wprowadzać trwałe zmiany.',
 
     // ===== Training =====
     trainingProgramsTitle: 'Nasze programy szkoleniowe',

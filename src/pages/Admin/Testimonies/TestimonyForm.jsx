@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { testimoniesService } from '../../../services/testimoniesService';
+import { useAlert } from '../../../hooks/useAlert';
+import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
 
 const TestimonyForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { success, error: showError } = useAlert();
+  const { t } = useLanguage();
   const isEdit = Boolean(id);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
+    name: '',
     name_en: '',
     name_ru: '',
     name_pl: '',
     title_en: '',
     title_ru: '',
     title_pl: '',
-    testimony_en: '',
-    testimony_ru: '',
-    testimony_pl: '',
+    content_en: '',
+    content_ru: '',
+    content_pl: '',
     image_url: '',
-    is_active: true,
+    is_approved: true,
   });
 
   useEffect(() => {
@@ -34,7 +39,12 @@ const TestimonyForm = () => {
     try {
       setLoading(true);
       const data = await testimoniesService.getById(id);
-      setFormData(data);
+      // Убеждаемся, что поле name заполнено
+      const formData = {
+        ...data,
+        name: data.name || data.name_en || '',
+      };
+      setFormData(formData);
     } catch (err) {
       setError(err.message || 'Failed to fetch testimony');
     } finally {
@@ -44,9 +54,20 @@ const TestimonyForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+    const newValue = type === 'checkbox' ? checked : value;
+
+    setFormData((prev) => {
+      const newFormData = {
+        ...prev,
+        [name]: newValue,
+      };
+
+      // Если изменяется name_en, обновляем также name
+      if (name === 'name_en') {
+        newFormData.name = newValue;
+      }
+
+      return newFormData;
     });
   };
 
@@ -65,12 +86,15 @@ const TestimonyForm = () => {
     try {
       if (isEdit) {
         await testimoniesService.update(id, formData);
+        success('Свидетельство успешно обновлено!', 'Успех');
       } else {
         await testimoniesService.create(formData);
+        success('Свидетельство успешно создано!', 'Успех');
       }
       navigate('/admin/testimonies');
     } catch (err) {
-      setError(err.message || 'Failed to save testimony');
+      const errorMessage = err.message || 'Failed to save testimony';
+      showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }
   };
@@ -90,12 +114,6 @@ const TestimonyForm = () => {
           {isEdit ? 'Редактировать свидетельство' : 'Создать новое свидетельство'}
         </h1>
       </div>
-
-      {error && (
-        <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
-          <p className="text-red-700 font-poppins">{error}</p>
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -196,8 +214,8 @@ const TestimonyForm = () => {
             <label className="flex items-center">
               <input
                 type="checkbox"
-                name="is_active"
-                checked={formData.is_active}
+                name="is_approved"
+                checked={formData.is_approved}
                 onChange={handleChange}
                 className="w-4 h-4 text-[#2F7D6D] border-gray-300 rounded focus:ring-[#2F7D6D]"
               />
@@ -216,8 +234,8 @@ const TestimonyForm = () => {
                 Свидительство (Английский)
               </label>
               <textarea
-                name="testimony_en"
-                value={formData.testimony_en}
+                name="content_en"
+                value={formData.content_en}
                 onChange={handleChange}
                 required
                 rows={6}
@@ -229,8 +247,8 @@ const TestimonyForm = () => {
                 Свидительство (Русский)
               </label>
               <textarea
-                name="testimony_ru"
-                value={formData.testimony_ru}
+                name="content_ru"
+                value={formData.content_ru}
                 onChange={handleChange}
                 required
                 rows={6}
@@ -242,8 +260,8 @@ const TestimonyForm = () => {
                 Свидительство (Польский)
               </label>
               <textarea
-                name="testimony_pl"
-                value={formData.testimony_pl}
+                name="content_pl"
+                value={formData.content_pl}
                 onChange={handleChange}
                 required
                 rows={6}

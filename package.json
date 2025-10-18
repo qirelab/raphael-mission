@@ -29,7 +29,11 @@
       "serve",
       "lint",
       "lint:fix",
-      "format"
+      "format",
+      "migrate:test-supabase",
+      "migrate:test-neon",
+      "migrate:run",
+      "migrate:help"
     ],
     "warning": "🚨 CRITICAL: DO NOT REMOVE OR MODIFY ABOVE DEPENDENCIES - Required for app functionality"
   },
@@ -38,16 +42,23 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "vite preview",
-    "format": "prettier --write \"src/**/*.{js,jsx,css,md,json}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,css,md,json}\"",
+    "migrate:test-supabase": "node migration-manager.js test-supabase",
+    "migrate:test-neon": "node migration-manager.js test-neon",
+    "migrate:run": "node migration-manager.js migrate",
+    "migrate:help": "node migration-manager.js help"
   },
   "dependencies": {
     "@dhiwise/component-tagger": "^1.0.10",
     "@emailjs/browser": "^4.4.1",
+    "@neondatabase/serverless": "^1.0.2",
     "@paypal/react-paypal-js": "^8.8.3",
     "@stripe/react-stripe-js": "^3.9.0",
     "@stripe/stripe-js": "^7.8.0",
     "@supabase/supabase-js": "^2.74.0",
     "@tailwindcss/typography": "^0.5.16",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

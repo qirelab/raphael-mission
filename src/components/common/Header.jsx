@@ -10,32 +10,36 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [projectLinks, setProjectLinks] = useState([]);
+  const [projectsLoading, setProjectsLoading] = useState(true);
   const closeTimeout = useRef(null);
   const { t, language } = useLanguage();
 
   const menuItems = [
-    { name: t('projects'), href: '/projects' },
-    { name: t('about'), href: '/about-mission' },
-    { name: t('training'), href: '/training' },
-    { name: t('shop'), href: '/shop' },
-    { name: t('testimonies'), href: '/testimonies' },
-    { name: t('story'), href: '/story' },
-    { name: t('contact'), href: '/questions-contact' },
+    { name: t('projects'), href: `/${language}/projects` },
+    { name: t('about'), href: `/${language}/about-mission` },
+    { name: t('training'), href: `/${language}/training` },
+    { name: t('shop'), href: `/${language}/shop` },
+    { name: t('testimonies'), href: `/${language}/testimonies` },
+    { name: t('story'), href: `/${language}/story` },
+    { name: t('contact'), href: `/${language}/contact` },
   ];
 
   // Load projects from database
   useEffect(() => {
     const loadProjects = async () => {
       try {
+        setProjectsLoading(true);
         const projects = await projectsService.getActive();
         const links = projects.map((project) => ({
           name: project[`title_${language}`] || project.title_en,
-          href: `/projects/${project.slug}`,
+          href: `/${language}/projects/${project.slug}`,
         }));
         setProjectLinks(links);
       } catch (error) {
         console.error('Error loading projects:', error);
         setProjectLinks([]);
+      } finally {
+        setProjectsLoading(false);
       }
     };
 
@@ -58,7 +62,7 @@ const Header = () => {
           {/* Left: Logo + Brand */}
           <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
             <a
-              href="/"
+              href={`/${language}`}
               className="flex items-center gap-3 sm:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-header-1/40 rounded-md"
             >
               <img
@@ -116,19 +120,34 @@ const Header = () => {
                       onMouseEnter={openProjects}
                       onMouseLeave={scheduleCloseProjects}
                     >
-                      {projectLinks.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          className="px-4 py-2.5 text-[14px] font-poppins text-header-2 rounded-md whitespace-nowrap
-                                     transition-all duration-150
-                                     border-l-4 border-transparent
-                                     hover:bg-gray-100 hover:text-header-1 hover:pl-5 hover:border-header-1
-                                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-header-1/30"
-                        >
-                          {link.name}
-                        </a>
-                      ))}
+                      {projectsLoading ? (
+                        // Projects loading skeleton
+                        <>
+                          {Array.from({ length: 4 }, (_, i) => (
+                            <div key={i} className="px-4 py-2.5 border-l-4 border-transparent">
+                              <div className="animate-pulse bg-gray-200 rounded h-4 w-32"></div>
+                            </div>
+                          ))}
+                        </>
+                      ) : projectLinks.length > 0 ? (
+                        projectLinks.map((link) => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            className="px-4 py-2.5 text-[14px] font-poppins text-header-2 rounded-md whitespace-nowrap
+                                       transition-all duration-150
+                                       border-l-4 border-transparent
+                                       hover:bg-gray-100 hover:text-header-1 hover:pl-5 hover:border-header-1
+                                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-header-1/30"
+                          >
+                            {link.name}
+                          </a>
+                        ))
+                      ) : (
+                        <div className="px-4 py-2.5 text-[14px] font-poppins text-gray-500">
+                          {t('noProjectsAvailable') || 'No projects available'}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

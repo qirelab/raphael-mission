@@ -2,10 +2,28 @@ import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
+import Footer from '../../components/common/Footer';
+import { StorySkeleton } from '../../components/skeletons';
 
 const Story = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const img = new Image();
+    img.onload = () => setImageLoaded(true);
+    img.src = '/images/ludi.jpg';
+  }, []);
+
+  if (!imageLoaded) {
+    return (
+      <div className="w-full bg-[#ffffff]">
+        <StorySkeleton />
+        <Footer />
+      </div>
+    );
+  }
 
   const milestones = [
     { year: '2010', key: 'storyMilestone1' },
@@ -178,14 +196,14 @@ const Story = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 variant="outline"
-                onClick={() => navigate('/projects')}
+                onClick={() => navigate(`/${language}/projects`)}
                 className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-white text-[#3c8a7a] text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200"
               >
                 {t('projects')}
               </Button>
               <Button
                 variant="primary"
-                onClick={() => navigate('/donation')}
+                onClick={() => navigate(`/${language}/donation`)}
                 className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200"
               >
                 {t('donate')}
@@ -196,121 +214,7 @@ const Story = () => {
       </section>
 
       {/* Footer */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                {t('footerDesc')}
-              </p>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame_blue_gray_100.svg"
-                  alt="Facebook"
-                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/img_frame_blue_gray_100_16x14.svg"
-                  alt="Twitter"
-                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/youtube.svg"
-                  alt="Youtube"
-                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
-              <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('navigation')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/about-mission', label: t('about') },
-                    { href: '/projects', label: t('projects') },
-                    { href: '/testimonies', label: t('testimonies') },
-                    { href: '/training', label: t('training') },
-                    { href: '/story', label: t('story') },
-                    { href: '/shop', label: t('shop') },
-                    { href: '/questions-contact', label: t('contact') },
-                    { href: '/donation', label: t('donate') },
-                  ].map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('contact')}
-                </h4>
-                <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('phoneNumber')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('emailAddress')}
-                  </p>
-                  <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('addressLine')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Legal */}
-              <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('legal')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/privacy-policy', label: t('privacyPolicy') },
-                    { href: '/terms-of-service', label: t('termsOfService') },
-                    { href: '/cookie-policy', label: t('cookiePolicy') },
-                  ].map((l) => (
-                    <Link
-                      key={l.label}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

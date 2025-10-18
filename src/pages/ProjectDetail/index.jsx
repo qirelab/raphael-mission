@@ -3,6 +3,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { projectsService } from '../../services/projectsService';
 import Button from '../../components/ui/Button';
+import Footer from '../../components/common/Footer';
+import { ProjectDetailSkeleton } from '../../components/skeletons';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -33,8 +35,9 @@ const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2F7D6D]"></div>
+      <div className="w-full bg-white">
+        <ProjectDetailSkeleton />
+        <Footer />
       </div>
     );
   }
@@ -48,7 +51,7 @@ const ProjectDetail = () => {
         <p className="text-gray-600 font-poppins mb-8">
           {t('projectNotFoundDesc') || 'The project you are looking for does not exist.'}
         </p>
-        <Button onClick={() => navigate('/projects')}>
+        <Button onClick={() => navigate(`/${language}/projects`)}>
           {t('backToProjects') || 'Back to Projects'}
         </Button>
       </div>
@@ -59,7 +62,6 @@ const ProjectDetail = () => {
   const description = project[`description_${language}`] || project.description_en;
   const aboutProject = project[`about_project_${language}`] || project.about_project_en;
   const whatWeDo = project[`what_we_do_${language}`] || project.what_we_do_en;
-  const impactTitle = project[`impact_title_${language}`] || project.impact_title_en;
   const impactDescription =
     project[`impact_description_${language}`] || project.impact_description_en;
 
@@ -138,12 +140,11 @@ const ProjectDetail = () => {
         <div className="max-w-[900px] mx-auto px-4">
           <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
             <h2 className="text-[28px] sm:text-[32px] font-bold mb-8 text-center text-[#1f2937]">
-              {impactTitle ||
-                (language === 'ru'
-                  ? 'Влияние проекта'
-                  : language === 'pl'
-                    ? 'Wpływ projektu'
-                    : 'Project Impact')}
+              {language === 'ru'
+                ? 'Влияние проекта'
+                : language === 'pl'
+                  ? 'Wpływ projektu'
+                  : 'Project Impact'}
             </h2>
             {impactDescription && (
               <div className="mb-8 text-[16px] sm:text-[18px] text-[#374151] text-center">
@@ -151,21 +152,67 @@ const ProjectDetail = () => {
               </div>
             )}
             {stats.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className={`rounded-lg p-6 flex flex-col items-start text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                      index % 4 === 0
-                        ? 'bg-[#2eaf7d]'
-                        : index % 4 === 1
-                          ? 'bg-[#3b82f6]'
-                          : index % 4 === 2
-                            ? 'bg-[#8b5cf6]'
-                            : 'bg-[#f97316]'
-                    }`}
+                    className="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-200"
                   >
-                    <div className="text-[28px] font-bold mb-1">{stat}</div>
+                    {/* Icon */}
+                    <div className="flex justify-center mb-4">
+                      <div
+                        className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                          index % 4 === 0
+                            ? 'bg-[#2eaf7d]'
+                            : index % 4 === 1
+                              ? 'bg-[#3b82f6]'
+                              : index % 4 === 2
+                                ? 'bg-[#8b5cf6]'
+                                : 'bg-[#f97316]'
+                        }`}
+                      >
+                        <svg
+                          className="w-8 h-8 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-full h-px bg-gray-200 mb-4"></div>
+
+                    {/* Content */}
+                    <div className="text-center">
+                      <div className="text-[16px] font-bold text-[#1f2937] mb-2">{stat}</div>
+                      <div className="text-[12px] text-gray-400 font-normal">
+                        {index === 0
+                          ? language === 'ru'
+                            ? 'Достижение'
+                            : language === 'pl'
+                              ? 'Osiągnięcie'
+                              : 'Achievement'
+                          : index === 1
+                            ? language === 'ru'
+                              ? 'Достижение'
+                              : language === 'pl'
+                                ? 'Osiągnięcie'
+                                : 'Achievement'
+                            : language === 'ru'
+                              ? 'Достижение'
+                              : language === 'pl'
+                                ? 'Osiągnięcie'
+                                : 'Success'}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -210,23 +257,16 @@ const ProjectDetail = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                variant="outline"
-                onClick={() => navigate('/training')}
-                className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-white text-[#3c8a7a] text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200"
-              >
-                {t('projectVolunteer')}
-              </Button>
-              <Button
                 variant="primary"
-                onClick={() => navigate('/donation')}
+                onClick={() => navigate(`/${language}/donation`)}
                 className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200"
               >
                 {t('projectDonate')}
               </Button>
               <Button
                 variant="outline"
-                onClick={() => navigate('/questions-contact')}
-                className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-transparent border-2 border-white text-white text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-white/10 transition-colors duration-200"
+                onClick={() => navigate(`/${language}/contact`)}
+                className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border-2 border-white text-[#2F7D6D] text-[16px] sm:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200"
               >
                 {t('projectPrayerPartner')}
               </Button>
@@ -235,122 +275,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="w-full bg-[#333333] py-8 lg:py-10">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-            {/* Brand */}
-            <div className="w-full lg:w-[22%]">
-              <h3 className="text-[20px] lg:text-[24px] font-bold leading-[30px] lg:leading-[36px] text-white font-['Poppins'] mb-4">
-                {t('brandName')}
-              </h3>
-              <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] mb-6 max-w-[94%]">
-                {t('footerDesc')}
-              </p>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame_blue_gray_100.svg"
-                  alt="Facebook"
-                  className="w-[10px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/img_frame_blue_gray_100_16x14.svg"
-                  alt="Twitter"
-                  className="w-[14px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-                <img
-                  src="/images/youtube.svg"
-                  alt="Youtube"
-                  className="w-[18px] h-[16px] transition-transform duration-200 hover:scale-110"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full lg:w-auto">
-              {/* Navigation */}
-              <div className="w-full lg:w-[18%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('navigation')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/about-mission', label: t('about') },
-                    { href: '/projects', label: t('projects') },
-                    { href: '/testimonies', label: t('testimonies') },
-                    { href: '/training', label: t('training') },
-                    { href: '/story', label: t('story') },
-                    { href: '/shop', label: t('shop') },
-                    { href: '/questions-contact', label: t('contact') },
-                    { href: '/donation', label: t('donate') },
-                  ].map((l) => (
-                    <Link
-                      key={l.href}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="w-full lg:w-[48%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('contact')}
-                </h4>
-                <div className="space-y-2 max-w-[84%]">
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('phoneNumber')}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                    {t('emailAddress')}
-                  </p>
-                  <div>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {t('addressLine')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      Faith City, FC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Legal */}
-              <div className="w-full lg:w-[42%]">
-                <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
-                  {t('legal')}
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { href: '/privacy-policy', label: t('privacyPolicy') },
-                    { href: '/terms-of-service', label: t('termsOfService') },
-                    { href: '/cookie-policy', label: t('cookiePolicy') },
-                  ].map((l) => (
-                    <Link
-                      key={l.label}
-                      to={l.href}
-                      className="relative block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] transition-colors hover:text-white
-                                 after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:w-0 after:bg-white after:transition-[width] after:duration-300 hover:after:w-full"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-6 border-t border-gray-600">
-            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-              {t('copyright')}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

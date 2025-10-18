@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { shopService } from '../../../services/shopService';
+import { useAlert } from '../../../hooks/useAlert';
+import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
 
 const ProductForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { success, error: showError } = useAlert();
+  const { t } = useLanguage();
   const isEdit = Boolean(id);
 
   const [loading, setLoading] = useState(false);
@@ -62,19 +66,27 @@ const ProductForm = () => {
     setLoading(true);
 
     try {
+      const price = parseFloat(formData.price);
+      if (isNaN(price) || price < 0) {
+        throw new Error('Введите корректную цену');
+      }
+
       const dataToSend = {
         ...formData,
-        price: parseFloat(formData.price),
+        price: price,
       };
 
       if (isEdit) {
         await shopService.update(id, dataToSend);
+        success('Товар успешно обновлен!', 'Успех');
       } else {
         await shopService.create(dataToSend);
+        success('Товар успешно создан!', 'Успех');
       }
       navigate('/admin/shop');
     } catch (err) {
-      setError(err.message || 'Failed to save product');
+      const errorMessage = err.message || 'Failed to save product';
+      showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }
   };

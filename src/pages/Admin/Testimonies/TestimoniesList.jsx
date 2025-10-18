@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { testimoniesService } from '../../../services/testimoniesService';
+import { ListSkeleton } from '../../../components/skeletons';
 
 const TestimoniesList = () => {
   const [testimonies, setTestimonies] = useState([]);
@@ -38,21 +39,26 @@ const TestimoniesList = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2F7D6D]"></div>
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+          <div className="animate-pulse bg-gray-200 rounded h-8 w-48"></div>
+          <div className="animate-pulse bg-gray-200 rounded h-10 w-32"></div>
+        </div>
+        <ListSkeleton count={5} />
       </div>
     );
   }
 
   return (
     <div className="space-y-4 sm:space-y-6">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins">
             Свидетельства
           </h1>
           <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 font-poppins">
-            Управление свидительствами
+            Управление свидетельствами верующих
           </p>
         </div>
         <Link
@@ -82,7 +88,7 @@ const TestimoniesList = () => {
         {testimonies.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
             <p className="text-gray-500 font-poppins">
-              Свидетельства не найдены. Создайте своё первое свидетельство!
+              Свидетельства не найдены. Создайте первое свидетельство!
             </p>
           </div>
         ) : (
@@ -100,51 +106,70 @@ const TestimoniesList = () => {
                   />
                 )}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold text-gray-900 font-poppins">
+                  <h3 className="text-base font-semibold text-gray-900 font-poppins truncate">
                     {testimony.name_en}
                   </h3>
-                  {testimony.title_en && (
-                    <p className="text-sm text-gray-500 font-poppins mt-0.5">
-                      {testimony.title_en}
-                    </p>
-                  )}
+                  <p className="text-sm text-gray-500 font-poppins line-clamp-2 mt-1">
+                    {testimony.testimony_en}
+                  </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span
+                      className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full font-poppins ${
+                        testimony.is_active
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      {testimony.is_active ? 'Активно' : 'Неактивно'}
+                    </span>
+                    <span className="text-xs text-gray-500 font-poppins">
+                      {new Date(testimony.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
                 </div>
               </div>
-
-              <p className="text-sm text-gray-700 font-poppins line-clamp-3">
-                {testimony.testimony_en}
-              </p>
 
               <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                 <div className="flex items-center gap-2">
-                  <span
-                    className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full font-poppins ${
-                      testimony.is_active
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}
+                  <Link
+                    to={`/admin/testimonies/edit/${testimony.id}`}
+                    className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[#2F7D6D] bg-[#2F7D6D]/10 rounded-lg hover:bg-[#2F7D6D]/20 transition-colors duration-200 font-poppins"
                   >
-                    {testimony.is_active ? 'Активен' : 'Неактивен'}
-                  </span>
-                  <span className="text-xs text-gray-500 font-poppins">
-                    {new Date(testimony.created_at).toLocaleDateString()}
-                  </span>
+                    <svg
+                      className="w-3 h-3 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
+                    Редактировать
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(testimony.id)}
+                    className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors duration-200 font-poppins"
+                  >
+                    <svg
+                      className="w-3 h-3 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                    Удалить
+                  </button>
                 </div>
-              </div>
-
-              <div className="flex gap-2 pt-2">
-                <Link
-                  to={`/admin/testimonies/edit/${testimony.id}`}
-                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-blue-50 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors font-poppins"
-                >
-                  Редактировать
-                </Link>
-                <button
-                  onClick={() => handleDelete(testimony.id)}
-                  className="flex-1 inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors font-poppins"
-                >
-                  Удалить
-                </button>
               </div>
             </div>
           ))
@@ -158,10 +183,10 @@ const TestimoniesList = () => {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Человек
+                  Свидетельство
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
-                  Свидетельство
+                  Текст
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase font-poppins">
                   Статус
@@ -197,44 +222,67 @@ const TestimoniesList = () => {
                           <div className="text-sm font-medium text-gray-900 font-poppins">
                             {testimony.name_en}
                           </div>
-                          <div className="text-sm text-gray-500 font-poppins">
-                            {testimony.title_en}
-                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900 font-poppins truncate max-w-xs">
-                        {testimony.testimony_en?.substring(0, 80)}...
+                      <div className="text-sm text-gray-500 font-poppins truncate max-w-xs">
+                        {testimony.testimony_en?.substring(0, 100)}...
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full font-poppins ${
+                        className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full font-poppins ${
                           testimony.is_active
                             ? 'bg-green-100 text-green-800'
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        {testimony.is_active ? 'Активен' : 'Неактивен'}
+                        {testimony.is_active ? 'Активно' : 'Неактивно'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-poppins">
                       {new Date(testimony.created_at).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Link
-                        to={`/admin/testimonies/edit/${testimony.id}`}
-                        className="text-blue-600 hover:text-blue-900 mr-4 font-poppins transition-colors"
-                      >
-                        Редактировать
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(testimony.id)}
-                        className="text-red-600 hover:text-red-900 font-poppins transition-colors"
-                      >
-                        Удалить
-                      </button>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium font-poppins">
+                      <div className="flex items-center justify-end gap-2">
+                        <Link
+                          to={`/admin/testimonies/edit/${testimony.id}`}
+                          className="text-[#2F7D6D] hover:text-[#266b5a] transition-colors duration-200"
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            />
+                          </svg>
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(testimony.id)}
+                          className="text-red-600 hover:text-red-900 transition-colors duration-200"
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
