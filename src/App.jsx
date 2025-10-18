@@ -4,9 +4,11 @@ import Header from './components/common/Header';
 import Routes from './Routes';
 import CookieConsent from './components/CookieConsent';
 import PageLoader from './components/common/PageLoader';
+import ChatBot from './components/ChatBot';
 import { ContactProvider } from './context/ContactContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
+import { ChatProvider } from './context/ChatContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
 
 function AppContent() {
@@ -23,6 +25,7 @@ function AppContent() {
       {!isAdminRoute && <Header />}
       <Routes />
       {!isAdminRoute && <CookieConsent />}
+      {!isAdminRoute && <ChatBot />}
     </>
   );
 }
@@ -32,7 +35,9 @@ export default function App() {
     <LoadingProvider>
       <ContactProvider>
         <AlertProvider>
-          <AppContent />
+          <ChatProvider>
+            <AppContent />
+          </ChatProvider>
         </AlertProvider>
       </ContactProvider>
     </LoadingProvider>
