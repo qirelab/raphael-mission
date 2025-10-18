@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useChat } from '../context/ChatContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const ChatWindow = () => {
-  const { isOpen, messages, isTyping, isApiError, sendMessage, clearChat, toggleChat } = useChat();
+  const { isOpen, messages, isTyping, isApiError, sendMessage, toggleChat } = useChat();
+  const { t } = useLanguage();
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -80,24 +82,24 @@ const ChatWindow = () => {
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-sm">Casper AI</h3>
+            <h3 className="font-semibold text-sm">{t('chatBotTitle')}</h3>
             <p className="text-xs text-white/80">
-              {isApiError ? 'Режим офлайн' : 'Помощник миссии'}
+              {isApiError ? t('chatBotOffline') : t('chatBotSubtitle')}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={clearChat}
+            onClick={toggleChat}
             className="p-1 hover:bg-white/20 rounded transition-colors"
-            title="Очистить чат"
+            title={t('chatBotClose')}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                d="M6 18L18 6M6 6l12 12"
               />
             </svg>
           </button>
@@ -146,7 +148,7 @@ const ChatWindow = () => {
                     style={{ animationDelay: '0.2s' }}
                   ></div>
                 </div>
-                <span className="text-xs text-gray-500 ml-2">Casper печатает...</span>
+                <span className="text-xs text-gray-500 ml-2">{t('chatBotTyping')}</span>
               </div>
             </div>
           </div>
@@ -164,7 +166,7 @@ const ChatWindow = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Напишите сообщение..."
+            placeholder={t('chatBotPlaceholder')}
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent text-sm"
             disabled={isTyping}
           />

@@ -82,26 +82,31 @@ const QuestionsContact = () => {
                     </div>
                   ) : (
                     <>
-                      <p>
-                        {contactData?.[`address_line1_${language}`] ||
-                          contactData?.address_line1_en ||
-                          contactData?.address_line1 ||
-                          t('addressLine')}
-                      </p>
-                      {contactData?.[`address_line2_${language}`] ||
-                      contactData?.address_line2_en ||
-                      contactData?.address_line2 ? (
+                      {(contactData?.[`address_line1_${language}`] ||
+                        contactData?.address_line1_en ||
+                        contactData?.address_line1) && (
+                        <p>
+                          {contactData?.[`address_line1_${language}`] ||
+                            contactData?.address_line1_en ||
+                            contactData?.address_line1}
+                        </p>
+                      )}
+                      {(contactData?.[`address_line2_${language}`] ||
+                        contactData?.address_line2_en ||
+                        contactData?.address_line2) && (
                         <p>
                           {contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
                             contactData?.address_line2}
                         </p>
-                      ) : null}
-                      <p>
-                        {contactData?.city && contactData?.country
-                          ? `${contactData.city}, ${contactData.country}`
-                          : contactData?.city || contactData?.country || ''}
-                      </p>
+                      )}
+                      {(contactData?.city || contactData?.country) && (
+                        <p>
+                          {contactData?.city && contactData?.country
+                            ? `${contactData.city}, ${contactData.country}`
+                            : contactData?.city || contactData?.country}
+                        </p>
+                      )}
                     </>
                   )}
                 </div>

@@ -599,6 +599,16 @@ export const translations = {
     cookieConsentReject: 'Reject All',
     cookieConsentSettings: 'Cookie Settings',
     cookieConsentLearnMore: 'Learn More',
+
+    // ===== Chat Bot =====
+    chatBotTitle: 'Casper AI',
+    chatBotSubtitle: 'Mission Assistant',
+    chatBotOffline: 'Offline Mode',
+    chatBotClose: 'Close Chat',
+    chatBotTyping: 'Casper is typing...',
+    chatBotPlaceholder: 'Type a message...',
+    chatBotWelcome: "Hello! I'm Casper AI, your Raphael Mission assistant. How can I help you?",
+    chatBotOfflineMode: 'Offline Mode',
   },
 
   ru: {
@@ -1200,6 +1210,16 @@ export const translations = {
     cookieConsentReject: 'Отклонить все',
     cookieConsentSettings: 'Настройки cookie',
     cookieConsentLearnMore: 'Узнать больше',
+
+    // ===== Chat Bot =====
+    chatBotTitle: 'Casper AI',
+    chatBotSubtitle: 'Помощник миссии',
+    chatBotOffline: 'Режим офлайн',
+    chatBotClose: 'Закрыть чат',
+    chatBotTyping: 'Casper печатает...',
+    chatBotPlaceholder: 'Напишите сообщение...',
+    chatBotWelcome: 'Привет! Я Casper AI, ваш помощник по миссии Raphael. Чем могу помочь?',
+    chatBotOfflineMode: 'Режим офлайн',
   },
 
   pl: {
@@ -1806,5 +1826,15 @@ export const translations = {
     cookieConsentReject: 'Odrzuć wszystkie',
     cookieConsentSettings: 'Ustawienia cookie',
     cookieConsentLearnMore: 'Dowiedz się więcej',
+
+    // ===== Chat Bot =====
+    chatBotTitle: 'Casper AI',
+    chatBotSubtitle: 'Asystent misji',
+    chatBotOffline: 'Tryb offline',
+    chatBotClose: 'Zamknij czat',
+    chatBotTyping: 'Casper pisze...',
+    chatBotPlaceholder: 'Napisz wiadomość...',
+    chatBotWelcome: 'Cześć! Jestem Casper AI, twoim asystentem misji Raphael. Jak mogę pomóc?',
+    chatBotOfflineMode: 'Tryb offline',
   },
 };

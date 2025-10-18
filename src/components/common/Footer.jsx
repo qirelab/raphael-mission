@@ -68,26 +68,31 @@ const Footer = () => {
                       {contactData?.email || t('emailAddress')}
                     </p>
                     <div>
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {contactData?.[`address_line1_${language}`] ||
-                          contactData?.address_line1_en ||
-                          contactData?.address_line1 ||
-                          t('addressLine')}
-                      </p>
-                      {contactData?.[`address_line2_${language}`] ||
-                      contactData?.address_line2_en ||
-                      contactData?.address_line2 ? (
+                      {(contactData?.[`address_line1_${language}`] ||
+                        contactData?.address_line1_en ||
+                        contactData?.address_line1) && (
+                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                          {contactData?.[`address_line1_${language}`] ||
+                            contactData?.address_line1_en ||
+                            contactData?.address_line1}
+                        </p>
+                      )}
+                      {(contactData?.[`address_line2_${language}`] ||
+                        contactData?.address_line2_en ||
+                        contactData?.address_line2) && (
                         <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
                           {contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
                             contactData?.address_line2}
                         </p>
-                      ) : null}
-                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                        {contactData?.city && contactData?.country
-                          ? `${contactData.city}, ${contactData.country}`
-                          : contactData?.city || contactData?.country || 'Faith City, FC 12345'}
-                      </p>
+                      )}
+                      {(contactData?.city || contactData?.country) && (
+                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                          {contactData?.city && contactData?.country
+                            ? `${contactData.city}, ${contactData.country}`
+                            : contactData?.city || contactData?.country}
+                        </p>
+                      )}
                     </div>
                   </>
                 )}

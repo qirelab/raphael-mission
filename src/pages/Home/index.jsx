@@ -426,10 +426,15 @@ const Home = () => {
                       {t('addressLabel')}
                     </h3>
                     <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {contactData?.[`address_line1_${language}`] ||
+                      {(contactData?.[`address_line1_${language}`] ||
                         contactData?.address_line1_en ||
-                        contactData?.address_line1 ||
-                        t('addressLine')}
+                        contactData?.address_line1) && (
+                        <>
+                          {contactData?.[`address_line1_${language}`] ||
+                            contactData?.address_line1_en ||
+                            contactData?.address_line1}
+                        </>
+                      )}
                       {(contactData?.[`address_line2_${language}`] ||
                         contactData?.address_line2_en ||
                         contactData?.address_line2) && (
@@ -440,10 +445,14 @@ const Home = () => {
                             contactData?.address_line2}
                         </>
                       )}
-                      <br />
-                      {contactData?.city && contactData?.country
-                        ? `${contactData.city}, ${contactData.country}`
-                        : contactData?.city || contactData?.country || 'Faith City, FC 12345'}
+                      {(contactData?.city || contactData?.country) && (
+                        <>
+                          <br />
+                          {contactData?.city && contactData?.country
+                            ? `${contactData.city}, ${contactData.country}`
+                            : contactData?.city || contactData?.country}
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
