@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { trainingService } from '../../../services/trainingService';
 import ImageUpload from '../../../components/ImageUpload';
+import MultilingualInput from '../../../components/MultilingualInput';
 
 const TrainingForm = () => {
   const navigate = useNavigate();
@@ -100,46 +101,20 @@ const TrainingForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Английский)
-              </label>
-              <input
-                type="text"
-                name="title_en"
-                value={formData.title_en}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Русский)
-              </label>
-              <input
-                type="text"
-                name="title_ru"
-                value={formData.title_ru}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Польский)
-              </label>
-              <input
-                type="text"
-                name="title_pl"
-                value={formData.title_pl}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
+          <div className="space-y-6">
+            <MultilingualInput
+              label="Название программы"
+              fieldName="title"
+              values={{
+                en: formData.title_en,
+                ru: formData.title_ru,
+                pl: formData.title_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              required
+              placeholder="Введите название программы обучения"
+            />
           </div>
           <div className="mt-6">
             <ImageUpload
@@ -165,92 +140,36 @@ const TrainingForm = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Продолжительность</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Продолжительность (Английский)
-              </label>
-              <input
-                type="text"
-                name="duration_en"
-                value={formData.duration_en}
-                onChange={handleChange}
-                placeholder="3 months"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Продолжительность (Русский)
-              </label>
-              <input
-                type="text"
-                name="duration_ru"
-                value={formData.duration_ru}
-                onChange={handleChange}
-                placeholder="3 месяца"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Продолжительность (Польский)
-              </label>
-              <input
-                type="text"
-                name="duration_pl"
-                value={formData.duration_pl}
-                onChange={handleChange}
-                placeholder="3 miesiące"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-          </div>
+          <MultilingualInput
+            label="Продолжительность"
+            fieldName="duration"
+            values={{
+              en: formData.duration_en,
+              ru: formData.duration_ru,
+              pl: formData.duration_pl,
+            }}
+            onChange={handleChange}
+            type="input"
+            placeholder="Например: 3 месяца / 3 months / 3 miesiące"
+          />
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описание</h2>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Английский)
-              </label>
-              <textarea
-                name="description_en"
-                value={formData.description_en}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Русский)
-              </label>
-              <textarea
-                name="description_ru"
-                value={formData.description_ru}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Польский)
-              </label>
-              <textarea
-                name="description_pl"
-                value={formData.description_pl}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-          </div>
+          <MultilingualInput
+            label="Описание программы"
+            fieldName="description"
+            values={{
+              en: formData.description_en,
+              ru: formData.description_ru,
+              pl: formData.description_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={6}
+            required
+            placeholder="Введите описание программы обучения"
+          />
         </div>
 
         <div className="flex gap-4">

@@ -4,6 +4,7 @@ import { shopService } from '../../../services/shopService';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
+import MultilingualInput from '../../../components/MultilingualInput';
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -116,46 +117,20 @@ const ProductForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Английский)
-              </label>
-              <input
-                type="text"
-                name="name_en"
-                value={formData.name_en}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Русский)
-              </label>
-              <input
-                type="text"
-                name="name_ru"
-                value={formData.name_ru}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Название (Польский)
-              </label>
-              <input
-                type="text"
-                name="name_pl"
-                value={formData.name_pl}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
+          <div className="space-y-6">
+            <MultilingualInput
+              label="Название товара"
+              fieldName="name"
+              values={{
+                en: formData.name_en,
+                ru: formData.name_ru,
+                pl: formData.name_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              required
+              placeholder="Введите название товара"
+            />
           </div>
           <div className="mt-6">
             <ImageUpload
@@ -217,44 +192,19 @@ const ProductForm = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описание</h2>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Английский)
-              </label>
-              <textarea
-                name="description_en"
-                value={formData.description_en}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Русский)
-              </label>
-              <textarea
-                name="description_ru"
-                value={formData.description_ru}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Описание (Польский)
-              </label>
-              <textarea
-                name="description_pl"
-                value={formData.description_pl}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-          </div>
+          <MultilingualInput
+            label="Описание товара"
+            fieldName="description"
+            values={{
+              en: formData.description_en,
+              ru: formData.description_ru,
+              pl: formData.description_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={4}
+            placeholder="Введите описание товара"
+          />
         </div>
 
         <div className="flex gap-4">

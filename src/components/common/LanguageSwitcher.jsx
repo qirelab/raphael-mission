@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAlert } from '../../hooks/useAlert';
+import FlagUS from '../icons/FlagUS';
+import FlagRU from '../icons/FlagRU';
+import FlagPL from '../icons/FlagPL';
 
 const LanguageSwitcher = () => {
   const { currentLanguage, changeLanguage, t } = useLanguage();
@@ -9,9 +12,9 @@ const LanguageSwitcher = () => {
   const dropdownRef = useRef(null);
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-    { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+    { code: 'en', name: 'English', FlagComponent: FlagUS },
+    { code: 'ru', name: 'Русский', FlagComponent: FlagRU },
+    { code: 'pl', name: 'Polski', FlagComponent: FlagPL },
   ];
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage);
@@ -46,6 +49,8 @@ const LanguageSwitcher = () => {
     setIsOpen(false);
   };
 
+  const CurrentFlag = currentLang?.FlagComponent;
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -53,7 +58,7 @@ const LanguageSwitcher = () => {
         className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3c8a7a] transition-all duration-200"
         aria-label={t('language')}
       >
-        <span className="text-lg">{currentLang?.flag}</span>
+        {CurrentFlag && <CurrentFlag className="w-6 h-4" />}
         <span className="hidden sm:inline">{currentLang?.name}</span>
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
@@ -68,29 +73,32 @@ const LanguageSwitcher = () => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
           <div className="py-1">
-            {languages.map((language) => (
-              <button
-                key={language.code}
-                onClick={() => handleLanguageChange(language.code)}
-                className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-left hover:bg-gray-50 transition-colors duration-150 ${
-                  currentLanguage === language.code
-                    ? 'bg-[#3c8a7a] text-white hover:bg-[#2d6b5d]'
-                    : 'text-gray-700'
-                }`}
-              >
-                <span className="text-lg">{language.flag}</span>
-                <span>{language.name}</span>
-                {currentLanguage === language.code && (
-                  <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                )}
-              </button>
-            ))}
+            {languages.map((language) => {
+              const Flag = language.FlagComponent;
+              return (
+                <button
+                  key={language.code}
+                  onClick={() => handleLanguageChange(language.code)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-left hover:bg-gray-50 transition-colors duration-150 ${
+                    currentLanguage === language.code
+                      ? 'bg-[#3c8a7a] text-white hover:bg-[#2d6b5d]'
+                      : 'text-gray-700'
+                  }`}
+                >
+                  {Flag && <Flag className="w-6 h-4" />}
+                  <span>{language.name}</span>
+                  {currentLanguage === language.code && (
+                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

@@ -156,7 +156,7 @@ const ProjectDetail = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-200"
+                    className="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-200 flex flex-col"
                   >
                     {/* Icon */}
                     <div className="flex justify-center mb-4">
@@ -190,27 +190,19 @@ const ProjectDetail = () => {
                     {/* Divider */}
                     <div className="w-full h-px bg-gray-200 mb-4"></div>
 
-                    {/* Content */}
-                    <div className="text-center">
-                      <div className="text-[16px] font-bold text-[#1f2937] mb-2">{stat}</div>
+                    {/* Stat Text - прижат к верху */}
+                    <div className="text-center mb-4">
+                      <div className="text-[16px] font-bold text-[#1f2937]">{stat}</div>
+                    </div>
+
+                    {/* Achievement Label - прижат к низу */}
+                    <div className="text-center mt-auto">
                       <div className="text-[12px] text-gray-400 font-normal">
-                        {index === 0
-                          ? language === 'ru'
-                            ? 'Достижение'
-                            : language === 'pl'
-                              ? 'Osiągnięcie'
-                              : 'Achievement'
-                          : index === 1
-                            ? language === 'ru'
-                              ? 'Достижение'
-                              : language === 'pl'
-                                ? 'Osiągnięcie'
-                                : 'Achievement'
-                            : language === 'ru'
-                              ? 'Достижение'
-                              : language === 'pl'
-                                ? 'Osiągnięcie'
-                                : 'Success'}
+                        {language === 'ru'
+                          ? 'Достижение'
+                          : language === 'pl'
+                            ? 'Osiągnięcie'
+                            : 'Achievement'}
                       </div>
                     </div>
                   </div>

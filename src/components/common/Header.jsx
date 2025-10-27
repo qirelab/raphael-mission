@@ -170,7 +170,7 @@ const Header = () => {
 
           {/* Right: Donate + Language */}
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 flex-1 justify-end">
-            <a href="/donation" className="shrink-0">
+            <a href={`/${language}/donation`} className="shrink-0">
               <Button
                 variant="primary"
                 className="py-[8px] px-[18px] rounded-[10px] text-[14px] leading-[20px] transition-transform duration-200 hover:-translate-y-[1px]"

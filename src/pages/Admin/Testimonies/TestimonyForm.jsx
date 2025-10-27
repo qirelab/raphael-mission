@@ -4,6 +4,7 @@ import { testimoniesService } from '../../../services/testimoniesService';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
+import MultilingualInput from '../../../components/MultilingualInput';
 
 const TestimonyForm = () => {
   const navigate = useNavigate();
@@ -119,50 +120,19 @@ const TestimonyForm = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                  Имя (Английский) *
-                </label>
-                <input
-                  type="text"
-                  name="name_en"
-                  value={formData.name_en}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-                  placeholder="e.g., John Smith"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                  Имя (Русский) *
-                </label>
-                <input
-                  type="text"
-                  name="name_ru"
-                  value={formData.name_ru}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-                  placeholder="e.g., Джон Смит"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                  Имя (Польский) *
-                </label>
-                <input
-                  type="text"
-                  name="name_pl"
-                  value={formData.name_pl}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-                  placeholder="e.g., Jan Kowalski"
-                />
-              </div>
-            </div>
+            <MultilingualInput
+              label="Имя"
+              fieldName="name"
+              values={{
+                en: formData.name_en,
+                ru: formData.name_ru,
+                pl: formData.name_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              required
+              placeholder="Введите имя"
+            />
           </div>
           <div className="mt-6">
             <ImageUpload
@@ -172,43 +142,19 @@ const TestimonyForm = () => {
               label="Изображение свидительства"
             />
           </div>
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Местоположение (АНГ)
-              </label>
-              <input
-                type="text"
-                name="title_en"
-                value={formData.title_en}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Местоположение (РУС)
-              </label>
-              <input
-                type="text"
-                name="title_ru"
-                value={formData.title_ru}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Местоположение (ПОЛ)
-              </label>
-              <input
-                type="text"
-                name="title_pl"
-                value={formData.title_pl}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
+          <div className="mt-6">
+            <MultilingualInput
+              label="Местоположение"
+              fieldName="title"
+              values={{
+                en: formData.title_en,
+                ru: formData.title_ru,
+                pl: formData.title_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Введите местоположение"
+            />
           </div>
           <div className="mt-6">
             <label className="flex items-center">
@@ -228,47 +174,20 @@ const TestimonyForm = () => {
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">
             Содержание свидительства
           </h2>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Свидительство (Английский)
-              </label>
-              <textarea
-                name="content_en"
-                value={formData.content_en}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Свидительство (Русский)
-              </label>
-              <textarea
-                name="content_ru"
-                value={formData.content_ru}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
-                Свидительство (Польский)
-              </label>
-              <textarea
-                name="content_pl"
-                value={formData.content_pl}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F7D6D] focus:border-transparent font-poppins"
-              />
-            </div>
-          </div>
+          <MultilingualInput
+            label="Свидительство"
+            fieldName="content"
+            values={{
+              en: formData.content_en,
+              ru: formData.content_ru,
+              pl: formData.content_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={6}
+            required
+            placeholder="Введите текст свидетельства"
+          />
         </div>
 
         <div className="flex gap-4">
