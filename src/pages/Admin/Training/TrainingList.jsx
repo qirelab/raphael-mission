@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { trainingService } from '../../../services/trainingService';
 import { ListSkeleton } from '../../../components/skeletons';
+import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const TrainingList = () => {
   const [programs, setPrograms] = useState([]);
@@ -9,6 +10,8 @@ const TrainingList = () => {
   const [error, setError] = useState('');
   const [deletingId, setDeletingId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [programToDelete, setProgramToDelete] = useState(null);
 
   useEffect(() => {
     fetchPrograms();
@@ -31,21 +34,31 @@ const TrainingList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Вы уверены, что хотите удалить эту программу обучения?')) {
-      return;
-    }
+  const handleDelete = (id) => {
+    setProgramToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!programToDelete) return;
 
     try {
-      setDeletingId(id);
-      await trainingService.delete(id);
+      setDeletingId(programToDelete);
+      await trainingService.delete(programToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchPrograms(true);
+      setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить программу обучения');
     } finally {
       setDeletingId(null);
+      setProgramToDelete(null);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setProgramToDelete(null);
   };
 
   if (loading) {
@@ -366,6 +379,19 @@ const TrainingList = () => {
           </table>
         </div>
       </div>
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title="Удалить программу обучения?"
+        message="Вы уверены, что хотите удалить эту программу обучения? Это действие нельзя отменить."
+        confirmText="Удалить"
+        cancelText="Отмена"
+        variant="danger"
+        loading={deletingId === programToDelete}
+      />
     </div>
   );
 };

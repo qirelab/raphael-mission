@@ -1,122 +1,324 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const Alert = ({ type = 'info', title, message, duration = 5000, onClose, show = true, t }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isEntering, setIsEntering] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
+  const [progress, setProgress] = useState(100);
+  const timerRef = useRef(null);
+  const progressIntervalRef = useRef(null);
 
   useEffect(() => {
     if (show) {
       setIsVisible(true);
       setIsLeaving(false);
+      setProgress(100);
+
+      // Trigger enter animation
+      setTimeout(() => setIsEntering(true), 10);
 
       if (duration > 0) {
-        const timer = setTimeout(() => {
+        const startTime = Date.now();
+
+        // Progress bar animation
+        progressIntervalRef.current = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(0, 100 - (elapsed / duration) * 100);
+          setProgress(remaining);
+
+          if (remaining === 0) {
+            clearInterval(progressIntervalRef.current);
+          }
+        }, 16); // ~60fps
+
+        // Auto close timer
+        timerRef.current = setTimeout(() => {
           handleClose();
         }, duration);
-
-        return () => clearTimeout(timer);
       }
+
+      return () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
+        if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+      };
     }
   }, [show, duration]);
 
   const handleClose = () => {
+    setIsEntering(false);
     setIsLeaving(true);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+
     setTimeout(() => {
       setIsVisible(false);
       onClose?.();
-    }, 300);
+    }, 400);
   };
 
   if (!isVisible) return null;
 
-  const getAlertStyles = () => {
-    const baseStyles =
-      'fixed bottom-4 left-4 z-[10000] max-w-sm w-full mx-4 sm:max-w-md transform transition-all duration-300 ease-out';
-
-    const typeStyles = {
-      success: 'bg-white border-green-200 text-green-800 shadow-lg',
-      error: 'bg-white border-red-200 text-red-800 shadow-lg',
-      warning: 'bg-white border-yellow-200 text-yellow-800 shadow-lg',
-      info: 'bg-white border-blue-200 text-blue-800 shadow-lg',
+  const getAlertConfig = () => {
+    const configs = {
+      success: {
+        bgGradient: 'from-green-50 via-green-50/95 to-emerald-50/90',
+        borderColor: 'border-green-200/60',
+        iconBg: 'bg-gradient-to-br from-green-400 to-emerald-500',
+        iconColor: 'text-white',
+        textColor: 'text-green-900',
+        titleColor: 'text-green-800',
+        progressBg: 'bg-green-500',
+        shadowColor: 'shadow-green-200/50',
+        glowColor: 'shadow-green-400/30',
+      },
+      error: {
+        bgGradient: 'from-red-50 via-red-50/95 to-rose-50/90',
+        borderColor: 'border-red-200/60',
+        iconBg: 'bg-gradient-to-br from-red-400 to-rose-500',
+        iconColor: 'text-white',
+        textColor: 'text-red-900',
+        titleColor: 'text-red-800',
+        progressBg: 'bg-red-500',
+        shadowColor: 'shadow-red-200/50',
+        glowColor: 'shadow-red-400/30',
+      },
+      warning: {
+        bgGradient: 'from-yellow-50 via-amber-50/95 to-orange-50/90',
+        borderColor: 'border-yellow-200/60',
+        iconBg: 'bg-gradient-to-br from-yellow-400 to-amber-500',
+        iconColor: 'text-white',
+        textColor: 'text-yellow-900',
+        titleColor: 'text-yellow-800',
+        progressBg: 'bg-yellow-500',
+        shadowColor: 'shadow-yellow-200/50',
+        glowColor: 'shadow-yellow-400/30',
+      },
+      info: {
+        bgGradient: 'from-blue-50 via-blue-50/95 to-cyan-50/90',
+        borderColor: 'border-blue-200/60',
+        iconBg: 'bg-gradient-to-br from-blue-400 to-cyan-500',
+        iconColor: 'text-white',
+        textColor: 'text-blue-900',
+        titleColor: 'text-blue-800',
+        progressBg: 'bg-blue-500',
+        shadowColor: 'shadow-blue-200/50',
+        glowColor: 'shadow-blue-400/30',
+      },
     };
 
-    const animationStyles = isLeaving ? 'translate-y-full opacity-0' : 'translate-y-0 opacity-100';
-
-    return `${baseStyles} ${typeStyles[type]} ${animationStyles}`;
+    return configs[type] || configs.info;
   };
 
   const getIcon = () => {
-    const iconClass = 'w-5 h-5 flex-shrink-0';
+    const config = getAlertConfig();
+    const iconClass = `w-5 h-5 sm:w-6 sm:h-6 ${config.iconColor}`;
 
-    switch (type) {
-      case 'success':
-        return (
-          <svg className={`${iconClass} text-green-600`} fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clipRule="evenodd"
-            />
-          </svg>
-        );
-      case 'error':
-        return (
-          <svg className={`${iconClass} text-red-600`} fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              clipRule="evenodd"
-            />
-          </svg>
-        );
-      case 'warning':
-        return (
-          <svg className={`${iconClass} text-yellow-600`} fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        );
-      default:
-        return (
-          <svg className={`${iconClass} text-blue-600`} fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-              clipRule="evenodd"
-            />
-          </svg>
-        );
+    const icons = {
+      success: (
+        <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      ),
+      error: (
+        <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      ),
+      warning: (
+        <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          />
+        </svg>
+      ),
+      info: (
+        <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      ),
+    };
+
+    return icons[type] || icons.info;
+  };
+
+  const config = getAlertConfig();
+
+  const getAnimationClasses = () => {
+    if (isLeaving) {
+      return 'opacity-0 translate-x-full scale-95';
     }
+    if (isEntering) {
+      return 'opacity-100 translate-x-0 scale-100';
+    }
+    return 'opacity-0 translate-x-full scale-95';
   };
 
   const ui = (
-    <div className={getAlertStyles()}>
-      <div className="flex items-start p-4 rounded-lg border">
-        <div className="flex-shrink-0 mr-3">{getIcon()}</div>
+    <div
+      className={`
+        fixed z-[10000]
+        bottom-4 right-4
+        sm:bottom-6 sm:right-6
+        md:bottom-8 md:right-8
+        w-[calc(100vw-2rem)]
+        sm:w-[420px]
+        md:w-[480px]
+        max-w-[calc(100vw-2rem)]
+      `}
+    >
+      <div
+        className={`
+          relative
+          bg-gradient-to-br ${config.bgGradient}
+          backdrop-blur-xl
+          border ${config.borderColor}
+          rounded-2xl
+          shadow-2xl ${config.shadowColor}
+          overflow-hidden
+          transition-all duration-400 ease-out
+          ${getAnimationClasses()}
+        `}
+        style={{
+          transform: isEntering ? 'translateX(0) scale(1)' : undefined,
+        }}
+      >
+        {/* Animated background effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-60"></div>
 
-        <div className="flex-1 min-w-0">
-          {title && <h4 className="text-sm font-semibold mb-1 font-poppins">{title}</h4>}
-          <p className="text-sm font-poppins">{message}</p>
+        {/* Main content */}
+        <div className="relative flex items-start gap-3 sm:gap-4 p-4 sm:p-5">
+          {/* Icon with animation */}
+          <div
+            className={`
+              flex-shrink-0
+              ${config.iconBg}
+              rounded-xl sm:rounded-2xl
+              p-2 sm:p-2.5
+              shadow-lg ${config.glowColor}
+              transition-all duration-300
+              ${isEntering ? 'animate-bounce-in' : ''}
+            `}
+          >
+            {getIcon()}
+          </div>
+
+          {/* Text content */}
+          <div className="flex-1 min-w-0 pt-0.5">
+            {title && (
+              <h4
+                className={`
+                  text-sm sm:text-base
+                  font-bold
+                  ${config.titleColor}
+                  font-poppins
+                  mb-1
+                  leading-snug
+                `}
+              >
+                {title}
+              </h4>
+            )}
+            <p
+              className={`
+                text-xs sm:text-sm
+                ${config.textColor}
+                font-poppins
+                leading-relaxed
+                break-words
+              `}
+            >
+              {message}
+            </p>
+          </div>
+
+          {/* Close button */}
+          <button
+            onClick={handleClose}
+            className={`
+              flex-shrink-0
+              p-1.5 sm:p-2
+              rounded-lg
+              ${config.textColor}
+              hover:bg-black/10
+              active:bg-black/20
+              transition-all duration-200
+              hover:scale-110
+              active:scale-95
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-current
+            `}
+            aria-label="Close notification"
+          >
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
 
-        <button
-          onClick={handleClose}
-          className="flex-shrink-0 ml-3 p-1 rounded-full hover:bg-black/5 transition-colors duration-200"
-          aria-label="Close notification"
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clipRule="evenodd"
+        {/* Progress bar */}
+        {duration > 0 && (
+          <div className="relative h-1 bg-black/5">
+            <div
+              className={`
+                absolute left-0 top-0 h-full
+                ${config.progressBg}
+                transition-all duration-100 ease-linear
+                shadow-lg
+              `}
+              style={{ width: `${progress}%` }}
             />
-          </svg>
-        </button>
+          </div>
+        )}
       </div>
+
+      <style jsx>{`
+        @keyframes bounce-in {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.15);
+          }
+          70% {
+            transform: scale(0.95);
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .animate-bounce-in {
+          animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+      `}</style>
     </div>
   );
 

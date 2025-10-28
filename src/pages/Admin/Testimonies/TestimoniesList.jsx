@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { testimoniesService } from '../../../services/testimoniesService';
 import { ListSkeleton } from '../../../components/skeletons';
+import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const TestimoniesList = () => {
   const [testimonies, setTestimonies] = useState([]);
@@ -9,6 +10,8 @@ const TestimoniesList = () => {
   const [error, setError] = useState('');
   const [deletingId, setDeletingId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [testimonyToDelete, setTestimonyToDelete] = useState(null);
 
   useEffect(() => {
     fetchTestimonies();
@@ -31,21 +34,31 @@ const TestimoniesList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Вы уверены, что хотите удалить это свидетельство?')) {
-      return;
-    }
+  const handleDelete = (id) => {
+    setTestimonyToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!testimonyToDelete) return;
 
     try {
-      setDeletingId(id);
-      await testimoniesService.delete(id);
+      setDeletingId(testimonyToDelete);
+      await testimoniesService.delete(testimonyToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchTestimonies(true);
+      setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить свидетельство');
     } finally {
       setDeletingId(null);
+      setTestimonyToDelete(null);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTestimonyToDelete(null);
   };
 
   if (loading) {
@@ -358,6 +371,19 @@ const TestimoniesList = () => {
           </table>
         </div>
       </div>
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title="Удалить свидетельство?"
+        message="Вы уверены, что хотите удалить это свидетельство? Это действие нельзя отменить."
+        confirmText="Удалить"
+        cancelText="Отмена"
+        variant="danger"
+        loading={deletingId === testimonyToDelete}
+      />
     </div>
   );
 };

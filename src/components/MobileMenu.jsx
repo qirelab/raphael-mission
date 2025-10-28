@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAlert } from '../hooks/useAlert';
 import { projectsService } from '../services/projectsService';
+import FlagUS from './icons/FlagUS';
+import FlagRU from './icons/FlagRU';
+import FlagPL from './icons/FlagPL';
 
 export default function MobileMenu({ open, onClose }) {
   const { t, language, changeLanguage } = useLanguage();
@@ -47,9 +50,9 @@ export default function MobileMenu({ open, onClose }) {
   ];
 
   const languages = [
-    { code: 'en', label: 'English', flag: '🇺🇸' },
-    { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-    { code: 'pl', label: 'Polski', flag: '🇵🇱' },
+    { code: 'en', label: 'English', FlagComponent: FlagUS },
+    { code: 'ru', label: 'Русский', FlagComponent: FlagRU },
+    { code: 'pl', label: 'Polski', FlagComponent: FlagPL },
   ];
 
   useEffect(() => {
@@ -240,43 +243,46 @@ export default function MobileMenu({ open, onClose }) {
               {t('language')}
             </div>
             <div className="space-y-2">
-              {languages.map((lang, index) => (
-                <button
-                  key={lang.code}
-                  onClick={() => handleLanguageChange(lang.code)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-poppins ${
-                    language === lang.code
-                      ? 'bg-[#3c8a7a] text-white shadow-md'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
-                  }`}
-                  style={{
-                    animationDelay: `${(links.length + index) * 80}ms`,
-                    animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
-                  }}
-                >
-                  <span className="text-2xl">{lang.flag}</span>
-                  <span className="text-base font-medium flex-1 text-left">{lang.label}</span>
-                  {language === lang.code && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      className="text-white"
-                      fill="none"
-                    >
-                      <path
-                        d="M5 13l4 4L19 7"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </button>
-              ))}
+              {languages.map((lang, index) => {
+                const Flag = lang.FlagComponent;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleLanguageChange(lang.code)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-poppins ${
+                      language === lang.code
+                        ? 'bg-[#3c8a7a] text-white shadow-md'
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                    }`}
+                    style={{
+                      animationDelay: `${(links.length + index) * 80}ms`,
+                      animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                    }}
+                  >
+                    {Flag && <Flag className="w-8 h-6" />}
+                    <span className="text-base font-medium flex-1 text-left">{lang.label}</span>
+                    {language === lang.code && (
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        className="text-white"
+                        fill="none"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
