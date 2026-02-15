@@ -3,6 +3,7 @@ node_modules/
 package-lock.json
 
 # Production build
+build
 
 # Logs
 npm-debug.log*
@@ -23,3 +24,4 @@ jest-test-results.json
 # Optional: if using IDEs
 .vscode/
 .idea/
+.env
