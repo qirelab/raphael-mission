@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { projectsService } from '../../../services/projectsService';
+import { useProjects } from '../../../context/ProjectsContext';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
@@ -10,6 +11,7 @@ import MultilingualInput from '../../../components/MultilingualInput';
 const ProjectForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { refreshProjects } = useProjects();
   const { success, error: showError } = useAlert();
   const { t } = useLanguage();
   const isEdit = Boolean(id);
@@ -101,6 +103,8 @@ const ProjectForm = () => {
         await projectsService.create(formData);
         success('Проект успешно создан!', 'Успех');
       }
+      // Refresh projects context for public frontend
+      await refreshProjects();
       navigate('/admin/projects');
     } catch (err) {
       const errorMessage = err.message || 'Failed to save project';

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { testimoniesService } from '../../../services/testimoniesService';
 import { ListSkeleton } from '../../../components/skeletons';
 import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const TestimoniesList = () => {
+  const location = useLocation();
   const [testimonies, setTestimonies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,9 +14,10 @@ const TestimoniesList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testimonyToDelete, setTestimonyToDelete] = useState(null);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
     fetchTestimonies();
-  }, []);
+  }, [location.pathname]);
 
   const fetchTestimonies = async (isRefresh = false) => {
     try {

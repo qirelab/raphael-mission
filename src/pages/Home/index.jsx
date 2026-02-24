@@ -27,7 +27,7 @@ const Home = () => {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const [firstProjects, setFirstProjects] = useState([]);
+  const [firstProjectsData, setFirstProjectsData] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
 
   const { data: testimonies, loading: loadingTestimonies } = useTestimonies();
@@ -38,13 +38,13 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Load first projects and testimonies
+  // Load first 3 projects only once, not on language change
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoadingProjects(true);
         const projects = await projectsService.getFirst(3);
-        setFirstProjects(projects);
+        setFirstProjectsData(projects);
       } catch (error) {
         console.error('Error loading projects:', error);
       } finally {
@@ -53,7 +53,14 @@ const Home = () => {
     };
 
     loadData();
-  }, [language]);
+  }, []); // Load only once!
+
+  // Transform projects based on current language (client-side, no API call)
+  const firstProjects = firstProjectsData.map((project) => ({
+    ...project,
+    title: project[`title_${language}`] || project.title_en,
+    description: project[`description_${language}`] || project.description_en,
+  }));
 
   // Обработка якоря при загрузке страницы
   useEffect(() => {

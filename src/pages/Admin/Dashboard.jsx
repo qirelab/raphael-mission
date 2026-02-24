@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { projectsService } from '../../services/projectsService';
 import { testimoniesService } from '../../services/testimoniesService';
 import { trainingService } from '../../services/trainingService';
 import { shopService } from '../../services/shopService';
 
 const Dashboard = () => {
+  const location = useLocation();
   const [stats, setStats] = useState({
     projects: 0,
     testimonies: 0,
@@ -14,6 +15,7 @@ const Dashboard = () => {
   });
   const [loading, setLoading] = useState(true);
 
+  // Refresh stats when navigating back to dashboard
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -38,7 +40,7 @@ const Dashboard = () => {
     };
 
     fetchStats();
-  }, []);
+  }, [location.pathname]);
 
   const statCards = [
     {

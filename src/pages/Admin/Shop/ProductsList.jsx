@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { shopService } from '../../../services/shopService';
 import { ListSkeleton } from '../../../components/skeletons';
 import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const ProductsList = () => {
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,9 +14,10 @@ const ProductsList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [location.pathname]);
 
   const fetchProducts = async (isRefresh = false) => {
     try {

@@ -1,112 +1,31 @@
-import { neonClient } from './neon.js';
-import bcrypt from 'bcryptjs';
+import { apiClient } from './apiClient.js';
 
-const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
-const MAX_LOGIN_ATTEMPTS = 5;
-const LOCKOUT_DURATION = 15 * 60 * 1000; // 15 minutes
-
-// Generate session token
-function generateSessionToken() {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
-
-// Get client IP (simplified for demo)
-function getClientIP() {
-  // In production, get real IP from request headers
-  return '127.0.0.1';
-}
-
-// Check if account is locked
-async function isAccountLocked(email) {
-  try {
-    const recentAttempts = await neonClient`
-      SELECT COUNT(*) as count
-      FROM login_attempts 
-      WHERE email = ${email} 
-      AND success = false 
-      AND attempted_at > NOW() - INTERVAL '${LOCKOUT_DURATION}ms'
-    `;
-
-    return recentAttempts[0].count >= MAX_LOGIN_ATTEMPTS;
-  } catch (error) {
-    console.error('Error checking account lock:', error);
-    return false;
-  }
-}
-
-// Record login attempt
-async function recordLoginAttempt(email, success, ipAddress) {
-  try {
-    await neonClient`
-      INSERT INTO login_attempts (email, ip_address, success)
-      VALUES (${email}, ${ipAddress}, ${success})
-    `;
-  } catch (error) {
-    console.error('Error recording login attempt:', error);
-  }
-}
-
+/**
+ * Authentication service - works with backend API and JWT tokens
+ */
 export const authService = {
-  // Sign in user with security checks
+  /**
+   * Sign in user with email and password
+   * @param {string} email - User email
+   * @param {string} password - User password
+   * @returns {Promise<Object>} User data and token
+   */
   async signIn(email, password) {
     try {
-      // Check if account is locked
-      if (await isAccountLocked(email)) {
-        throw new Error(
-          'Account temporarily locked due to too many failed attempts. Please try again later.'
-        );
+      const response = await apiClient.post('/auth/signin', {
+        email,
+        password,
+      });
+
+      // Store JWT token
+      if (response.success && response.data.token) {
+        apiClient.setToken(response.data.token);
       }
-
-      // Find user by email
-      const users = await neonClient`
-        SELECT id, email, password_hash, name, role, is_active 
-        FROM users 
-        WHERE email = ${email} AND is_active = true
-      `;
-
-      if (users.length === 0) {
-        await recordLoginAttempt(email, false, getClientIP());
-        throw new Error('Invalid email or password');
-      }
-
-      const user = users[0];
-
-      // Verify password
-      const isValidPassword = await bcrypt.compare(password, user.password_hash);
-
-      if (!isValidPassword) {
-        await recordLoginAttempt(email, false, getClientIP());
-        throw new Error('Invalid email or password');
-      }
-
-      // Record successful login
-      await recordLoginAttempt(email, true, getClientIP());
-
-      // Generate session token
-      const sessionToken = generateSessionToken();
-      const expiresAt = new Date(Date.now() + SESSION_DURATION);
-
-      // Store session in database
-      await neonClient`
-        INSERT INTO user_sessions (user_id, session_token, expires_at)
-        VALUES (${user.id}, ${sessionToken}, ${expiresAt.toISOString()})
-      `;
-
-      // Clean up expired sessions
-      await neonClient`
-        DELETE FROM user_sessions 
-        WHERE expires_at < NOW()
-      `;
 
       return {
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-        },
+        user: response.data.user,
         session: {
-          session_token: sessionToken,
+          session_token: response.data.token, // For compatibility with old code
         },
       };
     } catch (error) {
@@ -115,87 +34,105 @@ export const authService = {
     }
   },
 
-  // Sign out user
-  async signOut(sessionToken) {
+  /**
+   * Sign out current user
+   */
+  async signOut() {
     try {
-      if (sessionToken) {
-        await neonClient`
-          DELETE FROM user_sessions 
-          WHERE session_token = ${sessionToken}
-        `;
-      }
+      // Call backend to invalidate session
+      await apiClient.post('/auth/signout');
+
+      // Remove token from localStorage
+      apiClient.removeToken();
+
       return { success: true };
     } catch (error) {
       console.error('Sign out error:', error);
+      // Remove token even if request fails
+      apiClient.removeToken();
       throw error;
     }
   },
 
-  // Get current session
+  /**
+   * Get current session
+   * @returns {Promise<Object>} Session data with user
+   */
   async getSession() {
     try {
-      // Get session token from localStorage or cookies
-      const sessionToken = localStorage.getItem('session_token');
-      if (!sessionToken) {
+      const token = apiClient.getToken();
+
+      if (!token) {
         return { data: { session: null } };
       }
 
-      // Verify session in database
-      const sessions = await neonClient`
-        SELECT s.*, u.id, u.email, u.name, u.role
-        FROM user_sessions s
-        JOIN users u ON s.user_id = u.id
-        WHERE s.session_token = ${sessionToken} 
-        AND s.expires_at > NOW()
-        AND u.is_active = true
-      `;
+      const response = await apiClient.get('/auth/session');
 
-      if (sessions.length === 0) {
-        // Clean up invalid session
-        localStorage.removeItem('session_token');
-        return { data: { session: null } };
-      }
-
-      const session = sessions[0];
-      return {
-        data: {
-          session: {
-            session_token: sessionToken,
-            user: {
-              id: session.id,
-              email: session.email,
-              name: session.name,
-              role: session.role,
+      if (response.success && response.data.session) {
+        return {
+          data: {
+            session: {
+              ...response.data.session,
+              session_token: token, // For compatibility
             },
           },
-        },
-      };
+        };
+      }
+
+      return { data: { session: null } };
     } catch (error) {
       console.error('Get session error:', error);
+      // If session is invalid, remove token
+      if (error.status === 401) {
+        apiClient.removeToken();
+      }
       return { data: { session: null } };
     }
   },
 
-  // Get current user
+  /**
+   * Get current user
+   * @returns {Promise<Object>} User data
+   */
   async getUser() {
     try {
-      const sessionResult = await this.getSession();
-      if (sessionResult.data.session) {
-        return { data: { user: sessionResult.data.session.user } };
+      const token = apiClient.getToken();
+
+      if (!token) {
+        return { data: { user: null } };
       }
+
+      const response = await apiClient.get('/auth/user');
+
+      if (response.success && response.data.user) {
+        return { data: { user: response.data.user } };
+      }
+
       return { data: { user: null } };
     } catch (error) {
       console.error('Get user error:', error);
+      // If unauthorized, remove token
+      if (error.status === 401) {
+        apiClient.removeToken();
+      }
       return { data: { user: null } };
     }
   },
 
-  // Auth state change listener (simplified)
+  /**
+   * Auth state change listener
+   * @param {Function} callback - Callback function(event, session)
+   * @returns {Object} Subscription object with unsubscribe method
+   */
   onAuthStateChange(callback) {
-    // Simple implementation - check session on page load
+    // Check session on initialization
     this.getSession()
       .then((result) => {
-        callback('SIGNED_IN', result.data.session);
+        if (result.data.session) {
+          callback('SIGNED_IN', result.data.session);
+        } else {
+          callback('SIGNED_OUT', null);
+        }
       })
       .catch(() => {
         callback('SIGNED_OUT', null);
@@ -212,55 +149,63 @@ export const authService = {
     };
   },
 
-  // Update password with security checks
-  async updatePassword(newPassword) {
+  /**
+   * Update user password
+   * @param {string} currentPassword - Current password
+   * @param {string} newPassword - New password
+   * @returns {Promise<Object>} Success response
+   */
+  async updatePassword(currentPassword, newPassword) {
     try {
-      const sessionResult = await this.getSession();
-      if (!sessionResult.data.session) {
-        throw new Error('Not authenticated');
-      }
+      const response = await apiClient.put('/auth/password', {
+        currentPassword,
+        newPassword,
+      });
 
-      // Validate password strength
-      if (newPassword.length < 12) {
-        throw new Error('Password must be at least 12 characters long');
-      }
-
-      if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/.test(newPassword)) {
-        throw new Error(
-          'Password must contain uppercase, lowercase, number, and special character'
-        );
-      }
-
-      const userId = sessionResult.data.session.user.id;
-      const passwordHash = await bcrypt.hash(newPassword, 12);
-
-      await neonClient`
-        UPDATE users 
-        SET password_hash = ${passwordHash}, updated_at = NOW()
-        WHERE id = ${userId}
-      `;
-
-      return { data: { user: sessionResult.data.session.user } };
+      return {
+        data: {
+          success: response.success,
+          message: response.message
+        }
+      };
     } catch (error) {
       console.error('Update password error:', error);
       throw error;
     }
   },
 
-  // Get security statistics (for admin dashboard)
+  /**
+   * Get security statistics (admin only)
+   * @returns {Promise<Object>} Security stats
+   */
   async getSecurityStats() {
     try {
-      const stats = await neonClient`
-        SELECT 
-          (SELECT COUNT(*) FROM login_attempts WHERE success = false AND attempted_at > NOW() - INTERVAL '24 hours') as failed_attempts_24h,
-          (SELECT COUNT(*) FROM login_attempts WHERE success = true AND attempted_at > NOW() - INTERVAL '24 hours') as successful_logins_24h,
-          (SELECT COUNT(*) FROM user_sessions WHERE expires_at > NOW()) as active_sessions
-      `;
+      const response = await apiClient.get('/auth/security-stats');
 
-      return stats[0];
+      if (response.success) {
+        return response.data;
+      }
+
+      return null;
     } catch (error) {
       console.error('Get security stats error:', error);
       return null;
     }
+  },
+
+  /**
+   * Check if user is authenticated
+   * @returns {boolean} True if token exists
+   */
+  isAuthenticated() {
+    return !!apiClient.getToken();
+  },
+
+  /**
+   * Get stored JWT token
+   * @returns {string|null} JWT token or null
+   */
+  getToken() {
+    return apiClient.getToken();
   },
 };

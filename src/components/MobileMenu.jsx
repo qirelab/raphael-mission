@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useProjects } from '../context/ProjectsContext';
 import { useAlert } from '../hooks/useAlert';
-import { projectsService } from '../services/projectsService';
 import FlagUS from './icons/FlagUS';
 import FlagRU from './icons/FlagRU';
 import FlagPL from './icons/FlagPL';
@@ -13,26 +13,13 @@ export default function MobileMenu({ open, onClose }) {
   const { success } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [projectLinks, setProjectLinks] = useState([]);
+  const { projects } = useProjects();
 
-  // Load projects from database
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        const projects = await projectsService.getActive();
-        const links = projects.map((project) => ({
-          label: project[`title_${language}`] || project.title_en,
-          to: `/${language}/projects/${project.slug}`,
-        }));
-        setProjectLinks(links);
-      } catch (error) {
-        console.error('Error loading projects:', error);
-        setProjectLinks([]);
-      }
-    };
-
-    loadProjects();
-  }, [language]);
+  // Convert projects to menu links
+  const projectLinks = projects.map((project) => ({
+    label: project[`title_${language}`] || project.title_en,
+    to: `/${language}/projects/${project.slug}`,
+  }));
 
   const links = [
     {

@@ -7,25 +7,34 @@ import { TrainingGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const TrainingPrograms = () => {
   const { t, language } = useLanguage();
-  const [trainingPrograms, setTrainingPrograms] = useState([]);
+  const [trainingProgramsData, setTrainingProgramsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Load training programs only once, not on language change
   useEffect(() => {
     const loadPrograms = async () => {
       try {
         setLoading(true);
         const data = await trainingService.getActive();
-        setTrainingPrograms(data);
+        setTrainingProgramsData(data);
       } catch (error) {
         console.error('Error loading training programs:', error);
-        setTrainingPrograms([]);
+        setTrainingProgramsData([]);
       } finally {
         setLoading(false);
       }
     };
 
     loadPrograms();
-  }, [language]);
+  }, []); // Load only once!
+
+  // Transform programs based on current language (client-side, no API call)
+  const trainingPrograms = trainingProgramsData.map((p) => ({
+    ...p,
+    title: p[`title_${language}`] || p.title_en,
+    description: p[`description_${language}`] || p.description_en,
+    duration: p[`duration_${language}`] || p.duration_en || '',
+  }));
 
   if (loading) {
     return (

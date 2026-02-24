@@ -1,18 +1,23 @@
 // src/components/common/Header.jsx
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '../ui/Button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../../context/LanguageContext';
-import { projectsService } from '../../services/projectsService';
+import { useProjects } from '../../context/ProjectsContext';
 import MobileMenu from '../MobileMenu';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
-  const [projectLinks, setProjectLinks] = useState([]);
-  const [projectsLoading, setProjectsLoading] = useState(true);
   const closeTimeout = useRef(null);
   const { t, language } = useLanguage();
+  const { projects, loading: projectsLoading } = useProjects();
+
+  // Convert projects to menu links
+  const projectLinks = projects.map((project) => ({
+    name: project[`title_${language}`] || project.title_en,
+    href: `/${language}/projects/${project.slug}`,
+  }));
 
   const menuItems = [
     { name: t('projects'), href: `/${language}/projects` },
@@ -23,28 +28,6 @@ const Header = () => {
     { name: t('story'), href: `/${language}/story` },
     { name: t('contact'), href: `/${language}/contact` },
   ];
-
-  // Load projects from database
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        setProjectsLoading(true);
-        const projects = await projectsService.getActive();
-        const links = projects.map((project) => ({
-          name: project[`title_${language}`] || project.title_en,
-          href: `/${language}/projects/${project.slug}`,
-        }));
-        setProjectLinks(links);
-      } catch (error) {
-        console.error('Error loading projects:', error);
-        setProjectLinks([]);
-      } finally {
-        setProjectsLoading(false);
-      }
-    };
-
-    loadProjects();
-  }, [language]);
 
   const openProjects = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);

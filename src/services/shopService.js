@@ -1,34 +1,39 @@
-import { neonShopService } from './neonShopService';
+import { apiClient } from './apiClient.js';
 
 export const shopService = {
   // Get all products
   async getAll() {
-    return await neonShopService.getAll();
+    const response = await apiClient.get('/shop');
+    return response.data;
   },
 
   // Get active products only
   async getActive() {
-    return await neonShopService.getActive();
+    const response = await apiClient.get('/shop/active');
+    return response.data;
   },
 
   // Get product by ID
   async getById(id) {
-    return await neonShopService.getById(id);
+    const response = await apiClient.get(`/shop/${id}`);
+    return response.data;
   },
 
   // Create product
   async create(productData) {
-    return await neonShopService.create(productData);
+    const response = await apiClient.post('/shop', productData);
+    return response.data;
   },
 
   // Update product
   async update(id, productData) {
-    return await neonShopService.update(id, productData);
+    const response = await apiClient.put(`/shop/${id}`, productData);
+    return response.data;
   },
 
   // Delete product
   async delete(id) {
-    await neonShopService.delete(id);
-    return { message: 'Product deleted successfully' };
+    const response = await apiClient.delete(`/shop/${id}`);
+    return response.data;
   },
 };

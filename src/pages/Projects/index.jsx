@@ -1,92 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
-import { projectsService } from '../../services/projectsService';
+import { useProjects } from '../../context/ProjectsContext';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Projects = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
-  const [projectsData, setProjectsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { projects, loading } = useProjects();
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const data = await projectsService.getActive();
-        const activeProjects = data
-          .filter((p) => p.is_active)
-          .map((p) => ({
-            id: p.id,
-            title: p[`title_${language}`] || p.title_en,
-            description: p[`description_${language}`] || p.description_en,
-            image: p.image_url || '/images/img_img_192x384.png',
-            link: `/projects/${p.slug}`,
-          }));
-        setProjectsData(activeProjects);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-        // Fallback to default projects if API fails
-        setProjectsData([
-          {
-            id: 1,
-            titleKey: 'streetEvangelismTitle',
-            descriptionKey: 'streetEvangelismDesc',
-            image: '/images/img_img_192x384.png',
-            link: '/projects/street-evangelism',
-          },
-          {
-            id: 2,
-            titleKey: 'tentEvangelismTitle',
-            descriptionKey: 'tentEvangelismDesc',
-            image: '/images/img_img_1.png',
-            link: '/projects/tent-evangelism',
-          },
-          {
-            id: 3,
-            titleKey: 'personalEvangelismTitle',
-            descriptionKey: 'personalEvangelismDesc',
-            image: '/images/img_img_2.png',
-            link: '/projects/personal-evangelism',
-          },
-          {
-            id: 4,
-            titleKey: 'socialProjectsTitle',
-            descriptionKey: 'socialProjectsDesc',
-            image: '/images/img_img_3.png',
-            link: '/projects/social-projects',
-          },
-          {
-            id: 5,
-            titleKey: 'artEvangelismTitle',
-            descriptionKey: 'artEvangelismDesc',
-            image: '/images/img_img_4.png',
-            link: '/projects/art-evangelism',
-          },
-          {
-            id: 6,
-            titleKey: 'churchSupportTitle',
-            descriptionKey: 'churchSupportDesc',
-            image: '/images/img_img_5.png',
-            link: '/projects/church-support',
-          },
-          {
-            id: 7,
-            titleKey: 'healingMinistryTitle',
-            descriptionKey: 'healingMinistryDesc',
-            image: '/images/img_img_6.png',
-            link: '/projects/healing-ministry',
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, [language]);
+  // Transform projects for display
+  const projectsData = useMemo(() => {
+    return projects.map((p) => ({
+      id: p.id,
+      title: p[`title_${language}`] || p.title_en,
+      description: p[`description_${language}`] || p.description_en,
+      image: p.image_url || '/images/img_img_192x384.png',
+      link: `/projects/${p.slug}`,
+    }));
+  }, [projects, language]);
 
   const statsData = [
     { number: '500+', labelKey: 'livesTouched' },

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { trainingService } from '../../../services/trainingService';
 import { ListSkeleton } from '../../../components/skeletons';
 import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const TrainingList = () => {
+  const location = useLocation();
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,9 +14,10 @@ const TrainingList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [programToDelete, setProgramToDelete] = useState(null);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
     fetchPrograms();
-  }, []);
+  }, [location.pathname]);
 
   const fetchPrograms = async (isRefresh = false) => {
     try {

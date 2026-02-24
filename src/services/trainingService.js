@@ -1,34 +1,39 @@
-import { neonTrainingService } from './neonTrainingService';
+import { apiClient } from './apiClient.js';
 
 export const trainingService = {
   // Get all training programs
   async getAll() {
-    return await neonTrainingService.getAll();
+    const response = await apiClient.get('/training');
+    return response.data;
   },
 
   // Get active training programs only
   async getActive() {
-    return await neonTrainingService.getActive();
+    const response = await apiClient.get('/training/active');
+    return response.data;
   },
 
   // Get training program by ID
   async getById(id) {
-    return await neonTrainingService.getById(id);
+    const response = await apiClient.get(`/training/${id}`);
+    return response.data;
   },
 
   // Create training program
   async create(programData) {
-    return await neonTrainingService.create(programData);
+    const response = await apiClient.post('/training', programData);
+    return response.data;
   },
 
   // Update training program
   async update(id, programData) {
-    return await neonTrainingService.update(id, programData);
+    const response = await apiClient.put(`/training/${id}`, programData);
+    return response.data;
   },
 
   // Delete training program
   async delete(id) {
-    await neonTrainingService.delete(id);
-    return { message: 'Training program deleted successfully' };
+    const response = await apiClient.delete(`/training/${id}`);
+    return response.data;
   },
 };

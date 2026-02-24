@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { projectsService } from '../../../services/projectsService';
+import { useProjects } from '../../../context/ProjectsContext';
 import { ListSkeleton } from '../../../components/skeletons';
 import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const ProjectsList = () => {
+  const location = useLocation();
+  const { refreshProjects } = useProjects();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,9 +16,10 @@ const ProjectsList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [location.pathname]);
 
   const fetchProjects = async (isRefresh = false) => {
     try {
@@ -47,6 +51,8 @@ const ProjectsList = () => {
       await projectsService.delete(projectToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchProjects(true);
+      // Refresh projects context for public frontend
+      await refreshProjects();
       setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить проект');
