@@ -361,14 +361,26 @@ npm run build
 
 ### 5.3 Копирование на VPS
 
+**Вариант 1: Автоматический деплой через GitHub Actions**
+
+При push в `master` ветку GitHub Actions автоматически:
+1. Соберёт проект (`npm run build`)
+2. Создаст архив `raphael-mission.tar.gz`
+3. Скопирует на VPS в `/var/www/raphael-mission/build/`
+
+**Вариант 2: Ручной деплой**
+
 **С локальной машины:**
 
 ```bash
-# Упаковать dist в архив
-tar -czf dist.tar.gz dist/
+# Собрать проект
+npm run build
+
+# Упаковать build в архив
+tar -czf raphael-mission.tar.gz build/
 
 # Скопировать на VPS
-scp dist.tar.gz user@your-vps-ip:/tmp/
+scp raphael-mission.tar.gz user@your-vps-ip:/tmp/
 ```
 
 **На VPS:**
@@ -376,84 +388,41 @@ scp dist.tar.gz user@your-vps-ip:/tmp/
 ```bash
 # Распаковать
 cd /tmp
-tar -xzf dist.tar.gz
+tar -xzf raphael-mission.tar.gz
 
-# Переместить в Nginx директорию
-sudo mkdir -p /var/www/html
-sudo cp -r dist/* /var/www/html/
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 755 /var/www/html
+# Переместить в целевую директорию
+sudo mkdir -p /var/www/raphael-mission/build
+sudo cp -r build/* /var/www/raphael-mission/build/
+sudo chown -R www-data:www-data /var/www/raphael-mission/build
+sudo chmod -R 755 /var/www/raphael-mission/build
 
 # Удалить временные файлы
-rm -rf /tmp/dist /tmp/dist.tar.gz
+rm -rf /tmp/build /tmp/raphael-mission.tar.gz
 ```
 
 ---
 
 ## ⚙️ Этап 6: Настройка Nginx
 
-### 6.1 Создать конфиг для backend
+### 6.1 Использовать конфиг из репозитория
+
+В репозитории уже есть готовый `nginx.conf` в корне проекта.
 
 ```bash
-sudo nano /etc/nginx/sites-available/raphael-backend
+# Скопировать конфиг из репозитория
+sudo cp /var/www/raphael-mission/nginx.conf /etc/nginx/sites-available/raphael-mission
+
+# ВАЖНО: Отредактировать server_name под ваш домен (если отличается)
+sudo nano /etc/nginx/sites-available/raphael-mission
+# Изменить: server_name raphael-mission.com www.raphael-mission.com;
+# На ваш домен, если нужно
 ```
-
-Вставить:
-
-```nginx
-server {
-    listen 80;
-    server_name raphael-mission.com www.raphael-mission.com;
-
-    # API requests → Backend
-    location /api {
-        proxy_pass http://localhost:6388;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    # Health check
-    location /health {
-        proxy_pass http://localhost:6388;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-    }
-
-    # Frontend static files
-    location / {
-        root /var/www/html;
-        index index.html;
-        try_files $uri $uri/ /index.html;
-    }
-
-    # Cache static assets
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
-        root /var/www/html;
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-
-    # Security headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header X-XSS-Protection "1; mode=block" always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-}
-```
-
-Сохранить: `Ctrl+O`, `Enter`, `Ctrl+X`
 
 ### 6.2 Активировать конфиг
 
 ```bash
 # Создать символическую ссылку
-sudo ln -s /etc/nginx/sites-available/raphael-backend /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/raphael-mission /etc/nginx/sites-enabled/
 
 # Удалить дефолтный конфиг (опционально)
 sudo rm /etc/nginx/sites-enabled/default
@@ -615,6 +584,19 @@ pm2 logs raphael-backend
 
 ### Ручное обновление frontend:
 
+**Вариант 1: Автоматически через Git push**
+
+```bash
+# На локальной машине
+git add .
+git commit -m "Update frontend"
+git push origin master
+
+# GitHub Actions автоматически задеплоит на VPS
+```
+
+**Вариант 2: Вручную**
+
 **На локальной машине:**
 
 ```bash
@@ -622,8 +604,8 @@ pm2 logs raphael-backend
 npm run build
 
 # Упаковать и отправить на VPS
-tar -czf dist.tar.gz dist/
-scp dist.tar.gz user@your-vps-ip:/tmp/
+tar -czf raphael-mission.tar.gz build/
+scp raphael-mission.tar.gz user@your-vps-ip:/tmp/
 ```
 
 **На VPS:**
@@ -631,12 +613,12 @@ scp dist.tar.gz user@your-vps-ip:/tmp/
 ```bash
 # Распаковать и заменить
 cd /tmp
-tar -xzf dist.tar.gz
-sudo cp -r dist/* /var/www/html/
-sudo chown -R www-data:www-data /var/www/html
+tar -xzf raphael-mission.tar.gz
+sudo cp -r build/* /var/www/raphael-mission/build/
+sudo chown -R www-data:www-data /var/www/raphael-mission/build
 
-# Очистить кеш браузера у пользователей (Nginx purge)
-# Или просто добавить версию в URL assets
+# Очистить временные файлы
+rm -rf /tmp/build /tmp/raphael-mission.tar.gz
 ```
 
 ---
@@ -705,7 +687,7 @@ pm2 monit
 
 ```bash
 # Включить status page
-sudo nano /etc/nginx/sites-available/raphael-backend
+sudo nano /etc/nginx/sites-available/raphael-mission
 
 # Добавить внутри server {}:
 # location /nginx_status {
@@ -759,14 +741,14 @@ redis-cli -a ваш_пароль ping
 sudo nginx -t
 
 # Проверить файлы
-ls -la /var/www/html/
+ls -la /var/www/raphael-mission/build/
 
 # Проверить логи Nginx
 sudo tail -f /var/log/nginx/error.log
 
 # Проверить права доступа
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 755 /var/www/html
+sudo chown -R www-data:www-data /var/www/raphael-mission/build
+sudo chmod -R 755 /var/www/raphael-mission/build
 ```
 
 ### SSL не работает

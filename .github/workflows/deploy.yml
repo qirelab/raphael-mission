@@ -19,53 +19,54 @@ jobs:
           node-version: '23'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
 
       - name: Security audit
         run: npm audit --audit-level=critical
         continue-on-error: false
 
-      - name: Create .env file
+      - name: Create frontend .env file
         run: |
-          echo "Creating .env file from secrets..."
+          echo "Creating frontend .env file from secrets..."
           cat > .env << 'EOF'
-          ${{ secrets.ENV_FILE }}
+          ${{ secrets.FRONTEND_ENV_FILE }}
           EOF
-          echo ".env file created successfully!"
-          echo "File size (bytes and lines):"
-          wc .env
-          echo "First 3 lines:"
-          head -n 3 .env
+          echo "Frontend .env created!"
 
-      - name: Build project
+      - name: Build frontend
         run: |
           set -a
           source .env
           set +a
           npm run build
 
-      - name: Prepare deployment archive
+      - name: Prepare deployment archives
         run: |
           echo "Creating deployment directory..."
           mkdir -p deploy
 
-          echo "Creating archive with build files..."
+          echo "Creating frontend archive..."
           cd build
-          tar -czf ../deploy/raphael-mission.tar.gz .
+          tar -czf ../deploy/frontend.tar.gz .
           cd ..
 
-          echo "Archive created successfully!"
+          echo "Creating backend archive..."
+          cd server
+          tar -czf ../deploy/backend.tar.gz .
+          cd ..
+
+          echo "Archives created successfully!"
           ls -lh deploy/
 
-      - name: Copy archive to VPS
+      - name: Copy archives to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
-          source: "deploy/raphael-mission.tar.gz"
+          source: "deploy/*.tar.gz"
           target: "/tmp/"
           strip_components: 1
 
@@ -79,19 +80,65 @@ jobs:
           script: |
             set -e
 
-            echo "Starting deployment..."
+            echo "🚀 Starting deployment..."
 
-            # Clean up old deployment
-            echo "Cleaning old deployment..."
-            rm -rf /var/www/raphael-mission
-            mkdir -p /var/www/raphael-mission/build
+            # ===== FRONTEND DEPLOYMENT =====
+            echo "📦 Deploying frontend..."
 
-            # Extract archive
-            echo "Extracting archive..."
-            tar -xzf /tmp/raphael-mission.tar.gz -C /var/www/raphael-mission/build/
+            # Clean and create frontend directory
+            sudo rm -rf /var/www/raphael-mission/build
+            sudo mkdir -p /var/www/raphael-mission/build
 
-            # Clean up archive
-            rm -f /tmp/raphael-mission.tar.gz
+            # Extract frontend
+            sudo tar -xzf /tmp/frontend.tar.gz -C /var/www/raphael-mission/build/
 
-            echo "Deployment completed successfully!"
-            ls -la /var/www/raphael-mission/build/
+            # Set permissions
+            sudo chown -R www-data:www-data /var/www/raphael-mission/build
+            sudo chmod -R 755 /var/www/raphael-mission/build
+
+            echo "✅ Frontend deployed to /var/www/raphael-mission/build/"
+
+            # ===== BACKEND DEPLOYMENT =====
+            echo "📦 Deploying backend..."
+
+            # Create backend directory if not exists
+            sudo mkdir -p /var/www/raphael-mission/server
+
+            # Extract backend
+            sudo tar -xzf /tmp/backend.tar.gz -C /var/www/raphael-mission/server/
+
+            # Create backend .env
+            echo "📝 Creating backend .env..."
+            cat > /tmp/backend.env << 'EOF'
+            ${{ secrets.BACKEND_ENV_FILE }}
+            EOF
+            sudo mv /tmp/backend.env /var/www/raphael-mission/server/.env
+
+            # Install backend dependencies
+            echo "📥 Installing backend dependencies..."
+            cd /var/www/raphael-mission/server
+            sudo npm install --production --omit=dev
+
+            # Set permissions
+            sudo chown -R $USER:$USER /var/www/raphael-mission/server
+
+            # Restart PM2
+            echo "🔄 Restarting backend with PM2..."
+            pm2 restart raphael-backend || pm2 start ecosystem.config.js
+            pm2 save
+
+            echo "✅ Backend deployed and restarted!"
+
+            # ===== CLEANUP =====
+            echo "🧹 Cleaning up temporary files..."
+            rm -f /tmp/frontend.tar.gz /tmp/backend.tar.gz
+
+            # ===== VERIFY DEPLOYMENT =====
+            echo "🔍 Verifying deployment..."
+            echo "Frontend files:"
+            ls -lh /var/www/raphael-mission/build/ | head -5
+            echo ""
+            echo "PM2 status:"
+            pm2 status
+            echo ""
+            echo "✅ Deployment completed successfully!"
