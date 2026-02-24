@@ -35,6 +35,12 @@ async function startServer() {
       logger.info(`🚀 API: http://localhost:${PORT}/api`);
       logger.info('🚀 ========================================');
       logger.info('');
+
+      // Send ready signal to PM2 when in cluster mode
+      if (process.send) {
+        process.send('ready');
+        logger.info('✅ Ready signal sent to PM2');
+      }
     });
 
     // Graceful shutdown

@@ -22,8 +22,14 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Security audit
+      - name: Security audit (Frontend)
         run: npm audit --audit-level=critical
+        continue-on-error: false
+
+      - name: Security audit (Backend)
+        run: |
+          cd server
+          npm audit --audit-level=critical
         continue-on-error: false
 
       - name: Create frontend .env file
@@ -116,15 +122,21 @@ jobs:
             # Install backend dependencies
             echo "📥 Installing backend dependencies..."
             cd /var/www/raphael-mission/server
-            npm install --production --omit=dev
+            npm ci --production
 
             # Set permissions
             chown -R $USER:$USER /var/www/raphael-mission/server 2>/dev/null || true
 
-            # Restart PM2
+            # Clean restart PM2
             echo "🔄 Restarting backend with PM2..."
-            pm2 restart raphael-backend || pm2 start ecosystem.config.cjs
+            pm2 delete raphael-backend || true
+            pm2 start ecosystem.config.cjs
             pm2 save
+
+            # Health check
+            echo "🏥 Checking backend health..."
+            sleep 5
+            curl -f http://localhost:6388/health || (echo "❌ Health check failed!" && exit 1)
 
             echo "✅ Backend deployed and restarted!"
 
