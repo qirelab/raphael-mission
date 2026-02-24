@@ -15,10 +15,17 @@ const ProjectsList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
   // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchProjects();
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchProjects().finally(() => {
+      isFetching.current = false;
+    });
   }, [location.pathname]);
 
   const fetchProjects = async (isRefresh = false) => {

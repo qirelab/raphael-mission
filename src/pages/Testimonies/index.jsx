@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
-import { useTestimonies } from '../../hooks/useApiData';
+import { useTestimoniesContext } from '../../context/TestimoniesContext';
 import Footer from '../../components/common/Footer';
 import { TestimonialsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
@@ -10,7 +10,7 @@ const TestimoniesPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useLanguage();
   const navigate = useNavigate();
-  const { data: apiTestimonies, loading } = useTestimonies();
+  const { testimonies: testimoniesRaw, loading } = useTestimoniesContext();
 
   const handleShareStoryClick = () => {
     navigate(`/${language}`);
@@ -22,14 +22,16 @@ const TestimoniesPage = () => {
     }, 100);
   };
 
-  // Transform API data to match component structure
-  const testimonials = apiTestimonies.map((testimony) => ({
-    id: testimony.id,
-    name: testimony.name,
-    location: testimony.location,
-    image: testimony.image || '/images/mariasantos.png',
-    quote: testimony.testimony,
-  }));
+  // Transform testimonies based on current language (client-side, no API call)
+  const testimonials = useMemo(() => {
+    return testimoniesRaw.map((t) => ({
+      id: t.id,
+      name: t[`name_${language}`] || t.name_en || t.name,
+      location: t[`title_${language}`] || t.title_en || '',
+      image: t.image_url || '/images/mariasantos.png',
+      quote: t[`content_${language}`] || t.content_en,
+    }));
+  }, [testimoniesRaw, language]);
 
   if (loading) {
     return (

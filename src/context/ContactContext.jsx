@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { contactService } from '../services/contactService';
 
 const ContactContext = createContext();
@@ -15,6 +15,7 @@ export const ContactProvider = ({ children }) => {
   const [contactData, setContactData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isFetching = useRef(false);
 
   // Simple function to load contact data
   const loadContactData = async () => {
@@ -52,7 +53,13 @@ export const ContactProvider = ({ children }) => {
 
   // Load data on mount
   useEffect(() => {
-    loadContactData();
+    // Prevent duplicate fetches from React.StrictMode
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    loadContactData().finally(() => {
+      isFetching.current = false;
+    });
   }, []);
 
   const value = {

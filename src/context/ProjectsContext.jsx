@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { projectsService } from '../services/projectsService';
 
 const ProjectsContext = createContext();
@@ -15,9 +15,14 @@ export const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isFetching = useRef(false);
 
   // Load projects once on mount
   useEffect(() => {
+    // Prevent duplicate fetches from React.StrictMode
+    if (isFetching.current) return;
+    isFetching.current = true;
+
     const loadProjects = async () => {
       try {
         setLoading(true);
@@ -33,7 +38,9 @@ export const ProjectsProvider = ({ children }) => {
       }
     };
 
-    loadProjects();
+    loadProjects().finally(() => {
+      isFetching.current = false;
+    });
   }, []); // Load only once!
 
   // Refresh projects (for admin panel after create/update/delete)

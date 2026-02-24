@@ -1,5 +1,5 @@
 // src/pages/Home/index.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
@@ -7,7 +7,8 @@ import TextArea from '../../components/ui/TextArea';
 import ButtonSkeleton from '../../components/ui/ButtonSkeleton';
 import { useLanguage } from '../../context/LanguageContext';
 import { projectsService } from '../../services/projectsService';
-import { useTestimonies, useContactInfo } from '../../hooks/useApiData';
+import { useTestimoniesContext } from '../../context/TestimoniesContext';
+import { useContact } from '../../context/ContactContext';
 import { useAlert } from '../../hooks/useAlert';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, TestimonialsGridSkeleton } from '../../components/skeletons';
@@ -30,13 +31,33 @@ const Home = () => {
   const [firstProjectsData, setFirstProjectsData] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
 
-  const { data: testimonies, loading: loadingTestimonies } = useTestimonies();
-  const { data: contactData } = useContactInfo();
-
   const { t, language } = useLanguage();
   const { success, error, warning } = useAlert();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { testimonies: testimoniesRaw, loading: loadingTestimonies } = useTestimoniesContext();
+  const { contactData } = useContact();
+
+  // Transform testimonies based on current language (client-side, no API call)
+  const testimonies = useMemo(() => {
+    return testimoniesRaw.map((t) => ({
+      id: t.id,
+      name: t[`name_${language}`] || t.name_en || t.name,
+      location: t[`title_${language}`] || t.title_en || '',
+      testimony: t[`content_${language}`] || t.content_en,
+      image: t.image_url,
+    }));
+  }, [testimoniesRaw, language]);
+
+  // Transform projects based on current language (client-side, no API call)
+  const firstProjects = useMemo(() => {
+    return firstProjectsData.map((project) => ({
+      ...project,
+      title: project[`title_${language}`] || project.title_en,
+      description: project[`description_${language}`] || project.description_en,
+    }));
+  }, [firstProjectsData, language]);
 
   // Load first 3 projects only once, not on language change
   useEffect(() => {
@@ -54,13 +75,6 @@ const Home = () => {
 
     loadData();
   }, []); // Load only once!
-
-  // Transform projects based on current language (client-side, no API call)
-  const firstProjects = firstProjectsData.map((project) => ({
-    ...project,
-    title: project[`title_${language}`] || project.title_en,
-    description: project[`description_${language}`] || project.description_en,
-  }));
 
   // Обработка якоря при загрузке страницы
   useEffect(() => {

@@ -13,10 +13,17 @@ const TestimoniesList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testimonyToDelete, setTestimonyToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
   // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchTestimonies();
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchTestimonies().finally(() => {
+      isFetching.current = false;
+    });
   }, [location.pathname]);
 
   const fetchTestimonies = async (isRefresh = false) => {

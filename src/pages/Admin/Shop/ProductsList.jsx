@@ -13,10 +13,17 @@ const ProductsList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
   // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchProducts();
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchProducts().finally(() => {
+      isFetching.current = false;
+    });
   }, [location.pathname]);
 
   const fetchProducts = async (isRefresh = false) => {

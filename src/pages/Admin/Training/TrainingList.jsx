@@ -13,10 +13,17 @@ const TrainingList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [programToDelete, setProgramToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
   // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchPrograms();
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchPrograms().finally(() => {
+      isFetching.current = false;
+    });
   }, [location.pathname]);
 
   const fetchPrograms = async (isRefresh = false) => {
