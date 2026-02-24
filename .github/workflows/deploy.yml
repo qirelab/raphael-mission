@@ -86,15 +86,15 @@ jobs:
             echo "📦 Deploying frontend..."
 
             # Clean and create frontend directory
-            sudo rm -rf /var/www/raphael-mission/build
-            sudo mkdir -p /var/www/raphael-mission/build
+            rm -rf /var/www/raphael-mission/build
+            mkdir -p /var/www/raphael-mission/build
 
             # Extract frontend
-            sudo tar -xzf /tmp/frontend.tar.gz -C /var/www/raphael-mission/build/
+            tar -xzf /tmp/frontend.tar.gz -C /var/www/raphael-mission/build/
 
-            # Set permissions
-            sudo chown -R www-data:www-data /var/www/raphael-mission/build
-            sudo chmod -R 755 /var/www/raphael-mission/build
+            # Set permissions (only if needed)
+            chown -R www-data:www-data /var/www/raphael-mission/build 2>/dev/null || true
+            chmod -R 755 /var/www/raphael-mission/build
 
             echo "✅ Frontend deployed to /var/www/raphael-mission/build/"
 
@@ -102,25 +102,24 @@ jobs:
             echo "📦 Deploying backend..."
 
             # Create backend directory if not exists
-            sudo mkdir -p /var/www/raphael-mission/server
+            mkdir -p /var/www/raphael-mission/server
 
             # Extract backend
-            sudo tar -xzf /tmp/backend.tar.gz -C /var/www/raphael-mission/server/
+            tar -xzf /tmp/backend.tar.gz -C /var/www/raphael-mission/server/
 
             # Create backend .env
             echo "📝 Creating backend .env..."
-            cat > /tmp/backend.env << 'EOF'
+            cat > /var/www/raphael-mission/server/.env << 'EOF'
             ${{ secrets.BACKEND_ENV_FILE }}
             EOF
-            sudo mv /tmp/backend.env /var/www/raphael-mission/server/.env
 
             # Install backend dependencies
             echo "📥 Installing backend dependencies..."
             cd /var/www/raphael-mission/server
-            sudo npm install --production --omit=dev
+            npm install --production --omit=dev
 
             # Set permissions
-            sudo chown -R $USER:$USER /var/www/raphael-mission/server
+            chown -R $USER:$USER /var/www/raphael-mission/server 2>/dev/null || true
 
             # Restart PM2
             echo "🔄 Restarting backend with PM2..."
