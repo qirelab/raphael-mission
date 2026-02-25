@@ -71,8 +71,14 @@ class ApiClient {
     }
 
     if (!response.ok) {
-      // Handle error response
-      const error = new Error(data.error?.message || 'API request failed');
+      // Handle specific error cases
+      let errorMessage = data.error?.message || 'API request failed';
+
+      if (response.status === 413) {
+        errorMessage = 'Файл слишком большой. Максимальный размер: 50MB';
+      }
+
+      const error = new Error(errorMessage);
       error.status = response.status;
       error.code = data.error?.code;
       error.details = data.error?.details;
