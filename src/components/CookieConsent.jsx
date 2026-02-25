@@ -4,7 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useAlert } from '../hooks/useAlert';
 
 const CookieConsent = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { success, info } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -79,7 +79,7 @@ const CookieConsent = () => {
                   {t('cookieConsentMessage')}
                 </p>
                 <Link
-                  to="/cookie-policy"
+                  to={`/${language}/cookie-policy`}
                   className="text-[14px] sm:text-[15px] text-[#3c8a7a] font-semibold font-poppins hover:underline inline-flex items-center gap-1"
                 >
                   {t('cookieConsentLearnMore')}

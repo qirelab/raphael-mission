@@ -207,14 +207,14 @@ const Projects = () => {
                   <div className="flex flex-col sm:flex-row gap-[16px] justify-center items-center w-full mt-[16px] sm:mt-[20px] md:mt-[24px]">
                     <Button
                       variant="outline"
-                      onClick={() => (window.location.href = '/training')}
+                      onClick={() => navigate(`/${language}/training`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('getInvolved')}
                     </Button>
                     <Button
                       variant="primary"
-                      onClick={() => navigate(`/${language}/donate`)}
+                      onClick={() => navigate(`/${language}/donation`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('donateNow')}

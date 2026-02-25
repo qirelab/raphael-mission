@@ -39,7 +39,7 @@ const HealingMinistryDetail = () => {
       {/* CTA */}
       <section className="w-full bg-[#3c8a7a] py-16">
         <div className="max-w-[900px] mx-auto text-center">
-          <Button onClick={() => navigate('/projects')}>{t('backToProjects')}</Button>
+          <Button onClick={() => navigate(`/${language}/projects`)}>{t('backToProjects')}</Button>
         </div>
       </section>
     </div>

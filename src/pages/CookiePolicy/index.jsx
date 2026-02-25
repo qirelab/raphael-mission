@@ -106,7 +106,7 @@ const CookiePolicy = () => {
           {/* Back Button */}
           <div className="mt-12 text-center">
             <Link
-              to="/"
+              to={`/${language}`}
               className="inline-block px-8 py-3 bg-[#3c8a7a] text-white rounded-lg font-semibold font-poppins hover:bg-[#2F7D6D] transition-colors duration-200"
             >
               {t('backToHome')}
