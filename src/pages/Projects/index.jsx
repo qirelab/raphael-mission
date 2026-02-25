@@ -18,7 +18,7 @@ const Projects = () => {
       title: p[`title_${language}`] || p.title_en,
       description: p[`description_${language}`] || p.description_en,
       image: p.image_url || '/images/img_img_192x384.png',
-      link: `/projects/${p.slug}`,
+      link: `/${language}/projects/${p.slug}`,
     }));
   }, [projects, language]);
 

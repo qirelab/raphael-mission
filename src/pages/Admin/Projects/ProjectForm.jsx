@@ -67,6 +67,24 @@ const ProjectForm = () => {
     }
   };
 
+  // Auto-generate slug from title_en
+  const generateSlug = (text) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+  };
+
+  // Auto-generate slug when title_en changes (only for new projects)
+  useEffect(() => {
+    if (!isEdit && formData.title_en) {
+      const newSlug = generateSlug(formData.title_en);
+      setFormData(prev => ({ ...prev, slug: newSlug }));
+    }
+  }, [formData.title_en, isEdit]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -183,7 +201,20 @@ const ProjectForm = () => {
             />
           </div>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {renderInput('Slug', 'slug', 'street-evangelism')}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+                Slug (генерируется автоматически)
+              </label>
+              <input
+                type="text"
+                name="slug"
+                value={formData.slug}
+                readOnly
+                disabled
+                placeholder="автоматически из названия"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed font-poppins"
+              />
+            </div>
           </div>
           <div className="mt-6">
             <ImageUpload

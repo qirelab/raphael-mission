@@ -307,7 +307,7 @@ const Home = () => {
                     </div>
                     <div className="flex items-center gap-2 mt-auto pt-4">
                       <Link
-                        to={`/projects/${project.slug}`}
+                        to={`/${language}/projects/${project.slug}`}
                         className="flex items-center gap-2 text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins'] hover:underline"
                       >
                         {t('learnMore')}

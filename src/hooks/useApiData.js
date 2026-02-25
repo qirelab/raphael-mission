@@ -42,7 +42,7 @@ export const useProjects = () => {
       title: p[`title_${language}`] || p.title_en,
       description: p[`description_${language}`] || p.description_en,
       image: p.image_url,
-      link: `/projects/${p.slug}`,
+      link: `/${language}/projects/${p.slug}`,
       slug: p.slug,
     }));
 
