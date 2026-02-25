@@ -52,7 +52,23 @@ class ApiClient {
    * Handle API response
    */
   async handleResponse(response) {
-    const data = await response.json();
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    const isJson = contentType && contentType.includes('application/json');
+
+    let data;
+    try {
+      if (isJson) {
+        data = await response.json();
+      } else {
+        // If not JSON, try to get text (might be HTML error page)
+        const text = await response.text();
+        data = { error: { message: `Server returned non-JSON response: ${text.substring(0, 100)}...` } };
+      }
+    } catch (parseError) {
+      // If parsing fails completely
+      throw new Error(`Failed to parse server response: ${parseError.message}`);
+    }
 
     if (!response.ok) {
       // Handle error response
@@ -64,6 +80,27 @@ class ApiClient {
     }
 
     return data;
+  }
+
+  /**
+   * Handle network errors
+   */
+  handleNetworkError(error, method, endpoint) {
+    console.error(`${method} ${endpoint} failed:`, error);
+
+    // If it's already our custom error, just rethrow
+    if (error.status) {
+      throw error;
+    }
+
+    // Handle network errors (CORS, connection failed, etc.)
+    const networkError = new Error(
+      error.message === 'Failed to fetch'
+        ? 'Не удалось подключиться к серверу. Проверьте интернет-соединение.'
+        : error.message
+    );
+    networkError.isNetworkError = true;
+    throw networkError;
   }
 
   /**
@@ -79,8 +116,7 @@ class ApiClient {
 
       return await this.handleResponse(response);
     } catch (error) {
-      console.error(`GET ${endpoint} failed:`, error);
-      throw error;
+      this.handleNetworkError(error, 'GET', endpoint);
     }
   }
 
@@ -98,8 +134,7 @@ class ApiClient {
 
       return await this.handleResponse(response);
     } catch (error) {
-      console.error(`POST ${endpoint} failed:`, error);
-      throw error;
+      this.handleNetworkError(error, 'POST', endpoint);
     }
   }
 
@@ -117,8 +152,7 @@ class ApiClient {
 
       return await this.handleResponse(response);
     } catch (error) {
-      console.error(`PUT ${endpoint} failed:`, error);
-      throw error;
+      this.handleNetworkError(error, 'PUT', endpoint);
     }
   }
 
@@ -136,8 +170,7 @@ class ApiClient {
 
       return await this.handleResponse(response);
     } catch (error) {
-      console.error(`PATCH ${endpoint} failed:`, error);
-      throw error;
+      this.handleNetworkError(error, 'PATCH', endpoint);
     }
   }
 
@@ -154,8 +187,7 @@ class ApiClient {
 
       return await this.handleResponse(response);
     } catch (error) {
-      console.error(`DELETE ${endpoint} failed:`, error);
-      throw error;
+      this.handleNetworkError(error, 'DELETE', endpoint);
     }
   }
 }
