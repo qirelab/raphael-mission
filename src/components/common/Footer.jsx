@@ -36,8 +36,8 @@ const Footer = () => {
                   { href: `/${language}/projects`, label: t('projects') },
                   { href: `/${language}/testimonies`, label: t('testimonies') },
                   // { href: `/${language}/training`, label: t('training') }, // Temporarily hidden
-                  { href: `/${language}/story`, label: t('story') },
                   { href: `/${language}/shop`, label: t('shop') },
+                  { href: `/${language}/story`, label: t('story') },
                   { href: `/${language}/contact`, label: t('contact') },
                   { href: `/${language}/donation`, label: t('donate') },
                 ].map((l) => (

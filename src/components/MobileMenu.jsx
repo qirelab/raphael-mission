@@ -24,13 +24,13 @@ export default function MobileMenu({ open, onClose }) {
   }));
 
   const links = [
+    { labelKey: 'about', to: `/${language}/about-mission` },
     {
       labelKey: 'projects',
       to: `/${language}/projects`,
       hasDropdown: true,
       dropdownItems: projectLinks,
     },
-    { labelKey: 'about', to: `/${language}/about-mission` },
     // { labelKey: 'training', to: `/${language}/training` }, // Temporarily hidden
     { labelKey: 'testimonies', to: `/${language}/testimonies` },
     { labelKey: 'shop', to: `/${language}/shop` },
