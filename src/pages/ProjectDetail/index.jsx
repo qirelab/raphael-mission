@@ -135,6 +135,26 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* What We Do */}
+      {whatWeDo && (
+        <section className="w-full bg-[#fafbfc] py-10">
+          <div className="max-w-[900px] mx-auto px-4">
+            <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <h2 className="text-[28px] sm:text-[32px] font-bold mb-4 text-[#1f2937]">
+                {language === 'ru'
+                  ? 'Чем мы занимаемся'
+                  : language === 'pl'
+                    ? 'Czym się zajmujemy'
+                    : 'What We Do'}
+              </h2>
+              <div className="text-[16px] sm:text-[18px] text-[#374151] whitespace-pre-line">
+                {whatWeDo}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Project Impact */}
       <section className="w-full bg-[#fafbfc] py-10">
         <div className="max-w-[900px] mx-auto px-4">
