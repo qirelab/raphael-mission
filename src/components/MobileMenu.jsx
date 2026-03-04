@@ -30,8 +30,8 @@ export default function MobileMenu({ open, onClose }) {
     },
     { labelKey: 'about', to: `/${language}/about-mission` },
     { labelKey: 'training', to: `/${language}/training` },
-    { labelKey: 'shop', to: `/${language}/shop` },
     { labelKey: 'testimonies', to: `/${language}/testimonies` },
+    { labelKey: 'shop', to: `/${language}/shop` },
     { labelKey: 'story', to: `/${language}/story` },
     { labelKey: 'contact', to: `/${language}/contact` },
   ];
