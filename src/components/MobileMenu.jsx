@@ -296,21 +296,23 @@ export default function MobileMenu({ open, onClose }) {
                 <Instagram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
                 <span className="text-sm font-medium">Instagram</span>
               </a>
-              <a
-                href="https://t.me/+3S7xzFVZtJ0xNDY0"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#0088cc] hover:text-white transition-all duration-200 font-poppins group"
-                style={{
-                  animationDelay: `${(links.length + languages.length + 1) * 80}ms`,
-                  animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
-                }}
-              >
-                <Telegram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
-                <span className="text-sm font-medium">Telegram</span>
-              </a>
+              {language === 'ru' && (
+                <a
+                  href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#0088cc] hover:text-white transition-all duration-200 font-poppins group"
+                  style={{
+                    animationDelay: `${(links.length + languages.length + 1) * 80}ms`,
+                    animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                  }}
+                >
+                  <Telegram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
+                  <span className="text-sm font-medium">Telegram</span>
+                </a>
+              )}
             </div>
           </div>
 

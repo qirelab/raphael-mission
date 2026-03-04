@@ -184,15 +184,17 @@ const Footer = () => {
                 >
                   <Instagram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
                 </a>
-                <a
-                  href="https://t.me/+3S7xzFVZtJ0xNDY0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#0088cc] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
-                  aria-label={t('telegram')}
-                >
-                  <Telegram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
-                </a>
+                {language === 'ru' && (
+                  <a
+                    href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#0088cc] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+                    aria-label={t('telegram')}
+                  >
+                    <Telegram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
+                  </a>
+                )}
               </div>
             </div>
           </div>
