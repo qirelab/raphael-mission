@@ -613,7 +613,7 @@ export const translations = {
 
   ru: {
     // ===== Header =====
-    brandName: 'Миссия Рафаэля',
+    brandName: 'Raphael Mission',
     projects: 'Проекты',
     about: 'О нас',
     fund: 'Фонд',
@@ -1230,7 +1230,7 @@ export const translations = {
     emailValue: 'info@raphaelmission.org',
 
     // ===== Header =====
-    brandName: 'Misja Rafaela',
+    brandName: 'Raphael Mission',
     projects: 'Projekty',
     about: 'O nas',
     fund: 'Fundusz',
