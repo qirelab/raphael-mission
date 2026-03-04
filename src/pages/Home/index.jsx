@@ -446,7 +446,19 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('addressLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        [
+                          contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                          contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                          contactData?.city,
+                          contactData?.country
+                        ].filter(Boolean).join(', ')
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                    >
                       {(contactData?.[`address_line1_${language}`] ||
                         contactData?.address_line1_en ||
                         contactData?.address_line1) && (
@@ -474,7 +486,7 @@ const Home = () => {
                             : contactData?.city || contactData?.country}
                         </>
                       )}
-                    </p>
+                    </a>
                   </div>
                 </div>
 
@@ -491,9 +503,12 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('phoneLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                    <a
+                      href={`tel:${contactData?.phone_number || ''}`}
+                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                    >
                       {contactData?.phone_number || t('phoneNumber')}
-                    </p>
+                    </a>
                   </div>
                 </div>
 
@@ -510,9 +525,12 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('emailLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                    <a
+                      href={`mailto:${contactData?.email || ''}`}
+                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                    >
                       {contactData?.email || t('emailAddress')}
-                    </p>
+                    </a>
                   </div>
                 </div>
               </div>

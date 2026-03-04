@@ -61,13 +61,31 @@ const Footer = () => {
                   <ContactInfoSkeleton />
                 ) : (
                   <>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    <a
+                      href={`tel:${contactData?.phone_number || ''}`}
+                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                    >
                       {contactData?.phone_number || t('phoneNumber')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                    </a>
+                    <a
+                      href={`mailto:${contactData?.email || ''}`}
+                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                    >
                       {contactData?.email || t('emailAddress')}
-                    </p>
-                    <div>
+                    </a>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        [
+                          contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                          contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                          contactData?.city,
+                          contactData?.country
+                        ].filter(Boolean).join(', ')
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:text-white transition-colors"
+                    >
                       {(contactData?.[`address_line1_${language}`] ||
                         contactData?.address_line1_en ||
                         contactData?.address_line1) && (
@@ -93,7 +111,7 @@ const Footer = () => {
                             : contactData?.city || contactData?.country}
                         </p>
                       )}
-                    </div>
+                    </a>
                   </>
                 )}
               </div>
