@@ -7,6 +7,8 @@ import { useAlert } from '../hooks/useAlert';
 import FlagUS from './icons/FlagUS';
 import FlagRU from './icons/FlagRU';
 import FlagPL from './icons/FlagPL';
+import Instagram from './icons/Instagram';
+import Telegram from './icons/Telegram';
 
 export default function MobileMenu({ open, onClose }) {
   const { t, language, changeLanguage } = useLanguage();
@@ -273,13 +275,52 @@ export default function MobileMenu({ open, onClose }) {
             </div>
           </div>
 
+          {/* Social Media */}
+          <div className="mb-8">
+            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-4 font-poppins">
+              {t('followUs')}
+            </div>
+            <div className="flex gap-3 px-4">
+              <a
+                href="https://www.instagram.com/i.m.raphael"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#E1306C] hover:text-white transition-all duration-200 font-poppins group"
+                style={{
+                  animationDelay: `${(links.length + languages.length) * 80}ms`,
+                  animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                }}
+              >
+                <Instagram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
+                <span className="text-sm font-medium">Instagram</span>
+              </a>
+              <a
+                href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#0088cc] hover:text-white transition-all duration-200 font-poppins group"
+                style={{
+                  animationDelay: `${(links.length + languages.length + 1) * 80}ms`,
+                  animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                }}
+              >
+                <Telegram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
+                <span className="text-sm font-medium">Telegram</span>
+              </a>
+            </div>
+          </div>
+
           {/* Donate Button */}
           <Link
             to={`/${language}/donation`}
             onClick={onClose}
             className="block text-center rounded-2xl py-4 shadow-lg bg-gradient-to-r from-[#3c8a7a] to-[#2F7D6D] text-white text-lg font-semibold hover:shadow-xl hover:scale-[1.02] transition-all duration-200 font-poppins"
             style={{
-              animationDelay: `${(links.length + languages.length) * 80}ms`,
+              animationDelay: `${(links.length + languages.length + 2) * 80}ms`,
               animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0)' : 'translateX(20px)',

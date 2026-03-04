@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { useContact } from '../../context/ContactContext';
 import { ContactInfoSkeleton } from '../skeletons';
+import Instagram from '../icons/Instagram';
+import Telegram from '../icons/Telegram';
 
 const Footer = () => {
   const { t, language } = useLanguage();
@@ -161,6 +163,36 @@ const Footer = () => {
                     {l.label}
                   </Link>
                 ))}
+              </div>
+            </div>
+
+            {/* Follow Us */}
+            <div className="w-full lg:w-auto">
+              <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                {t('followUs')}
+              </h4>
+              <p className="text-[12px] lg:text-[14px] leading-[18px] lg:leading-[20px] text-[#d1d5db] font-['Poppins'] mb-4 max-w-[200px]">
+                {t('followUsDesc')}
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://www.instagram.com/i.m.raphael"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#E1306C] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+                  aria-label={t('instagram')}
+                >
+                  <Instagram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
+                </a>
+                <a
+                  href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#0088cc] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+                  aria-label={t('telegram')}
+                >
+                  <Telegram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
+                </a>
               </div>
             </div>
           </div>
