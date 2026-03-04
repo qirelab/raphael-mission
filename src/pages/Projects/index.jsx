@@ -115,7 +115,7 @@ const Projects = () => {
                         showButtons={false}
                         className="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px]"
                       />
-                    ) : (
+                    ) : projectsData.length > 0 ? (
                       projectsData.map((project, index) => (
                         <a
                           key={project.id}
@@ -149,6 +149,30 @@ const Projects = () => {
                           </div>
                         </a>
                       ))
+                    ) : (
+                      <div className="col-span-full text-center py-16">
+                        <div className="max-w-md mx-auto">
+                          <svg
+                            className="w-16 h-16 mx-auto mb-4 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            />
+                          </svg>
+                          <h3 className="text-xl font-semibold text-gray-700 mb-2 font-poppins">
+                            {t('noProjectsAvailable') || 'No projects available'}
+                          </h3>
+                          <p className="text-gray-500 font-poppins">
+                            {t('noProjectsYet') || 'No projects available at the moment. Check back soon!'}
+                          </p>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -207,7 +231,7 @@ const Projects = () => {
                   <div className="flex flex-col sm:flex-row gap-[16px] justify-center items-center w-full mt-[16px] sm:mt-[20px] md:mt-[24px]">
                     <Button
                       variant="outline"
-                      onClick={() => navigate(`/${language}/training`)}
+                      onClick={() => navigate(`/${language}/contact`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('getInvolved')}

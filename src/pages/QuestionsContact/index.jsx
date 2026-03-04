@@ -65,9 +65,6 @@ const QuestionsContact = () => {
                     {t('phoneNumber')}
                   </p>
                 )}
-                <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">
-                  {t('phoneWorkHoursShort')}
-                </p>
               </div>
 
               {/* Address */}
@@ -135,7 +132,7 @@ const QuestionsContact = () => {
                     </a>
                   ) : (
                     <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                      {t('address')}
+                      {t('addressLine')}
                     </p>
                   );
                 })()}

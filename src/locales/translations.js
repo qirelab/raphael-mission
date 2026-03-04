@@ -54,9 +54,10 @@ export const translations = {
     addressLabel: 'Address',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Address information will be available soon',
+    phoneNumber: 'Phone number will be added soon',
+    emailAddress: 'Email will be added soon',
+    address: 'Address will be added soon',
     sendMessage: 'Send Message',
     firstName: 'First Name',
     lastName: 'Last Name',
@@ -217,6 +218,7 @@ export const translations = {
       'Through their mentorship program, I found direction and purpose. Today I am helping others the same way they helped me.',
     shopTestimonialFoodProgram:
       "The mission's food program saved my family during our darkest hour. Their compassion gave us hope when we had none left.",
+    noProducts: 'No products available at the moment. Check back soon!',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Our Projects',
@@ -286,6 +288,12 @@ export const translations = {
       'They brought medical care to our remote village. My grandmother received life-saving treatment.',
     testimonyDavidThompsonQuote:
       'Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entire worldview.',
+    noTestimoniesYet: 'No testimonies available yet. Check back soon!',
+    noTestimonies: 'No testimonies available yet',
+    noTestimoniesDesc: 'Testimonies will be available soon. Check back later!',
+    noProjectsAvailable: 'No projects available',
+    noProjectsYet: 'No projects available at the moment. Check back soon!',
+    noTrainingPrograms: 'No training programs available at the moment. Check back soon!',
 
     // ===== Footer =====
     footerDesc: "Spreading God's love through evangelism, healing, and church support.",
@@ -298,7 +306,7 @@ export const translations = {
     privacyPolicy: 'Privacy Policy',
     termsOfService: 'Terms of Service',
     cookiePolicy: 'Cookie Policy',
-    copyright: '© 2025 Raphael Mission. All rights reserved.',
+    copyright: '© 2026 Raphael Mission. All rights reserved.',
 
     // ===== About =====
     aboutHeroTitle: 'We bring hope through',
@@ -373,7 +381,7 @@ export const translations = {
     storyGrowthDesc:
       'As word spread of our compassionate work, volunteers and supporters joined from around the world. We expanded from one project to seven distinct ministry areas, each addressing critical needs in communities across Eastern Europe, Africa, and Latin America.',
     storyTodayTitle: 'Today & Beyond',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
       "Today, Raphael Mission operates in over 25 countries, with hundreds of trained volunteers bringing hope through street evangelism, tent crusades, social programs, healing ministry, and church support. Our mission continues to grow as we answer God's call to serve.",
     storyVisionTitle: 'Our Vision for the Future',
@@ -514,7 +522,7 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Privacy Policy',
-    privacyPolicySubtitle: 'Last updated: January 2025',
+    privacyPolicySubtitle: 'Last updated: January 2026',
     privacySection1Title: '1. Information We Collect',
     privacySection1Content:
       'At Raphael Mission, we collect information you provide directly to us when you donate, volunteer, subscribe to our newsletter, or contact us. This may include your name, email address, phone number, mailing address, and payment information.',
@@ -542,7 +550,7 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Terms of Service',
-    termsSubtitle: 'Last updated: January 2025',
+    termsSubtitle: 'Last updated: January 2026',
     termsSection1Title: '1. Acceptance of Terms',
     termsSection1Content:
       'By accessing and using the Raphael Mission website, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.',
@@ -570,7 +578,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Cookie Policy',
-    cookiePolicySubtitle: 'Last updated: January 2025',
+    cookiePolicySubtitle: 'Last updated: January 2026',
     cookieSection1Title: 'What Are Cookies',
     cookieSection1Content:
       'Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.',
@@ -669,9 +677,10 @@ export const translations = {
     addressLabel: 'Адрес',
     phoneLabel: 'Телефон',
     emailLabel: 'Эл. почта',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Информация об адресе скоро будет доступна',
+    phoneNumber: 'Номер телефона скоро будет добавлен',
+    emailAddress: 'Email скоро будет добавлен',
+    address: 'Адрес скоро будет добавлен',
     sendMessage: 'Отправить сообщение',
     firstName: 'Имя',
     lastName: 'Фамилия',
@@ -832,6 +841,7 @@ export const translations = {
       'Благодаря их программе наставничества я нашёл цель и направление. Теперь я помогаю другим так же, как они помогли мне.',
     shopTestimonialFoodProgram:
       'Программа питания миссии спасла мою семью в самый трудный момент. Их сострадание подарило нам надежду, когда её уже не было.',
+    noProducts: 'Товары пока недоступны. Загляните позже!',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Наши проекты',
@@ -900,6 +910,12 @@ export const translations = {
       'Они привезли медицинскую помощь в нашу отдалённую деревню. Моя бабушка получила лечение, спасшее жизнь.',
     testimonyDavidThompsonQuote:
       'Волонтёрство в Миссии Рафаэля открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.',
+    noTestimoniesYet: 'Свидетельства пока недоступны. Загляните позже!',
+    noTestimonies: 'Свидетельства пока недоступны',
+    noTestimoniesDesc: 'Свидетельства скоро появятся. Загляните позже!',
+    noProjectsAvailable: 'Проекты недоступны',
+    noProjectsYet: 'Проекты пока недоступны. Загляните позже!',
+    noTrainingPrograms: 'Программы обучения пока недоступны. Загляните позже!',
 
     // ===== Footer =====
     footerDesc: 'Распространение Божьей любви через евангелизацию, исцеление и поддержку церквей.',
@@ -912,7 +928,7 @@ export const translations = {
     privacyPolicy: 'Политика конфиденциальности',
     termsOfService: 'Условия обслуживания',
     cookiePolicy: 'Политика файлов cookie',
-    copyright: '© 2025 Миссия Рафаэля. Все права защищены.',
+    copyright: '© 2026 Raphael Mission. Все права защищены.',
 
     // ===== About =====
     aboutHeroTitle: 'Мы приносим надежду через',
@@ -987,7 +1003,7 @@ export const translations = {
     storyGrowthDesc:
       'По мере того, как распространялась весть о нашей сострадательной работе, к нам присоединялись волонтёры и сторонники со всего мира. Мы расширились с одного проекта до семи различных направлений служения, каждое из которых отвечает критическим потребностям сообществ в Восточной Европе, Африке и Латинской Америке.',
     storyTodayTitle: 'Сегодня и дальше',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
       'Сегодня Миссия Рафаэля действует в более чем 25 странах, а сотни обученных волонтёров несут надежду через уличную евангелизацию, палаточные крусейды, социальные программы, служение исцеления и поддержку церквей. Наша миссия продолжает расти, поскольку мы отвечаем на Божий призыв служить.',
     storyVisionTitle: 'Наше видение будущего',
@@ -1128,7 +1144,7 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Политика конфиденциальности',
-    privacyPolicySubtitle: 'Последнее обновление: январь 2025',
+    privacyPolicySubtitle: 'Последнее обновление: январь 2026',
     privacySection1Title: '1. Информация, которую мы собираем',
     privacySection1Content:
       'В Миссии Рафаэля мы собираем информацию, которую вы предоставляете нам напрямую, когда жертвуете, становитесь волонтёром, подписываетесь на нашу рассылку или связываетесь с нами. Это может включать ваше имя, адрес электронной почты, номер телефона, почтовый адрес и платёжную информацию.',
@@ -1156,7 +1172,7 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Условия использования',
-    termsSubtitle: 'Последнее обновление: январь 2025',
+    termsSubtitle: 'Последнее обновление: январь 2026',
     termsSection1Title: '1. Принятие условий',
     termsSection1Content:
       'Получая доступ и используя веб-сайт Миссии Рафаэля, вы принимаете и соглашаетесь соблюдать эти Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш сайт.',
@@ -1185,7 +1201,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Политика использования файлов cookie',
-    cookiePolicySubtitle: 'Последнее обновление: январь 2025',
+    cookiePolicySubtitle: 'Последнее обновление: январь 2026',
     cookieSection1Title: 'Что такое файлы cookie',
     cookieSection1Content:
       'Файлы cookie — это небольшие текстовые файлы, которые сохраняются на вашем устройстве при посещении нашего сайта. Они помогают нам предоставлять вам лучший опыт, запоминая ваши предпочтения и понимая, как вы используете наш сайт.',
@@ -1232,10 +1248,10 @@ export const translations = {
 
   pl: {
     // контакты
-    phoneNumber: '(555) 123-4567',
+    phoneNumber: 'Numer telefonu zostanie wkrótce dodany',
     workHours: '8:30 – 17:00 czasu wschodniego',
-    addressValue: '123 Mission Street Hope City, HC 12345',
-    emailValue: 'info@raphaelmission.org',
+    addressValue: 'Informacje o adresie będą wkrótce dostępne',
+    emailValue: 'E-mail zostanie wkrótce dodany',
 
     // ===== Header =====
     brandName: 'Raphael Mission',
@@ -1290,9 +1306,11 @@ export const translations = {
     addressLabel: 'Adres',
     phoneLabel: 'Telefon',
     emailLabel: 'E-mail',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber2: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Informacje o adresie będą wkrótce dostępne',
+    phoneNumber: 'Numer telefonu zostanie wkrótce dodany',
+    phoneNumber2: 'Numer telefonu zostanie wkrótce dodany',
+    emailAddress: 'E-mail zostanie wkrótce dodany',
+    address: 'Adres zostanie wkrótce dodany',
     sendMessage: 'Wyślij wiadomość',
     firstName: 'Imię',
     lastName: 'Nazwisko',
@@ -1454,6 +1472,7 @@ export const translations = {
       'Dzięki ich programowi mentoringowemu odnalazłem cel i sens. Dziś pomagam innym tak, jak oni pomogli mnie.',
     shopTestimonialFoodProgram:
       'Program żywnościowy misji uratował moją rodzinę w najtrudniejszej chwili. Ich współczucie dało nam nadzieję, gdy już jej nie mieliśmy.',
+    noProducts: 'Produkty są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Nasze projekty',
@@ -1520,6 +1539,12 @@ export const translations = {
       'Przywieźli opiekę medyczną do naszej odległej wioski. Moja babcia otrzymała leczenie ratujące życie.',
     testimonyDavidThompsonQuote:
       'Wolontariat w Misji Rafaela otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.',
+    noTestimoniesYet: 'Świadectwa są obecnie niedostępne. Wróć wkrótce!',
+    noTestimonies: 'Świadectwa są obecnie niedostępne',
+    noTestimoniesDesc: 'Świadectwa będą wkrótce dostępne. Wróć później!',
+    noProjectsAvailable: 'Projekty niedostępne',
+    noProjectsYet: 'Projekty są obecnie niedostępne. Wróć wkrótce!',
+    noTrainingPrograms: 'Programy szkoleniowe są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Footer =====
     footerDesc: 'Szerzenie Bożej miłości poprzez ewangelizację, uzdrowienie i wsparcie kościołów.',
@@ -1532,7 +1557,7 @@ export const translations = {
     privacyPolicy: 'Polityka prywatności',
     termsOfService: 'Warunki usługi',
     cookiePolicy: 'Polityka plików cookie',
-    copyright: '© 2025 Misja Rafaela. Wszystkie prawa zastrzeżone.',
+    copyright: '© 2026 Raphael Mission. Wszystkie prawa zastrzeżone.',
 
     // ===== About =====
     aboutHeroTitle: 'Przynosimy nadzieję przez',
@@ -1608,7 +1633,7 @@ export const translations = {
     storyGrowthDesc:
       'W miarę rozprzestrzeniania się wieści o naszej współczującej pracy, wolontariusze i wspierający z całego świata dołączali do nas. Rozszerzyliśmy się z jednego projektu do siedmiu odrębnych obszarów służby, z których każdy odpowiada na krytyczne potrzeby społeczności w Europie Wschodniej, Afryce i Ameryce Łacińskiej.',
     storyTodayTitle: 'Dzisiaj i w przyszłości',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
       'Dzisiaj Misja Rafaela działa w ponad 25 krajach, a setki przeszkolonych wolontariuszy niosą nadzieję przez ewangelizację uliczną, namiotowe krucjaty, programy społeczne, służbę uzdrowienia i wsparcie kościołów. Nasza misja nadal rośnie, gdy odpowiadamy na Boże wołanie do służby.',
     storyVisionTitle: 'Nasza wizja przyszłości',
@@ -1749,7 +1774,7 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Polityka prywatności',
-    privacyPolicySubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    privacyPolicySubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     privacySection1Title: '1. Informacje, które zbieramy',
     privacySection1Content:
       'W Misji Rafaela zbieramy informacje, które nam bezpośrednio przekazujesz, gdy dokonujesz darowizny, stajesz się wolontariuszem, zapisujesz się do naszego newslettera lub kontaktujesz się z nami. Może to obejmować Twoje imię i nazwisko, adres e-mail, numer telefonu, adres pocztowy i informacje płatnicze.',
@@ -1777,7 +1802,7 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Warunki usługi',
-    termsSubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    termsSubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     termsSection1Title: '1. Akceptacja warunków',
     termsSection1Content:
       'Uzyskując dostęp i korzystając ze strony internetowej Misji Rafaela, akceptujesz i zgadzasz się przestrzegać niniejszych Warunków usługi. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z naszej strony.',
@@ -1805,7 +1830,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Polityka plików cookie',
-    cookiePolicySubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    cookiePolicySubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     cookieSection1Title: 'Czym są pliki cookie',
     cookieSection1Content:
       'Pliki cookie to małe pliki tekstowe, które są zapisywane na Twoim urządzeniu podczas odwiedzania naszej strony. Pomagają nam zapewnić Ci lepsze doświadczenie, zapamiętując Twoje preferencje i rozumiejąc, jak korzystasz z naszej strony.',

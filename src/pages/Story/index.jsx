@@ -32,7 +32,7 @@ const Story = () => {
     { year: '2017', key: 'storyMilestone4' },
     { year: '2020', key: 'storyMilestone5' },
     { year: '2022', key: 'storyMilestone6' },
-    { year: '2025', key: 'storyMilestone7' },
+    { year: '2026', key: 'storyMilestone7' },
   ];
 
   return (

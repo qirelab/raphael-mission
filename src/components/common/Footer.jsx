@@ -134,7 +134,7 @@ const Footer = () => {
                         </a>
                       ) : (
                         <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {t('address')}
+                          {t('addressLine')}
                         </p>
                       );
                     })()}

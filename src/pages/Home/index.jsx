@@ -493,7 +493,7 @@ const Home = () => {
                         </a>
                       ) : (
                         <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                          {t('address')}
+                          {t('addressLine')}
                         </p>
                       );
                     })()}
