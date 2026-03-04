@@ -45,6 +45,11 @@ export const LanguageProvider = ({ children }) => {
     }
   }, [location.pathname]);
 
+  // Update html lang attribute for font switching
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', currentLanguage);
+  }, [currentLanguage]);
+
   const changeLanguage = (language) => {
     if (translations[language]) {
       const currentPath = location.pathname;

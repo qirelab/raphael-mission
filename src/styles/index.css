@@ -1,11 +1,22 @@
 @import './tailwind.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
-  font-family: 'Poppins', 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Use Inter font for Russian language */
+html[lang="ru"] body,
+html[lang="ru"] body *:not([class*="font-['Poppins']"]) {
+  font-family: 'Inter', sans-serif;
+}
+
+html[lang="ru"] .font-\[\'Poppins\'\] {
+  font-family: 'Inter', sans-serif !important;
 }
 
 *, *::before, *::after {
