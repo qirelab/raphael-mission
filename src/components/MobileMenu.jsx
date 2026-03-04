@@ -29,7 +29,7 @@ export default function MobileMenu({ open, onClose }) {
       dropdownItems: projectLinks,
     },
     { labelKey: 'about', to: `/${language}/about-mission` },
-    { labelKey: 'training', to: `/${language}/training` },
+    // { labelKey: 'training', to: `/${language}/training` }, // Temporarily hidden
     { labelKey: 'testimonies', to: `/${language}/testimonies` },
     { labelKey: 'shop', to: `/${language}/shop` },
     { labelKey: 'story', to: `/${language}/story` },

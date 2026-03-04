@@ -33,7 +33,7 @@ const Footer = () => {
                   { href: `/${language}/about-mission`, label: t('about') },
                   { href: `/${language}/projects`, label: t('projects') },
                   { href: `/${language}/testimonies`, label: t('testimonies') },
-                  { href: `/${language}/training`, label: t('training') },
+                  // { href: `/${language}/training`, label: t('training') }, // Temporarily hidden
                   { href: `/${language}/story`, label: t('story') },
                   { href: `/${language}/shop`, label: t('shop') },
                   { href: `/${language}/contact`, label: t('contact') },
@@ -61,57 +61,81 @@ const Footer = () => {
                   <ContactInfoSkeleton />
                 ) : (
                   <>
-                    <a
-                      href={`tel:${contactData?.phone_number || ''}`}
-                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
-                    >
-                      {contactData?.phone_number || t('phoneNumber')}
-                    </a>
-                    <a
-                      href={`mailto:${contactData?.email || ''}`}
-                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
-                    >
-                      {contactData?.email || t('emailAddress')}
-                    </a>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                        [
-                          contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
-                          contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
-                          contactData?.city,
-                          contactData?.country
-                        ].filter(Boolean).join(', ')
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block hover:text-white transition-colors"
-                    >
-                      {(contactData?.[`address_line1_${language}`] ||
-                        contactData?.address_line1_en ||
-                        contactData?.address_line1) && (
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.[`address_line1_${language}`] ||
+                    {contactData?.phone_number ? (
+                      <a
+                        href={`tel:${contactData.phone_number}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.phone_number}
+                      </a>
+                    ) : (
+                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                        {t('phoneNumber')}
+                      </p>
+                    )}
+
+                    {contactData?.email ? (
+                      <a
+                        href={`mailto:${contactData.email}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.email}
+                      </a>
+                    ) : (
+                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                        {t('emailAddress')}
+                      </p>
+                    )}
+
+                    {(() => {
+                      const addressParts = [
+                        contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                        contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                        contactData?.city,
+                        contactData?.country
+                      ].filter(Boolean);
+
+                      const hasAddress = addressParts.length > 0;
+
+                      return hasAddress ? (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressParts.join(', '))}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:text-white transition-colors"
+                        >
+                          {(contactData?.[`address_line1_${language}`] ||
                             contactData?.address_line1_en ||
-                            contactData?.address_line1}
-                        </p>
-                      )}
-                      {(contactData?.[`address_line2_${language}`] ||
-                        contactData?.address_line2_en ||
-                        contactData?.address_line2) && (
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line1) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.[`address_line1_${language}`] ||
+                                contactData?.address_line1_en ||
+                                contactData?.address_line1}
+                            </p>
+                          )}
+                          {(contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
-                            contactData?.address_line2}
-                        </p>
-                      )}
-                      {(contactData?.city || contactData?.country) && (
+                            contactData?.address_line2) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.[`address_line2_${language}`] ||
+                                contactData?.address_line2_en ||
+                                contactData?.address_line2}
+                            </p>
+                          )}
+                          {(contactData?.city || contactData?.country) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.city && contactData?.country
+                                ? `${contactData.city}, ${contactData.country}`
+                                : contactData?.city || contactData?.country}
+                            </p>
+                          )}
+                        </a>
+                      ) : (
                         <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.city && contactData?.country
-                            ? `${contactData.city}, ${contactData.country}`
-                            : contactData?.city || contactData?.country}
+                          {t('address')}
                         </p>
-                      )}
-                    </a>
+                      );
+                    })()}
                   </>
                 )}
               </div>

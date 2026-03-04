@@ -10,7 +10,7 @@ import ProjectsPage from './pages/Projects';
 import DonationPage from './pages/Donation';
 import TestimoniesPage from './pages/Testimonies';
 import ShopPage from './pages/Shop';
-import TrainingPrograms from './pages/Training';
+// import TrainingPrograms from './pages/Training'; // Temporarily hidden
 import QuestionsContact from './pages/QuestionsContact';
 import Story from './pages/Story';
 
@@ -31,8 +31,8 @@ import ProjectForm from './pages/Admin/Projects/ProjectForm';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
 import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
-import TrainingList from './pages/Admin/Training/TrainingList';
-import TrainingForm from './pages/Admin/Training/TrainingForm';
+// import TrainingList from './pages/Admin/Training/TrainingList'; // Temporarily hidden
+// import TrainingForm from './pages/Admin/Training/TrainingForm'; // Temporarily hidden
 import ProductsList from './pages/Admin/Shop/ProductsList';
 import ProductForm from './pages/Admin/Shop/ProductForm';
 
@@ -49,7 +49,7 @@ const AppRoutes = () => {
       <Route path="/:lang/donate" element={<DonationPage />} />
       <Route path="/:lang/testimonies" element={<TestimoniesPage />} />
       <Route path="/:lang/shop" element={<ShopPage />} />
-      <Route path="/:lang/training" element={<TrainingPrograms />} />
+      {/* <Route path="/:lang/training" element={<TrainingPrograms />} /> */}{/* Temporarily hidden */}
       <Route path="/:lang/about" element={<AboutMission />} />
       <Route path="/:lang/contact" element={<QuestionsContact />} />
       <Route path="/:lang/about-mission" element={<AboutMission />} />
@@ -73,9 +73,9 @@ const AppRoutes = () => {
         <Route path="testimonies" element={<TestimoniesList />} />
         <Route path="testimonies/new" element={<TestimonyForm />} />
         <Route path="testimonies/edit/:id" element={<TestimonyForm />} />
-        <Route path="training" element={<TrainingList />} />
-        <Route path="training/new" element={<TrainingForm />} />
-        <Route path="training/edit/:id" element={<TrainingForm />} />
+        {/* <Route path="training" element={<TrainingList />} /> */}{/* Temporarily hidden */}
+        {/* <Route path="training/new" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
+        {/* <Route path="training/edit/:id" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
         <Route path="shop" element={<ProductsList />} />
         <Route path="shop/new" element={<ProductForm />} />
         <Route path="shop/edit/:id" element={<ProductForm />} />

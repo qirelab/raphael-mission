@@ -165,7 +165,7 @@ const Home = () => {
               <img
                 src="/images/img_logo_2.png"
                 alt={`${t('brandName')} Logo`}
-                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px]"
+                className="w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px]"
               />
             </div>
 
@@ -446,47 +446,57 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('addressLabel')}
                     </h3>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                        [
-                          contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
-                          contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
-                          contactData?.city,
-                          contactData?.country
-                        ].filter(Boolean).join(', ')
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
-                    >
-                      {(contactData?.[`address_line1_${language}`] ||
-                        contactData?.address_line1_en ||
-                        contactData?.address_line1) && (
-                        <>
-                          {contactData?.[`address_line1_${language}`] ||
+                    {(() => {
+                      const addressParts = [
+                        contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                        contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                        contactData?.city,
+                        contactData?.country
+                      ].filter(Boolean);
+
+                      const hasAddress = addressParts.length > 0;
+
+                      return hasAddress ? (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressParts.join(', '))}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                        >
+                          {(contactData?.[`address_line1_${language}`] ||
                             contactData?.address_line1_en ||
-                            contactData?.address_line1}
-                        </>
-                      )}
-                      {(contactData?.[`address_line2_${language}`] ||
-                        contactData?.address_line2_en ||
-                        contactData?.address_line2) && (
-                        <>
-                          <br />
-                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line1) && (
+                            <>
+                              {contactData?.[`address_line1_${language}`] ||
+                                contactData?.address_line1_en ||
+                                contactData?.address_line1}
+                            </>
+                          )}
+                          {(contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
-                            contactData?.address_line2}
-                        </>
-                      )}
-                      {(contactData?.city || contactData?.country) && (
-                        <>
-                          <br />
-                          {contactData?.city && contactData?.country
-                            ? `${contactData.city}, ${contactData.country}`
-                            : contactData?.city || contactData?.country}
-                        </>
-                      )}
-                    </a>
+                            contactData?.address_line2) && (
+                            <>
+                              <br />
+                              {contactData?.[`address_line2_${language}`] ||
+                                contactData?.address_line2_en ||
+                                contactData?.address_line2}
+                            </>
+                          )}
+                          {(contactData?.city || contactData?.country) && (
+                            <>
+                              <br />
+                              {contactData?.city && contactData?.country
+                                ? `${contactData.city}, ${contactData.country}`
+                                : contactData?.city || contactData?.country}
+                            </>
+                          )}
+                        </a>
+                      ) : (
+                        <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                          {t('address')}
+                        </p>
+                      );
+                    })()}
                   </div>
                 </div>
 
@@ -503,12 +513,18 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('phoneLabel')}
                     </h3>
-                    <a
-                      href={`tel:${contactData?.phone_number || ''}`}
-                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
-                    >
-                      {contactData?.phone_number || t('phoneNumber')}
-                    </a>
+                    {contactData?.phone_number ? (
+                      <a
+                        href={`tel:${contactData.phone_number}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.phone_number}
+                      </a>
+                    ) : (
+                      <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                        {t('phoneNumber')}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -525,12 +541,18 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('emailLabel')}
                     </h3>
-                    <a
-                      href={`mailto:${contactData?.email || ''}`}
-                      className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
-                    >
-                      {contactData?.email || t('emailAddress')}
-                    </a>
+                    {contactData?.email ? (
+                      <a
+                        href={`mailto:${contactData.email}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.email}
+                      </a>
+                    ) : (
+                      <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                        {t('emailAddress')}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
