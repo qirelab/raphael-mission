@@ -625,7 +625,7 @@ export const translations = {
 
   ru: {
     // ===== Header =====
-    brandName: 'Raphael Mission',
+    brandName: 'Raphael Миссия',
     projects: 'Проекты',
     about: 'О нас',
     fund: 'Фонд',
@@ -928,7 +928,7 @@ export const translations = {
     privacyPolicy: 'Политика конфиденциальности',
     termsOfService: 'Условия обслуживания',
     cookiePolicy: 'Политика файлов cookie',
-    copyright: '© 2026 Raphael Mission. Все права защищены.',
+    copyright: '© 2026 Raphael Миссия. Все права защищены.',
 
     // ===== About =====
     aboutHeroTitle: 'Мы приносим надежду через',
@@ -1254,7 +1254,7 @@ export const translations = {
     emailValue: 'E-mail zostanie wkrótce dodany',
 
     // ===== Header =====
-    brandName: 'Raphael Mission',
+    brandName: 'Raphael Misja',
     projects: 'Projekty',
     about: 'O nas',
     fund: 'Fundusz',
@@ -1557,7 +1557,7 @@ export const translations = {
     privacyPolicy: 'Polityka prywatności',
     termsOfService: 'Warunki usługi',
     cookiePolicy: 'Polityka plików cookie',
-    copyright: '© 2026 Raphael Mission. Wszystkie prawa zastrzeżone.',
+    copyright: '© 2026 Raphael Misja. Wszystkie prawa zastrzeżone.',
 
     // ===== About =====
     aboutHeroTitle: 'Przynosimy nadzieję przez',
