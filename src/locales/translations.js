@@ -22,10 +22,10 @@ export const translations = {
     history: 'History',
 
     // ===== Hero =====
-    heroTitle: 'Spreading Hope Through Faith',
-    heroTitleHighlight: 'and Service',
+    heroTitle: 'Our mission is to preach the',
+    heroTitleHighlight: 'Gospel',
     heroDescription:
-      'We believe that true change happens when practical help and spiritual hope come together. Through acts of compassion, we deliver food, medical care, and essential resources to struggling communities, while also sharing the message of faith that brings strength and renewal.',
+      'We believe that the Gospel is the power of God that saves, heals, and gives true freedom to every person and to entire nations.',
     supportMission: 'Support Our Mission',
     learnMore: 'Learn More',
 
@@ -221,8 +221,10 @@ export const translations = {
     noProducts: 'No products available at the moment. Check back soon!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Our Projects',
+    projectsPageTitle: 'Current Projects',
     projectsPageDescription: 'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
+    projectsBibleQuote: '"I have come that you may have life, and have it to the full."',
+    projectsBibleSource: 'Jesus (John 10:10)',
     streetEvangelismTitle: 'Street Evangelism',
     streetEvangelismDesc:
       'Sharing the message of hope and faith in public spaces, connecting with people where they are.',
@@ -645,10 +647,10 @@ export const translations = {
     history: 'История',
 
     // ===== Hero =====
-    heroTitle: 'Распространяем надежду через веру',
-    heroTitleHighlight: 'и служение',
+    heroTitle: 'Наша миссия — нести',
+    heroTitleHighlight: 'Евангелие',
     heroDescription:
-      'Мы верим, что настоящие перемены происходят, когда практическая помощь и духовная надежда объединяются. Через акты сострадания мы доставляем еду, медицинскую помощь и необходимые ресурсы нуждающимся сообществам, а также делимся посланием веры, которое приносит силу и обновление.',
+      'Мы верим, что Евангелие — это сила Божья, которая спасает, исцеляет и дарует подлинную свободу каждому человеку и целым народам.',
     supportMission: 'Поддержать нашу миссию',
     learnMore: 'Узнать больше',
 
@@ -844,9 +846,11 @@ export const translations = {
     noProducts: 'Товары пока недоступны. Загляните позже!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Наши проекты',
+    projectsPageTitle: 'Текущие проекты',
     projectsPageDescription:
       'Через каждый проект мы видим плоды Евангелия: открытые сердца для Иисуса, покаяние и изменённые жизни, где люди получают свободу, исцеление и надежду, возвращаясь к смыслу жизни.',
+    projectsBibleQuote: '«Я пришёл, чтобы вы имели жизнь и имели жизнь с избытком».',
+    projectsBibleSource: 'Иисус (Иоанна 10:10)',
     streetEvangelismTitle: 'Уличная евангелизация',
     streetEvangelismDesc:
       'Делимся посланием надежды и веры в общественных местах, встречаясь с людьми там, где они находятся.',
@@ -1274,10 +1278,10 @@ export const translations = {
     history: 'Historia',
 
     // ===== Hero =====
-    heroTitle: 'Rozprzestrzeniamy nadzieję przez wiarę',
-    heroTitleHighlight: 'i służbę',
+    heroTitle: 'Naszą misją jest głoszenie',
+    heroTitleHighlight: 'Ewangelii',
     heroDescription:
-      'Wierzymy, że prawdziwa zmiana następuje, gdy praktyczna pomoc i duchowa nadzieja łączą się razem. Poprzez akty współczucia dostarczamy żywność, opiekę medyczną i niezbędne zasoby potrzebującym społecznościom, jednocześnie dzieląc się przesłaniem wiary, które przynosi siłę i odnowę.',
+      'Wierzymy, że Ewangelia jest mocą Bożą, która zbawia, uzdrawia i daje prawdziwą wolność każdemu człowiekowi oraz całym narodom.',
     supportMission: 'Wesprzyj naszą misję',
     learnMore: 'Dowiedz się więcej',
 
@@ -1475,9 +1479,11 @@ export const translations = {
     noProducts: 'Produkty są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Nasze projekty',
+    projectsPageTitle: 'Aktualne projekty',
     projectsPageDescription:
       'Przez każdy projekt widzimy owoce Ewangelii: otwarte serca dla Jezusa, nawrócenie i odmienione życie, w którym ludzie otrzymują wolność, uzdrowienie i nadzieję, wracając do sensu życia.',
+    projectsBibleQuote: '„Przyszedłem po to, abyście mieli życie i mieli je w obfitości".',
+    projectsBibleSource: 'Jezus (Jana 10:10)',
     streetEvangelismTitle: 'Ewangelizacja uliczna',
     streetEvangelismDesc:
       'Dzielenie się przesłaniem nadziei i wiary w miejscach publicznych, łączenie się z ludźmi tam, gdzie są.',

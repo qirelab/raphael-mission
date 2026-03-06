@@ -22,11 +22,12 @@ const Projects = () => {
     }));
   }, [projects, language]);
 
-  const statsData = [
-    { number: '500+', labelKey: 'livesTouched' },
-    { number: '25+', labelKey: 'communitiesServed' },
-    { number: '7', labelKey: 'activeProjects' },
-  ];
+  // Statistics data - Temporarily hidden as per DOCUMENT.md
+  // const statsData = [
+  //   { number: '500+', labelKey: 'livesTouched' },
+  //   { number: '25+', labelKey: 'communitiesServed' },
+  //   { number: '7', labelKey: 'activeProjects' },
+  // ];
 
   if (loading) {
     return (
@@ -47,8 +48,8 @@ const Projects = () => {
               </div>
             </section>
 
-            {/* Stats Section Skeleton */}
-            <section className="w-full bg-white py-12 lg:py-16">
+            {/* Stats Section Skeleton - Temporarily Hidden as per DOCUMENT.md */}
+            {/* <section className="w-full bg-white py-12 lg:py-16">
               <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                   {Array.from({ length: 3 }, (_, i) => (
@@ -59,7 +60,7 @@ const Projects = () => {
                   ))}
                 </div>
               </div>
-            </section>
+            </section> */}
 
             {/* Projects Section Skeleton */}
             <section className="w-full bg-gray-50 py-12 lg:py-16">
@@ -93,6 +94,12 @@ const Projects = () => {
                     <h1 className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-poppins font-bold leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] text-center text-white mb-[16px] sm:mb-[20px] md:mb-[24px]">
                       {t('projectsPageTitle')}
                     </h1>
+                    <blockquote className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal italic leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-100 w-full mb-[8px] sm:mb-[10px]">
+                      {t('projectsBibleQuote')}
+                    </blockquote>
+                    <cite className="text-[14px] sm:text-[15px] md:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] text-center text-gray-300 w-full mb-[24px] sm:mb-[28px] md:mb-[32px] not-italic">
+                      {t('projectsBibleSource')}
+                    </cite>
                     <p className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-200 w-full">
                       {t('projectsPageDescription')}
                     </p>
@@ -180,8 +187,8 @@ const Projects = () => {
             </div>
           </section>
 
-          {/* Statistics Section */}
-          <section className="w-full bg-[#F3F4F6] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
+          {/* Statistics Section - Temporarily Hidden as per DOCUMENT.md */}
+          {/* <section className="w-full bg-[#F3F4F6] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
             <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-center items-center w-full">
                 <div className="flex flex-col justify-start items-center w-full max-w-[1200px]">
@@ -214,7 +221,7 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Call to Action Section */}
           <section className="w-full bg-[#3c8a7a] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
