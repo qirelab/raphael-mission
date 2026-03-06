@@ -32,16 +32,16 @@ export const translations = {
     // ===== Home / Support =====
     supportOurMission: 'Support Our Mission',
     supportMissionDesc:
-      "Your generous donation helps us reach more people with God's love, healing, and hope. Every contribution makes a difference in transforming lives and communities.",
+      "Your donation helps us spread the Gospel even further and respond to people's needs.",
 
     // ===== Home / Current Projects =====
     currentProjects: 'Current Projects',
     currentProjectsDesc:
-      "Discover the impactful work we're doing around the world to bring hope and healing to communities in need.",
+      "We share the Gospel by responding to people's needs through various outreach initiatives and events.",
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      "Stories of faith and transformation that show how God's love is changing lives through Raphael Mission",
+      "Real stories of people who experienced God's touch, love, renewal, healing, and freedom thanks to Jesus through the Mission's ministry.",
     quoteSarahJohnson:
       '"Through this mission, I discovered God’s love in a way I never imagined. My life has found new meaning".',
     sarahJohnson: 'Sarah Johnson',
@@ -50,7 +50,7 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Contact Us',
     contactUsDesc:
-      "We'd love to hear from you. Get in touch with us to learn more about our mission or to get involved.",
+      "We'll be happy to hear from you. Write to us to learn more about the Mission or to join the ministry.",
     addressLabel: 'Address',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
@@ -76,16 +76,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Our Goals',
     missionDescription:
-      'Our goals is to stay close to God and help people connect with Him. We preach the Gospel, bringing healing and restoration, carrying the light of Christ to the nations.',
-    humanitarianAid: 'Closeness with God',
+      'Our goal is to lead people to Jesus.',
+    humanitarianAid: 'A close relationship with God',
     humanitarianAidDesc:
-      'We strive to live in deep relationship with God and inspire others to seek His presence.',
+      'To live in constant closeness with God and pass on to others this desire to be near Him.',
     spiritualGuidance: 'Preach the Gospel',
     spiritualGuidanceDesc:
-      'We share the message of salvation with nations so that everyone may know the love and truth of Christ.',
-    communityBuilding: 'Healing and Restoration',
+      "Reach people's hearts with the Word of the Gospel, God's love and power, bringing healing, freedom, and restoration.",
+    communityBuilding: 'Practical help',
     communityBuildingDesc:
-      'We serve people by bringing spiritual, emotional, and physical healing in the name of Jesus.',
+      "Through practical actions, respond to people's needs, struggles, and pain.",
 
     // ===== Language switcher =====
     language: 'Language',
@@ -195,7 +195,7 @@ export const translations = {
     // ===== Shop =====
     shopHeroTitle: 'Support Our Mission Through Your Purchase',
     shopHeroDesc:
-      'Every purchase you make helps fund our humanitarian aid programs, spiritual guidance initiatives, and community building projects around the world.',
+      "This shop features original handmade paintings by the artist Katryn Feli—an evangelist and missionary, and one of the founders of Raphael Mission. By purchasing a painting, you support the mission and help us spread the Gospel even further and respond to people's needs. To purchase, please write to us.",
     shopProductBottleTitle: 'Clean Water Bottle',
     shopProductBottleDesc: 'Eco-friendly bottle supporting our clean water initiatives worldwide.',
     shopProductBottlePrice: '$32',
@@ -222,7 +222,7 @@ export const translations = {
 
     // ===== Projects Page =====
     projectsPageTitle: 'Our Projects',
-    projectsPageDescription: 'Serving communities worldwide through faith, compassion, and action.',
+    projectsPageDescription: 'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
     streetEvangelismTitle: 'Street Evangelism',
     streetEvangelismDesc:
       'Sharing the message of hope and faith in public spaces, connecting with people where they are.',
@@ -296,7 +296,7 @@ export const translations = {
     noTrainingPrograms: 'No training programs available at the moment. Check back soon!',
 
     // ===== Footer =====
-    footerDesc: "Spreading God's love through evangelism, healing, and church support.",
+    footerDesc: "Raphael Mission — the Gospel for the nations and love in action.",
     navigation: 'Navigation',
     legal: 'Legal',
     followUs: 'Follow Us',
@@ -315,7 +315,7 @@ export const translations = {
     aboutService: 'service',
     aboutAnd: 'and',
     aboutDescription:
-      'Raphael Mission is a Christian movement of evangelists dedicated to spreading the Gospel and showing God’s love through action. Through evangelism, training, creative outreach, and social service, we bring hope, healing, and transformation to communities. Our passion is to make Jesus known and allow His miracles to be revealed everywhere the light of the Gospel can shine.',
+      'We believe that the Gospel is the power of God that saves, heals, and gives true freedom to every person and to entire nations.',
     aboutMissionNote:
       'With every mission, we walk alongside communities — listening, serving, and building together.',
     aboutCoreValuesTitle: 'Our Core Values',
@@ -655,16 +655,16 @@ export const translations = {
     // ===== Home / Support =====
     supportOurMission: 'Поддержите нашу миссию',
     supportMissionDesc:
-      'Ваше щедрое пожертвование помогает нам достигать больше людей Божьей любовью, исцелением и надеждой. Каждый вклад меняет жизни и сообщества.',
+      'Ваше пожертвование помогает нам распространять Евангелие ещё больше и отвечать на нужды людей.',
 
     // ===== Home / Current Projects =====
     currentProjects: 'Текущие проекты',
     currentProjectsDesc:
-      'Узнайте о значимых инициативах, которые мы реализуем по всему миру, чтобы приносить надежду и исцеление нуждающимся сообществам.',
+      'Мы распространяем Евангелие, реагируя на нужды людей через различные инициативы и мероприятия.',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Raphael',
+      'Реальные истории людей, которые пережили Божье прикосновение, любовь, обновление, исцеление и свободу благодаря Иисусу через служение Миссии.',
     quoteSarahJohnson:
       '"Благодаря этой миссии я открыла Божью любовь так, как никогда не представляла. Моя жизнь обрела новый смысл".',
     sarahJohnson: 'Сара Джонсон',
@@ -673,7 +673,7 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Свяжитесь с нами',
     contactUsDesc:
-      'Мы будем рады вам помочь. Свяжитесь с нами, чтобы узнать больше о нашей миссии или присоединиться к служению.',
+      'Мы будем рады вашему сообщению. Напишите нам, чтобы узнать больше о Миссии или присоединиться к служению.',
     addressLabel: 'Адрес',
     phoneLabel: 'Телефон',
     emailLabel: 'Эл. почта',
@@ -699,16 +699,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Наши Цели',
     missionDescription:
-      'Наша цель — быть близко с Богом и помогать людям соединяться с Ним. Мы проповедуем Евангелие, приносим исцеление и восстановление, неся свет Христа народам.',
-    humanitarianAid: 'Близость с Богом',
+      'Наша цель — приводить людей к Иисусу.',
+    humanitarianAid: 'Близкие отношения с Богом',
     humanitarianAidDesc:
-      'Стремимся к личным отношениям с Богом и вдохновляем других искать Его присутствие.',
+      'Быть в постоянной близости с Богом и передавать другим эту жажду быть рядом с Ним.',
     spiritualGuidance: 'Проповедовать Евангелие',
     spiritualGuidanceDesc:
-      'Несём весть о спасении народам, чтобы каждый мог познать любовь и истину Христа.',
-    communityBuilding: 'Исцеление и восстановление',
+      'Достигать сердец людей Словом Евангелия, Божьей любовью и силой, принося исцеление, свободу и восстановление.',
+    communityBuilding: 'Практическая помощь',
     communityBuildingDesc:
-      'Служим людям, принося духовное, эмоциональное и физическое исцеление во имя Иисуса.',
+      'Через конкретные дела отвечать на нужды, потребности и боль людей.',
 
     // ===== Language switcher =====
     language: 'Язык',
@@ -817,7 +817,7 @@ export const translations = {
     // ===== Shop =====
     shopHeroTitle: 'Поддержите нашу миссию через покупку',
     shopHeroDesc:
-      'Каждая ваша покупка помогает финансировать наши гуманитарные программы, духовные инициативы и проекты по развитию сообществ по всему миру.',
+      'В этом магазине представлены авторские картины ручной работы художницы Katryn Feli — евангелиста и миссионера, одной из основателей миссии Raphael. Приобретая картину, вы поддерживаете миссию и помогаете нам распространять Евангелие ещё больше и отвечать на нужды людей. Для приобретения напишите нам.',
     shopProductBottleTitle: 'Бутылка для чистой воды',
     shopProductBottleDesc:
       'Экологичная бутылка, поддерживающая наши инициативы по обеспечению чистой воды по всему миру.',
@@ -846,7 +846,7 @@ export const translations = {
     // ===== Projects Page =====
     projectsPageTitle: 'Наши проекты',
     projectsPageDescription:
-      'Служение сообществам по всему миру через веру, сострадание и действие.',
+      'Через каждый проект мы видим плоды Евангелия: открытые сердца для Иисуса, покаяние и изменённые жизни, где люди получают свободу, исцеление и надежду, возвращаясь к смыслу жизни.',
     streetEvangelismTitle: 'Уличная евангелизация',
     streetEvangelismDesc:
       'Делимся посланием надежды и веры в общественных местах, встречаясь с людьми там, где они находятся.',
@@ -918,7 +918,7 @@ export const translations = {
     noTrainingPrograms: 'Программы обучения пока недоступны. Загляните позже!',
 
     // ===== Footer =====
-    footerDesc: 'Распространение Божьей любви через евангелизацию, исцеление и поддержку церквей.',
+    footerDesc: 'Миссия Raphael — Евангелие для народов и любовь в действии.',
     navigation: 'Навигация',
     legal: 'Правовая информация',
     followUs: 'Подписывайтесь на нас',
@@ -937,7 +937,7 @@ export const translations = {
     aboutService: 'служение',
     aboutAnd: 'и',
     aboutDescription:
-      'Raphael Mission — это христианское движение евангелистов, посвящённое распространению Евангелия и проявлению Божьей любви через действия. Через евангелизацию, обучение, творческие проекты и социальное служение мы приносим надежду, исцеление и преобразование обществу. Наша страсть — делать Иисуса известным и позволять Его чудесам проявляться повсюду, где может засиять свет Евангелия.',
+      'Мы верим, что Евангелие — это сила Божья, которая спасает, исцеляет и дарует подлинную свободу каждому человеку и целым народам.',
     aboutMissionNote:
       'В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.',
     aboutCoreValuesTitle: 'Наши ключевые ценности',
@@ -1284,16 +1284,16 @@ export const translations = {
     // ===== Home / Support =====
     supportOurMission: 'Wesprzyj naszą misję',
     supportMissionDesc:
-      'Twoja hojna darowizna pomaga nam dotrzeć do większej liczby osób z Bożą miłością, uzdrowieniem i nadzieją. Każdy wkład zmienia życie i społeczności.',
+      'Twoje wsparcie finansowe pomaga nam szerzej głosić Ewangelię i odpowiadać na potrzeby ludzi.',
 
     // ===== Home / Current Projects =====
     currentProjects: 'Aktualne projekty',
     currentProjectsDesc:
-      'Poznaj działania, które prowadzimy na całym świecie, aby nieść nadzieję i uzdrowienie potrzebującym społecznościom.',
+      'Rozpowszechniamy Ewangelię, reagując na potrzeby ludzi poprzez różne inicjatywy i wydarzenia.',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Historie wiary i transformacji pokazujące, jak Boża miłość zmienia życie poprzez Misję Raphael',
+      'Prawdziwe historie ludzi, którzy doświadczyli Bożego dotknięcia, miłości, odnowienia, uzdrowienia i wolności dzięki Jezusowi poprzez służbę Misji.',
     quoteSarahJohnson:
       '"Dzięki tej misji odkryłam Bożą miłość w sposób, którego nigdy sobie nie wyobrażałam. My life has found new meaning".',
     sarahJohnson: 'Sarah Johnson',
@@ -1302,7 +1302,7 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Skontaktuj się z nami',
     contactUsDesc:
-      'Chętnie od Ciebie usłyszymy. Skontaktuj się z nami, aby dowiedzieć się więcej o naszej misji lub włączyć się w działanie.',
+      'Będzie nam miło otrzymać Twoją wiadomość. Napisz do nas, aby dowiedzieć się więcej o Misji lub dołączyć do służby.',
     addressLabel: 'Adres',
     phoneLabel: 'Telefon',
     emailLabel: 'E-mail',
@@ -1329,16 +1329,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Nasze Cele',
     missionDescription:
-      'Naszą сel jest być blisko Boga i pomagać ludziom zbliżać się do Niego. Głosimy Ewangelię, niosąc uzdrowienie i odnowę, aby świat poznał światło Chrystusa.',
-    humanitarianAid: 'Bliskość z Bogiem',
+      'Naszym celem jest prowadzić ludzi do Jezusa.',
+    humanitarianAid: 'Bliska relacja z Bogiem',
     humanitarianAidDesc:
-      'Dążymy do osobistej relacji z Bogiem i inspirujemy innych, by szukali Jego obecności.',
-    spiritualGuidance: 'Głoszenie Ewangelii',
+      'Być w stałej bliskości z Bogiem i przekazywać innym to pragnienie, by być blisko Niego.',
+    spiritualGuidance: 'Głosić Ewangelię',
     spiritualGuidanceDesc:
-      'Zwiastujemy przesłanie zbawienia narodom, aby każdy mógł poznać miłość i prawdę Chrystusa.',
-    communityBuilding: 'Uzdrowienie i odnowa',
+      'Docierać do serc ludzi Słowem Ewangelii, Bożą miłością i mocą, przynosząc uzdrowienie, wolność i odnowę.',
+    communityBuilding: 'Praktyczna pomoc',
     communityBuildingDesc:
-      'Służymy ludziom, przynosząc duchowe, emocjonalne i fizyczne uzdrowienie w imię Jezusa.',
+      'Przez konkretne działania odpowiadać na potrzeby, pragnienia i ból ludzi.',
 
     // ===== Language switcher =====
     language: 'Język',
@@ -1447,7 +1447,7 @@ export const translations = {
     // ===== Shop =====
     shopHeroTitle: 'Wesprzyj naszą misję poprzez zakup',
     shopHeroDesc:
-      'Każdy Twój zakup pomaga finansować nasze programy pomocy humanitarnej, inicjatywy duchowego wsparcia i projekty budowania społeczności na całym świecie.',
+      'W tym sklepie prezentowane są autorskie, ręcznie malowane obrazy artystki Katryn Feli — ewangelistki i misjonarki, jednej z założicielek misji Raphael. Kupując obraz, wspierasz misję i pomagasz nam jeszcze szerzej głosić Ewangelię oraz odpowiadać na potrzeby ludzi. Aby dokonać zakupu, napisz do nas.',
     shopProductBottleTitle: 'Butelka na czystą wodę',
     shopProductBottleDesc:
       'Ekologiczna butelka wspierająca nasze inicjatywy czystej wody na całym świecie.',
@@ -1477,7 +1477,7 @@ export const translations = {
     // ===== Projects Page =====
     projectsPageTitle: 'Nasze projekty',
     projectsPageDescription:
-      'Służenie społecznościom na całym świecie poprzez wiarę, współczucie i działanie.',
+      'Przez każdy projekt widzimy owoce Ewangelii: otwarte serca dla Jezusa, nawrócenie i odmienione życie, w którym ludzie otrzymują wolność, uzdrowienie i nadzieję, wracając do sensu życia.',
     streetEvangelismTitle: 'Ewangelizacja uliczna',
     streetEvangelismDesc:
       'Dzielenie się przesłaniem nadziei i wiary w miejscach publicznych, łączenie się z ludźmi tam, gdzie są.',
@@ -1547,7 +1547,7 @@ export const translations = {
     noTrainingPrograms: 'Programy szkoleniowe są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Footer =====
-    footerDesc: 'Szerzenie Bożej miłości poprzez ewangelizację, uzdrowienie i wsparcie kościołów.',
+    footerDesc: 'Misja Raphael — Ewangelia dla narodów i miłość w działaniu.',
     navigation: 'Nawigacja',
     legal: 'Informacje prawne',
     followUs: 'Obserwuj nas',
@@ -1566,7 +1566,7 @@ export const translations = {
     aboutService: 'służbę',
     aboutAnd: 'i',
     aboutDescription:
-      'Raphael Mission to chrześcijański ruch ewangelistów poświęcony głoszeniu Ewangelii i ukazywaniu Bożej miłości poprzez działanie. Poprzez ewangelizację, szkolenia, twórcze projekty i służbę społeczną przynosimy nadzieję, uzdrowienie i przemianę społecznościom. Naszą pasją jest sprawić, by Jezus był znany, i pozwolić, aby Jego cuda objawiały się wszędzie tam, gdzie może świecić światło Ewangelii.',
+      'Wierzymy, że Ewangelia jest mocą Bożą, która zbawia, uzdrawia i daje prawdziwą wolność każdemu człowiekowi oraz całym narodom.',
     aboutMissionNote:
       'W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.',
     aboutCoreValuesTitle: 'Nasze kluczowe wartości',
