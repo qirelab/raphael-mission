@@ -625,7 +625,7 @@ export const translations = {
 
   ru: {
     // ===== Header =====
-    brandName: 'Raphael Миссия',
+    brandName: 'Миссия Raphael',
     projects: 'Проекты',
     about: 'О нас',
     fund: 'Фонд',
@@ -664,7 +664,7 @@ export const translations = {
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Рафаэля',
+      'Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Raphael',
     quoteSarahJohnson:
       '"Благодаря этой миссии я открыла Божью любовь так, как никогда не представляла. Моя жизнь обрела новый смысл".',
     sarahJohnson: 'Сара Джонсон',
@@ -689,7 +689,7 @@ export const translations = {
     yourMessage: 'Ваше сообщение',
 
     // ===== QuestionsContact (NEW) =====
-    waysToConnectTitle: 'Три способа связаться с Миссией Рафаэля',
+    waysToConnectTitle: 'Три способа связаться с Миссией Raphael',
     callUs: 'Позвоните нам',
     address: 'Адрес',
     emailUs: 'Напишите нам',
@@ -812,7 +812,7 @@ export const translations = {
     paymentMethodLocalPolishBanks: 'Местные польские банки',
     paymentMethodBLIKPoland: 'BLIK (Польша)',
     paymentMethodBankTransfers: 'Банковские переводы',
-    donationOrderDescription: 'Пожертвование Миссии Рафаэля',
+    donationOrderDescription: 'Пожертвование Миссии Raphael',
 
     // ===== Shop =====
     shopHeroTitle: 'Поддержите нашу миссию через покупку',
@@ -887,7 +887,7 @@ export const translations = {
       'Реальные истории людей, чьи жизни были затронуты и изменены благодаря работе миссии.',
     shareYourStoryTitle: 'Поделитесь своей историей',
     shareYourStoryDesc:
-      'Коснулась ли Миссия Рафаэля вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.',
+      'Коснулась ли Миссия Raphael вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.',
     shareYourStoryBtn: 'Поделиться историей',
     readFullStory: 'Читать полностью',
     // === Свидетельства: имена и города ===
@@ -909,7 +909,7 @@ export const translations = {
     testimonySarahKimQuote:
       'Они привезли медицинскую помощь в нашу отдалённую деревню. Моя бабушка получила лечение, спасшее жизнь.',
     testimonyDavidThompsonQuote:
-      'Волонтёрство в Миссии Рафаэля открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.',
+      'Волонтёрство в Миссии Raphael открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.',
     noTestimoniesYet: 'Свидетельства пока недоступны. Загляните позже!',
     noTestimonies: 'Свидетельства пока недоступны',
     noTestimoniesDesc: 'Свидетельства скоро появятся. Загляните позже!',
@@ -928,7 +928,7 @@ export const translations = {
     privacyPolicy: 'Политика конфиденциальности',
     termsOfService: 'Условия обслуживания',
     cookiePolicy: 'Политика файлов cookie',
-    copyright: '© 2026 Raphael Миссия. Все права защищены.',
+    copyright: '© 2026 Миссия Raphael. Все права защищены.',
 
     // ===== About =====
     aboutHeroTitle: 'Мы приносим надежду через',
@@ -993,7 +993,7 @@ export const translations = {
     storyPageTitle: 'Наша история',
     storyPageSubtitle: 'Путь веры и служения',
     storyHeroDescription:
-      'Миссия Рафаэля началась с простого призвания: приносить надежду и исцеление нуждающимся сообществам через служение, основанное на вере. То, что начиналось как небольшая группа верующих, выросло в глобальное движение, затрагивающее жизни на разных континентах.',
+      'Миссия Raphael началась с простого призвания: приносить надежду и исцеление нуждающимся сообществам через служение, основанное на вере. То, что начиналось как небольшая группа верующих, выросло в глобальное движение, затрагивающее жизни на разных континентах.',
     storyFoundingTitle: 'Основание',
     storyFoundingYear: '2010',
     storyFoundingDesc:
@@ -1005,7 +1005,7 @@ export const translations = {
     storyTodayTitle: 'Сегодня и дальше',
     storyTodayYear: '2026',
     storyTodayDesc:
-      'Сегодня Миссия Рафаэля действует в более чем 25 странах, а сотни обученных волонтёров несут надежду через уличную евангелизацию, палаточные крусейды, социальные программы, служение исцеления и поддержку церквей. Наша миссия продолжает расти, поскольку мы отвечаем на Божий призыв служить.',
+      'Сегодня Миссия Raphael действует в более чем 25 странах, а сотни обученных волонтёров несут надежду через уличную евангелизацию, палаточные крусейды, социальные программы, служение исцеления и поддержку церквей. Наша миссия продолжает расти, поскольку мы отвечаем на Божий призыв служить.',
     storyVisionTitle: 'Наше видение будущего',
     storyVisionDesc:
       'Мы представляем мир, где каждое сообщество имеет доступ к духовному наставничеству, гуманитарной помощи и преобразующей силе Божьей любви. Через программы обучения, устойчивые проекты и верное служение мы создаём наследие надежды, которое будет длиться поколениями.',
@@ -1147,7 +1147,7 @@ export const translations = {
     privacyPolicySubtitle: 'Последнее обновление: январь 2026',
     privacySection1Title: '1. Информация, которую мы собираем',
     privacySection1Content:
-      'В Миссии Рафаэля мы собираем информацию, которую вы предоставляете нам напрямую, когда жертвуете, становитесь волонтёром, подписываетесь на нашу рассылку или связываетесь с нами. Это может включать ваше имя, адрес электронной почты, номер телефона, почтовый адрес и платёжную информацию.',
+      'В Миссии Raphael мы собираем информацию, которую вы предоставляете нам напрямую, когда жертвуете, становитесь волонтёром, подписываетесь на нашу рассылку или связываетесь с нами. Это может включать ваше имя, адрес электронной почты, номер телефона, почтовый адрес и платёжную информацию.',
     privacySection2Title: '2. Как мы используем вашу информацию',
     privacySection2Content: 'Мы используем собранную информацию для:',
     privacySection2Item1: 'Обработки ваших пожертвований и отправки квитанций',
@@ -1175,7 +1175,7 @@ export const translations = {
     termsSubtitle: 'Последнее обновление: январь 2026',
     termsSection1Title: '1. Принятие условий',
     termsSection1Content:
-      'Получая доступ и используя веб-сайт Миссии Рафаэля, вы принимаете и соглашаетесь соблюдать эти Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш сайт.',
+      'Получая доступ и используя веб-сайт Миссии Raphael, вы принимаете и соглашаетесь соблюдать эти Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш сайт.',
     termsSection2Title: '2. Использование сайта',
     termsSection2Content:
       'Вы можете использовать наш сайт только в законных целях. Вы соглашаетесь не использовать сайт способом, который может повредить, отключить, перегрузить или нарушить работу наших серверов или сетей, или помешать использованию сайта другими лицами.',
@@ -1188,10 +1188,10 @@ export const translations = {
       'Вы понимаете, что пожертвования поддерживают нашу благотворительную миссию',
     termsSection4Title: '4. Интеллектуальная собственность',
     termsSection4Content:
-      'Весь контент на этом сайте, включая текст, графику, логотипы, изображения и программное обеспечение, является собственностью Миссии Рафаэля и защищён авторским правом и другими законами об интеллектуальной собственности. Вы не можете воспроизводить, распространять или создавать производные работы без нашего письменного разрешения.',
+      'Весь контент на этом сайте, включая текст, графику, логотипы, изображения и программное обеспечение, является собственностью Миссии Raphael и защищён авторским правом и другими законами об интеллектуальной собственности. Вы не можете воспроизводить, распространять или создавать производные работы без нашего письменного разрешения.',
     termsSection5Title: '5. Ограничение ответственности',
     termsSection5Content:
-      'Миссия Рафаэля не несёт ответственности за любые косвенные, случайные, особые, последующие или штрафные убытки, возникшие в результате вашего использования или невозможности использования сайта, даже если нас уведомили о возможности таких убытков.',
+      'Миссия Raphael не несёт ответственности за любые косвенные, случайные, особые, последующие или штрафные убытки, возникшие в результате вашего использования или невозможности использования сайта, даже если нас уведомили о возможности таких убытков.',
     termsSection6Title: '6. Изменения условий',
     termsSection6Content:
       'Мы оставляем за собой право изменять эти Условия использования в любое время. Ваше продолжение использования сайта после публикации изменений означает ваше принятие изменённых условий.',
@@ -1254,7 +1254,7 @@ export const translations = {
     emailValue: 'E-mail zostanie wkrótce dodany',
 
     // ===== Header =====
-    brandName: 'Raphael Misja',
+    brandName: 'Misja Raphael',
     projects: 'Projekty',
     about: 'O nas',
     fund: 'Fundusz',
@@ -1293,7 +1293,7 @@ export const translations = {
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Historie wiary i transformacji pokazujące, jak Boża miłość zmienia życie poprzez Misję Rafaela',
+      'Historie wiary i transformacji pokazujące, jak Boża miłość zmienia życie poprzez Misję Raphael',
     quoteSarahJohnson:
       '"Dzięki tej misji odkryłam Bożą miłość w sposób, którego nigdy sobie nie wyobrażałam. My life has found new meaning".',
     sarahJohnson: 'Sarah Johnson',
@@ -1319,7 +1319,7 @@ export const translations = {
     yourMessage: 'Twoja wiadomość',
 
     // ===== QuestionsContact (NEW) =====
-    waysToConnectTitle: 'Trzy sposoby kontaktu z Misją Rafaela',
+    waysToConnectTitle: 'Trzy sposoby kontaktu z Misją Raphael',
     callUs: 'Zadzwoń do nas',
     address: 'Adres',
     emailUs: 'Napisz do nas',
@@ -1442,7 +1442,7 @@ export const translations = {
     paymentMethodLocalPolishBanks: 'Lokalne polskie banki',
     paymentMethodBLIKPoland: 'BLIK (Polska)',
     paymentMethodBankTransfers: 'Przelewy bankowe',
-    donationOrderDescription: 'Darowizna dla Misji Rafaela',
+    donationOrderDescription: 'Darowizna dla Misji Raphael',
 
     // ===== Shop =====
     shopHeroTitle: 'Wesprzyj naszą misję poprzez zakup',
@@ -1516,7 +1516,7 @@ export const translations = {
       'Prawdziwe doświadczenia ludzi, których życie zostało dotknięte i zmienione przez pracę misji.',
     shareYourStoryTitle: 'Podziel się swoją historią',
     shareYourStoryDesc:
-      'Czy Misja Rafaela dotknęła twojego życia? Chętnie poznamy twoje świadectwo i podzielimy się nim z tymi, którzy potrzebują nadziei.',
+      'Czy Misja Raphael dotknęła twojego życia? Chętnie poznamy twoje świadectwo i podzielimy się nim z tymi, którzy potrzebują nadziei.',
     shareYourStoryBtn: 'Podziel się historią',
     readFullStory: 'Przeczytaj pełną historię',
     // === Świadectwa: imiona i miasta ===
@@ -1538,7 +1538,7 @@ export const translations = {
     testimonySarahKimQuote:
       'Przywieźli opiekę medyczną do naszej odległej wioski. Moja babcia otrzymała leczenie ratujące życie.',
     testimonyDavidThompsonQuote:
-      'Wolontariat w Misji Rafaela otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.',
+      'Wolontariat w Misji Raphael otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.',
     noTestimoniesYet: 'Świadectwa są obecnie niedostępne. Wróć wkrótce!',
     noTestimonies: 'Świadectwa są obecnie niedostępne',
     noTestimoniesDesc: 'Świadectwa będą wkrótce dostępne. Wróć później!',
@@ -1557,7 +1557,7 @@ export const translations = {
     privacyPolicy: 'Polityka prywatności',
     termsOfService: 'Warunki usługi',
     cookiePolicy: 'Polityka plików cookie',
-    copyright: '© 2026 Raphael Misja. Wszystkie prawa zastrzeżone.',
+    copyright: '© 2026 Misja Raphael. Wszystkie prawa zastrzeżone.',
 
     // ===== About =====
     aboutHeroTitle: 'Przynosimy nadzieję przez',
@@ -1623,7 +1623,7 @@ export const translations = {
     storyPageTitle: 'Nasza historia',
     storyPageSubtitle: 'Podróż wiary i służby',
     storyHeroDescription:
-      'Misja Rafaela rozpoczęła się od prostego powołania: niesienia nadziei i uzdrowienia potrzebującym społecznościom przez służbę opartą na wierze. To, co zaczęło się jako mała grupa wierzących, wyrosło w globalny ruch dotykający żyć na różnych kontynentach.',
+      'Misja Raphael rozpoczęła się od prostego powołania: niesienia nadziei i uzdrowienia potrzebującym społecznościom przez służbę opartą na wierze. To, co zaczęło się jako mała grupa wierzących, wyrosło w globalny ruch dotykający żyć na różnych kontynentach.',
     storyFoundingTitle: 'Założenie',
     storyFoundingYear: '2010',
     storyFoundingDesc:
@@ -1635,7 +1635,7 @@ export const translations = {
     storyTodayTitle: 'Dzisiaj i w przyszłości',
     storyTodayYear: '2026',
     storyTodayDesc:
-      'Dzisiaj Misja Rafaela działa w ponad 25 krajach, a setki przeszkolonych wolontariuszy niosą nadzieję przez ewangelizację uliczną, namiotowe krucjaty, programy społeczne, służbę uzdrowienia i wsparcie kościołów. Nasza misja nadal rośnie, gdy odpowiadamy na Boże wołanie do służby.',
+      'Dzisiaj Misja Raphael działa w ponad 25 krajach, a setki przeszkolonych wolontariuszy niosą nadzieję przez ewangelizację uliczną, namiotowe krucjaty, programy społeczne, służbę uzdrowienia i wsparcie kościołów. Nasza misja nadal rośnie, gdy odpowiadamy na Boże wołanie do służby.',
     storyVisionTitle: 'Nasza wizja przyszłości',
     storyVisionDesc:
       'Wyobrażamy sobie świat, w którym każda społeczność ma dostęp do duchowego przewodnictwa, pomocy humanitarnej i przemieniającej mocy Bożej miłości. Poprzez programy szkoleniowe, zrównoważone projekty i wierną służbę budujemy dziedzictwo nadziei, które przetrwa przez pokolenia.',
@@ -1777,7 +1777,7 @@ export const translations = {
     privacyPolicySubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     privacySection1Title: '1. Informacje, które zbieramy',
     privacySection1Content:
-      'W Misji Rafaela zbieramy informacje, które nam bezpośrednio przekazujesz, gdy dokonujesz darowizny, stajesz się wolontariuszem, zapisujesz się do naszego newslettera lub kontaktujesz się z nami. Może to obejmować Twoje imię i nazwisko, adres e-mail, numer telefonu, adres pocztowy i informacje płatnicze.',
+      'W Misji Raphael zbieramy informacje, które nam bezpośrednio przekazujesz, gdy dokonujesz darowizny, stajesz się wolontariuszem, zapisujesz się do naszego newslettera lub kontaktujesz się z nami. Może to obejmować Twoje imię i nazwisko, adres e-mail, numer telefonu, adres pocztowy i informacje płatnicze.',
     privacySection2Title: '2. Jak wykorzystujemy Twoje informacje',
     privacySection2Content: 'Wykorzystujemy zebrane informacje do:',
     privacySection2Item1: 'Przetwarzania Twoich darowizn i wysyłania potwierdzeń',
@@ -1805,7 +1805,7 @@ export const translations = {
     termsSubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     termsSection1Title: '1. Akceptacja warunków',
     termsSection1Content:
-      'Uzyskując dostęp i korzystając ze strony internetowej Misji Rafaela, akceptujesz i zgadzasz się przestrzegać niniejszych Warunków usługi. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z naszej strony.',
+      'Uzyskując dostęp i korzystając ze strony internetowej Misji Raphael, akceptujesz i zgadzasz się przestrzegać niniejszych Warunków usługi. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z naszej strony.',
     termsSection2Title: '2. Korzystanie ze strony',
     termsSection2Content:
       'Możesz korzystać z naszej strony wyłącznie w celach zgodnych z prawem. Zgadzasz się nie używać strony w sposób, który mógłby uszkodzić, wyłączyć, przeciążyć lub zakłócić nasze serwery lub sieci, lub zakłócić korzystanie ze strony przez inne osoby.',
@@ -1817,10 +1817,10 @@ export const translations = {
     termsSection3Item3: 'Rozumiesz, że darowizny wspierają naszą misję charytatywną',
     termsSection4Title: '4. Własność intelektualna',
     termsSection4Content:
-      'Cała zawartość tej strony, w tym tekst, grafika, logo, obrazy i oprogramowanie, jest własnością Misji Rafaela i chroniona prawami autorskimi oraz innymi prawami własności intelektualnej. Nie możesz powielać, rozpowszechniać ani tworzyć dzieł pochodnych bez naszej pisemnej zgody.',
+      'Cała zawartość tej strony, w tym tekst, grafika, logo, obrazy i oprogramowanie, jest własnością Misji Raphael i chroniona prawami autorskimi oraz innymi prawami własności intelektualnej. Nie możesz powielać, rozpowszechniać ani tworzyć dzieł pochodnych bez naszej pisemnej zgody.',
     termsSection5Title: '5. Ograniczenie odpowiedzialności',
     termsSection5Content:
-      'Misja Rafaela nie ponosi odpowiedzialności za jakiekolwiek szkody pośrednie, przypadkowe, szczególne, wynikowe lub karne wynikające z korzystania lub niemożności korzystania ze strony, nawet jeśli zostaliśmy poinformowani o możliwości takich szkód.',
+      'Misja Raphael nie ponosi odpowiedzialności za jakiekolwiek szkody pośrednie, przypadkowe, szczególne, wynikowe lub karne wynikające z korzystania lub niemożności korzystania ze strony, nawet jeśli zostaliśmy poinformowani o możliwości takich szkód.',
     termsSection6Title: '6. Zmiany warunków',
     termsSection6Content:
       'Zastrzegamy sobie prawo do modyfikacji niniejszych Warunków usługi w dowolnym momencie. Twoje dalsze korzystanie ze strony po opublikowaniu zmian oznacza akceptację zmienionych warunków.',
