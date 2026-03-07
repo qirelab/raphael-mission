@@ -20,7 +20,7 @@ const Header = () => {
   }));
 
   const menuItems = [
-    { name: t('about'), href: `/${language}/about-mission` },
+    // { name: t('about'), href: `/${language}/about-mission` }, // Temporarily hidden
     { name: t('projects'), href: `/${language}/projects` },
     // { name: t('training'), href: `/${language}/training` }, // Temporarily hidden
     { name: t('testimonies'), href: `/${language}/testimonies` },

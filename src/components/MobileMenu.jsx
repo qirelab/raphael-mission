@@ -24,7 +24,7 @@ export default function MobileMenu({ open, onClose }) {
   }));
 
   const links = [
-    { labelKey: 'about', to: `/${language}/about-mission` },
+    // { labelKey: 'about', to: `/${language}/about-mission` }, // Temporarily hidden
     {
       labelKey: 'projects',
       to: `/${language}/projects`,

@@ -32,7 +32,7 @@ const Footer = () => {
               </h4>
               <div className="space-y-2">
                 {[
-                  { href: `/${language}/about-mission`, label: t('about') },
+                  // { href: `/${language}/about-mission`, label: t('about') }, // Temporarily hidden
                   { href: `/${language}/projects`, label: t('projects') },
                   { href: `/${language}/testimonies`, label: t('testimonies') },
                   // { href: `/${language}/training`, label: t('training') }, // Temporarily hidden
