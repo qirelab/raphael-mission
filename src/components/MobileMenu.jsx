@@ -24,7 +24,7 @@ export default function MobileMenu({ open, onClose }) {
   }));
 
   const links = [
-    // { labelKey: 'about', to: `/${language}/about-mission` }, // Temporarily hidden
+    { labelKey: 'about', to: `/${language}/about-mission` },
     {
       labelKey: 'projects',
       to: `/${language}/projects`,
@@ -34,7 +34,7 @@ export default function MobileMenu({ open, onClose }) {
     // { labelKey: 'training', to: `/${language}/training` }, // Temporarily hidden
     { labelKey: 'testimonies', to: `/${language}/testimonies` },
     { labelKey: 'shop', to: `/${language}/shop` },
-    { labelKey: 'story', to: `/${language}/story` },
+    // { labelKey: 'story', to: `/${language}/story` }, // Temporarily hidden
     { labelKey: 'contact', to: `/${language}/contact` },
   ];
 

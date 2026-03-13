@@ -20,12 +20,12 @@ const Header = () => {
   }));
 
   const menuItems = [
-    // { name: t('about'), href: `/${language}/about-mission` }, // Temporarily hidden
+    { name: t('about'), href: `/${language}/about-mission` },
     { name: t('projects'), href: `/${language}/projects` },
     // { name: t('training'), href: `/${language}/training` }, // Temporarily hidden
     { name: t('testimonies'), href: `/${language}/testimonies` },
     { name: t('shop'), href: `/${language}/shop` },
-    { name: t('story'), href: `/${language}/story` },
+    // { name: t('story'), href: `/${language}/story` }, // Temporarily hidden
     { name: t('contact'), href: `/${language}/contact` },
   ];
 

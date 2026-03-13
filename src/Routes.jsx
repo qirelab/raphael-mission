@@ -50,10 +50,10 @@ const AppRoutes = () => {
       <Route path="/:lang/testimonies" element={<TestimoniesPage />} />
       <Route path="/:lang/shop" element={<ShopPage />} />
       {/* <Route path="/:lang/training" element={<TrainingPrograms />} /> */}{/* Temporarily hidden */}
-      {/* <Route path="/:lang/about" element={<AboutMission />} /> */}{/* Temporarily hidden */}
+      <Route path="/:lang/about" element={<AboutMission />} />
       <Route path="/:lang/contact" element={<QuestionsContact />} />
-      {/* <Route path="/:lang/about-mission" element={<AboutMission />} /> */}{/* Temporarily hidden */}
-      <Route path="/:lang/story" element={<Story />} />
+      <Route path="/:lang/about-mission" element={<AboutMission />} />
+      {/* <Route path="/:lang/story" element={<Story />} /> */}{/* Temporarily hidden */}
 
       {/* Dynamic Project Detail Route */}
       <Route path="/:lang/projects/:slug" element={<ProjectDetail />} />
