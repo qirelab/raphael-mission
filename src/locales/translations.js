@@ -311,22 +311,29 @@ export const translations = {
     copyright: '© 2026 Raphael Mission. All rights reserved.',
 
     // ===== About =====
-    aboutHeroTitle: 'We bring hope through',
-    aboutFaith: 'faith',
-    aboutCompassion: 'compassion',
-    aboutService: 'service',
-    aboutAnd: 'and',
-    aboutDescription:
-      'We believe that the Gospel is the power of God that saves, heals, and gives true freedom to every person and to entire nations.',
-    aboutMissionNote:
-      'With every mission, we walk alongside communities — listening, serving, and building together.',
-    aboutCoreValuesTitle: 'Our Core Values',
+    aboutHeroTitle: 'Mission Raphael',
+    aboutParagraph1:
+      'Mission Raphael is a Christian mission founded on the Gospel. Our vision is to lead people to Jesus, help them build a close relationship with Him, and bring the Gospel to different nations.',
+    aboutParagraph2:
+      'Revelation 22:2 speaks of the tree of life: on both sides of the river stood the tree of life, bearing twelve kinds of fruit and yielding its fruit every month, and the leaves of the tree are for the healing of the nations.',
+    aboutParagraph3:
+      'We believe that God is able to heal every soul, heart, and body. Therefore, an important practice in our ministry is prayer for healing and deliverance.',
+    aboutParagraph4:
+      'We raise up and equip workers, support churches in evangelistic ministry, and strive to establish new communities so that more and more people can hear the Gospel and encounter Jesus.',
+    aboutParagraph5:
+      'In order to reach more people and different groups of people, we use various gifts and methods. We preach the Gospel through creativity and practical help, demonstrating the power of God so that people may experience supernatural miracles in their lives.',
+    aboutCoreValuesTitle: 'Our key values',
     aboutCoreValuesDesc:
-      'Guided by faith and driven by compassion, these values shape every mission we undertake.',
-    aboutFaithDesc:
-      "Our unwavering belief in Christ's love drives us to serve others with hope and purpose.",
-    aboutCompassionDesc: 'We approach every person with empathy and care.',
-    aboutServiceDesc: 'Through humble service, we work with communities to bring lasting change.',
+      "We build our ministry on the redemption of Jesus Christ, the power of the Gospel, and God's love.",
+    aboutValue1Title: 'Jesus brought deliverance, freedom, and healing',
+    aboutValue1Desc:
+      'Jesus died for every sin, every curse, and every sickness so that we could be free, and He rose again so that everyone who believes in Him might be justified. We believe that Jesus brought deliverance, freedom, and healing.',
+    aboutValue2Title: 'The Gospel is the power of God',
+    aboutValue2Desc:
+      'The Gospel is the power of God. When the Gospel is preached, it brings power capable of destroying every sickness and every curse and of making the impossible possible. The preached Gospel works miracles.',
+    aboutValue3Title: 'Love is the foundation of everything',
+    aboutValue3Desc:
+      'At the heart of everything God does is love. At the heart of every mission, every ministry, and every action there must be love!',
 
     // ===== Training (section + page) =====
     trainingProgramsTitle: 'Our Training Programs',
@@ -935,23 +942,29 @@ export const translations = {
     copyright: '© 2026 Миссия Raphael. Все права защищены.',
 
     // ===== About =====
-    aboutHeroTitle: 'Мы приносим надежду через',
-    aboutFaith: 'веру',
-    aboutCompassion: 'сострадание',
-    aboutService: 'служение',
-    aboutAnd: 'и',
-    aboutDescription:
-      'Мы верим, что Евангелие — это сила Божья, которая спасает, исцеляет и дарует подлинную свободу каждому человеку и целым народам.',
-    aboutMissionNote:
-      'В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.',
+    aboutHeroTitle: 'Миссия Raphael',
+    aboutParagraph1:
+      'Миссия Raphael — христианская миссия, в основе которой лежит Евангелие. Наше видение — приводить людей к Иисусу, помогать им строить близкие отношения с Ним и нести Евангелие разным народам.',
+    aboutParagraph2:
+      'В Откровении 22:2 говорится о дереве жизни: по ту и другую сторону реки — дерево жизни, приносящее двенадцать плодов, дающее на каждый месяц плод свой; и листья дерева — для исцеления народов.',
+    aboutParagraph3:
+      'Мы верим, что Бог способен исцелить каждую душу, сердце и тело. Поэтому в нашем служении важной практикой является молитва за исцеление и освобождение.',
+    aboutParagraph4:
+      'Мы поднимаем и снаряжаем делателей, поддерживаем церкви в евангелизационном служении и стремимся к открытию новых общин, чтобы всё больше людей могли услышать Евангелие и встретиться с Иисусом.',
+    aboutParagraph5:
+      'Чтобы достигать больше людей и разных категорий людей, мы используем различные дары и методы. Мы проповедуем Евангелие через творчество и практическую помощь, являя силу Божью, чтобы люди переживали сверхъестественные чудеса в своей жизни.',
     aboutCoreValuesTitle: 'Наши ключевые ценности',
     aboutCoreValuesDesc:
-      'Руководствуясь верой и движимые состраданием, мы следуем этим ценностям в каждом нашем служении.',
-    aboutFaithDesc:
-      'Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.',
-    aboutCompassionDesc: 'Мы относимся к каждому человеку с эмпатией и заботой.',
-    aboutServiceDesc:
-      'Через смиренное служение мы вместе с сообществами приносим устойчивые перемены.',
+      'Мы строим наше служение на искуплении Иисуса Христа, силе Евангелия и Божьей любви.',
+    aboutValue1Title: 'Иисус принёс избавление, свободу и исцеление',
+    aboutValue1Desc:
+      'Иисус умер за каждый грех, за каждое проклятие и за каждую болезнь, чтобы мы были свободны, и воскрес, чтобы каждый уверовавший в Него был оправдан. Мы верим, что Иисус принёс избавление, свободу и исцеление.',
+    aboutValue2Title: 'Евангелие — сила Божья',
+    aboutValue2Desc:
+      'Евангелие есть сила Божья. Когда проповедуется Евангелие, оно приносит силу, способную разрушать всякую болезнь и всякое проклятие, и делает невозможное возможным. Проповеданное Евангелие производит чудеса.',
+    aboutValue3Title: 'Любовь — основание всего',
+    aboutValue3Desc:
+      'В основе всего, что делает Бог, лежит любовь. В основе каждой миссии, каждого служения и каждого действия должна быть любовь!',
 
     // ===== Training =====
     trainingProgramsTitle: 'Наши программы обучения',
@@ -1566,23 +1579,29 @@ export const translations = {
     copyright: '© 2026 Misja Raphael. Wszystkie prawa zastrzeżone.',
 
     // ===== About =====
-    aboutHeroTitle: 'Przynosimy nadzieję przez',
-    aboutFaith: 'wiarę',
-    aboutCompassion: 'współczucie',
-    aboutService: 'służbę',
-    aboutAnd: 'i',
-    aboutDescription:
-      'Wierzymy, że Ewangelia jest mocą Bożą, która zbawia, uzdrawia i daje prawdziwą wolność każdemu człowiekowi oraz całym narodom.',
-    aboutMissionNote:
-      'W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.',
+    aboutHeroTitle: 'Misja Raphael',
+    aboutParagraph1:
+      'Misja Raphael to chrześcijańska misja, której fundamentem jest Ewangelia. Naszą wizją jest prowadzić ludzi do Jezusa, pomagać im budować bliską relację z Nim i nieść Ewangelię do różnych narodów.',
+    aboutParagraph2:
+      'W Objawieniu 22:2 jest mowa o drzewie życia: po obu stronach rzeki stoi drzewo życia, rodzące dwanaście owoców i wydające swój owoc każdego miesiąca, a liście drzewa służą do uzdrowienia narodów.',
+    aboutParagraph3:
+      'Wierzymy, że Bóg jest w stanie uzdrowić każdą duszę, serce i ciało. Dlatego ważną praktyką w naszej służbie jest modlitwa o uzdrowienie i uwolnienie.',
+    aboutParagraph4:
+      'Podnosimy i wyposażamy pracowników, wspieramy kościoły w służbie ewangelizacyjnej i dążymy do zakładania nowych wspólnot, aby coraz więcej ludzi mogło usłyszeć Ewangelię i spotkać się z Jezusem.',
+    aboutParagraph5:
+      'Aby docierać do większej liczby ludzi i do różnych grup odbiorców, wykorzystujemy różne dary i metody. Głosimy Ewangelię poprzez twórczość i praktyczną pomoc, ukazując moc Bożą, aby ludzie doświadczali nadprzyrodzonych cudów w swoim życiu.',
     aboutCoreValuesTitle: 'Nasze kluczowe wartości',
     aboutCoreValuesDesc:
-      'Kierowani wiarą i poruszeni współczuciem, realizujemy te wartości w każdej misji.',
-    aboutFaithDesc:
-      'Niezachwiana wiara w miłość Chrystusa motywuje nas do służby innym z nadzieją i celem.',
-    aboutCompassionDesc: 'Podchodzimy do każdego człowieka z empatią i troską.',
-    aboutServiceDesc:
-      'Przez pokorną służbę współpracujemy ze społecznościami, aby wprowadzać trwałe zmiany.',
+      'Budujemy naszą służbę na odkupieniu Jezusa Chrystusa, mocy Ewangelii i Bożej miłości.',
+    aboutValue1Title: 'Jezus przyniósł wybawienie, wolność i uzdrowienie',
+    aboutValue1Desc:
+      'Jezus umarł za każdy grzech, za każde przekleństwo i za każdą chorobę, abyśmy byli wolni, i zmartwychwstał, aby każdy, kto w Niego wierzy, został usprawiedliwiony. Wierzymy, że Jezus przyniósł wybawienie, wolność i uzdrowienie.',
+    aboutValue2Title: 'Ewangelia — moc Boża',
+    aboutValue2Desc:
+      'Ewangelia jest mocą Bożą. Kiedy Ewangelia jest głoszona, przynosi moc zdolną zniszczyć każdą chorobę i każde przekleństwo oraz uczynić niemożliwe możliwym. Głoszona Ewangelia sprawia cuda.',
+    aboutValue3Title: 'Miłość — fundament wszystkiego',
+    aboutValue3Desc:
+      'U podstaw wszystkiego, co czyni Bóg, leży miłość. U podstaw każdej misji, każdej służby i każdego działania powinna być miłość!',
 
     // ===== Training =====
     trainingProgramsTitle: 'Nasze programy szkoleniowe',
