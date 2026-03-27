@@ -3,7 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import Footer from '../../components/common/Footer';
 import { AboutSkeleton } from '../../components/skeletons';
 
-const aboutHero = '/images/aboutus.jpeg';
+const aboutHero = '/images/image3.jpeg';
 
 const AboutMission = () => {
   const { t } = useLanguage();
@@ -72,10 +72,7 @@ const AboutMission = () => {
               src={aboutHero}
               alt="Mission community"
               className="
-                rounded-lg shadow-lg w-full object-cover
-                h-[300px] sm:h-[400px] lg:h-[540px]
-                lg:scale-110 lg:translate-x-8
-                transition-transform duration-500
+                rounded-lg shadow-lg w-full max-w-[450px] h-auto object-contain
               "
             />
           </div>
