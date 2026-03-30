@@ -4,15 +4,33 @@ import { useLanguage } from '../context/LanguageContext';
 import { useAlert } from '../hooks/useAlert';
 
 const CookieConsent = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { success, info } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Helper function to get cookie value
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
+  // Helper function to set cookie
+  const setCookie = (name, value, days = 365) => {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+  };
+
   useEffect(() => {
-    // Проверяем, принял ли пользователь cookie
-    const consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
+    // Проверяем, принял ли пользователь cookie (проверяем и в cookie, и в localStorage для обратной совместимости)
+    const cookieConsent = getCookie('cookieConsent');
+    const localConsent = localStorage.getItem('cookieConsent');
+
+    if (!cookieConsent && !localConsent) {
       // Показываем баннер с небольшой задержкой для плавности
       setTimeout(() => {
         setIsVisible(true);
@@ -22,6 +40,8 @@ const CookieConsent = () => {
   }, []);
 
   const handleAccept = () => {
+    // Сохраняем в реальные cookies и в localStorage
+    setCookie('cookieConsent', 'accepted', 365);
     localStorage.setItem('cookieConsent', 'accepted');
     success(t('alertCookiesAccepted'), t('alertCookiesAcceptedTitle'));
     setIsAnimating(false);
@@ -29,6 +49,8 @@ const CookieConsent = () => {
   };
 
   const handleReject = () => {
+    // Сохраняем отказ в cookies и localStorage
+    setCookie('cookieConsent', 'rejected', 365);
     localStorage.setItem('cookieConsent', 'rejected');
     info(t('alertCookiesRejected'), t('alertCookiesRejectedTitle'));
     setIsAnimating(false);
@@ -79,7 +101,7 @@ const CookieConsent = () => {
                   {t('cookieConsentMessage')}
                 </p>
                 <Link
-                  to="/cookie-policy"
+                  to={`/${language}/cookie-policy`}
                   className="text-[14px] sm:text-[15px] text-[#3c8a7a] font-semibold font-poppins hover:underline inline-flex items-center gap-1"
                 >
                   {t('cookieConsentLearnMore')}

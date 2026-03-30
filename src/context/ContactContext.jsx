@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { contactService } from '../services/contactService';
-import { neonContactService } from '../services/neonContactService';
-import { isUsingNeon } from '../config/database';
 
 const ContactContext = createContext();
 
@@ -17,6 +15,7 @@ export const ContactProvider = ({ children }) => {
   const [contactData, setContactData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isFetching = useRef(false);
 
   // Simple function to load contact data
   const loadContactData = async () => {
@@ -24,9 +23,7 @@ export const ContactProvider = ({ children }) => {
       setLoading(true);
       setError(null);
 
-      // Use appropriate service based on configuration
-      const service = isUsingNeon() ? neonContactService : contactService;
-      const data = await service.get();
+      const data = await contactService.get();
       setContactData(data);
     } catch (err) {
       setError(err.message);
@@ -41,9 +38,7 @@ export const ContactProvider = ({ children }) => {
     try {
       setError(null);
 
-      // Use appropriate service based on configuration
-      const service = isUsingNeon() ? neonContactService : contactService;
-      const updatedData = await service.update(newData);
+      const updatedData = await contactService.update(newData);
 
       // Immediately update local state
       setContactData(updatedData);
@@ -58,7 +53,13 @@ export const ContactProvider = ({ children }) => {
 
   // Load data on mount
   useEffect(() => {
-    loadContactData();
+    // Prevent duplicate fetches from React.StrictMode
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    loadContactData().finally(() => {
+      isFetching.current = false;
+    });
   }, []);
 
   const value = {

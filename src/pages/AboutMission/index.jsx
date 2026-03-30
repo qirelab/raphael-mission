@@ -41,21 +41,28 @@ const AboutMission = () => {
         <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20 grid lg:grid-cols-2 gap-10 items-start">
           {/* Левая колонка */}
           <div>
-            <h1 className="font-[Poppins] font-normal leading-[1.05] text-[28px] sm:text-[40px] lg:text-[56px] text-left text-[#1f2937]">
+            <h1 className="font-[Poppins] font-semibold leading-[1.1] text-[28px] sm:text-[40px] lg:text-[56px] text-left text-[#3c8a7a]">
               {t('aboutHeroTitle')}
-              <span className="text-[#3c8a7a] font-medium"> {t('aboutFaith')}</span>
-              <span className="text-[#1f2937] font-medium"> , </span>
-              <span className="text-[#3c8a7a] font-medium">{t('aboutCompassion')}</span>
-              <span className="text-[#1f2937] font-medium"> , {t('aboutAnd')} </span>
-              <span className="text-[#3c8a7a] font-medium">{t('aboutService')}</span>
             </h1>
 
-            <p className="mt-6 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins] max-w-[680px]">
-              {t('aboutDescription')}
+            <p className="mt-6 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins]">
+              {t('aboutParagraph1')}
             </p>
 
             <p className="mt-4 italic text-[#6B7280] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins]">
-              {t('aboutMissionNote')}
+              {t('aboutParagraph2')}
+            </p>
+
+            <p className="mt-4 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins]">
+              {t('aboutParagraph3')}
+            </p>
+
+            <p className="mt-4 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins]">
+              {t('aboutParagraph4')}
+            </p>
+
+            <p className="mt-4 text-[#485563] text-[14px] sm:text-[15px] md:text-[17px] leading-relaxed font-[Poppins]">
+              {t('aboutParagraph5')}
             </p>
           </div>
 
@@ -78,54 +85,33 @@ const AboutMission = () => {
           <h2 className="text-center text-[28px] sm:text-[32px] lg:text-[36px] font-[Poppins] font-semibold text-[#111827]">
             {t('aboutCoreValuesTitle')}
           </h2>
-          <p className="mt-4 text-center text-[#6B7280] text-[16px] max-w-2xl mx-auto">
+          <p className="mt-4 text-center text-[#6B7280] text-[16px] max-w-3xl mx-auto">
             {t('aboutCoreValuesDesc')}
           </p>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Faith */}
+            {/* Value 1 */}
             <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
-                {t('aboutFaith')}
+              <h3 className="text-[18px] font-semibold text-[#1f2937]">
+                {t('aboutValue1Title')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutFaithDesc')}</p>
+              <p className="mt-3 text-[15px] text-[#4B5563]">{t('aboutValue1Desc')}</p>
             </div>
 
-            {/* Compassion */}
+            {/* Value 2 */}
             <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
-                {t('aboutCompassion')}
+              <h3 className="text-[18px] font-semibold text-[#1f2937]">
+                {t('aboutValue2Title')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutCompassionDesc')}</p>
+              <p className="mt-3 text-[15px] text-[#4B5563]">{t('aboutValue2Desc')}</p>
             </div>
 
-            {/* Service */}
+            {/* Value 3 */}
             <div className="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-[#3c8a7a] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-[18px] font-semibold text-[#1f2937] capitalize">
-                {t('aboutService')}
+              <h3 className="text-[18px] font-semibold text-[#1f2937]">
+                {t('aboutValue3Title')}
               </h3>
-              <p className="mt-2 text-[15px] text-[#4B5563]">{t('aboutServiceDesc')}</p>
+              <p className="mt-3 text-[15px] text-[#4B5563]">{t('aboutValue3Desc')}</p>
             </div>
           </div>
         </div>

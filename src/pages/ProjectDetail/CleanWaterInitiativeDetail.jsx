@@ -5,7 +5,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const CleanWaterInitiativeDetail = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const galleryImages = [
     '/images/about.png',
     '/images/projects.png',
@@ -60,7 +60,7 @@ const CleanWaterInitiativeDetail = () => {
       </section>
       <section className="w-full bg-[#3c8a7a] py-16">
         <div className="max-w-[900px] mx-auto text-center">
-          <Button onClick={() => navigate('/projects')}>{t('backToProjects')}</Button>
+          <Button onClick={() => navigate(`/${language}/projects`)}>{t('backToProjects')}</Button>
         </div>
       </section>
     </div>

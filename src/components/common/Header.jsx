@@ -1,50 +1,33 @@
 // src/components/common/Header.jsx
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '../ui/Button';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../../context/LanguageContext';
-import { projectsService } from '../../services/projectsService';
+import { useProjects } from '../../context/ProjectsContext';
 import MobileMenu from '../MobileMenu';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
-  const [projectLinks, setProjectLinks] = useState([]);
-  const [projectsLoading, setProjectsLoading] = useState(true);
   const closeTimeout = useRef(null);
   const { t, language } = useLanguage();
+  const { projects, loading: projectsLoading } = useProjects();
+
+  // Convert projects to menu links
+  const projectLinks = projects.map((project) => ({
+    name: project[`title_${language}`] || project.title_en,
+    href: `/${language}/projects/${project.slug}`,
+  }));
 
   const menuItems = [
-    { name: t('projects'), href: `/${language}/projects` },
     { name: t('about'), href: `/${language}/about-mission` },
-    { name: t('training'), href: `/${language}/training` },
-    { name: t('shop'), href: `/${language}/shop` },
+    { name: t('projects'), href: `/${language}/projects` },
+    // { name: t('training'), href: `/${language}/training` }, // Temporarily hidden
     { name: t('testimonies'), href: `/${language}/testimonies` },
-    { name: t('story'), href: `/${language}/story` },
+    { name: t('shop'), href: `/${language}/shop` },
+    // { name: t('story'), href: `/${language}/story` }, // Temporarily hidden
     { name: t('contact'), href: `/${language}/contact` },
   ];
-
-  // Load projects from database
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        setProjectsLoading(true);
-        const projects = await projectsService.getActive();
-        const links = projects.map((project) => ({
-          name: project[`title_${language}`] || project.title_en,
-          href: `/${language}/projects/${project.slug}`,
-        }));
-        setProjectLinks(links);
-      } catch (error) {
-        console.error('Error loading projects:', error);
-        setProjectLinks([]);
-      } finally {
-        setProjectsLoading(false);
-      }
-    };
-
-    loadProjects();
-  }, [language]);
 
   const openProjects = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
@@ -170,7 +153,7 @@ const Header = () => {
 
           {/* Right: Donate + Language */}
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 flex-1 justify-end">
-            <a href="/donation" className="shrink-0">
+            <a href={`/${language}/donation`} className="shrink-0">
               <Button
                 variant="primary"
                 className="py-[8px] px-[18px] rounded-[10px] text-[14px] leading-[20px] transition-transform duration-200 hover:-translate-y-[1px]"

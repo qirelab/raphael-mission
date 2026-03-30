@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { projectsService } from '../../../services/projectsService';
+import { useProjects } from '../../../context/ProjectsContext';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
 import GalleryUploadSlot from '../../../components/GalleryUploadSlot';
+import MultilingualInput from '../../../components/MultilingualInput';
 
 const ProjectForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { refreshProjects } = useProjects();
   const { success, error: showError } = useAlert();
   const { t } = useLanguage();
   const isEdit = Boolean(id);
@@ -64,6 +67,24 @@ const ProjectForm = () => {
     }
   };
 
+  // Auto-generate slug from title_en
+  const generateSlug = (text) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+  };
+
+  // Auto-generate slug when title_en changes (only for new projects)
+  useEffect(() => {
+    if (!isEdit && formData.title_en) {
+      const newSlug = generateSlug(formData.title_en);
+      setFormData(prev => ({ ...prev, slug: newSlug }));
+    }
+  }, [formData.title_en, isEdit]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -100,6 +121,8 @@ const ProjectForm = () => {
         await projectsService.create(formData);
         success('Проект успешно создан!', 'Успех');
       }
+      // Refresh projects context for public frontend
+      await refreshProjects();
       navigate('/admin/projects');
     } catch (err) {
       const errorMessage = err.message || 'Failed to save project';
@@ -162,13 +185,36 @@ const ProjectForm = () => {
         {/* Basic Info */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Основная информация</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {renderInput('Название (Английский)', 'title_en', 'Street Evangelism')}
-            {renderInput('Название (Русский)', 'title_ru', 'Уличная Евангелизация')}
-            {renderInput('Название (Польский)', 'title_pl', 'Ewangelizacja Uliczna')}
+          <div className="space-y-6">
+            <MultilingualInput
+              label="Название проекта"
+              fieldName="title"
+              values={{
+                en: formData.title_en,
+                ru: formData.title_ru,
+                pl: formData.title_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              required
+              placeholder="Введите название проекта"
+            />
           </div>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {renderInput('Slug', 'slug', 'street-evangelism')}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">
+                Slug (генерируется автоматически)
+              </label>
+              <input
+                type="text"
+                name="slug"
+                value={formData.slug}
+                readOnly
+                disabled
+                placeholder="автоматически из названия"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed font-poppins"
+              />
+            </div>
           </div>
           <div className="mt-6">
             <ImageUpload
@@ -195,87 +241,113 @@ const ProjectForm = () => {
         {/* Descriptions */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Описания</h2>
-          <div className="space-y-6">
-            {renderInput('Описание (Английский)', 'description_en', '', 3)}
-            {renderInput('Описание (Русский)', 'description_ru', '', 3)}
-            {renderInput('Описание (Польский)', 'description_pl', '', 3)}
-          </div>
+          <MultilingualInput
+            label="Краткое описание"
+            fieldName="description"
+            values={{
+              en: formData.description_en,
+              ru: formData.description_ru,
+              pl: formData.description_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={3}
+            placeholder="Введите краткое описание проекта"
+          />
         </div>
 
         {/* About This Project */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Об этом проекте</h2>
-          <div className="space-y-6">
-            {renderInput(
-              'Об этом проекте (Английский)',
-              'about_project_en',
-              'Detailed description of the project...',
-              4
-            )}
-            {renderInput(
-              'Об этом проекте (Русский)',
-              'about_project_ru',
-              'Подробное описание проекта...',
-              4
-            )}
-            {renderInput(
-              'Об этом проекте (Польский)',
-              'about_project_pl',
-              'Szczegółowy opis projektu...',
-              4
-            )}
-          </div>
+          <MultilingualInput
+            label="Подробное описание проекта"
+            fieldName="about_project"
+            values={{
+              en: formData.about_project_en,
+              ru: formData.about_project_ru,
+              pl: formData.about_project_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={4}
+            placeholder="Введите подробное описание проекта"
+          />
         </div>
 
         {/* What We Do */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Чем мы занимаемся</h2>
-          <div className="space-y-6">
-            {renderInput('Чем мы занимаемся (Английский)', 'what_we_do_en', '', 4)}
-            {renderInput('Чем мы занимаемся (Русский)', 'what_we_do_ru', '', 4)}
-            {renderInput('Чем мы занимаемся (Польский)', 'what_we_do_pl', '', 4)}
-          </div>
+          <MultilingualInput
+            label="Чем мы занимаемся"
+            fieldName="what_we_do"
+            values={{
+              en: formData.what_we_do_en,
+              ru: formData.what_we_do_ru,
+              pl: formData.what_we_do_pl,
+            }}
+            onChange={handleChange}
+            type="textarea"
+            rows={4}
+            placeholder="Опишите деятельность в рамках проекта"
+          />
         </div>
 
         {/* Project Impact */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 font-poppins mb-6">Влияние проекта</h2>
           <div className="space-y-6">
-            <div className="space-y-6">
-              {renderInput(
-                'Описание влияния (АНГ)',
-                'impact_description_en',
-                'Describe the impact and results...',
-                4
-              )}
-              {renderInput(
-                'Описание влияния (РУС)',
-                'impact_description_ru',
-                'Опишите влияние и результаты...',
-                4
-              )}
-              {renderInput(
-                'Описание влияния (ПОЛ)',
-                'impact_description_pl',
-                'Opisz wpływ i rezultaty...',
-                4
-              )}
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Статистика 1 (АНГ)', 'stat1_en', '500+ people reached')}
-              {renderInput('Статистика 1 (РУС)', 'stat1_ru', '500+ человек охвачено')}
-              {renderInput('Статистика 1 (ПОЛ)', 'stat1_pl', '500+ osób objętych')}
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Статистика 2 (АНГ)', 'stat2_en', '15 communities served')}
-              {renderInput('Статистика 2 (РУС)', 'stat2_ru', '15 сообществ обслужено')}
-              {renderInput('Статистика 2 (ПОЛ)', 'stat2_pl', '15 społeczności obsłużonych')}
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {renderInput('Статистика 3 (АНГ)', 'stat3_en', '10 regions covered')}
-              {renderInput('Статистика 3 (РУС)', 'stat3_ru', '10 регионов охвачено')}
-              {renderInput('Статистика 3 (ПОЛ)', 'stat3_pl', '10 regionów objętych')}
-            </div>
+            <MultilingualInput
+              label="Описание влияния"
+              fieldName="impact_description"
+              values={{
+                en: formData.impact_description_en,
+                ru: formData.impact_description_ru,
+                pl: formData.impact_description_pl,
+              }}
+              onChange={handleChange}
+              type="textarea"
+              rows={4}
+              placeholder="Опишите влияние и результаты проекта"
+            />
+
+            <MultilingualInput
+              label="Статистика 1"
+              fieldName="stat1"
+              values={{
+                en: formData.stat1_en,
+                ru: formData.stat1_ru,
+                pl: formData.stat1_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Например: 500+ people reached"
+            />
+
+            <MultilingualInput
+              label="Статистика 2"
+              fieldName="stat2"
+              values={{
+                en: formData.stat2_en,
+                ru: formData.stat2_ru,
+                pl: formData.stat2_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Например: 15 communities served"
+            />
+
+            <MultilingualInput
+              label="Статистика 3"
+              fieldName="stat3"
+              values={{
+                en: formData.stat3_en,
+                ru: formData.stat3_ru,
+                pl: formData.stat3_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Например: 10 regions covered"
+            />
           </div>
         </div>
 

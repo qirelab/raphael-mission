@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { shopService } from '../../../services/shopService';
 import { ListSkeleton } from '../../../components/skeletons';
+import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const ProductsList = () => {
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [deletingId, setDeletingId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchProducts().finally(() => {
+      isFetching.current = false;
+    });
+  }, [location.pathname]);
 
   const fetchProducts = async (isRefresh = false) => {
     try {
@@ -31,21 +43,31 @@ const ProductsList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Вы уверены, что хотите удалить этот товар?')) {
-      return;
-    }
+  const handleDelete = (id) => {
+    setProductToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!productToDelete) return;
 
     try {
-      setDeletingId(id);
-      await shopService.delete(id);
+      setDeletingId(productToDelete);
+      await shopService.delete(productToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchProducts(true);
+      setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить товар');
     } finally {
       setDeletingId(null);
+      setProductToDelete(null);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setProductToDelete(null);
   };
 
   if (loading) {
@@ -357,6 +379,19 @@ const ProductsList = () => {
           </table>
         </div>
       </div>
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title="Удалить товар?"
+        message="Вы уверены, что хотите удалить этот товар? Это действие нельзя отменить."
+        confirmText="Удалить"
+        cancelText="Отмена"
+        variant="danger"
+        loading={deletingId === productToDelete}
+      />
     </div>
   );
 };

@@ -8,25 +8,33 @@ import { ProductsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Shop = () => {
   const { t, language } = useLanguage();
-  const [products, setProducts] = useState([]);
+  const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Load products only once, not on language change
   useEffect(() => {
     const loadProducts = async () => {
       try {
         setLoading(true);
         const data = await shopService.getActive();
-        setProducts(data);
+        setProductsData(data);
       } catch (error) {
         console.error('Error loading products:', error);
-        setProducts([]);
+        setProductsData([]);
       } finally {
         setLoading(false);
       }
     };
 
     loadProducts();
-  }, [language]);
+  }, []); // Load only once!
+
+  // Transform products based on current language (client-side, no API call)
+  const products = productsData.map((p) => ({
+    ...p,
+    name: p[`name_${language}`] || p.name_en,
+    description: p[`description_${language}`] || p.description_en,
+  }));
 
   const testimonials = [
     {

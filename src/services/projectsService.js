@@ -1,49 +1,57 @@
-import { neonProjectsService } from './neonProjectsService';
+import { apiClient } from './apiClient.js';
 
 export const projectsService = {
   // Get all projects
   async getAll() {
-    return await neonProjectsService.getAll();
+    const response = await apiClient.get('/projects');
+    return response.data;
   },
 
   // Get active projects only
   async getActive() {
-    return await neonProjectsService.getActive();
+    const response = await apiClient.get('/projects/active');
+    return response.data;
   },
 
   // Get project by ID
   async getById(id) {
-    return await neonProjectsService.getById(id);
+    const response = await apiClient.get(`/projects/${id}`);
+    return response.data;
   },
 
   // Get project by slug
   async getBySlug(slug) {
-    return await neonProjectsService.getBySlug(slug);
+    const response = await apiClient.get(`/projects/slug/${slug}`);
+    return response.data;
   },
 
   // Create project
   async create(projectData) {
-    return await neonProjectsService.create(projectData);
+    const response = await apiClient.post('/projects', projectData);
+    return response.data;
   },
 
   // Update project
   async update(id, projectData) {
-    return await neonProjectsService.update(id, projectData);
+    const response = await apiClient.put(`/projects/${id}`, projectData);
+    return response.data;
   },
 
   // Delete project
   async delete(id) {
-    await neonProjectsService.delete(id);
-    return { message: 'Project deleted successfully' };
+    const response = await apiClient.delete(`/projects/${id}`);
+    return response.data;
   },
 
   // Get random projects (for homepage)
   async getRandom(limit = 3) {
-    return await neonProjectsService.getRandom(limit);
+    const response = await apiClient.get(`/projects/random?limit=${limit}`);
+    return response.data;
   },
 
   // Get first projects (for homepage)
   async getFirst(limit = 3) {
-    return await neonProjectsService.getFirst(limit);
+    const response = await apiClient.get(`/projects/first?limit=${limit}`);
+    return response.data;
   },
 };

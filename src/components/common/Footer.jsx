@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { useContact } from '../../context/ContactContext';
 import { ContactInfoSkeleton } from '../skeletons';
+import Instagram from '../icons/Instagram';
+import Telegram from '../icons/Telegram';
 
 const Footer = () => {
   const { t, language } = useLanguage();
@@ -30,12 +32,12 @@ const Footer = () => {
               </h4>
               <div className="space-y-2">
                 {[
-                  { href: `/${language}/about-mission`, label: t('about') },
+                  // { href: `/${language}/about-mission`, label: t('about') }, // Temporarily hidden
                   { href: `/${language}/projects`, label: t('projects') },
                   { href: `/${language}/testimonies`, label: t('testimonies') },
-                  { href: `/${language}/training`, label: t('training') },
-                  { href: `/${language}/story`, label: t('story') },
+                  // { href: `/${language}/training`, label: t('training') }, // Temporarily hidden
                   { href: `/${language}/shop`, label: t('shop') },
+                  { href: `/${language}/story`, label: t('story') },
                   { href: `/${language}/contact`, label: t('contact') },
                   { href: `/${language}/donation`, label: t('donate') },
                 ].map((l) => (
@@ -61,39 +63,81 @@ const Footer = () => {
                   <ContactInfoSkeleton />
                 ) : (
                   <>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {contactData?.phone_number || t('phoneNumber')}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                      {contactData?.email || t('emailAddress')}
-                    </p>
-                    <div>
-                      {(contactData?.[`address_line1_${language}`] ||
-                        contactData?.address_line1_en ||
-                        contactData?.address_line1) && (
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.[`address_line1_${language}`] ||
+                    {contactData?.phone_number ? (
+                      <a
+                        href={`tel:${contactData.phone_number}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.phone_number}
+                      </a>
+                    ) : (
+                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                        {t('phoneNumber')}
+                      </p>
+                    )}
+
+                    {contactData?.email ? (
+                      <a
+                        href={`mailto:${contactData.email}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.email}
+                      </a>
+                    ) : (
+                      <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                        {t('emailAddress')}
+                      </p>
+                    )}
+
+                    {(() => {
+                      const addressParts = [
+                        contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                        contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                        contactData?.city,
+                        contactData?.country
+                      ].filter(Boolean);
+
+                      const hasAddress = addressParts.length > 0;
+
+                      return hasAddress ? (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressParts.join(', '))}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:text-white transition-colors"
+                        >
+                          {(contactData?.[`address_line1_${language}`] ||
                             contactData?.address_line1_en ||
-                            contactData?.address_line1}
-                        </p>
-                      )}
-                      {(contactData?.[`address_line2_${language}`] ||
-                        contactData?.address_line2_en ||
-                        contactData?.address_line2) && (
-                        <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line1) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.[`address_line1_${language}`] ||
+                                contactData?.address_line1_en ||
+                                contactData?.address_line1}
+                            </p>
+                          )}
+                          {(contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
-                            contactData?.address_line2}
-                        </p>
-                      )}
-                      {(contactData?.city || contactData?.country) && (
+                            contactData?.address_line2) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.[`address_line2_${language}`] ||
+                                contactData?.address_line2_en ||
+                                contactData?.address_line2}
+                            </p>
+                          )}
+                          {(contactData?.city || contactData?.country) && (
+                            <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
+                              {contactData?.city && contactData?.country
+                                ? `${contactData.city}, ${contactData.country}`
+                                : contactData?.city || contactData?.country}
+                            </p>
+                          )}
+                        </a>
+                      ) : (
                         <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                          {contactData?.city && contactData?.country
-                            ? `${contactData.city}, ${contactData.country}`
-                            : contactData?.city || contactData?.country}
+                          {t('addressLine')}
                         </p>
-                      )}
-                    </div>
+                      );
+                    })()}
                   </>
                 )}
               </div>
@@ -119,6 +163,38 @@ const Footer = () => {
                     {l.label}
                   </Link>
                 ))}
+              </div>
+            </div>
+
+            {/* Follow Us */}
+            <div className="w-full lg:w-auto">
+              <h4 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins'] mb-4">
+                {t('followUs')}
+              </h4>
+              <p className="text-[12px] lg:text-[14px] leading-[18px] lg:leading-[20px] text-[#d1d5db] font-['Poppins'] mb-4 max-w-[200px]">
+                {t('followUsDesc')}
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://www.instagram.com/i.m.raphael"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#E1306C] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+                  aria-label={t('instagram')}
+                >
+                  <Instagram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
+                </a>
+                {language === 'ru' && (
+                  <a
+                    href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-[#d1d5db]/10 hover:bg-[#0088cc] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
+                    aria-label={t('telegram')}
+                  >
+                    <Telegram className="w-5 h-5 text-[#d1d5db] group-hover:text-white transition-colors" />
+                  </a>
+                )}
               </div>
             </div>
           </div>

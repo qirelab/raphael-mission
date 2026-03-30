@@ -1,0 +1,156 @@
+name: Deploy raphael-mission to VPS
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23'
+          cache: 'npm'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Security audit (Frontend)
+        run: npm audit --audit-level=critical
+        continue-on-error: false
+
+      - name: Security audit (Backend)
+        run: |
+          cd server
+          npm audit --audit-level=critical
+        continue-on-error: false
+
+      - name: Create frontend .env file
+        run: |
+          echo "Creating frontend .env file from secrets..."
+          cat > .env << 'EOF'
+          ${{ secrets.FRONTEND_ENV_FILE }}
+          EOF
+          echo "Frontend .env created!"
+
+      - name: Build frontend
+        run: |
+          set -a
+          source .env
+          set +a
+          npm run build
+
+      - name: Prepare deployment archives
+        run: |
+          echo "Creating deployment directory..."
+          mkdir -p deploy
+
+          echo "Creating frontend archive..."
+          cd build
+          tar -czf ../deploy/frontend.tar.gz .
+          cd ..
+
+          echo "Creating backend archive..."
+          cd server
+          tar -czf ../deploy/backend.tar.gz .
+          cd ..
+
+          echo "Archives created successfully!"
+          ls -lh deploy/
+
+      - name: Copy archives to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          source: "deploy/*.tar.gz"
+          target: "/tmp/"
+          strip_components: 1
+
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            set -e
+
+            echo "🚀 Starting deployment..."
+
+            # ===== FRONTEND DEPLOYMENT =====
+            echo "📦 Deploying frontend..."
+
+            # Clean and create frontend directory
+            rm -rf /var/www/raphael-mission/build
+            mkdir -p /var/www/raphael-mission/build
+
+            # Extract frontend
+            tar -xzf /tmp/frontend.tar.gz -C /var/www/raphael-mission/build/
+
+            # Set permissions (only if needed)
+            chown -R www-data:www-data /var/www/raphael-mission/build 2>/dev/null || true
+            chmod -R 755 /var/www/raphael-mission/build
+
+            echo "✅ Frontend deployed to /var/www/raphael-mission/build/"
+
+            # ===== BACKEND DEPLOYMENT =====
+            echo "📦 Deploying backend..."
+
+            # Create backend directory if not exists
+            mkdir -p /var/www/raphael-mission/server
+
+            # Extract backend
+            tar -xzf /tmp/backend.tar.gz -C /var/www/raphael-mission/server/
+
+            # Create backend .env
+            echo "📝 Creating backend .env..."
+            cat > /var/www/raphael-mission/server/.env << 'EOF'
+            ${{ secrets.BACKEND_ENV_FILE }}
+            EOF
+
+            # Install backend dependencies
+            echo "📥 Installing backend dependencies..."
+            cd /var/www/raphael-mission/server
+            npm ci --production
+
+            # Set permissions
+            chown -R $USER:$USER /var/www/raphael-mission/server 2>/dev/null || true
+
+            # Clean restart PM2
+            echo "🔄 Restarting backend with PM2..."
+            pm2 delete raphael-backend || true
+            pm2 start ecosystem.config.cjs
+            pm2 save
+
+            # Health check
+            echo "🏥 Checking backend health..."
+            sleep 5
+            curl -f http://localhost:6388/health || (echo "❌ Health check failed!" && exit 1)
+
+            echo "✅ Backend deployed and restarted!"
+
+            # ===== CLEANUP =====
+            echo "🧹 Cleaning up temporary files..."
+            rm -f /tmp/frontend.tar.gz /tmp/backend.tar.gz
+
+            # ===== VERIFY DEPLOYMENT =====
+            echo "🔍 Verifying deployment..."
+            echo "Frontend files:"
+            ls -lh /var/www/raphael-mission/build/ | head -5
+            echo ""
+            echo "PM2 status:"
+            pm2 status
+            echo ""
+            echo "✅ Deployment completed successfully!"

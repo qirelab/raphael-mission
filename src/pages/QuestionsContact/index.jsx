@@ -49,16 +49,22 @@ const QuestionsContact = () => {
                 <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
                   {t('callUs')}
                 </h3>
-                <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
-                  {loading ? (
+                {loading ? (
+                  <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
                     <div className="animate-pulse bg-gray-200 rounded h-6 w-32 mx-auto"></div>
-                  ) : (
-                    contactData?.phone_number || t('phoneNumber')
-                  )}
-                </p>
-                <p className="mt-1 text-[13px] sm:text-[14px] font-[Poppins] text-[#64748b]">
-                  {t('phoneWorkHoursShort')}
-                </p>
+                  </p>
+                ) : contactData?.phone_number ? (
+                  <a
+                    href={`tel:${contactData.phone_number}`}
+                    className="mt-2 inline-block text-[16px] sm:text-[18px] font-[Poppins] text-[#334155] hover:text-[#0f172a] transition-colors"
+                  >
+                    {contactData.phone_number}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-[16px] sm:text-[18px] font-[Poppins] text-[#334155]">
+                    {t('phoneNumber')}
+                  </p>
+                )}
               </div>
 
               {/* Address */}
@@ -73,15 +79,31 @@ const QuestionsContact = () => {
                 <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
                   {t('address')}
                 </h3>
-                <div className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {loading ? (
+                {loading ? (
+                  <div className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
                     <div className="space-y-2">
                       <div className="animate-pulse bg-gray-200 rounded h-4 w-40 mx-auto"></div>
                       <div className="animate-pulse bg-gray-200 rounded h-4 w-32 mx-auto"></div>
                       <div className="animate-pulse bg-gray-200 rounded h-4 w-36 mx-auto"></div>
                     </div>
-                  ) : (
-                    <>
+                  </div>
+                ) : (() => {
+                  const addressParts = [
+                    contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                    contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                    contactData?.city,
+                    contactData?.country
+                  ].filter(Boolean);
+
+                  const hasAddress = addressParts.length > 0;
+
+                  return hasAddress ? (
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressParts.join(', '))}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block text-[14px] sm:text-[16px] font-[Poppins] text-[#334155] hover:text-[#0f172a] transition-colors"
+                    >
                       {(contactData?.[`address_line1_${language}`] ||
                         contactData?.address_line1_en ||
                         contactData?.address_line1) && (
@@ -107,9 +129,13 @@ const QuestionsContact = () => {
                             : contactData?.city || contactData?.country}
                         </p>
                       )}
-                    </>
-                  )}
-                </div>
+                    </a>
+                  ) : (
+                    <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
+                      {t('addressLine')}
+                    </p>
+                  );
+                })()}
               </div>
 
               {/* Email Us */}
@@ -124,13 +150,22 @@ const QuestionsContact = () => {
                 <h3 className="text-[18px] sm:text-[20px] font-[Poppins] text-[#0f172a]">
                   {t('emailUs')}
                 </h3>
-                <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
-                  {loading ? (
+                {loading ? (
+                  <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
                     <div className="animate-pulse bg-gray-200 rounded h-5 w-48 mx-auto"></div>
-                  ) : (
-                    contactData?.email || t('emailAddress')
-                  )}
-                </p>
+                  </p>
+                ) : contactData?.email ? (
+                  <a
+                    href={`mailto:${contactData.email}`}
+                    className="mt-2 inline-block text-[14px] sm:text-[16px] font-[Poppins] text-[#334155] hover:text-[#0f172a] transition-colors break-all"
+                  >
+                    {contactData.email}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-[14px] sm:text-[16px] font-[Poppins] text-[#334155]">
+                    {t('emailAddress')}
+                  </p>
+                )}
                 <p className="mt-1 text-[12px] sm:text-[14px] font-[Poppins] text-[#64748b]">
                   {t('weRespondSoon')}
                 </p>

@@ -44,7 +44,7 @@ Information about Raphael Mission:
 
 Answer briefly, to the point and friendly.`;
     } else if (language === 'pl') {
-      systemPrompt = `Jesteś Casper AI - asystentem chrześcijańskiej misji Raphael Mission.
+      systemPrompt = `Jesteś Casper AI - asystentem chrześcijańskiej Misji Raphael.
 
 Twoja rola:
 - Pomagać odwiedzającym stronę uzyskać informacje o misji
@@ -62,7 +62,7 @@ Informacje o misji Raphael:
 Odpowiadaj krótko, na temat i przyjaźnie.`;
     } else {
       // Russian (default)
-      systemPrompt = `Ты Casper AI - помощник христианской миссии Raphael Mission. 
+      systemPrompt = `Ты Casper AI - помощник христианской Миссии Raphael. 
 
 Твоя роль:
 - Помогать посетителям сайта получить информацию о миссии
@@ -166,7 +166,7 @@ Odpowiadaj krótko, na temat i przyjaźnie.`;
       } else if (message.includes('pomoc') || message.includes('pomóż')) {
         return 'Oczywiście! Mogę pomóc ci z:\n• Informacjami o misji\n• Projektami i programami\n• Informacjami kontaktowymi\n• Ogólnymi pytaniami\n\nCo konkretnie cię interesuje?';
       } else if (message.includes('misja') || message.includes('o misji')) {
-        return 'Raphael Mission to chrześcijańska misja zajmująca się:\n• Ewangelizacją\n• Projektami społecznymi\n• Szkoleniami i rozwojem\n• Pomocą potrzebującym\n\nChcesz dowiedzieć się więcej o konkretnym obszarze?';
+        return 'Misja Raphael to chrześcijańska misja zajmująca się:\n• Ewangelizacją\n• Projektami społecznymi\n• Szkoleniami i rozwojem\n• Pomocą potrzebującym\n\nChcesz dowiedzieć się więcej o konkretnym obszarze?';
       } else if (message.includes('projekt') || message.includes('projekty')) {
         return 'Mamy kilka projektów:\n• Czysta woda\n• Służba uzdrawiająca\n• Osobista ewangelizacja\n• Projekty społeczne\n• Ewangelizacja namiotowa\n\nKtóry projekt cię interesuje?';
       } else if (message.includes('kontakt') || message.includes('skontaktować')) {
@@ -192,7 +192,7 @@ Odpowiadaj krótko, na temat i przyjaźnie.`;
       } else if (message.includes('помощь') || message.includes('помоги')) {
         return 'Конечно! Я могу помочь вам с:\n• Информацией о миссии\n• Проектами и программами\n• Контактной информацией\n• Общими вопросами\n\nЧто именно вас интересует?';
       } else if (message.includes('миссия') || message.includes('о миссии')) {
-        return 'Raphael Mission - это христианская миссия, занимающаяся:\n• Евангелизацией\n• Социальными проектами\n• Обучением и развитием\n• Помощью нуждающимся\n\nХотите узнать больше о конкретном направлении?';
+        return 'Миссия Raphael - это христианская миссия, занимающаяся:\n• Евангелизацией\n• Социальными проектами\n• Обучением и развитием\n• Помощью нуждающимся\n\nХотите узнать больше о конкретном направлении?';
       } else if (message.includes('проект') || message.includes('проекты')) {
         return 'У нас есть несколько проектов:\n• Чистая вода\n• Исцеляющее служение\n• Личная евангелизация\n• Социальные проекты\n• Палаточная евангелизация\n\nКакой проект вас интересует?';
       } else if (message.includes('контакт') || message.includes('связаться')) {

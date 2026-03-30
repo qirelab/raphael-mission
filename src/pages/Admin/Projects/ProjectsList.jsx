@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { projectsService } from '../../../services/projectsService';
+import { useProjects } from '../../../context/ProjectsContext';
 import { ListSkeleton } from '../../../components/skeletons';
+import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const ProjectsList = () => {
+  const location = useLocation();
+  const { refreshProjects } = useProjects();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [deletingId, setDeletingId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchProjects().finally(() => {
+      isFetching.current = false;
+    });
+  }, [location.pathname]);
 
   const fetchProjects = async (isRefresh = false) => {
     try {
@@ -31,21 +45,33 @@ const ProjectsList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Вы уверены, что хотите удалить этот проект?')) {
-      return;
-    }
+  const handleDelete = (id) => {
+    setProjectToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!projectToDelete) return;
 
     try {
-      setDeletingId(id);
-      await projectsService.delete(id);
+      setDeletingId(projectToDelete);
+      await projectsService.delete(projectToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchProjects(true);
+      // Refresh projects context for public frontend
+      await refreshProjects();
+      setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить проект');
     } finally {
       setDeletingId(null);
+      setProjectToDelete(null);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setProjectToDelete(null);
   };
 
   if (loading) {
@@ -354,6 +380,19 @@ const ProjectsList = () => {
           </table>
         </div>
       </div>
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title="Удалить проект?"
+        message="Вы уверены, что хотите удалить этот проект? Это действие нельзя отменить."
+        confirmText="Удалить"
+        cancelText="Отмена"
+        variant="danger"
+        loading={deletingId === projectToDelete}
+      />
     </div>
   );
 };

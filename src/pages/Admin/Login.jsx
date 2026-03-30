@@ -210,7 +210,7 @@ const AdminLogin = () => {
 
           {/* Footer */}
           <p className="text-center text-sm text-white/60 font-poppins">
-            © 2025 Raphael Mission. All rights reserved.
+            © 2026 Raphael Mission. All rights reserved.
           </p>
         </div>
       </div>

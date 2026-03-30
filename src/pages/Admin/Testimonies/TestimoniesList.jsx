@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { testimoniesService } from '../../../services/testimoniesService';
 import { ListSkeleton } from '../../../components/skeletons';
+import ConfirmModal from '../../../components/ui/ConfirmModal';
 
 const TestimoniesList = () => {
+  const location = useLocation();
   const [testimonies, setTestimonies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [deletingId, setDeletingId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [testimonyToDelete, setTestimonyToDelete] = useState(null);
+  const isFetching = React.useRef(false);
 
+  // Refresh list when returning from form (location change)
   useEffect(() => {
-    fetchTestimonies();
-  }, []);
+    // Prevent duplicate fetches
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    fetchTestimonies().finally(() => {
+      isFetching.current = false;
+    });
+  }, [location.pathname]);
 
   const fetchTestimonies = async (isRefresh = false) => {
     try {
@@ -31,21 +43,31 @@ const TestimoniesList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Вы уверены, что хотите удалить это свидетельство?')) {
-      return;
-    }
+  const handleDelete = (id) => {
+    setTestimonyToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!testimonyToDelete) return;
 
     try {
-      setDeletingId(id);
-      await testimoniesService.delete(id);
+      setDeletingId(testimonyToDelete);
+      await testimoniesService.delete(testimonyToDelete);
       // Refresh data instead of just filtering to ensure consistency
       await fetchTestimonies(true);
+      setIsModalOpen(false);
     } catch (err) {
       alert(err.message || 'Не удалось удалить свидетельство');
     } finally {
       setDeletingId(null);
+      setTestimonyToDelete(null);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTestimonyToDelete(null);
   };
 
   if (loading) {
@@ -358,6 +380,19 @@ const TestimoniesList = () => {
           </table>
         </div>
       </div>
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title="Удалить свидетельство?"
+        message="Вы уверены, что хотите удалить это свидетельство? Это действие нельзя отменить."
+        confirmText="Удалить"
+        cancelText="Отмена"
+        variant="danger"
+        loading={deletingId === testimonyToDelete}
+      />
     </div>
   );
 };

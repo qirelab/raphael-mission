@@ -22,26 +22,26 @@ export const translations = {
     history: 'History',
 
     // ===== Hero =====
-    heroTitle: 'Spreading Hope Through Faith',
-    heroTitleHighlight: 'and Service',
+    heroTitle: 'Our mission is to preach the',
+    heroTitleHighlight: 'Gospel',
     heroDescription:
-      'We believe that true change happens when practical help and spiritual hope come together. Through acts of compassion, we deliver food, medical care, and essential resources to struggling communities, while also sharing the message of faith that brings strength and renewal.',
+      'We believe that the Gospel is the power of God that saves, heals, and gives true freedom to every person and to entire nations.',
     supportMission: 'Support Our Mission',
     learnMore: 'Learn More',
 
     // ===== Home / Support =====
     supportOurMission: 'Support Our Mission',
     supportMissionDesc:
-      "Your generous donation helps us reach more people with God's love, healing, and hope. Every contribution makes a difference in transforming lives and communities.",
+      "Your donation helps us spread the Gospel even further and respond to people's needs.",
 
     // ===== Home / Current Projects =====
     currentProjects: 'Current Projects',
     currentProjectsDesc:
-      "Discover the impactful work we're doing around the world to bring hope and healing to communities in need.",
+      "We share the Gospel by responding to people's needs through various outreach initiatives and events.",
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      "Stories of faith and transformation that show how God's love is changing lives through Raphael Mission",
+      "Real stories of people who experienced God's touch, love, renewal, healing, and freedom thanks to Jesus through the Mission's ministry.",
     quoteSarahJohnson:
       '"Through this mission, I discovered God’s love in a way I never imagined. My life has found new meaning".',
     sarahJohnson: 'Sarah Johnson',
@@ -50,13 +50,14 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Contact Us',
     contactUsDesc:
-      "We'd love to hear from you. Get in touch with us to learn more about our mission or to get involved.",
+      "We'll be happy to hear from you. Write to us to learn more about the Mission or to join the ministry.",
     addressLabel: 'Address',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Address information will be available soon',
+    phoneNumber: 'Phone number will be added soon',
+    emailAddress: 'Email will be added soon',
+    address: 'Address will be added soon',
     sendMessage: 'Send Message',
     firstName: 'First Name',
     lastName: 'Last Name',
@@ -75,16 +76,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Our Goals',
     missionDescription:
-      'Our goals is to stay close to God and help people connect with Him. We preach the Gospel, bringing healing and restoration, carrying the light of Christ to the nations.',
-    humanitarianAid: 'Closeness with God',
+      'Our goal is to lead people to Jesus.',
+    humanitarianAid: 'A close relationship with God',
     humanitarianAidDesc:
-      'We strive to live in deep relationship with God and inspire others to seek His presence.',
+      'To live in constant closeness with God and pass on to others this desire to be near Him.',
     spiritualGuidance: 'Preach the Gospel',
     spiritualGuidanceDesc:
-      'We share the message of salvation with nations so that everyone may know the love and truth of Christ.',
-    communityBuilding: 'Healing and Restoration',
+      "Reach people's hearts with the Word of the Gospel, God's love and power, bringing healing, freedom, and restoration.",
+    communityBuilding: 'Practical help',
     communityBuildingDesc:
-      'We serve people by bringing spiritual, emotional, and physical healing in the name of Jesus.',
+      "Through practical actions, respond to people's needs, struggles, and pain.",
 
     // ===== Language switcher =====
     language: 'Language',
@@ -194,7 +195,7 @@ export const translations = {
     // ===== Shop =====
     shopHeroTitle: 'Support Our Mission Through Your Purchase',
     shopHeroDesc:
-      'Every purchase you make helps fund our humanitarian aid programs, spiritual guidance initiatives, and community building projects around the world.',
+      "This shop features original handmade paintings by the artist Katryn Feli—an evangelist and missionary, and one of the founders of Raphael Mission. By purchasing a painting, you support the mission and help us spread the Gospel even further and respond to people's needs. To purchase, please write to us.",
     shopProductBottleTitle: 'Clean Water Bottle',
     shopProductBottleDesc: 'Eco-friendly bottle supporting our clean water initiatives worldwide.',
     shopProductBottlePrice: '$32',
@@ -217,10 +218,13 @@ export const translations = {
       'Through their mentorship program, I found direction and purpose. Today I am helping others the same way they helped me.',
     shopTestimonialFoodProgram:
       "The mission's food program saved my family during our darkest hour. Their compassion gave us hope when we had none left.",
+    noProducts: 'No products available at the moment. Check back soon!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Our Projects',
-    projectsPageDescription: 'Serving communities worldwide through faith, compassion, and action.',
+    projectsPageTitle: 'Current Projects',
+    projectsPageDescription: 'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
+    projectsBibleQuote: '"I have come that you may have life, and have it to the full."',
+    projectsBibleSource: 'Jesus (John 10:10)',
     streetEvangelismTitle: 'Street Evangelism',
     streetEvangelismDesc:
       'Sharing the message of hope and faith in public spaces, connecting with people where they are.',
@@ -286,33 +290,50 @@ export const translations = {
       'They brought medical care to our remote village. My grandmother received life-saving treatment.',
     testimonyDavidThompsonQuote:
       'Volunteering with Raphael Mission opened my eyes to the power of faith in action. It transformed my entire worldview.',
+    noTestimoniesYet: 'No testimonies available yet. Check back soon!',
+    noTestimonies: 'No testimonies available yet',
+    noTestimoniesDesc: 'Testimonies will be available soon. Check back later!',
+    noProjectsAvailable: 'No projects available',
+    noProjectsYet: 'No projects available at the moment. Check back soon!',
+    noTrainingPrograms: 'No training programs available at the moment. Check back soon!',
 
     // ===== Footer =====
-    footerDesc: "Spreading God's love through evangelism, healing, and church support.",
+    footerDesc: "Raphael Mission — the Gospel for the nations and love in action.",
     navigation: 'Navigation',
     legal: 'Legal',
+    followUs: 'Follow Us',
+    followUsDesc: 'Stay connected with us on social media',
+    instagram: 'Instagram',
+    telegram: 'Telegram',
     privacyPolicy: 'Privacy Policy',
     termsOfService: 'Terms of Service',
     cookiePolicy: 'Cookie Policy',
-    copyright: '© 2025 Raphael Mission. All rights reserved.',
+    copyright: '© 2026 Raphael Mission. All rights reserved.',
 
     // ===== About =====
-    aboutHeroTitle: 'We bring hope through',
-    aboutFaith: 'faith',
-    aboutCompassion: 'compassion',
-    aboutService: 'service',
-    aboutAnd: 'and',
-    aboutDescription:
-      'Raphael Mission is a Christian movement of evangelists dedicated to spreading the Gospel and showing God’s love through action. Through evangelism, training, creative outreach, and social service, we bring hope, healing, and transformation to communities. Our passion is to make Jesus known and allow His miracles to be revealed everywhere the light of the Gospel can shine.',
-    aboutMissionNote:
-      'With every mission, we walk alongside communities — listening, serving, and building together.',
-    aboutCoreValuesTitle: 'Our Core Values',
+    aboutHeroTitle: 'Mission Raphael',
+    aboutParagraph1:
+      'Mission Raphael is a Christian mission founded on the Gospel. Our vision is to lead people to Jesus, help them build a close relationship with Him, and bring the Gospel to different nations.',
+    aboutParagraph2:
+      'Revelation 22:2 speaks of the tree of life: on both sides of the river stood the tree of life, bearing twelve kinds of fruit and yielding its fruit every month, and the leaves of the tree are for the healing of the nations.',
+    aboutParagraph3:
+      'We believe that God is able to heal every soul, heart, and body. Therefore, an important practice in our ministry is prayer for healing and deliverance.',
+    aboutParagraph4:
+      'We raise up and equip workers, support churches in evangelistic ministry, and strive to establish new communities so that more and more people can hear the Gospel and encounter Jesus.',
+    aboutParagraph5:
+      'In order to reach more people and different groups of people, we use various gifts and methods. We preach the Gospel through creativity and practical help, demonstrating the power of God so that people may experience supernatural miracles in their lives.',
+    aboutCoreValuesTitle: 'Our key values',
     aboutCoreValuesDesc:
-      'Guided by faith and driven by compassion, these values shape every mission we undertake.',
-    aboutFaithDesc:
-      "Our unwavering belief in Christ's love drives us to serve others with hope and purpose.",
-    aboutCompassionDesc: 'We approach every person with empathy and care.',
-    aboutServiceDesc: 'Through humble service, we work with communities to bring lasting change.',
+      "We build our ministry on the redemption of Jesus Christ, the power of the Gospel, and God's love.",
+    aboutValue1Title: 'Jesus brought deliverance, freedom, and healing',
+    aboutValue1Desc:
+      'Jesus died for every sin, every curse, and every sickness so that we could be free, and He rose again so that everyone who believes in Him might be justified. We believe that Jesus brought deliverance, freedom, and healing.',
+    aboutValue2Title: 'The Gospel is the power of God',
+    aboutValue2Desc:
+      'The Gospel is the power of God. When the Gospel is preached, it brings power capable of destroying every sickness and every curse and of making the impossible possible. The preached Gospel works miracles.',
+    aboutValue3Title: 'Love is the foundation of everything',
+    aboutValue3Desc:
+      'At the heart of everything God does is love. At the heart of every mission, every ministry, and every action there must be love!',
 
     // ===== Training (section + page) =====
     trainingProgramsTitle: 'Our Training Programs',
@@ -369,7 +390,7 @@ export const translations = {
     storyGrowthDesc:
       'As word spread of our compassionate work, volunteers and supporters joined from around the world. We expanded from one project to seven distinct ministry areas, each addressing critical needs in communities across Eastern Europe, Africa, and Latin America.',
     storyTodayTitle: 'Today & Beyond',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
       "Today, Raphael Mission operates in over 25 countries, with hundreds of trained volunteers bringing hope through street evangelism, tent crusades, social programs, healing ministry, and church support. Our mission continues to grow as we answer God's call to serve.",
     storyVisionTitle: 'Our Vision for the Future',
@@ -510,7 +531,7 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Privacy Policy',
-    privacyPolicySubtitle: 'Last updated: January 2025',
+    privacyPolicySubtitle: 'Last updated: January 2026',
     privacySection1Title: '1. Information We Collect',
     privacySection1Content:
       'At Raphael Mission, we collect information you provide directly to us when you donate, volunteer, subscribe to our newsletter, or contact us. This may include your name, email address, phone number, mailing address, and payment information.',
@@ -538,7 +559,7 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Terms of Service',
-    termsSubtitle: 'Last updated: January 2025',
+    termsSubtitle: 'Last updated: January 2026',
     termsSection1Title: '1. Acceptance of Terms',
     termsSection1Content:
       'By accessing and using the Raphael Mission website, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.',
@@ -566,7 +587,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Cookie Policy',
-    cookiePolicySubtitle: 'Last updated: January 2025',
+    cookiePolicySubtitle: 'Last updated: January 2026',
     cookieSection1Title: 'What Are Cookies',
     cookieSection1Content:
       'Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.',
@@ -613,7 +634,7 @@ export const translations = {
 
   ru: {
     // ===== Header =====
-    brandName: 'Миссия Рафаэля',
+    brandName: 'Миссия Raphael',
     projects: 'Проекты',
     about: 'О нас',
     fund: 'Фонд',
@@ -633,26 +654,26 @@ export const translations = {
     history: 'История',
 
     // ===== Hero =====
-    heroTitle: 'Распространяем надежду через веру',
-    heroTitleHighlight: 'и служение',
+    heroTitle: 'Наша миссия — нести',
+    heroTitleHighlight: 'Евангелие',
     heroDescription:
-      'Мы верим, что настоящие перемены происходят, когда практическая помощь и духовная надежда объединяются. Через акты сострадания мы доставляем еду, медицинскую помощь и необходимые ресурсы нуждающимся сообществам, а также делимся посланием веры, которое приносит силу и обновление.',
+      'Мы верим, что Евангелие — это сила Божья, которая спасает, исцеляет и дарует подлинную свободу каждому человеку и целым народам.',
     supportMission: 'Поддержать нашу миссию',
     learnMore: 'Узнать больше',
 
     // ===== Home / Support =====
     supportOurMission: 'Поддержите нашу миссию',
     supportMissionDesc:
-      'Ваше щедрое пожертвование помогает нам достигать больше людей Божьей любовью, исцелением и надеждой. Каждый вклад меняет жизни и сообщества.',
+      'Ваше пожертвование помогает нам распространять Евангелие ещё больше и отвечать на нужды людей.',
 
     // ===== Home / Current Projects =====
     currentProjects: 'Текущие проекты',
     currentProjectsDesc:
-      'Узнайте о значимых инициативах, которые мы реализуем по всему миру, чтобы приносить надежду и исцеление нуждающимся сообществам.',
+      'Мы распространяем Евангелие, реагируя на нужды людей через различные инициативы и мероприятия.',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Истории веры и преобразования, которые показывают, как Божья любовь меняет жизни через Миссию Рафаэля',
+      'Реальные истории людей, которые пережили Божье прикосновение, любовь, обновление, исцеление и свободу благодаря Иисусу через служение Миссии.',
     quoteSarahJohnson:
       '"Благодаря этой миссии я открыла Божью любовь так, как никогда не представляла. Моя жизнь обрела новый смысл".',
     sarahJohnson: 'Сара Джонсон',
@@ -661,13 +682,14 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Свяжитесь с нами',
     contactUsDesc:
-      'Мы будем рады вам помочь. Свяжитесь с нами, чтобы узнать больше о нашей миссии или присоединиться к служению.',
+      'Мы будем рады вашему сообщению. Напишите нам, чтобы узнать больше о Миссии или присоединиться к служению.',
     addressLabel: 'Адрес',
     phoneLabel: 'Телефон',
     emailLabel: 'Эл. почта',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Информация об адресе скоро будет доступна',
+    phoneNumber: 'Номер телефона скоро будет добавлен',
+    emailAddress: 'Email скоро будет добавлен',
+    address: 'Адрес скоро будет добавлен',
     sendMessage: 'Отправить сообщение',
     firstName: 'Имя',
     lastName: 'Фамилия',
@@ -676,7 +698,7 @@ export const translations = {
     yourMessage: 'Ваше сообщение',
 
     // ===== QuestionsContact (NEW) =====
-    waysToConnectTitle: 'Три способа связаться с Миссией Рафаэля',
+    waysToConnectTitle: 'Три способа связаться с Миссией Raphael',
     callUs: 'Позвоните нам',
     address: 'Адрес',
     emailUs: 'Напишите нам',
@@ -686,16 +708,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Наши Цели',
     missionDescription:
-      'Наша цель — быть близко с Богом и помогать людям соединяться с Ним. Мы проповедуем Евангелие, приносим исцеление и восстановление, неся свет Христа народам.',
-    humanitarianAid: 'Близость с Богом',
+      'Наша цель — приводить людей к Иисусу.',
+    humanitarianAid: 'Близкие отношения с Богом',
     humanitarianAidDesc:
-      'Стремимся к личным отношениям с Богом и вдохновляем других искать Его присутствие.',
+      'Быть в постоянной близости с Богом и передавать другим эту жажду быть рядом с Ним.',
     spiritualGuidance: 'Проповедовать Евангелие',
     spiritualGuidanceDesc:
-      'Несём весть о спасении народам, чтобы каждый мог познать любовь и истину Христа.',
-    communityBuilding: 'Исцеление и восстановление',
+      'Достигать сердец людей Словом Евангелия, Божьей любовью и силой, принося исцеление, свободу и восстановление.',
+    communityBuilding: 'Практическая помощь',
     communityBuildingDesc:
-      'Служим людям, принося духовное, эмоциональное и физическое исцеление во имя Иисуса.',
+      'Через конкретные дела отвечать на нужды, потребности и боль людей.',
 
     // ===== Language switcher =====
     language: 'Язык',
@@ -799,12 +821,12 @@ export const translations = {
     paymentMethodLocalPolishBanks: 'Местные польские банки',
     paymentMethodBLIKPoland: 'BLIK (Польша)',
     paymentMethodBankTransfers: 'Банковские переводы',
-    donationOrderDescription: 'Пожертвование Миссии Рафаэля',
+    donationOrderDescription: 'Пожертвование Миссии Raphael',
 
     // ===== Shop =====
     shopHeroTitle: 'Поддержите нашу миссию через покупку',
     shopHeroDesc:
-      'Каждая ваша покупка помогает финансировать наши гуманитарные программы, духовные инициативы и проекты по развитию сообществ по всему миру.',
+      'В этом магазине представлены авторские картины ручной работы художницы Katryn Feli — евангелиста и миссионера, одной из основателей миссии Raphael. Приобретая картину, вы поддерживаете миссию и помогаете нам распространять Евангелие ещё больше и отвечать на нужды людей. Для приобретения напишите нам.',
     shopProductBottleTitle: 'Бутылка для чистой воды',
     shopProductBottleDesc:
       'Экологичная бутылка, поддерживающая наши инициативы по обеспечению чистой воды по всему миру.',
@@ -828,11 +850,14 @@ export const translations = {
       'Благодаря их программе наставничества я нашёл цель и направление. Теперь я помогаю другим так же, как они помогли мне.',
     shopTestimonialFoodProgram:
       'Программа питания миссии спасла мою семью в самый трудный момент. Их сострадание подарило нам надежду, когда её уже не было.',
+    noProducts: 'Товары пока недоступны. Загляните позже!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Наши проекты',
+    projectsPageTitle: 'Текущие проекты',
     projectsPageDescription:
-      'Служение сообществам по всему миру через веру, сострадание и действие.',
+      'Через каждый проект мы видим плоды Евангелия: открытые сердца для Иисуса, покаяние и изменённые жизни, где люди получают свободу, исцеление и надежду, возвращаясь к смыслу жизни.',
+    projectsBibleQuote: '«Я пришёл, чтобы вы имели жизнь и имели жизнь с избытком».',
+    projectsBibleSource: 'Иисус (Иоанна 10:10)',
     streetEvangelismTitle: 'Уличная евангелизация',
     streetEvangelismDesc:
       'Делимся посланием надежды и веры в общественных местах, встречаясь с людьми там, где они находятся.',
@@ -873,7 +898,7 @@ export const translations = {
       'Реальные истории людей, чьи жизни были затронуты и изменены благодаря работе миссии.',
     shareYourStoryTitle: 'Поделитесь своей историей',
     shareYourStoryDesc:
-      'Коснулась ли Миссия Рафаэля вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.',
+      'Коснулась ли Миссия Raphael вашей жизни? Расскажите нам своё свидетельство — оно вдохновит тех, кому нужна надежда.',
     shareYourStoryBtn: 'Поделиться историей',
     readFullStory: 'Читать полностью',
     // === Свидетельства: имена и города ===
@@ -895,35 +920,51 @@ export const translations = {
     testimonySarahKimQuote:
       'Они привезли медицинскую помощь в нашу отдалённую деревню. Моя бабушка получила лечение, спасшее жизнь.',
     testimonyDavidThompsonQuote:
-      'Волонтёрство в Миссии Рафаэля открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.',
+      'Волонтёрство в Миссии Raphael открыло мне глаза на силу веры в действии. Это полностью изменило мой взгляд на мир.',
+    noTestimoniesYet: 'Свидетельства пока недоступны. Загляните позже!',
+    noTestimonies: 'Свидетельства пока недоступны',
+    noTestimoniesDesc: 'Свидетельства скоро появятся. Загляните позже!',
+    noProjectsAvailable: 'Проекты недоступны',
+    noProjectsYet: 'Проекты пока недоступны. Загляните позже!',
+    noTrainingPrograms: 'Программы обучения пока недоступны. Загляните позже!',
 
     // ===== Footer =====
-    footerDesc: 'Распространение Божьей любви через евангелизацию, исцеление и поддержку церквей.',
+    footerDesc: 'Миссия Raphael — Евангелие для народов и любовь в действии.',
     navigation: 'Навигация',
     legal: 'Правовая информация',
+    followUs: 'Подписывайтесь на нас',
+    followUsDesc: 'Оставайтесь на связи в социальных сетях',
+    instagram: 'Instagram',
+    telegram: 'Telegram',
     privacyPolicy: 'Политика конфиденциальности',
     termsOfService: 'Условия обслуживания',
     cookiePolicy: 'Политика файлов cookie',
-    copyright: '© 2025 Миссия Рафаэля. Все права защищены.',
+    copyright: '© 2026 Миссия Raphael. Все права защищены.',
 
     // ===== About =====
-    aboutHeroTitle: 'Мы приносим надежду через',
-    aboutFaith: 'веру',
-    aboutCompassion: 'сострадание',
-    aboutService: 'служение',
-    aboutAnd: 'и',
-    aboutDescription:
-      'Raphael Mission — это христианское движение евангелистов, посвящённое распространению Евангелия и проявлению Божьей любви через действия. Через евангелизацию, обучение, творческие проекты и социальное служение мы приносим надежду, исцеление и преобразование обществу. Наша страсть — делать Иисуса известным и позволять Его чудесам проявляться повсюду, где может засиять свет Евангелия.',
-    aboutMissionNote:
-      'В каждой миссии мы идём рядом с сообществами — слушаем, служим и строим вместе.',
+    aboutHeroTitle: 'Миссия Raphael',
+    aboutParagraph1:
+      'Миссия Raphael — христианская миссия, в основе которой лежит Евангелие. Наше видение — приводить людей к Иисусу, помогать им строить близкие отношения с Ним и нести Евангелие разным народам.',
+    aboutParagraph2:
+      'В Откровении 22:2 говорится о дереве жизни: по ту и другую сторону реки — дерево жизни, приносящее двенадцать плодов, дающее на каждый месяц плод свой; и листья дерева — для исцеления народов.',
+    aboutParagraph3:
+      'Мы верим, что Бог способен исцелить каждую душу, сердце и тело. Поэтому в нашем служении важной практикой является молитва за исцеление и освобождение.',
+    aboutParagraph4:
+      'Мы поднимаем и снаряжаем делателей, поддерживаем церкви в евангелизационном служении и стремимся к открытию новых общин, чтобы всё больше людей могли услышать Евангелие и встретиться с Иисусом.',
+    aboutParagraph5:
+      'Чтобы достигать больше людей и разных категорий людей, мы используем различные дары и методы. Мы проповедуем Евангелие через творчество и практическую помощь, являя силу Божью, чтобы люди переживали сверхъестественные чудеса в своей жизни.',
     aboutCoreValuesTitle: 'Наши ключевые ценности',
     aboutCoreValuesDesc:
-      'Руководствуясь верой и движимые состраданием, мы следуем этим ценностям в каждом нашем служении.',
-    aboutFaithDesc:
-      'Наша непоколебимая вера в любовь Христа побуждает нас служить другим с надеждой и целью.',
-    aboutCompassionDesc: 'Мы относимся к каждому человеку с эмпатией и заботой.',
-    aboutServiceDesc:
-      'Через смиренное служение мы вместе с сообществами приносим устойчивые перемены.',
+      'Мы строим наше служение на искуплении Иисуса Христа, силе Евангелия и Божьей любви.',
+    aboutValue1Title: 'Иисус принёс избавление, свободу и исцеление',
+    aboutValue1Desc:
+      'Иисус умер за каждый грех, за каждое проклятие и за каждую болезнь, чтобы мы были свободны, и воскрес, чтобы каждый уверовавший в Него был оправдан. Мы верим, что Иисус принёс избавление, свободу и исцеление.',
+    aboutValue2Title: 'Евангелие — сила Божья',
+    aboutValue2Desc:
+      'Евангелие есть сила Божья. Когда проповедуется Евангелие, оно приносит силу, способную разрушать всякую болезнь и всякое проклятие, и делает невозможное возможным. Проповеданное Евангелие производит чудеса.',
+    aboutValue3Title: 'Любовь — основание всего',
+    aboutValue3Desc:
+      'В основе всего, что делает Бог, лежит любовь. В основе каждой миссии, каждого служения и каждого действия должна быть любовь!',
 
     // ===== Training =====
     trainingProgramsTitle: 'Наши программы обучения',
@@ -969,7 +1010,7 @@ export const translations = {
     storyPageTitle: 'Наша история',
     storyPageSubtitle: 'Путь веры и служения',
     storyHeroDescription:
-      'Миссия Рафаэля началась с простого призвания: приносить надежду и исцеление нуждающимся сообществам через служение, основанное на вере. То, что начиналось как небольшая группа верующих, выросло в глобальное движение, затрагивающее жизни на разных континентах.',
+      'Миссия Raphael началась с простого призвания: приносить надежду и исцеление нуждающимся сообществам через служение, основанное на вере. То, что начиналось как небольшая группа верующих, выросло в глобальное движение, затрагивающее жизни на разных континентах.',
     storyFoundingTitle: 'Основание',
     storyFoundingYear: '2010',
     storyFoundingDesc:
@@ -979,9 +1020,9 @@ export const translations = {
     storyGrowthDesc:
       'По мере того, как распространялась весть о нашей сострадательной работе, к нам присоединялись волонтёры и сторонники со всего мира. Мы расширились с одного проекта до семи различных направлений служения, каждое из которых отвечает критическим потребностям сообществ в Восточной Европе, Африке и Латинской Америке.',
     storyTodayTitle: 'Сегодня и дальше',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
-      'Сегодня Миссия Рафаэля действует в более чем 25 странах, а сотни обученных волонтёров несут надежду через уличную евангелизацию, палаточные крусейды, социальные программы, служение исцеления и поддержку церквей. Наша миссия продолжает расти, поскольку мы отвечаем на Божий призыв служить.',
+      'Сегодня Миссия Raphael действует в более чем 25 странах, а сотни обученных волонтёров несут надежду через уличную евангелизацию, палаточные крусейды, социальные программы, служение исцеления и поддержку церквей. Наша миссия продолжает расти, поскольку мы отвечаем на Божий призыв служить.',
     storyVisionTitle: 'Наше видение будущего',
     storyVisionDesc:
       'Мы представляем мир, где каждое сообщество имеет доступ к духовному наставничеству, гуманитарной помощи и преобразующей силе Божьей любви. Через программы обучения, устойчивые проекты и верное служение мы создаём наследие надежды, которое будет длиться поколениями.',
@@ -1120,10 +1161,10 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Политика конфиденциальности',
-    privacyPolicySubtitle: 'Последнее обновление: январь 2025',
+    privacyPolicySubtitle: 'Последнее обновление: январь 2026',
     privacySection1Title: '1. Информация, которую мы собираем',
     privacySection1Content:
-      'В Миссии Рафаэля мы собираем информацию, которую вы предоставляете нам напрямую, когда жертвуете, становитесь волонтёром, подписываетесь на нашу рассылку или связываетесь с нами. Это может включать ваше имя, адрес электронной почты, номер телефона, почтовый адрес и платёжную информацию.',
+      'В Миссии Raphael мы собираем информацию, которую вы предоставляете нам напрямую, когда жертвуете, становитесь волонтёром, подписываетесь на нашу рассылку или связываетесь с нами. Это может включать ваше имя, адрес электронной почты, номер телефона, почтовый адрес и платёжную информацию.',
     privacySection2Title: '2. Как мы используем вашу информацию',
     privacySection2Content: 'Мы используем собранную информацию для:',
     privacySection2Item1: 'Обработки ваших пожертвований и отправки квитанций',
@@ -1148,10 +1189,10 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Условия использования',
-    termsSubtitle: 'Последнее обновление: январь 2025',
+    termsSubtitle: 'Последнее обновление: январь 2026',
     termsSection1Title: '1. Принятие условий',
     termsSection1Content:
-      'Получая доступ и используя веб-сайт Миссии Рафаэля, вы принимаете и соглашаетесь соблюдать эти Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш сайт.',
+      'Получая доступ и используя веб-сайт Миссии Raphael, вы принимаете и соглашаетесь соблюдать эти Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш сайт.',
     termsSection2Title: '2. Использование сайта',
     termsSection2Content:
       'Вы можете использовать наш сайт только в законных целях. Вы соглашаетесь не использовать сайт способом, который может повредить, отключить, перегрузить или нарушить работу наших серверов или сетей, или помешать использованию сайта другими лицами.',
@@ -1164,10 +1205,10 @@ export const translations = {
       'Вы понимаете, что пожертвования поддерживают нашу благотворительную миссию',
     termsSection4Title: '4. Интеллектуальная собственность',
     termsSection4Content:
-      'Весь контент на этом сайте, включая текст, графику, логотипы, изображения и программное обеспечение, является собственностью Миссии Рафаэля и защищён авторским правом и другими законами об интеллектуальной собственности. Вы не можете воспроизводить, распространять или создавать производные работы без нашего письменного разрешения.',
+      'Весь контент на этом сайте, включая текст, графику, логотипы, изображения и программное обеспечение, является собственностью Миссии Raphael и защищён авторским правом и другими законами об интеллектуальной собственности. Вы не можете воспроизводить, распространять или создавать производные работы без нашего письменного разрешения.',
     termsSection5Title: '5. Ограничение ответственности',
     termsSection5Content:
-      'Миссия Рафаэля не несёт ответственности за любые косвенные, случайные, особые, последующие или штрафные убытки, возникшие в результате вашего использования или невозможности использования сайта, даже если нас уведомили о возможности таких убытков.',
+      'Миссия Raphael не несёт ответственности за любые косвенные, случайные, особые, последующие или штрафные убытки, возникшие в результате вашего использования или невозможности использования сайта, даже если нас уведомили о возможности таких убытков.',
     termsSection6Title: '6. Изменения условий',
     termsSection6Content:
       'Мы оставляем за собой право изменять эти Условия использования в любое время. Ваше продолжение использования сайта после публикации изменений означает ваше принятие изменённых условий.',
@@ -1177,7 +1218,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Политика использования файлов cookie',
-    cookiePolicySubtitle: 'Последнее обновление: январь 2025',
+    cookiePolicySubtitle: 'Последнее обновление: январь 2026',
     cookieSection1Title: 'Что такое файлы cookie',
     cookieSection1Content:
       'Файлы cookie — это небольшие текстовые файлы, которые сохраняются на вашем устройстве при посещении нашего сайта. Они помогают нам предоставлять вам лучший опыт, запоминая ваши предпочтения и понимая, как вы используете наш сайт.',
@@ -1224,13 +1265,13 @@ export const translations = {
 
   pl: {
     // контакты
-    phoneNumber: '(555) 123-4567',
+    phoneNumber: 'Numer telefonu zostanie wkrótce dodany',
     workHours: '8:30 – 17:00 czasu wschodniego',
-    addressValue: '123 Mission Street Hope City, HC 12345',
-    emailValue: 'info@raphaelmission.org',
+    addressValue: 'Informacje o adresie będą wkrótce dostępne',
+    emailValue: 'E-mail zostanie wkrótce dodany',
 
     // ===== Header =====
-    brandName: 'Misja Rafaela',
+    brandName: 'Misja Raphael',
     projects: 'Projekty',
     about: 'O nas',
     fund: 'Fundusz',
@@ -1250,26 +1291,26 @@ export const translations = {
     history: 'Historia',
 
     // ===== Hero =====
-    heroTitle: 'Rozprzestrzeniamy nadzieję przez wiarę',
-    heroTitleHighlight: 'i służbę',
+    heroTitle: 'Naszą misją jest głoszenie',
+    heroTitleHighlight: 'Ewangelii',
     heroDescription:
-      'Wierzymy, że prawdziwa zmiana następuje, gdy praktyczna pomoc i duchowa nadzieja łączą się razem. Poprzez akty współczucia dostarczamy żywność, opiekę medyczną i niezbędne zasoby potrzebującym społecznościom, jednocześnie dzieląc się przesłaniem wiary, które przynosi siłę i odnowę.',
+      'Wierzymy, że Ewangelia jest mocą Bożą, która zbawia, uzdrawia i daje prawdziwą wolność każdemu człowiekowi oraz całym narodom.',
     supportMission: 'Wesprzyj naszą misję',
     learnMore: 'Dowiedz się więcej',
 
     // ===== Home / Support =====
     supportOurMission: 'Wesprzyj naszą misję',
     supportMissionDesc:
-      'Twoja hojna darowizna pomaga nam dotrzeć do większej liczby osób z Bożą miłością, uzdrowieniem i nadzieją. Każdy wkład zmienia życie i społeczności.',
+      'Twoje wsparcie finansowe pomaga nam szerzej głosić Ewangelię i odpowiadać na potrzeby ludzi.',
 
     // ===== Home / Current Projects =====
     currentProjects: 'Aktualne projekty',
     currentProjectsDesc:
-      'Poznaj działania, które prowadzimy na całym świecie, aby nieść nadzieję i uzdrowienie potrzebującym społecznościom.',
+      'Rozpowszechniamy Ewangelię, reagując na potrzeby ludzi poprzez różne inicjatywy i wydarzenia.',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
-      'Historie wiary i transformacji pokazujące, jak Boża miłość zmienia życie poprzez Misję Rafaela',
+      'Prawdziwe historie ludzi, którzy doświadczyli Bożego dotknięcia, miłości, odnowienia, uzdrowienia i wolności dzięki Jezusowi poprzez służbę Misji.',
     quoteSarahJohnson:
       '"Dzięki tej misji odkryłam Bożą miłość w sposób, którego nigdy sobie nie wyobrażałam. My life has found new meaning".',
     sarahJohnson: 'Sarah Johnson',
@@ -1278,13 +1319,15 @@ export const translations = {
     // ===== Contact (form) =====
     contactUsTitle: 'Skontaktuj się z nami',
     contactUsDesc:
-      'Chętnie od Ciebie usłyszymy. Skontaktuj się z nami, aby dowiedzieć się więcej o naszej misji lub włączyć się w działanie.',
+      'Będzie nam miło otrzymać Twoją wiadomość. Napisz do nas, aby dowiedzieć się więcej o Misji lub dołączyć do służby.',
     addressLabel: 'Adres',
     phoneLabel: 'Telefon',
     emailLabel: 'E-mail',
-    addressLine: '123 Mission Street, Hope City, HC 12345',
-    phoneNumber2: '+1 (555) 123-4567',
-    emailAddress: 'info@raphaelmission.org',
+    addressLine: 'Informacje o adresie będą wkrótce dostępne',
+    phoneNumber: 'Numer telefonu zostanie wkrótce dodany',
+    phoneNumber2: 'Numer telefonu zostanie wkrótce dodany',
+    emailAddress: 'E-mail zostanie wkrótce dodany',
+    address: 'Adres zostanie wkrótce dodany',
     sendMessage: 'Wyślij wiadomość',
     firstName: 'Imię',
     lastName: 'Nazwisko',
@@ -1293,7 +1336,7 @@ export const translations = {
     yourMessage: 'Twoja wiadomość',
 
     // ===== QuestionsContact (NEW) =====
-    waysToConnectTitle: 'Trzy sposoby kontaktu z Misją Rafaela',
+    waysToConnectTitle: 'Trzy sposoby kontaktu z Misją Raphael',
     callUs: 'Zadzwoń do nas',
     address: 'Adres',
     emailUs: 'Napisz do nas',
@@ -1303,16 +1346,16 @@ export const translations = {
     // ===== Mission (home section) =====
     missionTitle: 'Nasze Cele',
     missionDescription:
-      'Naszą сel jest być blisko Boga i pomagać ludziom zbliżać się do Niego. Głosimy Ewangelię, niosąc uzdrowienie i odnowę, aby świat poznał światło Chrystusa.',
-    humanitarianAid: 'Bliskość z Bogiem',
+      'Naszym celem jest prowadzić ludzi do Jezusa.',
+    humanitarianAid: 'Bliska relacja z Bogiem',
     humanitarianAidDesc:
-      'Dążymy do osobistej relacji z Bogiem i inspirujemy innych, by szukali Jego obecności.',
-    spiritualGuidance: 'Głoszenie Ewangelii',
+      'Być w stałej bliskości z Bogiem i przekazywać innym to pragnienie, by być blisko Niego.',
+    spiritualGuidance: 'Głosić Ewangelię',
     spiritualGuidanceDesc:
-      'Zwiastujemy przesłanie zbawienia narodom, aby każdy mógł poznać miłość i prawdę Chrystusa.',
-    communityBuilding: 'Uzdrowienie i odnowa',
+      'Docierać do serc ludzi Słowem Ewangelii, Bożą miłością i mocą, przynosząc uzdrowienie, wolność i odnowę.',
+    communityBuilding: 'Praktyczna pomoc',
     communityBuildingDesc:
-      'Służymy ludziom, przynosząc duchowe, emocjonalne i fizyczne uzdrowienie w imię Jezusa.',
+      'Przez konkretne działania odpowiadać na potrzeby, pragnienia i ból ludzi.',
 
     // ===== Language switcher =====
     language: 'Język',
@@ -1416,12 +1459,12 @@ export const translations = {
     paymentMethodLocalPolishBanks: 'Lokalne polskie banki',
     paymentMethodBLIKPoland: 'BLIK (Polska)',
     paymentMethodBankTransfers: 'Przelewy bankowe',
-    donationOrderDescription: 'Darowizna dla Misji Rafaela',
+    donationOrderDescription: 'Darowizna dla Misji Raphael',
 
     // ===== Shop =====
     shopHeroTitle: 'Wesprzyj naszą misję poprzez zakup',
     shopHeroDesc:
-      'Każdy Twój zakup pomaga finansować nasze programy pomocy humanitarnej, inicjatywy duchowego wsparcia i projekty budowania społeczności na całym świecie.',
+      'W tym sklepie prezentowane są autorskie, ręcznie malowane obrazy artystki Katryn Feli — ewangelistki i misjonarki, jednej z założicielek misji Raphael. Kupując obraz, wspierasz misję i pomagasz nam jeszcze szerzej głosić Ewangelię oraz odpowiadać na potrzeby ludzi. Aby dokonać zakupu, napisz do nas.',
     shopProductBottleTitle: 'Butelka na czystą wodę',
     shopProductBottleDesc:
       'Ekologiczna butelka wspierająca nasze inicjatywy czystej wody na całym świecie.',
@@ -1446,11 +1489,14 @@ export const translations = {
       'Dzięki ich programowi mentoringowemu odnalazłem cel i sens. Dziś pomagam innym tak, jak oni pomogli mnie.',
     shopTestimonialFoodProgram:
       'Program żywnościowy misji uratował moją rodzinę w najtrudniejszej chwili. Ich współczucie dało nam nadzieję, gdy już jej nie mieliśmy.',
+    noProducts: 'Produkty są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Nasze projekty',
+    projectsPageTitle: 'Aktualne projekty',
     projectsPageDescription:
-      'Służenie społecznościom na całym świecie poprzez wiarę, współczucie i działanie.',
+      'Przez każdy projekt widzimy owoce Ewangelii: otwarte serca dla Jezusa, nawrócenie i odmienione życie, w którym ludzie otrzymują wolność, uzdrowienie i nadzieję, wracając do sensu życia.',
+    projectsBibleQuote: '„Przyszedłem po to, abyście mieli życie i mieli je w obfitości".',
+    projectsBibleSource: 'Jezus (Jana 10:10)',
     streetEvangelismTitle: 'Ewangelizacja uliczna',
     streetEvangelismDesc:
       'Dzielenie się przesłaniem nadziei i wiary w miejscach publicznych, łączenie się z ludźmi tam, gdzie są.',
@@ -1489,7 +1535,7 @@ export const translations = {
       'Prawdziwe doświadczenia ludzi, których życie zostało dotknięte i zmienione przez pracę misji.',
     shareYourStoryTitle: 'Podziel się swoją historią',
     shareYourStoryDesc:
-      'Czy Misja Rafaela dotknęła twojego życia? Chętnie poznamy twoje świadectwo i podzielimy się nim z tymi, którzy potrzebują nadziei.',
+      'Czy Misja Raphael dotknęła twojego życia? Chętnie poznamy twoje świadectwo i podzielimy się nim z tymi, którzy potrzebują nadziei.',
     shareYourStoryBtn: 'Podziel się historią',
     readFullStory: 'Przeczytaj pełną historię',
     // === Świadectwa: imiona i miasta ===
@@ -1511,35 +1557,51 @@ export const translations = {
     testimonySarahKimQuote:
       'Przywieźli opiekę medyczną do naszej odległej wioski. Moja babcia otrzymała leczenie ratujące życie.',
     testimonyDavidThompsonQuote:
-      'Wolontariat w Misji Rafaela otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.',
+      'Wolontariat w Misji Raphael otworzył mi oczy na siłę wiary w działaniu. Całkowicie odmienił mój światopogląd.',
+    noTestimoniesYet: 'Świadectwa są obecnie niedostępne. Wróć wkrótce!',
+    noTestimonies: 'Świadectwa są obecnie niedostępne',
+    noTestimoniesDesc: 'Świadectwa będą wkrótce dostępne. Wróć później!',
+    noProjectsAvailable: 'Projekty niedostępne',
+    noProjectsYet: 'Projekty są obecnie niedostępne. Wróć wkrótce!',
+    noTrainingPrograms: 'Programy szkoleniowe są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Footer =====
-    footerDesc: 'Szerzenie Bożej miłości poprzez ewangelizację, uzdrowienie i wsparcie kościołów.',
+    footerDesc: 'Misja Raphael — Ewangelia dla narodów i miłość w działaniu.',
     navigation: 'Nawigacja',
     legal: 'Informacje prawne',
+    followUs: 'Obserwuj nas',
+    followUsDesc: 'Bądź z nami w kontakcie w mediach społecznościowych',
+    instagram: 'Instagram',
+    telegram: 'Telegram',
     privacyPolicy: 'Polityka prywatności',
     termsOfService: 'Warunki usługi',
     cookiePolicy: 'Polityka plików cookie',
-    copyright: '© 2025 Misja Rafaela. Wszystkie prawa zastrzeżone.',
+    copyright: '© 2026 Misja Raphael. Wszystkie prawa zastrzeżone.',
 
     // ===== About =====
-    aboutHeroTitle: 'Przynosimy nadzieję przez',
-    aboutFaith: 'wiarę',
-    aboutCompassion: 'współczucie',
-    aboutService: 'służbę',
-    aboutAnd: 'i',
-    aboutDescription:
-      'Raphael Mission to chrześcijański ruch ewangelistów poświęcony głoszeniu Ewangelii i ukazywaniu Bożej miłości poprzez działanie. Poprzez ewangelizację, szkolenia, twórcze projekty i służbę społeczną przynosimy nadzieję, uzdrowienie i przemianę społecznościom. Naszą pasją jest sprawić, by Jezus był znany, i pozwolić, aby Jego cuda objawiały się wszędzie tam, gdzie może świecić światło Ewangelii.',
-    aboutMissionNote:
-      'W każdej misji idziemy razem ze społecznościami — słuchamy, służymy i budujemy wspólnie.',
+    aboutHeroTitle: 'Misja Raphael',
+    aboutParagraph1:
+      'Misja Raphael to chrześcijańska misja, której fundamentem jest Ewangelia. Naszą wizją jest prowadzić ludzi do Jezusa, pomagać im budować bliską relację z Nim i nieść Ewangelię do różnych narodów.',
+    aboutParagraph2:
+      'W Objawieniu 22:2 jest mowa o drzewie życia: po obu stronach rzeki stoi drzewo życia, rodzące dwanaście owoców i wydające swój owoc każdego miesiąca, a liście drzewa służą do uzdrowienia narodów.',
+    aboutParagraph3:
+      'Wierzymy, że Bóg jest w stanie uzdrowić każdą duszę, serce i ciało. Dlatego ważną praktyką w naszej służbie jest modlitwa o uzdrowienie i uwolnienie.',
+    aboutParagraph4:
+      'Podnosimy i wyposażamy pracowników, wspieramy kościoły w służbie ewangelizacyjnej i dążymy do zakładania nowych wspólnot, aby coraz więcej ludzi mogło usłyszeć Ewangelię i spotkać się z Jezusem.',
+    aboutParagraph5:
+      'Aby docierać do większej liczby ludzi i do różnych grup odbiorców, wykorzystujemy różne dary i metody. Głosimy Ewangelię poprzez twórczość i praktyczną pomoc, ukazując moc Bożą, aby ludzie doświadczali nadprzyrodzonych cudów w swoim życiu.',
     aboutCoreValuesTitle: 'Nasze kluczowe wartości',
     aboutCoreValuesDesc:
-      'Kierowani wiarą i poruszeni współczuciem, realizujemy te wartości w każdej misji.',
-    aboutFaithDesc:
-      'Niezachwiana wiara w miłość Chrystusa motywuje nas do służby innym z nadzieją i celem.',
-    aboutCompassionDesc: 'Podchodzimy do każdego człowieka z empatią i troską.',
-    aboutServiceDesc:
-      'Przez pokorną służbę współpracujemy ze społecznościami, aby wprowadzać trwałe zmiany.',
+      'Budujemy naszą służbę na odkupieniu Jezusa Chrystusa, mocy Ewangelii i Bożej miłości.',
+    aboutValue1Title: 'Jezus przyniósł wybawienie, wolność i uzdrowienie',
+    aboutValue1Desc:
+      'Jezus umarł za każdy grzech, za każde przekleństwo i za każdą chorobę, abyśmy byli wolni, i zmartwychwstał, aby każdy, kto w Niego wierzy, został usprawiedliwiony. Wierzymy, że Jezus przyniósł wybawienie, wolność i uzdrowienie.',
+    aboutValue2Title: 'Ewangelia — moc Boża',
+    aboutValue2Desc:
+      'Ewangelia jest mocą Bożą. Kiedy Ewangelia jest głoszona, przynosi moc zdolną zniszczyć każdą chorobę i każde przekleństwo oraz uczynić niemożliwe możliwym. Głoszona Ewangelia sprawia cuda.',
+    aboutValue3Title: 'Miłość — fundament wszystkiego',
+    aboutValue3Desc:
+      'U podstaw wszystkiego, co czyni Bóg, leży miłość. U podstaw każdej misji, każdej służby i każdego działania powinna być miłość!',
 
     // ===== Training =====
     trainingProgramsTitle: 'Nasze programy szkoleniowe',
@@ -1586,7 +1648,7 @@ export const translations = {
     storyPageTitle: 'Nasza historia',
     storyPageSubtitle: 'Podróż wiary i służby',
     storyHeroDescription:
-      'Misja Rafaela rozpoczęła się od prostego powołania: niesienia nadziei i uzdrowienia potrzebującym społecznościom przez służbę opartą na wierze. To, co zaczęło się jako mała grupa wierzących, wyrosło w globalny ruch dotykający żyć na różnych kontynentach.',
+      'Misja Raphael rozpoczęła się od prostego powołania: niesienia nadziei i uzdrowienia potrzebującym społecznościom przez służbę opartą na wierze. To, co zaczęło się jako mała grupa wierzących, wyrosło w globalny ruch dotykający żyć na różnych kontynentach.',
     storyFoundingTitle: 'Założenie',
     storyFoundingYear: '2010',
     storyFoundingDesc:
@@ -1596,9 +1658,9 @@ export const translations = {
     storyGrowthDesc:
       'W miarę rozprzestrzeniania się wieści o naszej współczującej pracy, wolontariusze i wspierający z całego świata dołączali do nas. Rozszerzyliśmy się z jednego projektu do siedmiu odrębnych obszarów służby, z których każdy odpowiada na krytyczne potrzeby społeczności w Europie Wschodniej, Afryce i Ameryce Łacińskiej.',
     storyTodayTitle: 'Dzisiaj i w przyszłości',
-    storyTodayYear: '2025',
+    storyTodayYear: '2026',
     storyTodayDesc:
-      'Dzisiaj Misja Rafaela działa w ponad 25 krajach, a setki przeszkolonych wolontariuszy niosą nadzieję przez ewangelizację uliczną, namiotowe krucjaty, programy społeczne, służbę uzdrowienia i wsparcie kościołów. Nasza misja nadal rośnie, gdy odpowiadamy na Boże wołanie do służby.',
+      'Dzisiaj Misja Raphael działa w ponad 25 krajach, a setki przeszkolonych wolontariuszy niosą nadzieję przez ewangelizację uliczną, namiotowe krucjaty, programy społeczne, służbę uzdrowienia i wsparcie kościołów. Nasza misja nadal rośnie, gdy odpowiadamy na Boże wołanie do służby.',
     storyVisionTitle: 'Nasza wizja przyszłości',
     storyVisionDesc:
       'Wyobrażamy sobie świat, w którym każda społeczność ma dostęp do duchowego przewodnictwa, pomocy humanitarnej i przemieniającej mocy Bożej miłości. Poprzez programy szkoleniowe, zrównoważone projekty i wierną służbę budujemy dziedzictwo nadziei, które przetrwa przez pokolenia.',
@@ -1737,10 +1799,10 @@ export const translations = {
 
     // Privacy Policy
     privacyPolicyTitle: 'Polityka prywatności',
-    privacyPolicySubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    privacyPolicySubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     privacySection1Title: '1. Informacje, które zbieramy',
     privacySection1Content:
-      'W Misji Rafaela zbieramy informacje, które nam bezpośrednio przekazujesz, gdy dokonujesz darowizny, stajesz się wolontariuszem, zapisujesz się do naszego newslettera lub kontaktujesz się z nami. Może to obejmować Twoje imię i nazwisko, adres e-mail, numer telefonu, adres pocztowy i informacje płatnicze.',
+      'W Misji Raphael zbieramy informacje, które nam bezpośrednio przekazujesz, gdy dokonujesz darowizny, stajesz się wolontariuszem, zapisujesz się do naszego newslettera lub kontaktujesz się z nami. Może to obejmować Twoje imię i nazwisko, adres e-mail, numer telefonu, adres pocztowy i informacje płatnicze.',
     privacySection2Title: '2. Jak wykorzystujemy Twoje informacje',
     privacySection2Content: 'Wykorzystujemy zebrane informacje do:',
     privacySection2Item1: 'Przetwarzania Twoich darowizn i wysyłania potwierdzeń',
@@ -1765,10 +1827,10 @@ export const translations = {
 
     // Terms of Service
     termsTitle: 'Warunki usługi',
-    termsSubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    termsSubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     termsSection1Title: '1. Akceptacja warunków',
     termsSection1Content:
-      'Uzyskując dostęp i korzystając ze strony internetowej Misji Rafaela, akceptujesz i zgadzasz się przestrzegać niniejszych Warunków usługi. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z naszej strony.',
+      'Uzyskując dostęp i korzystając ze strony internetowej Misji Raphael, akceptujesz i zgadzasz się przestrzegać niniejszych Warunków usługi. Jeśli nie zgadzasz się z tymi warunkami, prosimy nie korzystać z naszej strony.',
     termsSection2Title: '2. Korzystanie ze strony',
     termsSection2Content:
       'Możesz korzystać z naszej strony wyłącznie w celach zgodnych z prawem. Zgadzasz się nie używać strony w sposób, który mógłby uszkodzić, wyłączyć, przeciążyć lub zakłócić nasze serwery lub sieci, lub zakłócić korzystanie ze strony przez inne osoby.',
@@ -1780,10 +1842,10 @@ export const translations = {
     termsSection3Item3: 'Rozumiesz, że darowizny wspierają naszą misję charytatywną',
     termsSection4Title: '4. Własność intelektualna',
     termsSection4Content:
-      'Cała zawartość tej strony, w tym tekst, grafika, logo, obrazy i oprogramowanie, jest własnością Misji Rafaela i chroniona prawami autorskimi oraz innymi prawami własności intelektualnej. Nie możesz powielać, rozpowszechniać ani tworzyć dzieł pochodnych bez naszej pisemnej zgody.',
+      'Cała zawartość tej strony, w tym tekst, grafika, logo, obrazy i oprogramowanie, jest własnością Misji Raphael i chroniona prawami autorskimi oraz innymi prawami własności intelektualnej. Nie możesz powielać, rozpowszechniać ani tworzyć dzieł pochodnych bez naszej pisemnej zgody.',
     termsSection5Title: '5. Ograniczenie odpowiedzialności',
     termsSection5Content:
-      'Misja Rafaela nie ponosi odpowiedzialności za jakiekolwiek szkody pośrednie, przypadkowe, szczególne, wynikowe lub karne wynikające z korzystania lub niemożności korzystania ze strony, nawet jeśli zostaliśmy poinformowani o możliwości takich szkód.',
+      'Misja Raphael nie ponosi odpowiedzialności za jakiekolwiek szkody pośrednie, przypadkowe, szczególne, wynikowe lub karne wynikające z korzystania lub niemożności korzystania ze strony, nawet jeśli zostaliśmy poinformowani o możliwości takich szkód.',
     termsSection6Title: '6. Zmiany warunków',
     termsSection6Content:
       'Zastrzegamy sobie prawo do modyfikacji niniejszych Warunków usługi w dowolnym momencie. Twoje dalsze korzystanie ze strony po opublikowaniu zmian oznacza akceptację zmienionych warunków.',
@@ -1793,7 +1855,7 @@ export const translations = {
 
     // Cookie Policy
     cookiePolicyTitle: 'Polityka plików cookie',
-    cookiePolicySubtitle: 'Ostatnia aktualizacja: styczeń 2025',
+    cookiePolicySubtitle: 'Ostatnia aktualizacja: styczeń 2026',
     cookieSection1Title: 'Czym są pliki cookie',
     cookieSection1Content:
       'Pliki cookie to małe pliki tekstowe, które są zapisywane na Twoim urządzeniu podczas odwiedzania naszej strony. Pomagają nam zapewnić Ci lepsze doświadczenie, zapamiętując Twoje preferencje i rozumiejąc, jak korzystasz z naszej strony.',

@@ -135,6 +135,26 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* What We Do */}
+      {whatWeDo && (
+        <section className="w-full bg-[#fafbfc] py-10">
+          <div className="max-w-[900px] mx-auto px-4">
+            <div className="bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <h2 className="text-[28px] sm:text-[32px] font-bold mb-4 text-[#1f2937]">
+                {language === 'ru'
+                  ? 'Чем мы занимаемся'
+                  : language === 'pl'
+                    ? 'Czym się zajmujemy'
+                    : 'What We Do'}
+              </h2>
+              <div className="text-[16px] sm:text-[18px] text-[#374151] whitespace-pre-line">
+                {whatWeDo}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Project Impact */}
       <section className="w-full bg-[#fafbfc] py-10">
         <div className="max-w-[900px] mx-auto px-4">
@@ -156,7 +176,7 @@ const ProjectDetail = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-200"
+                    className="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-200 flex flex-col"
                   >
                     {/* Icon */}
                     <div className="flex justify-center mb-4">
@@ -190,27 +210,19 @@ const ProjectDetail = () => {
                     {/* Divider */}
                     <div className="w-full h-px bg-gray-200 mb-4"></div>
 
-                    {/* Content */}
-                    <div className="text-center">
-                      <div className="text-[16px] font-bold text-[#1f2937] mb-2">{stat}</div>
+                    {/* Stat Text - прижат к верху */}
+                    <div className="text-center mb-4">
+                      <div className="text-[16px] font-bold text-[#1f2937]">{stat}</div>
+                    </div>
+
+                    {/* Achievement Label - прижат к низу */}
+                    <div className="text-center mt-auto">
                       <div className="text-[12px] text-gray-400 font-normal">
-                        {index === 0
-                          ? language === 'ru'
-                            ? 'Достижение'
-                            : language === 'pl'
-                              ? 'Osiągnięcie'
-                              : 'Achievement'
-                          : index === 1
-                            ? language === 'ru'
-                              ? 'Достижение'
-                              : language === 'pl'
-                                ? 'Osiągnięcie'
-                                : 'Achievement'
-                            : language === 'ru'
-                              ? 'Достижение'
-                              : language === 'pl'
-                                ? 'Osiągnięcie'
-                                : 'Success'}
+                        {language === 'ru'
+                          ? 'Достижение'
+                          : language === 'pl'
+                            ? 'Osiągnięcie'
+                            : 'Achievement'}
                       </div>
                     </div>
                   </div>

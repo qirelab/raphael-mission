@@ -1,98 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
-import { projectsService } from '../../services/projectsService';
+import { useProjects } from '../../context/ProjectsContext';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Projects = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
-  const [projectsData, setProjectsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { projects, loading } = useProjects();
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const data = await projectsService.getActive();
-        const activeProjects = data
-          .filter((p) => p.is_active)
-          .map((p) => ({
-            id: p.id,
-            title: p[`title_${language}`] || p.title_en,
-            description: p[`description_${language}`] || p.description_en,
-            image: p.image_url || '/images/img_img_192x384.png',
-            link: `/projects/${p.slug}`,
-          }));
-        setProjectsData(activeProjects);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-        // Fallback to default projects if API fails
-        setProjectsData([
-          {
-            id: 1,
-            titleKey: 'streetEvangelismTitle',
-            descriptionKey: 'streetEvangelismDesc',
-            image: '/images/img_img_192x384.png',
-            link: '/projects/street-evangelism',
-          },
-          {
-            id: 2,
-            titleKey: 'tentEvangelismTitle',
-            descriptionKey: 'tentEvangelismDesc',
-            image: '/images/img_img_1.png',
-            link: '/projects/tent-evangelism',
-          },
-          {
-            id: 3,
-            titleKey: 'personalEvangelismTitle',
-            descriptionKey: 'personalEvangelismDesc',
-            image: '/images/img_img_2.png',
-            link: '/projects/personal-evangelism',
-          },
-          {
-            id: 4,
-            titleKey: 'socialProjectsTitle',
-            descriptionKey: 'socialProjectsDesc',
-            image: '/images/img_img_3.png',
-            link: '/projects/social-projects',
-          },
-          {
-            id: 5,
-            titleKey: 'artEvangelismTitle',
-            descriptionKey: 'artEvangelismDesc',
-            image: '/images/img_img_4.png',
-            link: '/projects/art-evangelism',
-          },
-          {
-            id: 6,
-            titleKey: 'churchSupportTitle',
-            descriptionKey: 'churchSupportDesc',
-            image: '/images/img_img_5.png',
-            link: '/projects/church-support',
-          },
-          {
-            id: 7,
-            titleKey: 'healingMinistryTitle',
-            descriptionKey: 'healingMinistryDesc',
-            image: '/images/img_img_6.png',
-            link: '/projects/healing-ministry',
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Transform projects for display
+  const projectsData = useMemo(() => {
+    return projects.map((p) => ({
+      id: p.id,
+      title: p[`title_${language}`] || p.title_en,
+      description: p[`description_${language}`] || p.description_en,
+      image: p.image_url || '/images/img_img_192x384.png',
+      link: `/${language}/projects/${p.slug}`,
+    }));
+  }, [projects, language]);
 
-    fetchProjects();
-  }, [language]);
-
-  const statsData = [
-    { number: '500+', labelKey: 'livesTouched' },
-    { number: '25+', labelKey: 'communitiesServed' },
-    { number: '7', labelKey: 'activeProjects' },
-  ];
+  // Statistics data - Temporarily hidden as per DOCUMENT.md
+  // const statsData = [
+  //   { number: '500+', labelKey: 'livesTouched' },
+  //   { number: '25+', labelKey: 'communitiesServed' },
+  //   { number: '7', labelKey: 'activeProjects' },
+  // ];
 
   if (loading) {
     return (
@@ -113,8 +48,8 @@ const Projects = () => {
               </div>
             </section>
 
-            {/* Stats Section Skeleton */}
-            <section className="w-full bg-white py-12 lg:py-16">
+            {/* Stats Section Skeleton - Temporarily Hidden as per DOCUMENT.md */}
+            {/* <section className="w-full bg-white py-12 lg:py-16">
               <div className="max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                   {Array.from({ length: 3 }, (_, i) => (
@@ -125,7 +60,7 @@ const Projects = () => {
                   ))}
                 </div>
               </div>
-            </section>
+            </section> */}
 
             {/* Projects Section Skeleton */}
             <section className="w-full bg-gray-50 py-12 lg:py-16">
@@ -159,6 +94,12 @@ const Projects = () => {
                     <h1 className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-poppins font-bold leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] text-center text-white mb-[16px] sm:mb-[20px] md:mb-[24px]">
                       {t('projectsPageTitle')}
                     </h1>
+                    <blockquote className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal italic leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-100 w-full mb-[8px] sm:mb-[10px]">
+                      {t('projectsBibleQuote')}
+                    </blockquote>
+                    <cite className="text-[14px] sm:text-[15px] md:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] text-center text-gray-300 w-full mb-[24px] sm:mb-[28px] md:mb-[32px] not-italic">
+                      {t('projectsBibleSource')}
+                    </cite>
                     <p className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-200 w-full">
                       {t('projectsPageDescription')}
                     </p>
@@ -181,7 +122,7 @@ const Projects = () => {
                         showButtons={false}
                         className="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] md:gap-[32px]"
                       />
-                    ) : (
+                    ) : projectsData.length > 0 ? (
                       projectsData.map((project, index) => (
                         <a
                           key={project.id}
@@ -215,6 +156,30 @@ const Projects = () => {
                           </div>
                         </a>
                       ))
+                    ) : (
+                      <div className="col-span-full text-center py-16">
+                        <div className="max-w-md mx-auto">
+                          <svg
+                            className="w-16 h-16 mx-auto mb-4 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            />
+                          </svg>
+                          <h3 className="text-xl font-semibold text-gray-700 mb-2 font-poppins">
+                            {t('noProjectsAvailable') || 'No projects available'}
+                          </h3>
+                          <p className="text-gray-500 font-poppins">
+                            {t('noProjectsYet') || 'No projects available at the moment. Check back soon!'}
+                          </p>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -222,8 +187,8 @@ const Projects = () => {
             </div>
           </section>
 
-          {/* Statistics Section */}
-          <section className="w-full bg-[#F3F4F6] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
+          {/* Statistics Section - Temporarily Hidden as per DOCUMENT.md */}
+          {/* <section className="w-full bg-[#F3F4F6] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
             <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-center items-center w-full">
                 <div className="flex flex-col justify-start items-center w-full max-w-[1200px]">
@@ -256,7 +221,7 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Call to Action Section */}
           <section className="w-full bg-[#3c8a7a] py-[64px] sm:py-[80px] md:py-[88px] lg:py-[96px]">
@@ -273,14 +238,14 @@ const Projects = () => {
                   <div className="flex flex-col sm:flex-row gap-[16px] justify-center items-center w-full mt-[16px] sm:mt-[20px] md:mt-[24px]">
                     <Button
                       variant="outline"
-                      onClick={() => (window.location.href = '/training')}
+                      onClick={() => navigate(`/${language}/contact`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('getInvolved')}
                     </Button>
                     <Button
                       variant="primary"
-                      onClick={() => navigate(`/${language}/donate`)}
+                      onClick={() => navigate(`/${language}/donation`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
                       {t('donateNow')}

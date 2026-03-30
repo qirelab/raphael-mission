@@ -7,25 +7,34 @@ import { TrainingGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const TrainingPrograms = () => {
   const { t, language } = useLanguage();
-  const [trainingPrograms, setTrainingPrograms] = useState([]);
+  const [trainingProgramsData, setTrainingProgramsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Load training programs only once, not on language change
   useEffect(() => {
     const loadPrograms = async () => {
       try {
         setLoading(true);
         const data = await trainingService.getActive();
-        setTrainingPrograms(data);
+        setTrainingProgramsData(data);
       } catch (error) {
         console.error('Error loading training programs:', error);
-        setTrainingPrograms([]);
+        setTrainingProgramsData([]);
       } finally {
         setLoading(false);
       }
     };
 
     loadPrograms();
-  }, [language]);
+  }, []); // Load only once!
+
+  // Transform programs based on current language (client-side, no API call)
+  const trainingPrograms = trainingProgramsData.map((p) => ({
+    ...p,
+    title: p[`title_${language}`] || p.title_en,
+    description: p[`description_${language}`] || p.description_en,
+    duration: p[`duration_${language}`] || p.duration_en || '',
+  }));
 
   if (loading) {
     return (
@@ -161,7 +170,7 @@ const TrainingPrograms = () => {
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact">
+              <a href={`/${language}/contact`}>
                 <button className="inline-flex items-center justify-center rounded-md border-2 border-white text-white font-semibold px-6 py-3 hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
                   {t('trainingCtaButton')}
                 </button>

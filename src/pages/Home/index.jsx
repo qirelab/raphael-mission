@@ -1,5 +1,5 @@
 // src/pages/Home/index.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import EditText from '../../components/ui/EditText';
@@ -7,7 +7,8 @@ import TextArea from '../../components/ui/TextArea';
 import ButtonSkeleton from '../../components/ui/ButtonSkeleton';
 import { useLanguage } from '../../context/LanguageContext';
 import { projectsService } from '../../services/projectsService';
-import { useTestimonies, useContactInfo } from '../../hooks/useApiData';
+import { useTestimoniesContext } from '../../context/TestimoniesContext';
+import { useContact } from '../../context/ContactContext';
 import { useAlert } from '../../hooks/useAlert';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, TestimonialsGridSkeleton } from '../../components/skeletons';
@@ -27,24 +28,44 @@ const Home = () => {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const [firstProjects, setFirstProjects] = useState([]);
+  const [firstProjectsData, setFirstProjectsData] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
-
-  const { data: testimonies, loading: loadingTestimonies } = useTestimonies();
-  const { data: contactData } = useContactInfo();
 
   const { t, language } = useLanguage();
   const { success, error, warning } = useAlert();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Load first projects and testimonies
+  const { testimonies: testimoniesRaw, loading: loadingTestimonies } = useTestimoniesContext();
+  const { contactData } = useContact();
+
+  // Transform testimonies based on current language (client-side, no API call)
+  const testimonies = useMemo(() => {
+    return testimoniesRaw.map((t) => ({
+      id: t.id,
+      name: t[`name_${language}`] || t.name_en || t.name,
+      location: t[`title_${language}`] || t.title_en || '',
+      testimony: t[`content_${language}`] || t.content_en,
+      image: t.image_url,
+    }));
+  }, [testimoniesRaw, language]);
+
+  // Transform projects based on current language (client-side, no API call)
+  const firstProjects = useMemo(() => {
+    return firstProjectsData.map((project) => ({
+      ...project,
+      title: project[`title_${language}`] || project.title_en,
+      description: project[`description_${language}`] || project.description_en,
+    }));
+  }, [firstProjectsData, language]);
+
+  // Load first 3 projects only once, not on language change
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoadingProjects(true);
         const projects = await projectsService.getFirst(3);
-        setFirstProjects(projects);
+        setFirstProjectsData(projects);
       } catch (error) {
         console.error('Error loading projects:', error);
       } finally {
@@ -53,7 +74,7 @@ const Home = () => {
     };
 
     loadData();
-  }, [language]);
+  }, []); // Load only once!
 
   // Обработка якоря при загрузке страницы
   useEffect(() => {
@@ -144,7 +165,7 @@ const Home = () => {
               <img
                 src="/images/img_logo_2.png"
                 alt={`${t('brandName')} Logo`}
-                className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[386px] lg:h-[384px]"
+                className="w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px]"
               />
             </div>
 
@@ -286,7 +307,7 @@ const Home = () => {
                     </div>
                     <div className="flex items-center gap-2 mt-auto pt-4">
                       <Link
-                        to={`/projects/${project.slug}`}
+                        to={`/${language}/projects/${project.slug}`}
                         className="flex items-center gap-2 text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#3c8a7a] font-['Poppins'] hover:underline"
                       >
                         {t('learnMore')}
@@ -425,35 +446,57 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('addressLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {(contactData?.[`address_line1_${language}`] ||
-                        contactData?.address_line1_en ||
-                        contactData?.address_line1) && (
-                        <>
-                          {contactData?.[`address_line1_${language}`] ||
+                    {(() => {
+                      const addressParts = [
+                        contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
+                        contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                        contactData?.city,
+                        contactData?.country
+                      ].filter(Boolean);
+
+                      const hasAddress = addressParts.length > 0;
+
+                      return hasAddress ? (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressParts.join(', '))}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                        >
+                          {(contactData?.[`address_line1_${language}`] ||
                             contactData?.address_line1_en ||
-                            contactData?.address_line1}
-                        </>
-                      )}
-                      {(contactData?.[`address_line2_${language}`] ||
-                        contactData?.address_line2_en ||
-                        contactData?.address_line2) && (
-                        <>
-                          <br />
-                          {contactData?.[`address_line2_${language}`] ||
+                            contactData?.address_line1) && (
+                            <>
+                              {contactData?.[`address_line1_${language}`] ||
+                                contactData?.address_line1_en ||
+                                contactData?.address_line1}
+                            </>
+                          )}
+                          {(contactData?.[`address_line2_${language}`] ||
                             contactData?.address_line2_en ||
-                            contactData?.address_line2}
-                        </>
-                      )}
-                      {(contactData?.city || contactData?.country) && (
-                        <>
-                          <br />
-                          {contactData?.city && contactData?.country
-                            ? `${contactData.city}, ${contactData.country}`
-                            : contactData?.city || contactData?.country}
-                        </>
-                      )}
-                    </p>
+                            contactData?.address_line2) && (
+                            <>
+                              <br />
+                              {contactData?.[`address_line2_${language}`] ||
+                                contactData?.address_line2_en ||
+                                contactData?.address_line2}
+                            </>
+                          )}
+                          {(contactData?.city || contactData?.country) && (
+                            <>
+                              <br />
+                              {contactData?.city && contactData?.country
+                                ? `${contactData.city}, ${contactData.country}`
+                                : contactData?.city || contactData?.country}
+                            </>
+                          )}
+                        </a>
+                      ) : (
+                        <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                          {t('addressLine')}
+                        </p>
+                      );
+                    })()}
                   </div>
                 </div>
 
@@ -470,9 +513,18 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('phoneLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {contactData?.phone_number || t('phoneNumber')}
-                    </p>
+                    {contactData?.phone_number ? (
+                      <a
+                        href={`tel:${contactData.phone_number}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.phone_number}
+                      </a>
+                    ) : (
+                      <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                        {t('phoneNumber')}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -489,9 +541,18 @@ const Home = () => {
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
                       {t('emailLabel')}
                     </h3>
-                    <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
-                      {contactData?.email || t('emailAddress')}
-                    </p>
+                    {contactData?.email ? (
+                      <a
+                        href={`mailto:${contactData.email}`}
+                        className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins'] hover:text-white transition-colors"
+                      >
+                        {contactData.email}
+                      </a>
+                    ) : (
+                      <p className="block text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#dcfce7] font-['Poppins']">
+                        {t('emailAddress')}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

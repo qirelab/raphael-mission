@@ -1,49 +1,57 @@
-import { neonTestimoniesService } from './neonTestimoniesService';
+import { apiClient } from './apiClient.js';
 
 export const testimoniesService = {
   // Get all testimonies
   async getAll() {
-    return await neonTestimoniesService.getAll();
+    const response = await apiClient.get('/testimonies');
+    return response.data;
   },
 
   // Get approved testimonies only
   async getApproved() {
-    return await neonTestimoniesService.getApproved();
+    const response = await apiClient.get('/testimonies/approved');
+    return response.data;
   },
 
   // Get active testimonies (alias for getApproved)
   async getActive() {
-    return await neonTestimoniesService.getApproved();
+    const response = await apiClient.get('/testimonies/approved');
+    return response.data;
   },
 
   // Get testimony by ID
   async getById(id) {
-    return await neonTestimoniesService.getById(id);
+    const response = await apiClient.get(`/testimonies/${id}`);
+    return response.data;
   },
 
   // Create testimony
   async create(testimonyData) {
-    return await neonTestimoniesService.create(testimonyData);
+    const response = await apiClient.post('/testimonies', testimonyData);
+    return response.data;
   },
 
   // Update testimony
   async update(id, testimonyData) {
-    return await neonTestimoniesService.update(id, testimonyData);
+    const response = await apiClient.put(`/testimonies/${id}`, testimonyData);
+    return response.data;
   },
 
   // Delete testimony
   async delete(id) {
-    await neonTestimoniesService.delete(id);
-    return { message: 'Testimony deleted successfully' };
+    const response = await apiClient.delete(`/testimonies/${id}`);
+    return response.data;
   },
 
   // Approve testimony
   async approve(id) {
-    return await neonTestimoniesService.approve(id);
+    const response = await apiClient.patch(`/testimonies/${id}/approve`);
+    return response.data;
   },
 
   // Reject testimony
   async reject(id) {
-    return await neonTestimoniesService.reject(id);
+    const response = await apiClient.patch(`/testimonies/${id}/reject`);
+    return response.data;
   },
 };

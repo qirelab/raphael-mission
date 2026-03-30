@@ -1,55 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useProjects } from '../context/ProjectsContext';
 import { useAlert } from '../hooks/useAlert';
-import { projectsService } from '../services/projectsService';
+import FlagUS from './icons/FlagUS';
+import FlagRU from './icons/FlagRU';
+import FlagPL from './icons/FlagPL';
+import Instagram from './icons/Instagram';
+import Telegram from './icons/Telegram';
 
 export default function MobileMenu({ open, onClose }) {
   const { t, language, changeLanguage } = useLanguage();
   const { success } = useAlert();
   const [isVisible, setIsVisible] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [projectLinks, setProjectLinks] = useState([]);
+  const { projects } = useProjects();
 
-  // Load projects from database
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        const projects = await projectsService.getActive();
-        const links = projects.map((project) => ({
-          label: project[`title_${language}`] || project.title_en,
-          to: `/${language}/projects/${project.slug}`,
-        }));
-        setProjectLinks(links);
-      } catch (error) {
-        console.error('Error loading projects:', error);
-        setProjectLinks([]);
-      }
-    };
-
-    loadProjects();
-  }, [language]);
+  // Convert projects to menu links
+  const projectLinks = projects.map((project) => ({
+    label: project[`title_${language}`] || project.title_en,
+    to: `/${language}/projects/${project.slug}`,
+  }));
 
   const links = [
+    { labelKey: 'about', to: `/${language}/about-mission` },
     {
       labelKey: 'projects',
       to: `/${language}/projects`,
       hasDropdown: true,
       dropdownItems: projectLinks,
     },
-    { labelKey: 'about', to: `/${language}/about-mission` },
-    { labelKey: 'training', to: `/${language}/training` },
-    { labelKey: 'shop', to: `/${language}/shop` },
+    // { labelKey: 'training', to: `/${language}/training` }, // Temporarily hidden
     { labelKey: 'testimonies', to: `/${language}/testimonies` },
-    { labelKey: 'story', to: `/${language}/story` },
+    { labelKey: 'shop', to: `/${language}/shop` },
+    // { labelKey: 'story', to: `/${language}/story` }, // Temporarily hidden
     { labelKey: 'contact', to: `/${language}/contact` },
   ];
 
   const languages = [
-    { code: 'en', label: 'English', flag: '🇺🇸' },
-    { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-    { code: 'pl', label: 'Polski', flag: '🇵🇱' },
+    { code: 'en', label: 'English', FlagComponent: FlagUS },
+    { code: 'ru', label: 'Русский', FlagComponent: FlagRU },
+    { code: 'pl', label: 'Polski', FlagComponent: FlagPL },
   ];
 
   useEffect(() => {
@@ -240,43 +232,87 @@ export default function MobileMenu({ open, onClose }) {
               {t('language')}
             </div>
             <div className="space-y-2">
-              {languages.map((lang, index) => (
-                <button
-                  key={lang.code}
-                  onClick={() => handleLanguageChange(lang.code)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-poppins ${
-                    language === lang.code
-                      ? 'bg-[#3c8a7a] text-white shadow-md'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
-                  }`}
+              {languages.map((lang, index) => {
+                const Flag = lang.FlagComponent;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleLanguageChange(lang.code)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-poppins ${
+                      language === lang.code
+                        ? 'bg-[#3c8a7a] text-white shadow-md'
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                    }`}
+                    style={{
+                      animationDelay: `${(links.length + index) * 80}ms`,
+                      animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                    }}
+                  >
+                    {Flag && <Flag className="w-8 h-6" />}
+                    <span className="text-base font-medium flex-1 text-left">{lang.label}</span>
+                    {language === lang.code && (
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        className="text-white"
+                        fill="none"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div className="mb-8">
+            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-4 font-poppins">
+              {t('followUs')}
+            </div>
+            <div className="flex gap-3 px-4">
+              <a
+                href="https://www.instagram.com/i.m.raphael"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#E1306C] hover:text-white transition-all duration-200 font-poppins group"
+                style={{
+                  animationDelay: `${(links.length + languages.length) * 80}ms`,
+                  animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                }}
+              >
+                <Instagram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
+                <span className="text-sm font-medium">Instagram</span>
+              </a>
+              {language === 'ru' && (
+                <a
+                  href="https://t.me/+3S7xzFVZtJ0xNDY0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-700 hover:bg-[#0088cc] hover:text-white transition-all duration-200 font-poppins group"
                   style={{
-                    animationDelay: `${(links.length + index) * 80}ms`,
+                    animationDelay: `${(links.length + languages.length + 1) * 80}ms`,
                     animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
                   }}
                 >
-                  <span className="text-2xl">{lang.flag}</span>
-                  <span className="text-base font-medium flex-1 text-left">{lang.label}</span>
-                  {language === lang.code && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      className="text-white"
-                      fill="none"
-                    >
-                      <path
-                        d="M5 13l4 4L19 7"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </button>
-              ))}
+                  <Telegram className="w-6 h-6 text-gray-700 group-hover:text-white transition-colors" />
+                  <span className="text-sm font-medium">Telegram</span>
+                </a>
+              )}
             </div>
           </div>
 
@@ -286,7 +322,7 @@ export default function MobileMenu({ open, onClose }) {
             onClick={onClose}
             className="block text-center rounded-2xl py-4 shadow-lg bg-gradient-to-r from-[#3c8a7a] to-[#2F7D6D] text-white text-lg font-semibold hover:shadow-xl hover:scale-[1.02] transition-all duration-200 font-poppins"
             style={{
-              animationDelay: `${(links.length + languages.length) * 80}ms`,
+              animationDelay: `${(links.length + languages.length + 2) * 80}ms`,
               animation: isVisible ? 'slideInRight 0.5s ease-out forwards' : 'none',
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
