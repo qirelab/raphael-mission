@@ -15,12 +15,47 @@ body {
 .hero-bg-blur {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background:
-    linear-gradient(90deg, rgba(17, 24, 39, 0.2) 0%, rgba(17, 24, 39, 0.2) 100%),
-    url('/images/image2.png') left center/50% 100% no-repeat,
-    url('/images/image1.png') right center/50% 100% no-repeat;
+  background: linear-gradient(90deg, rgba(17, 24, 39, 0.2) 0%, rgba(17, 24, 39, 0.2) 100%);
   filter: blur(0px);
   z-index: 0;
+}
+
+.hero-bg-blur::before,
+.hero-bg-blur::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
+}
+
+.hero-bg-blur::before {
+  left: 0;
+  background-image: url('/images/image2.png');
+}
+
+.hero-bg-blur::after {
+  right: 0;
+  background-image: url('/images/image1.png');
+}
+
+/* Mobile + tablet: show one image to avoid squeezing */
+@media (max-width: 1023px) {
+  .hero-bg-blur::before {
+    width: 100%;
+  }
+
+  .hero-bg-blur::after {
+    display: none;
+  }
+
+  .hero-bg-blur {
+    background: linear-gradient(90deg, rgba(17, 24, 39, 0.35) 0%, rgba(17, 24, 39, 0.35) 100%);
+  }
 }
 
 .hero-bg-overlay {
