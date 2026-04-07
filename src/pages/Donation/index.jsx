@@ -180,7 +180,7 @@ const DonationPage = () => {
             {/* Правый столбец: картинка */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <img
-                src="/images/money .jpg"
+                src="/images/money.jpg"
                 alt="Mission impact"
                 className="
                   block w-full h-auto

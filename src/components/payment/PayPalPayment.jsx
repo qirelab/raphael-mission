@@ -4,9 +4,10 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
   const { t } = useLanguage();
+  const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
 
   const initialOptions = {
-    'client-id': 'your_paypal_client_id_here', // TODO: замените на реальный ID
+    'client-id': paypalClientId || '',
     currency,
     intent: 'capture',
   };
@@ -35,6 +36,20 @@ const PayPalPayment = ({ amount, currency = 'USD', onSuccess, onError }) => {
       onError?.(e);
     }
   };
+
+  if (!paypalClientId) {
+    return (
+      <div className="bg-white p-6 rounded-lg border">
+        <div className="flex items-center mb-3">
+          <img src="/images/i.svg" alt="PayPal" className="w-8 h-6 mr-2" />
+          <h3 className="text-lg font-semibold text-global-1">{t('paymentPayWithPayPal')}</h3>
+        </div>
+        <p className="text-sm text-red-600">
+          PayPal is temporarily unavailable. Missing VITE_PAYPAL_CLIENT_ID configuration.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <PayPalScriptProvider options={initialOptions}>
