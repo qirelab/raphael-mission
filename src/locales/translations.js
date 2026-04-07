@@ -35,7 +35,7 @@ export const translations = {
       "Your donation helps us spread the Gospel even further and respond to people's needs.",
 
     // ===== Home / Current Projects =====
-    currentProjects: 'Current Projects',
+    currentProjects: 'Our Projects',
     currentProjectsDesc:
       "We share the Gospel by responding to people's needs through various outreach initiatives and events.",
 
@@ -221,7 +221,7 @@ export const translations = {
     noProducts: 'No products available at the moment. Check back soon!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Current Projects',
+    projectsPageTitle: 'Our Projects',
     projectsPageDescription: 'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
     projectsBibleQuote: '"I have come that you may have life, and have it to the full."',
     projectsBibleSource: 'Jesus (John 10:10)',
@@ -667,7 +667,7 @@ export const translations = {
       'Ваше пожертвование помогает нам распространять Евангелие ещё больше и отвечать на нужды людей.',
 
     // ===== Home / Current Projects =====
-    currentProjects: 'Текущие проекты',
+    currentProjects: 'Наши проекты',
     currentProjectsDesc:
       'Мы распространяем Евангелие, реагируя на нужды людей через различные инициативы и мероприятия.',
 
@@ -853,7 +853,7 @@ export const translations = {
     noProducts: 'Товары пока недоступны. Загляните позже!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Текущие проекты',
+    projectsPageTitle: 'Наши проекты',
     projectsPageDescription:
       'Через каждый проект мы видим плоды Евангелия: открытые сердца для Иисуса, покаяние и изменённые жизни, где люди получают свободу, исцеление и надежду, возвращаясь к смыслу жизни.',
     projectsBibleQuote: '«Я пришёл, чтобы вы имели жизнь и имели жизнь с избытком».',
@@ -1304,7 +1304,7 @@ export const translations = {
       'Twoje wsparcie finansowe pomaga nam szerzej głosić Ewangelię i odpowiadać na potrzeby ludzi.',
 
     // ===== Home / Current Projects =====
-    currentProjects: 'Aktualne projekty',
+    currentProjects: 'Nasze projekty',
     currentProjectsDesc:
       'Rozpowszechniamy Ewangelię, reagując na potrzeby ludzi poprzez różne inicjatywy i wydarzenia.',
 
@@ -1492,7 +1492,7 @@ export const translations = {
     noProducts: 'Produkty są obecnie niedostępne. Wróć wkrótce!',
 
     // ===== Projects Page =====
-    projectsPageTitle: 'Aktualne projekty',
+    projectsPageTitle: 'Nasze projekty',
     projectsPageDescription:
       'Przez każdy projekt widzimy owoce Ewangelii: otwarte serca dla Jezusa, nawrócenie i odmienione życie, w którym ludzie otrzymują wolność, uzdrowienie i nadzieję, wracając do sensu życia.',
     projectsBibleQuote: '„Przyszedłem po to, abyście mieli życie i mieli je w obfitości".',
