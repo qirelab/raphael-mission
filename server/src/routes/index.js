@@ -4,6 +4,7 @@ import projectsRoutes from './projects.routes.js';
 import projectsHeroRoutes from './projectsHero.routes.js';
 import shopRoutes from './shop.routes.js';
 import testimoniesRoutes from './testimonies.routes.js';
+import testimoniesHeroRoutes from './testimoniesHero.routes.js';
 import trainingRoutes from './training.routes.js';
 import contactRoutes from './contact.routes.js';
 import aboutRoutes from './about.routes.js';
@@ -16,6 +17,7 @@ router.use('/projects', projectsRoutes);
 router.use('/projects-hero', projectsHeroRoutes);
 router.use('/shop', shopRoutes);
 router.use('/testimonies', testimoniesRoutes);
+router.use('/testimonies-hero', testimoniesHeroRoutes);
 router.use('/training', trainingRoutes);
 router.use('/contact', contactRoutes);
 router.use('/about', aboutRoutes);
@@ -32,6 +34,7 @@ router.get('/', (req, res) => {
       projectsHero: '/api/projects-hero',
       shop: '/api/shop',
       testimonies: '/api/testimonies',
+      testimoniesHero: '/api/testimonies-hero',
       training: '/api/training',
       contact: '/api/contact',
       about: '/api/about',

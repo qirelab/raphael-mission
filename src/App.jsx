@@ -9,6 +9,7 @@ import { ContactProvider } from './context/ContactContext';
 import { ProjectsProvider } from './context/ProjectsContext';
 import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
+import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
 import { AboutProvider } from './context/AboutContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
@@ -40,15 +41,17 @@ export default function App() {
       <ProjectsProvider>
         <ProjectsHeroProvider>
           <TestimoniesProvider>
-            <ContactProvider>
-              <AboutProvider>
-                <AlertProvider>
-                  <ChatProvider>
-                    <AppContent />
-                  </ChatProvider>
-                </AlertProvider>
-              </AboutProvider>
-            </ContactProvider>
+            <TestimoniesHeroProvider>
+              <ContactProvider>
+                <AboutProvider>
+                  <AlertProvider>
+                    <ChatProvider>
+                      <AppContent />
+                    </ChatProvider>
+                  </AlertProvider>
+                </AboutProvider>
+              </ContactProvider>
+            </TestimoniesHeroProvider>
           </TestimoniesProvider>
         </ProjectsHeroProvider>
       </ProjectsProvider>

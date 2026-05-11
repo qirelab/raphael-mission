@@ -3,14 +3,35 @@ import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTestimoniesContext } from '../../context/TestimoniesContext';
+import { useTestimoniesHero } from '../../context/TestimoniesHeroContext';
 import Footer from '../../components/common/Footer';
 import { TestimonialsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
+
+const DEFAULT_HERO_BACKGROUND = '/images/transformation.png';
 
 const TestimoniesPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { testimonies: testimoniesRaw, loading } = useTestimoniesContext();
+  const { heroData } = useTestimoniesHero();
+
+  // Resolve a localized hero field from the DB row with graceful fallbacks:
+  //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
+  const heroPick = (base, translationKey) => {
+    if (heroData) {
+      const localized = heroData[`${base}_${language}`];
+      if (localized && localized.trim() !== '') return localized;
+      const englishFallback = heroData[`${base}_en`];
+      if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    }
+    return t(translationKey);
+  };
+
+  const heroBackground =
+    heroData?.background_image_url && heroData.background_image_url.trim() !== ''
+      ? heroData.background_image_url
+      : DEFAULT_HERO_BACKGROUND;
 
   const handleShareStoryClick = () => {
     navigate(`/${language}`);
@@ -55,7 +76,7 @@ const TestimoniesPage = () => {
       {/* ===== HERO ===== */}
       <section className="relative isolate w-full overflow-hidden">
         <img
-          src="/images/transformation.png"
+          src={heroBackground}
           alt=""
           className="
             absolute inset-0 h-full w-full object-cover
@@ -70,11 +91,11 @@ const TestimoniesPage = () => {
         <div className="relative z-[4] w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-[96px] sm:py-[136px] md:py-[170px] text-left">
             <h1 className="text-[32px] sm:text-[48px] md:text-[64px] font-extrabold leading-[1.08] tracking-tight mb-4 lg:whitespace-nowrap">
-              <span className="text-neutral-900">{t('testimoniesPageTitle')}</span>
-              <span className="text-[#1F7A5B]"> {t('testimoniesPageTitleHighlight')}</span>
+              <span className="text-neutral-900">{heroPick('title', 'testimoniesPageTitle')}</span>
+              <span className="text-[#1F7A5B]"> {heroPick('title_highlight', 'testimoniesPageTitleHighlight')}</span>
             </h1>
             <p className="text-[16px] sm:text-[18px] md:text-[20px] leading-[26px] sm:leading-[28px] md:leading-[30px] text-[#111827]/80 max-w-[740px]">
-              {t('testimoniesPageDescription')}
+              {heroPick('description', 'testimoniesPageDescription')}
             </p>
           </div>
         </div>
