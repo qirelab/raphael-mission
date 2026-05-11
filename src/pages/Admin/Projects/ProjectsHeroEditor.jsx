@@ -5,6 +5,15 @@ import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import ImageUpload from '../../../components/ImageUpload';
 import MultilingualInput from '../../../components/MultilingualInput';
+import FlagUS from '../../../components/icons/FlagUS';
+import FlagRU from '../../../components/icons/FlagRU';
+import FlagPL from '../../../components/icons/FlagPL';
+
+const PREVIEW_LANGUAGES = [
+  { code: 'en', label: 'EN', name: 'English', FlagComponent: FlagUS },
+  { code: 'ru', label: 'RU', name: 'Русский', FlagComponent: FlagRU },
+  { code: 'pl', label: 'PL', name: 'Polski', FlagComponent: FlagPL },
+];
 
 const EMPTY_FORM = {
   title_en: '', title_ru: '', title_pl: '',
@@ -22,6 +31,20 @@ const ProjectsHeroEditor = () => {
 
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewLang, setPreviewLang] = useState('en');
+
+  // Resolve a localized preview value with English fallback so the preview is
+  // never blank just because one language was left empty.
+  const previewValue = (base) => {
+    const localized = formData[`${base}_${previewLang}`];
+    if (localized && localized.trim() !== '') return localized;
+    return formData[`${base}_en`] || '';
+  };
+  const previewTitleFallback = {
+    en: 'Our Projects',
+    ru: 'Наши проекты',
+    pl: 'Nasze projekty',
+  };
 
   useEffect(() => {
     if (!heroData) return;
@@ -94,7 +117,42 @@ const ProjectsHeroEditor = () => {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* ====================== LIVE PREVIEW ====================== */}
-        <section className="rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <section className="rounded-xl shadow-sm overflow-hidden border border-gray-100 bg-white">
+          {/* Language switcher */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50">
+            <p className="text-sm font-semibold text-gray-700 font-poppins">
+              Предпросмотр Hero-блока
+            </p>
+            <div className="flex gap-2">
+              {PREVIEW_LANGUAGES.map((lang) => {
+                const Flag = lang.FlagComponent;
+                const active = previewLang === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => setPreviewLang(lang.code)}
+                    aria-label={`Предпросмотр на ${lang.name}`}
+                    className={`
+                      flex items-center gap-2 px-3 py-1.5 rounded-lg font-poppins text-sm font-medium
+                      transition-all duration-200 ease-in-out
+                      focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:ring-offset-1
+                      ${
+                        active
+                          ? 'bg-[#2F7D6D] text-white shadow-md ring-2 ring-[#2F7D6D] ring-offset-1'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:border-[#2F7D6D]'
+                      }
+                    `}
+                  >
+                    {Flag && <Flag className="w-5 h-3.5" />}
+                    {lang.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Preview canvas */}
           <div className="relative min-h-[280px] flex items-center justify-center">
             <div
               className="absolute inset-0 bg-cover bg-center z-0"
@@ -106,25 +164,22 @@ const ProjectsHeroEditor = () => {
             />
             <div className="absolute inset-0 bg-[rgba(18,60,52,0.6)] z-10" />
             <div className="relative z-20 w-full px-6 py-10 text-center text-white">
-              <p className="text-xs uppercase tracking-wider opacity-80 font-poppins mb-2">
-                Предпросмотр (EN)
-              </p>
               <h2 className="text-2xl sm:text-3xl font-bold font-poppins">
-                {formData.title_en || 'Our Projects'}
+                {previewValue('title') || previewTitleFallback[previewLang]}
               </h2>
-              {(formData.bible_quote_en || formData.bible_source_en) && (
+              {(previewValue('bible_quote') || previewValue('bible_source')) && (
                 <div className="mt-3">
                   <blockquote className="italic text-base sm:text-lg font-poppins">
-                    {formData.bible_quote_en}
+                    {previewValue('bible_quote')}
                   </blockquote>
                   <cite className="block text-xs sm:text-sm opacity-90 mt-1 not-italic font-poppins">
-                    {formData.bible_source_en}
+                    {previewValue('bible_source')}
                   </cite>
                 </div>
               )}
-              {formData.description_en && (
+              {previewValue('description') && (
                 <p className="mt-4 text-sm sm:text-base max-w-2xl mx-auto opacity-95 font-poppins">
-                  {formData.description_en}
+                  {previewValue('description')}
                 </p>
               )}
             </div>

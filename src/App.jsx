@@ -38,17 +38,19 @@ export default function App() {
   return (
     <LoadingProvider>
       <ProjectsProvider>
-        <TestimoniesProvider>
-          <ContactProvider>
-            <AboutProvider>
-              <AlertProvider>
-                <ChatProvider>
-                  <AppContent />
-                </ChatProvider>
-              </AlertProvider>
-            </AboutProvider>
-          </ContactProvider>
-        </TestimoniesProvider>
+        <ProjectsHeroProvider>
+          <TestimoniesProvider>
+            <ContactProvider>
+              <AboutProvider>
+                <AlertProvider>
+                  <ChatProvider>
+                    <AppContent />
+                  </ChatProvider>
+                </AlertProvider>
+              </AboutProvider>
+            </ContactProvider>
+          </TestimoniesProvider>
+        </ProjectsHeroProvider>
       </ProjectsProvider>
     </LoadingProvider>
   );

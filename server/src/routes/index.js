@@ -1,6 +1,7 @@
 import express from 'express';
 import authRoutes from './auth.routes.js';
 import projectsRoutes from './projects.routes.js';
+import projectsHeroRoutes from './projectsHero.routes.js';
 import shopRoutes from './shop.routes.js';
 import testimoniesRoutes from './testimonies.routes.js';
 import trainingRoutes from './training.routes.js';

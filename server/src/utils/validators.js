@@ -267,6 +267,28 @@ export const schemas = {
     value3_desc_pl:  Joi.string().allow('', null),
   }).unknown(true),
 
+  // Projects Hero — editable hero block of the public "Проекты" page.
+  // All fields optional so the admin can save partial updates.
+  updateProjectsHero: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    bible_quote_en: Joi.string().allow('', null),
+    bible_quote_ru: Joi.string().allow('', null),
+    bible_quote_pl: Joi.string().allow('', null),
+
+    bible_source_en: Joi.string().allow('', null),
+    bible_source_ru: Joi.string().allow('', null),
+    bible_source_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+
+    background_image_url: Joi.string().allow('', null),
+  }).unknown(true),
+
   // Contact schemas
   updateContact: Joi.object({
     phone_number: Joi.string().allow('', null),
