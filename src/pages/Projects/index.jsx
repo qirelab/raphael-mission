@@ -253,10 +253,10 @@ const Projects = () => {
               <div className="flex justify-center items-center w-full">
                 <div className="flex flex-col gap-[24px] sm:gap-[28px] md:gap-[32px] lg:gap-[36px] justify-start items-center w-full max-w-[1000px]">
                   <h2 className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-poppins font-bold text-center text-white w-full max-w-[800px]">
-                    {t('joinUsTitle')}
+                    {heroPick('cta_title', 'joinUsTitle')}
                   </h2>
                   <p className="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-poppins font-normal text-center text-white w-full max-w-[700px]">
-                    {t('joinUsDesc')}
+                    {heroPick('cta_description', 'joinUsDesc')}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-[16px] justify-center items-center w-full mt-[16px] sm:mt-[20px] md:mt-[24px]">
@@ -265,14 +265,14 @@ const Projects = () => {
                       onClick={() => navigate(`/${language}/contact`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-white border border-[#D1D5DB] text-gray-700 text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
-                      {t('getInvolved')}
+                      {heroPick('cta_get_involved', 'getInvolved')}
                     </Button>
                     <Button
                       variant="primary"
                       onClick={() => navigate(`/${language}/donation`)}
                       className="px-[24px] sm:px-[28px] py-[12px] sm:py-[14px] rounded-[8px] bg-[#2F7D6D] border border-white text-white text-[16px] sm:text-[17px] md:text-[18px] font-semibold w-full sm:w-auto hover:bg-[#266b5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
-                      {t('donateNow')}
+                      {heroPick('cta_donate_now', 'donateNow')}
                     </Button>
                   </div>
                 </div>

@@ -287,6 +287,23 @@ export const schemas = {
     description_pl: Joi.string().allow('', null),
 
     background_image_url: Joi.string().allow('', null),
+
+    // CTA block
+    cta_title_en: Joi.string().allow('', null),
+    cta_title_ru: Joi.string().allow('', null),
+    cta_title_pl: Joi.string().allow('', null),
+
+    cta_description_en: Joi.string().allow('', null),
+    cta_description_ru: Joi.string().allow('', null),
+    cta_description_pl: Joi.string().allow('', null),
+
+    cta_get_involved_en: Joi.string().allow('', null),
+    cta_get_involved_ru: Joi.string().allow('', null),
+    cta_get_involved_pl: Joi.string().allow('', null),
+
+    cta_donate_now_en: Joi.string().allow('', null),
+    cta_donate_now_ru: Joi.string().allow('', null),
+    cta_donate_now_pl: Joi.string().allow('', null),
   }).unknown(true),
 
   // Contact schemas
