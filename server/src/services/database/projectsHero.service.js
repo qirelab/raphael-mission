@@ -7,11 +7,18 @@ const CACHE_KEY = 'projects:hero';
 // Whitelist of writable columns — used both for filtering the request body and
 // for building the UPDATE/INSERT statements safely.
 const TEXT_COLUMNS = [
+  // Hero block
   'title_en', 'title_ru', 'title_pl',
   'bible_quote_en', 'bible_quote_ru', 'bible_quote_pl',
   'bible_source_en', 'bible_source_ru', 'bible_source_pl',
   'description_en', 'description_ru', 'description_pl',
   'background_image_url',
+
+  // CTA block (bottom green section)
+  'cta_title_en', 'cta_title_ru', 'cta_title_pl',
+  'cta_description_en', 'cta_description_ru', 'cta_description_pl',
+  'cta_get_involved_en', 'cta_get_involved_ru', 'cta_get_involved_pl',
+  'cta_donate_now_en', 'cta_donate_now_ru', 'cta_donate_now_pl',
 ];
 
 export const projectsHeroDbService = {
