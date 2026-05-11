@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAbout } from '../../../context/AboutContext';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
@@ -30,6 +31,7 @@ const EMPTY_FORM = {
 };
 
 const AboutEditor = () => {
+  const navigate = useNavigate();
   const { aboutData, loading, error: ctxError, updateAbout } = useAbout();
   const { success, error: showError } = useAlert();
   const { t } = useLanguage();
@@ -281,6 +283,13 @@ const AboutEditor = () => {
             <p className="flex-1 text-sm text-gray-600 font-poppins">
               Изменения сразу появятся на публичной странице после сохранения.
             </p>
+            <button
+              type="button"
+              onClick={() => navigate('/admin')}
+              className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 font-poppins"
+            >
+              Отмена
+            </button>
             <button
               type="submit"
               disabled={isSubmitting}

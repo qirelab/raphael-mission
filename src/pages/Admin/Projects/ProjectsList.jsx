@@ -110,7 +110,7 @@ const ProjectsList = () => {
                   d="M4 5a1 1 0 011-1h14a1 1 0 011 1v5H4V5zm0 9h16v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5z"
                 />
               </svg>
-              Редактировать Hero
+              Редактировать страницу
             </Link>
             <Link
               to="/admin/projects/new"
@@ -164,7 +164,7 @@ const ProjectsList = () => {
                 d="M4 5a1 1 0 011-1h14a1 1 0 011 1v5H4V5zm0 9h16v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5z"
               />
             </svg>
-            Редактировать Hero
+            Редактировать страницу
           </Link>
           <Link
             to="/admin/projects/new"
