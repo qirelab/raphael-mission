@@ -150,11 +150,10 @@ VALUES (
 ON CONFLICT DO NOTHING;
 
 -- Default admin user (password: Raphael$2026!Secure#Admin*Pass)
--- Password hash for: Raphael$2026!Secure#Admin*Pass
 INSERT INTO users (email, password_hash, name, role, is_active)
 VALUES (
     'admin@raphael.com',
-    '$2a$12$K9p7Xz8qN2YvLmW5fJ3.HuEr4Gx6Tp9Rq8Sv3Nx7Kw2Mp1Lv4Qz8a',
+    '$2a$12$72QBkIxacLfaKtz9uS673.No8MNv6uB1reuiMizf8.77V/N3UMZtm',
     'Admin User',
     'admin',
     true
