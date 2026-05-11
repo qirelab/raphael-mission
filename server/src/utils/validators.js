@@ -338,6 +338,24 @@ export const schemas = {
     country: Joi.string().allow('', null),
   }).unknown(true),
 
+  // Donation page — editable content of the public "Пожертвование" page.
+  // All fields optional so the admin can save partial updates.
+  updateDonationPage: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+
+    image_url: Joi.string().allow('', null),
+
+    back_button_en: Joi.string().allow('', null),
+    back_button_ru: Joi.string().allow('', null),
+    back_button_pl: Joi.string().allow('', null),
+  }).unknown(true),
+
   // Common schemas
   id: Joi.object({
     id: Joi.number().integer().positive().required(),

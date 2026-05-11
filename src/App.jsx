@@ -11,6 +11,7 @@ import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
 import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
 import { AboutProvider } from './context/AboutContext';
+import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
 import { ChatProvider } from './context/ChatContext';
@@ -44,11 +45,13 @@ export default function App() {
             <TestimoniesHeroProvider>
               <ContactProvider>
                 <AboutProvider>
-                  <AlertProvider>
-                    <ChatProvider>
-                      <AppContent />
-                    </ChatProvider>
-                  </AlertProvider>
+                  <DonationPageProvider>
+                    <AlertProvider>
+                      <ChatProvider>
+                        <AppContent />
+                      </ChatProvider>
+                    </AlertProvider>
+                  </DonationPageProvider>
                 </AboutProvider>
               </ContactProvider>
             </TestimoniesHeroProvider>
