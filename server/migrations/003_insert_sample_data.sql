@@ -26,7 +26,7 @@ TRUNCATE TABLE contact CASCADE;
 INSERT INTO users (email, password_hash, name, role, is_active)
 VALUES (
     'admin@raphael.com',
-    '$2a$12$K9p7Xz8qN2YvLmW5fJ3.HuEr4Gx6Tp9Rq8Sv3Nx7Kw2Mp1Lv4Qz8a',
+    '$2a$12$72QBkIxacLfaKtz9uS673.No8MNv6uB1reuiMizf8.77V/N3UMZtm',
     'Администратор',
     'admin',
     true
@@ -36,7 +36,7 @@ VALUES (
 INSERT INTO users (email, password_hash, name, role, is_active)
 VALUES (
     'user@raphael.com',
-    '$2a$12$X5Yp2Wz7Nv6Tm4Kf9Lj2.GuDr3Hx5Uq7Rw8Ox6Mx9Np0Kw3Rv1Za',
+    '$2a$12$s4VCpreQt/4GbeD9n7CWaeuNsBdOqJCbovTPNi5f5l.67E1OIKOme',
     'Обычный пользователь',
     'user',
     true

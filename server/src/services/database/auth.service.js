@@ -84,16 +84,17 @@ export const authDbService = {
       // Generate session token
       const sessionToken = generateSessionToken();
       const expiresAt = new Date(Date.now() + SESSION_DURATION);
+      const sessionId = crypto.randomUUID();
 
-      // Store session in database
+      // Store session in database (id is required — VARCHAR PK)
       const sessionResult = await pool.query(
-        `INSERT INTO user_sessions (user_id, session_token, expires_at)
-        VALUES ($1, $2, $3)
+        `INSERT INTO user_sessions (id, user_id, session_token, expires_at)
+        VALUES ($1, $2, $3, $4)
         RETURNING id`,
-        [user.id, sessionToken, expiresAt.toISOString()]
+        [sessionId, user.id, sessionToken, expiresAt.toISOString()]
       );
 
-      const sessionId = sessionResult.rows[0].id;
+      const persistedSessionId = sessionResult.rows[0].id;
 
       // Clean up expired sessions
       await pool.query('DELETE FROM user_sessions WHERE expires_at < NOW()');
@@ -103,7 +104,7 @@ export const authDbService = {
         userId: user.id,
         email: user.email,
         role: user.role,
-        sessionId: sessionId,
+        sessionId: persistedSessionId,
       });
 
       return {
@@ -114,7 +115,7 @@ export const authDbService = {
           role: user.role,
         },
         token: jwtToken,
-        sessionId: sessionId,
+        sessionId: persistedSessionId,
       };
     } catch (error) {
       logger.error('Sign in error:', error);

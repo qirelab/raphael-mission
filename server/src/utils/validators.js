@@ -213,6 +213,60 @@ export const schemas = {
     is_active: Joi.boolean().allow(null),
   }).unknown(true),
 
+  // About page schema — every text field is optional so the admin can save
+  // partial updates (e.g. tweak a single paragraph without resending the rest).
+  updateAbout: Joi.object({
+    hero_title_en: Joi.string().allow('', null),
+    hero_title_ru: Joi.string().allow('', null),
+    hero_title_pl: Joi.string().allow('', null),
+
+    hero_paragraph1_en: Joi.string().allow('', null),
+    hero_paragraph1_ru: Joi.string().allow('', null),
+    hero_paragraph1_pl: Joi.string().allow('', null),
+    hero_paragraph2_en: Joi.string().allow('', null),
+    hero_paragraph2_ru: Joi.string().allow('', null),
+    hero_paragraph2_pl: Joi.string().allow('', null),
+    hero_paragraph3_en: Joi.string().allow('', null),
+    hero_paragraph3_ru: Joi.string().allow('', null),
+    hero_paragraph3_pl: Joi.string().allow('', null),
+    hero_paragraph4_en: Joi.string().allow('', null),
+    hero_paragraph4_ru: Joi.string().allow('', null),
+    hero_paragraph4_pl: Joi.string().allow('', null),
+    hero_paragraph5_en: Joi.string().allow('', null),
+    hero_paragraph5_ru: Joi.string().allow('', null),
+    hero_paragraph5_pl: Joi.string().allow('', null),
+
+    hero_image_url: Joi.string().allow('', null),
+
+    values_title_en: Joi.string().allow('', null),
+    values_title_ru: Joi.string().allow('', null),
+    values_title_pl: Joi.string().allow('', null),
+    values_desc_en:  Joi.string().allow('', null),
+    values_desc_ru:  Joi.string().allow('', null),
+    values_desc_pl:  Joi.string().allow('', null),
+
+    value1_title_en: Joi.string().allow('', null),
+    value1_title_ru: Joi.string().allow('', null),
+    value1_title_pl: Joi.string().allow('', null),
+    value1_desc_en:  Joi.string().allow('', null),
+    value1_desc_ru:  Joi.string().allow('', null),
+    value1_desc_pl:  Joi.string().allow('', null),
+
+    value2_title_en: Joi.string().allow('', null),
+    value2_title_ru: Joi.string().allow('', null),
+    value2_title_pl: Joi.string().allow('', null),
+    value2_desc_en:  Joi.string().allow('', null),
+    value2_desc_ru:  Joi.string().allow('', null),
+    value2_desc_pl:  Joi.string().allow('', null),
+
+    value3_title_en: Joi.string().allow('', null),
+    value3_title_ru: Joi.string().allow('', null),
+    value3_title_pl: Joi.string().allow('', null),
+    value3_desc_en:  Joi.string().allow('', null),
+    value3_desc_ru:  Joi.string().allow('', null),
+    value3_desc_pl:  Joi.string().allow('', null),
+  }).unknown(true),
+
   // Contact schemas
   updateContact: Joi.object({
     phone_number: Joi.string().allow('', null),

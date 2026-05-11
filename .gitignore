@@ -3,6 +3,7 @@ node_modules/
 
 # Production build
 build
+dist/
 
 # Logs
 npm-debug.log*
@@ -24,6 +25,37 @@ jest-test-results.json
 .vscode/
 .idea/
 
+# Claude Code / Cursor local config
+.claude/
+.cursor/
+
+# Vite / ESLint caches (local only)
+.vite/
+.eslintcache
+
+# Local logs (Winston / ad-hoc)
+logs/
+server/logs/
+*.log
+
+# Merge / editor temp
+*.swp
+*.swo
+*~
+*.orig
+
+# Local TLS / secrets (never commit)
+*.pem
+*.p12
+*.pfx
+
+# Env backups people sometimes create by hand
+.env.backup
+.env.bak
+.env.*.bak
+server/.env.backup
+server/.env.bak
+
 # Environment files (contain secrets!)
 .env
 .env.local
@@ -34,3 +66,6 @@ jest-test-results.json
 server/.env
 server/.env.local
 server/.env.prod
+
+# Personal task notes (do not commit)
+TUSK.md

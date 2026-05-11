@@ -31,6 +31,7 @@ import ProjectForm from './pages/Admin/Projects/ProjectForm';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
 import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
+import AboutEditor from './pages/Admin/About/AboutEditor';
 // import TrainingList from './pages/Admin/Training/TrainingList'; // Temporarily hidden
 // import TrainingForm from './pages/Admin/Training/TrainingForm'; // Temporarily hidden
 import ProductsList from './pages/Admin/Shop/ProductsList';
@@ -80,6 +81,7 @@ const AppRoutes = () => {
         <Route path="shop/new" element={<ProductForm />} />
         <Route path="shop/edit/:id" element={<ProductForm />} />
         <Route path="contact" element={<ContactInfo />} />
+        <Route path="about" element={<AboutEditor />} />
       </Route>
 
       {/* 404 Route */}
