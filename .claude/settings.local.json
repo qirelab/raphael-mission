@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir C:StudyGitHubraphael-mission *)",
+      "PowerShell(Get-ChildItem -Path src\\\\pages\\\\Admin -Recurse | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\\(Get-Location\\).Path + '\\\\', ''\\) })",
+      "PowerShell(Get-ChildItem -Path src\\\\pages\\\\AboutMission -Recurse | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\\(Get-Location\\).Path + '\\\\', ''\\) })",
+      "PowerShell(Get-ChildItem -Path src\\\\services -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\\(Get-Location\\).Path + '\\\\', ''\\) })",
+      "PowerShell(npm run *)",
+      "PowerShell(docker exec *)",
+      "Bash(git status *)"
+    ]
+  }
+}

@@ -28,6 +28,7 @@ import AdminLayout from './pages/Admin/Layout';
 import Dashboard from './pages/Admin/Dashboard';
 import ProjectsList from './pages/Admin/Projects/ProjectsList';
 import ProjectForm from './pages/Admin/Projects/ProjectForm';
+import ProjectsHeroEditor from './pages/Admin/Projects/ProjectsHeroEditor';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
 import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
@@ -69,6 +70,7 @@ const AppRoutes = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="projects" element={<ProjectsList />} />
+        <Route path="projects/hero" element={<ProjectsHeroEditor />} />
         <Route path="projects/new" element={<ProjectForm />} />
         <Route path="projects/edit/:id" element={<ProjectForm />} />
         <Route path="testimonies" element={<TestimoniesList />} />

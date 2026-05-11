@@ -97,20 +97,36 @@ const ProjectsList = () => {
               Управление всеми проектами миссии
             </p>
           </div>
-          <Link
-            to="/admin/projects/new"
-            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            Добавить новый проект
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <Link
+              to="/admin/projects/hero"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-white border border-[#2F7D6D] text-[#2F7D6D] text-sm sm:text-base font-semibold rounded-lg hover:bg-[#2F7D6D]/5 transition-colors duration-200 font-poppins shadow-sm"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v5H4V5zm0 9h16v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5z"
+                />
+              </svg>
+              Редактировать Hero
+            </Link>
+            <Link
+              to="/admin/projects/new"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+              Добавить новый проект
+            </Link>
+          </div>
         </div>
         <div className="relative">
           <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex items-center justify-center">
@@ -135,20 +151,36 @@ const ProjectsList = () => {
             Управление всеми проектами миссии
           </p>
         </div>
-        <Link
-          to="/admin/projects/new"
-          className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-          Добавить новый проект
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Link
+            to="/admin/projects/hero"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-white border border-[#2F7D6D] text-[#2F7D6D] text-sm sm:text-base font-semibold rounded-lg hover:bg-[#2F7D6D]/5 transition-colors duration-200 font-poppins shadow-sm"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v5H4V5zm0 9h16v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5z"
+              />
+            </svg>
+            Редактировать Hero
+          </Link>
+          <Link
+            to="/admin/projects/new"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-[#2F7D6D] text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-[#266b5a] transition-colors duration-200 font-poppins shadow-sm"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            Добавить новый проект
+          </Link>
+        </div>
       </div>
 
       {error && (

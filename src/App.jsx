@@ -7,6 +7,7 @@ import PageLoader from './components/common/PageLoader';
 import ChatBot from './components/ChatBot';
 import { ContactProvider } from './context/ContactContext';
 import { ProjectsProvider } from './context/ProjectsContext';
+import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
 import { AboutProvider } from './context/AboutContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
@@ -37,17 +38,19 @@ export default function App() {
   return (
     <LoadingProvider>
       <ProjectsProvider>
-        <TestimoniesProvider>
-          <ContactProvider>
-            <AboutProvider>
-              <AlertProvider>
-                <ChatProvider>
-                  <AppContent />
-                </ChatProvider>
-              </AlertProvider>
-            </AboutProvider>
-          </ContactProvider>
-        </TestimoniesProvider>
+        <ProjectsHeroProvider>
+          <TestimoniesProvider>
+            <ContactProvider>
+              <AboutProvider>
+                <AlertProvider>
+                  <ChatProvider>
+                    <AppContent />
+                  </ChatProvider>
+                </AlertProvider>
+              </AboutProvider>
+            </ContactProvider>
+          </TestimoniesProvider>
+        </ProjectsHeroProvider>
       </ProjectsProvider>
     </LoadingProvider>
   );
