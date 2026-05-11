@@ -31,6 +31,7 @@ import ProjectForm from './pages/Admin/Projects/ProjectForm';
 import ProjectsHeroEditor from './pages/Admin/Projects/ProjectsHeroEditor';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
 import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
+import TestimoniesHeroEditor from './pages/Admin/Testimonies/TestimoniesHeroEditor';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
 import AboutEditor from './pages/Admin/About/AboutEditor';
 // import TrainingList from './pages/Admin/Training/TrainingList'; // Temporarily hidden
@@ -74,6 +75,7 @@ const AppRoutes = () => {
         <Route path="projects/new" element={<ProjectForm />} />
         <Route path="projects/edit/:id" element={<ProjectForm />} />
         <Route path="testimonies" element={<TestimoniesList />} />
+        <Route path="testimonies/hero" element={<TestimoniesHeroEditor />} />
         <Route path="testimonies/new" element={<TestimonyForm />} />
         <Route path="testimonies/edit/:id" element={<TestimonyForm />} />
         {/* <Route path="training" element={<TrainingList />} /> */}{/* Temporarily hidden */}

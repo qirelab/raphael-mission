@@ -306,6 +306,24 @@ export const schemas = {
     cta_donate_now_pl: Joi.string().allow('', null),
   }).unknown(true),
 
+  // Testimonies Hero — editable hero block of the public "Свидетельства" page.
+  // All fields optional so the admin can save partial updates.
+  updateTestimoniesHero: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    title_highlight_en: Joi.string().allow('', null),
+    title_highlight_ru: Joi.string().allow('', null),
+    title_highlight_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+
+    background_image_url: Joi.string().allow('', null),
+  }).unknown(true),
+
   // Contact schemas
   updateContact: Joi.object({
     phone_number: Joi.string().allow('', null),
