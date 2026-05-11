@@ -338,6 +338,30 @@ export const schemas = {
     country: Joi.string().allow('', null),
   }).unknown(true),
 
+  // Privacy Policy — editable content of the public "/privacy-policy" page.
+  // All fields are simple optional strings; built programmatically so the
+  // schema stays in sync with the DB columns.
+  updatePrivacyPolicy: (() => {
+    const bases = [
+      'hero_title', 'hero_subtitle',
+      'section1_title', 'section1_content',
+      'section2_title', 'section2_content',
+      'section2_item1', 'section2_item2', 'section2_item3', 'section2_item4',
+      'section3_title', 'section3_content',
+      'section4_title', 'section4_content',
+      'section5_title', 'section5_content',
+      'section6_title', 'section6_content',
+      'contact_title', 'contact_content',
+    ];
+    const shape = {};
+    for (const base of bases) {
+      for (const lang of ['en', 'ru', 'pl']) {
+        shape[`${base}_${lang}`] = Joi.string().allow('', null);
+      }
+    }
+    return Joi.object(shape).unknown(true);
+  })(),
+
   // Common schemas
   id: Joi.object({
     id: Joi.number().integer().positive().required(),
