@@ -16,10 +16,16 @@ const PREVIEW_LANGUAGES = [
 ];
 
 const EMPTY_FORM = {
+  // Hero block
   title_en: '', title_ru: '', title_pl: '',
   title_highlight_en: '', title_highlight_ru: '', title_highlight_pl: '',
   description_en: '', description_ru: '', description_pl: '',
   background_image_url: '',
+
+  // Share Your Story block (bottom green section)
+  share_title_en: '', share_title_ru: '', share_title_pl: '',
+  share_description_en: '', share_description_ru: '', share_description_pl: '',
+  share_button_en: '', share_button_ru: '', share_button_pl: '',
 };
 
 const TestimoniesHeroEditor = () => {
@@ -31,6 +37,7 @@ const TestimoniesHeroEditor = () => {
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewLang, setPreviewLang] = useState('en');
+  const [sharePreviewLang, setSharePreviewLang] = useState('en');
 
   useEffect(() => {
     if (!heroData) return;
@@ -44,6 +51,12 @@ const TestimoniesHeroEditor = () => {
   // never blank just because one language was left empty.
   const previewValue = (base) => {
     const localized = formData[`${base}_${previewLang}`];
+    if (localized && localized.trim() !== '') return localized;
+    return formData[`${base}_en`] || '';
+  };
+  // Independent picker for the Share Your Story preview.
+  const sharePreviewValue = (base) => {
+    const localized = formData[`${base}_${sharePreviewLang}`];
     if (localized && localized.trim() !== '') return localized;
     return formData[`${base}_en`] || '';
   };
@@ -99,7 +112,7 @@ const TestimoniesHeroEditor = () => {
           Страница «Свидетельства»
         </h1>
         <p className="mt-2 text-base text-gray-600 font-poppins">
-          Редактируйте верхний (Hero) блок публичной страницы «Свидетельства».
+          Редактируйте верхний (Hero) и нижний (Поделиться историей) блоки публичной страницы «Свидетельства».
         </p>
       </div>
 
@@ -236,6 +249,113 @@ const TestimoniesHeroEditor = () => {
             folder="testimonies-hero"
             label="Фон блока"
           />
+        </section>
+
+        {/* ====================== SHARE YOUR STORY PREVIEW ====================== */}
+        <section className="rounded-xl shadow-sm overflow-hidden border border-gray-100 bg-white">
+          {/* Language switcher */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50">
+            <p className="text-sm font-semibold text-gray-700 font-poppins">
+              Предосмотр блока
+            </p>
+            <div className="flex gap-2">
+              {PREVIEW_LANGUAGES.map((lang) => {
+                const Flag = lang.FlagComponent;
+                const active = sharePreviewLang === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => setSharePreviewLang(lang.code)}
+                    aria-label={`Предпросмотр «Поделиться историей» на ${lang.name}`}
+                    className={`
+                      flex items-center gap-2 px-3 py-1.5 rounded-lg font-poppins text-sm font-medium
+                      transition-all duration-200 ease-in-out
+                      focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:ring-offset-1
+                      ${
+                        active
+                          ? 'bg-[#2F7D6D] text-white shadow-md ring-2 ring-[#2F7D6D] ring-offset-1'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:border-[#2F7D6D]'
+                      }
+                    `}
+                  >
+                    {Flag && <Flag className="w-5 h-3.5" />}
+                    {lang.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Preview canvas — повторяет публичную верстку Share Your Story (зелёный фон) */}
+          <div className="bg-[#2F7D6D] text-white px-6 py-12 sm:py-14 text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold font-poppins max-w-2xl mx-auto">
+              {sharePreviewValue('share_title') || 'Share Your Story'}
+            </h3>
+            {sharePreviewValue('share_description') && (
+              <p className="mt-3 text-sm sm:text-base max-w-3xl mx-auto opacity-95 font-poppins">
+                {sharePreviewValue('share_description')}
+              </p>
+            )}
+            <div className="mt-6 flex justify-center">
+              <span className="inline-block px-6 py-3 rounded-lg bg-white text-[#2F7D6D] font-semibold font-poppins text-sm sm:text-base shadow-sm">
+                {sharePreviewValue('share_button') || 'Share Your Story'}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ====================== SHARE YOUR STORY FIELDS ====================== */}
+        <section className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-1.5 h-8 bg-[#2F7D6D] rounded-full" />
+            <h2 className="text-xl font-bold text-gray-900 font-poppins">Нижний блок</h2>
+          </div>
+          <p className="text-sm text-gray-500 font-poppins mb-6 ml-4">
+            Зелёный блок внизу страницы «Свидетельства» — приглашение поделиться историей.
+          </p>
+
+          <div className="space-y-6">
+            <MultilingualInput
+              label="Заголовок"
+              fieldName="share_title"
+              values={{
+                en: formData.share_title_en,
+                ru: formData.share_title_ru,
+                pl: formData.share_title_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Например: Поделитесь своей историей"
+            />
+
+            <MultilingualInput
+              label="Описание"
+              fieldName="share_description"
+              values={{
+                en: formData.share_description_en,
+                ru: formData.share_description_ru,
+                pl: formData.share_description_pl,
+              }}
+              onChange={handleChange}
+              type="textarea"
+              rows={4}
+              placeholder="Текст под заголовком"
+            />
+
+            <MultilingualInput
+              label="Текст кнопки"
+              fieldName="share_button"
+              values={{
+                en: formData.share_button_en,
+                ru: formData.share_button_ru,
+                pl: formData.share_button_pl,
+              }}
+              onChange={handleChange}
+              type="input"
+              placeholder="Например: Поделиться историей"
+            />
+          </div>
         </section>
 
         {/* ====================== ACTIONS ====================== */}
