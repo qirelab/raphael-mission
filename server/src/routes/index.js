@@ -5,7 +5,7 @@ import shopRoutes from './shop.routes.js';
 import testimoniesRoutes from './testimonies.routes.js';
 import trainingRoutes from './training.routes.js';
 import contactRoutes from './contact.routes.js';
-import projectsHeroRoutes from './projectsHero.routes.js';
+import aboutRoutes from './about.routes.js';
 
 const router = express.Router();
 
@@ -17,6 +17,7 @@ router.use('/shop', shopRoutes);
 router.use('/testimonies', testimoniesRoutes);
 router.use('/training', trainingRoutes);
 router.use('/contact', contactRoutes);
+router.use('/about', aboutRoutes);
 
 // API info endpoint
 router.get('/', (req, res) => {
@@ -32,6 +33,7 @@ router.get('/', (req, res) => {
       testimonies: '/api/testimonies',
       training: '/api/training',
       contact: '/api/contact',
+      about: '/api/about',
     },
   });
 });

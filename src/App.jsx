@@ -9,6 +9,7 @@ import { ContactProvider } from './context/ContactContext';
 import { ProjectsProvider } from './context/ProjectsContext';
 import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
+import { AboutProvider } from './context/AboutContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
 import { ChatProvider } from './context/ChatContext';
@@ -37,17 +38,17 @@ export default function App() {
   return (
     <LoadingProvider>
       <ProjectsProvider>
-        <ProjectsHeroProvider>
-          <TestimoniesProvider>
-            <ContactProvider>
+        <TestimoniesProvider>
+          <ContactProvider>
+            <AboutProvider>
               <AlertProvider>
                 <ChatProvider>
                   <AppContent />
                 </ChatProvider>
               </AlertProvider>
-            </ContactProvider>
-          </TestimoniesProvider>
-        </ProjectsHeroProvider>
+            </AboutProvider>
+          </ContactProvider>
+        </TestimoniesProvider>
       </ProjectsProvider>
     </LoadingProvider>
   );

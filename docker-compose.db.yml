@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: raphael-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: raphael_db
+      POSTGRES_USER: raphael_user
+      POSTGRES_PASSWORD: dev_password_2024
+    ports:
+      - "55432:5432"
+    volumes:
+      - raphael_postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init/001_bootstrap.sql:/docker-entrypoint-initdb.d/001_bootstrap.sql:ro
+      - ./server/migrations:/docker-entrypoint-initdb.d/migrations:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raphael_user -d raphael_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  raphael_postgres_data:
