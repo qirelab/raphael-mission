@@ -147,6 +147,18 @@ export const schemas = {
     is_active: Joi.boolean().allow(null),
   }).unknown(true),
 
+  // Shop Hero — editable hero block of the public "Магазин" page.
+  // All fields optional so the admin can save partial updates.
+  updateShopHero: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+  }).unknown(true),
+
   // Testimony schemas
   createTestimony: Joi.object({
     name: Joi.string().allow(''),

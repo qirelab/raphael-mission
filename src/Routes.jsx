@@ -38,6 +38,7 @@ import AboutEditor from './pages/Admin/About/AboutEditor';
 // import TrainingForm from './pages/Admin/Training/TrainingForm'; // Temporarily hidden
 import ProductsList from './pages/Admin/Shop/ProductsList';
 import ProductForm from './pages/Admin/Shop/ProductForm';
+import ShopHeroEditor from './pages/Admin/Shop/ShopHeroEditor';
 
 const AppRoutes = () => {
   return (
@@ -82,6 +83,7 @@ const AppRoutes = () => {
         {/* <Route path="training/new" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
         {/* <Route path="training/edit/:id" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
         <Route path="shop" element={<ProductsList />} />
+        <Route path="shop/hero" element={<ShopHeroEditor />} />
         <Route path="shop/new" element={<ProductForm />} />
         <Route path="shop/edit/:id" element={<ProductForm />} />
         <Route path="contact" element={<ContactInfo />} />
