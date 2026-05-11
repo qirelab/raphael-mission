@@ -3,13 +3,34 @@ import { useNavigate, Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { useProjects } from '../../context/ProjectsContext';
+import { useProjectsHero } from '../../context/ProjectsHeroContext';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
+
+const DEFAULT_HERO_BACKGROUND = '/images/projects.png';
 
 const Projects = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { projects, loading } = useProjects();
+  const { heroData } = useProjectsHero();
+
+  // Resolve a localized hero field from the DB row with graceful fallbacks:
+  //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
+  const heroPick = (base, translationKey) => {
+    if (heroData) {
+      const localized = heroData[`${base}_${language}`];
+      if (localized && localized.trim() !== '') return localized;
+      const englishFallback = heroData[`${base}_en`];
+      if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    }
+    return t(translationKey);
+  };
+
+  const heroBackground =
+    heroData?.background_image_url && heroData.background_image_url.trim() !== ''
+      ? heroData.background_image_url
+      : DEFAULT_HERO_BACKGROUND;
 
   // Transform projects for display
   const projectsData = useMemo(() => {
@@ -85,23 +106,26 @@ const Projects = () => {
         <div className="flex flex-col justify-start items-center w-full">
           {/* Hero Section */}
           <section className="relative w-full min-h-[400px]">
-            <div className="absolute inset-0 bg-[url('/images/projects.png')] bg-cover bg-center z-0" />
+            <div
+              className="absolute inset-0 bg-cover bg-center z-0"
+              style={{ backgroundImage: `url('${heroBackground}')` }}
+            />
             <div className="absolute inset-0 bg-[rgba(18,60,52,0.6)] z-10" />
             <div className="relative z-20 w-full">
               <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-center items-center w-full py-[80px] sm:py-[96px] md:py-[112px] lg:py-[128px]">
                   <div className="flex flex-col justify-center items-center w-full max-w-[900px] px-[22px] sm:px-[32px] md:px-[44px]">
                     <h1 className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-poppins font-bold leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] text-center text-white mb-[16px] sm:mb-[20px] md:mb-[24px]">
-                      {t('projectsPageTitle')}
+                      {heroPick('title', 'projectsPageTitle')}
                     </h1>
                     <blockquote className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal italic leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-100 w-full mb-[8px] sm:mb-[10px]">
-                      {t('projectsBibleQuote')}
+                      {heroPick('bible_quote', 'projectsBibleQuote')}
                     </blockquote>
                     <cite className="text-[14px] sm:text-[15px] md:text-[16px] font-poppins font-normal leading-[20px] sm:leading-[22px] text-center text-gray-300 w-full mb-[24px] sm:mb-[28px] md:mb-[32px] not-italic">
-                      {t('projectsBibleSource')}
+                      {heroPick('bible_source', 'projectsBibleSource')}
                     </cite>
                     <p className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-poppins font-normal leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-center text-gray-200 w-full">
-                      {t('projectsPageDescription')}
+                      {heroPick('description', 'projectsPageDescription')}
                     </p>
                   </div>
                 </div>

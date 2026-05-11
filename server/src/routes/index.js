@@ -5,12 +5,14 @@ import shopRoutes from './shop.routes.js';
 import testimoniesRoutes from './testimonies.routes.js';
 import trainingRoutes from './training.routes.js';
 import contactRoutes from './contact.routes.js';
+import projectsHeroRoutes from './projectsHero.routes.js';
 
 const router = express.Router();
 
 // Mount routes
 router.use('/auth', authRoutes);
 router.use('/projects', projectsRoutes);
+router.use('/projects-hero', projectsHeroRoutes);
 router.use('/shop', shopRoutes);
 router.use('/testimonies', testimoniesRoutes);
 router.use('/training', trainingRoutes);
@@ -25,6 +27,7 @@ router.get('/', (req, res) => {
     endpoints: {
       auth: '/api/auth',
       projects: '/api/projects',
+      projectsHero: '/api/projects-hero',
       shop: '/api/shop',
       testimonies: '/api/testimonies',
       training: '/api/training',
