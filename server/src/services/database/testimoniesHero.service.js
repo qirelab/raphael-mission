@@ -7,10 +7,16 @@ const CACHE_KEY = 'testimonies:hero';
 // Whitelist of writable columns — used both for filtering the request body and
 // for building the UPDATE/INSERT statements safely.
 const TEXT_COLUMNS = [
+  // Hero block
   'title_en', 'title_ru', 'title_pl',
   'title_highlight_en', 'title_highlight_ru', 'title_highlight_pl',
   'description_en', 'description_ru', 'description_pl',
   'background_image_url',
+
+  // Share Your Story block (bottom green section)
+  'share_title_en', 'share_title_ru', 'share_title_pl',
+  'share_description_en', 'share_description_ru', 'share_description_pl',
+  'share_button_en', 'share_button_ru', 'share_button_pl',
 ];
 
 export const testimoniesHeroDbService = {

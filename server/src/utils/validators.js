@@ -322,6 +322,19 @@ export const schemas = {
     description_pl: Joi.string().allow('', null),
 
     background_image_url: Joi.string().allow('', null),
+
+    // Share Your Story block
+    share_title_en: Joi.string().allow('', null),
+    share_title_ru: Joi.string().allow('', null),
+    share_title_pl: Joi.string().allow('', null),
+
+    share_description_en: Joi.string().allow('', null),
+    share_description_ru: Joi.string().allow('', null),
+    share_description_pl: Joi.string().allow('', null),
+
+    share_button_en: Joi.string().allow('', null),
+    share_button_ru: Joi.string().allow('', null),
+    share_button_pl: Joi.string().allow('', null),
   }).unknown(true),
 
   // Contact schemas
