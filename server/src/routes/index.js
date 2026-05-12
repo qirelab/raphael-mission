@@ -9,6 +9,7 @@ import testimoniesHeroRoutes from './testimoniesHero.routes.js';
 import trainingRoutes from './training.routes.js';
 import contactRoutes from './contact.routes.js';
 import aboutRoutes from './about.routes.js';
+import privacyPolicyRoutes from './privacyPolicy.routes.js';
 import donationPageRoutes from './donationPage.routes.js';
 
 const router = express.Router();
@@ -24,6 +25,7 @@ router.use('/testimonies-hero', testimoniesHeroRoutes);
 router.use('/training', trainingRoutes);
 router.use('/contact', contactRoutes);
 router.use('/about', aboutRoutes);
+router.use('/privacy-policy', privacyPolicyRoutes);
 router.use('/donation-page', donationPageRoutes);
 
 // API info endpoint
@@ -43,6 +45,7 @@ router.get('/', (req, res) => {
       training: '/api/training',
       contact: '/api/contact',
       about: '/api/about',
+      privacyPolicy: '/api/privacy-policy',
       donationPage: '/api/donation-page',
     },
   });
