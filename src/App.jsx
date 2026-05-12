@@ -10,8 +10,10 @@ import { ProjectsProvider } from './context/ProjectsContext';
 import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
 import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
+import { ShopHeroProvider } from './context/ShopHeroContext';
 import { AboutProvider } from './context/AboutContext';
 import { PrivacyPolicyProvider } from './context/PrivacyPolicyContext';
+import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
 import { ChatProvider } from './context/ChatContext';
@@ -46,11 +48,13 @@ export default function App() {
               <ContactProvider>
                 <AboutProvider>
                   <PrivacyPolicyProvider>
+                   <DonationPageProvider>
                     <AlertProvider>
                       <ChatProvider>
                         <AppContent />
                       </ChatProvider>
                     </AlertProvider>
+                   </DonationPageProvider>
                   </PrivacyPolicyProvider>
                 </AboutProvider>
               </ContactProvider>

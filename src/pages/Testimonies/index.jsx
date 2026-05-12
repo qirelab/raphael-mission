@@ -176,17 +176,17 @@ const TestimoniesPage = () => {
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-[24px] sm:text-[30px] md:text-[36px] font-bold leading-[32px] sm:leading-[36px] md:leading-[40px] text-global-7 mb-[16px] sm:mb-[20px] md:mb-[24px]">
-              {t('shareYourStoryTitle')}
+              {heroPick('share_title', 'shareYourStoryTitle')}
             </h2>
             <p className="text-[16px] sm:text-[18px] md:text-[20px] font-normal leading-[26px] sm:leading-[29px] md:leading-[33px] text-global-7 mb-[20px] sm:mb-[22px] md:py-[24px] max-w-4xl mx-auto">
-              {t('shareYourStoryDesc')}
+              {heroPick('share_description', 'shareYourStoryDesc')}
             </p>
             <Button
               variant="secondary"
               onClick={handleShareStoryClick}
               className="bg-global-9 text-global-1 px-[24px] sm:px-[28px] md:px-[34px] py-[12px] sm:py-[14px] md:py-[16px] rounded-[8px] text-[16px] font-semibold leading-[24px] hover:bg-opacity-90 transition-all duration-200"
             >
-              {t('shareYourStoryBtn')}
+              {heroPick('share_button', 'shareYourStoryBtn')}
             </Button>
           </div>
         </div>

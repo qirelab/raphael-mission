@@ -147,6 +147,18 @@ export const schemas = {
     is_active: Joi.boolean().allow(null),
   }).unknown(true),
 
+  // Shop Hero — editable hero block of the public "Магазин" page.
+  // All fields optional so the admin can save partial updates.
+  updateShopHero: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+  }).unknown(true),
+
   // Testimony schemas
   createTestimony: Joi.object({
     name: Joi.string().allow(''),
@@ -322,6 +334,19 @@ export const schemas = {
     description_pl: Joi.string().allow('', null),
 
     background_image_url: Joi.string().allow('', null),
+
+    // Share Your Story block
+    share_title_en: Joi.string().allow('', null),
+    share_title_ru: Joi.string().allow('', null),
+    share_title_pl: Joi.string().allow('', null),
+
+    share_description_en: Joi.string().allow('', null),
+    share_description_ru: Joi.string().allow('', null),
+    share_description_pl: Joi.string().allow('', null),
+
+    share_button_en: Joi.string().allow('', null),
+    share_button_ru: Joi.string().allow('', null),
+    share_button_pl: Joi.string().allow('', null),
   }).unknown(true),
 
   // Contact schemas
@@ -361,6 +386,23 @@ export const schemas = {
     }
     return Joi.object(shape).unknown(true);
   })(),
+  // Donation page — editable content of the public "Пожертвование" page.
+  // All fields optional so the admin can save partial updates.
+  updateDonationPage: Joi.object({
+    title_en: Joi.string().allow('', null),
+    title_ru: Joi.string().allow('', null),
+    title_pl: Joi.string().allow('', null),
+
+    description_en: Joi.string().allow('', null),
+    description_ru: Joi.string().allow('', null),
+    description_pl: Joi.string().allow('', null),
+
+    image_url: Joi.string().allow('', null),
+
+    back_button_en: Joi.string().allow('', null),
+    back_button_ru: Joi.string().allow('', null),
+    back_button_pl: Joi.string().allow('', null),
+  }).unknown(true),
 
   // Common schemas
   id: Joi.object({
