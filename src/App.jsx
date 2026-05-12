@@ -10,6 +10,7 @@ import { ProjectsProvider } from './context/ProjectsContext';
 import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
 import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
+import { ShopHeroProvider } from './context/ShopHeroContext';
 import { AboutProvider } from './context/AboutContext';
 import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';

@@ -3,6 +3,7 @@ import authRoutes from './auth.routes.js';
 import projectsRoutes from './projects.routes.js';
 import projectsHeroRoutes from './projectsHero.routes.js';
 import shopRoutes from './shop.routes.js';
+import shopHeroRoutes from './shopHero.routes.js';
 import testimoniesRoutes from './testimonies.routes.js';
 import testimoniesHeroRoutes from './testimoniesHero.routes.js';
 import trainingRoutes from './training.routes.js';
@@ -17,6 +18,7 @@ router.use('/auth', authRoutes);
 router.use('/projects', projectsRoutes);
 router.use('/projects-hero', projectsHeroRoutes);
 router.use('/shop', shopRoutes);
+router.use('/shop-hero', shopHeroRoutes);
 router.use('/testimonies', testimoniesRoutes);
 router.use('/testimonies-hero', testimoniesHeroRoutes);
 router.use('/training', trainingRoutes);
@@ -35,6 +37,7 @@ router.get('/', (req, res) => {
       projects: '/api/projects',
       projectsHero: '/api/projects-hero',
       shop: '/api/shop',
+      shopHero: '/api/shop-hero',
       testimonies: '/api/testimonies',
       testimoniesHero: '/api/testimonies-hero',
       training: '/api/training',
