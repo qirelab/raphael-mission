@@ -386,6 +386,30 @@ export const schemas = {
     }
     return Joi.object(shape).unknown(true);
   })(),
+
+  // Cookie Policy — editable content of the public "/cookie-policy" page.
+  // Hero + 4 sections + 3 cookie types inside section 2 + contact block.
+  updateCookiePolicy: (() => {
+    const bases = [
+      'hero_title', 'hero_subtitle',
+      'section1_title', 'section1_content',
+      'section2_title', 'section2_content',
+      'type1_title', 'type1_desc',
+      'type2_title', 'type2_desc',
+      'type3_title', 'type3_desc',
+      'section3_title', 'section3_content',
+      'section4_title', 'section4_content',
+      'contact_title', 'contact_content',
+    ];
+    const shape = {};
+    for (const base of bases) {
+      for (const lang of ['en', 'ru', 'pl']) {
+        shape[`${base}_${lang}`] = Joi.string().allow('', null);
+      }
+    }
+    return Joi.object(shape).unknown(true);
+  })(),
+
   // Donation page — editable content of the public "Пожертвование" page.
   // All fields optional so the admin can save partial updates.
   updateDonationPage: Joi.object({

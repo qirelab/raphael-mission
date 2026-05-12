@@ -156,6 +156,21 @@ const AdminLayout = () => {
       ),
     },
     {
+      name: 'Политика cookies',
+      path: '/admin/cookie-policy',
+      nameClass: 'font-normal',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21.17 11.34a9 9 0 11-9.5-9.5 5 5 0 005.5 5.5 4.5 4.5 0 004 4zM8 13h.01M12 17h.01M16 12h.01"
+          />
+        </svg>
+      ),
+    },
+    {
       name: 'Пожертвование',
       path: '/admin/donation',
       icon: (
@@ -247,8 +262,8 @@ const AdminLayout = () => {
                   : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
-              {item.icon}
-              <span className="font-medium">{item.name}</span>
+              <span className="flex-shrink-0">{item.icon}</span>
+              <span className={item.nameClass || 'font-medium'}>{item.name}</span>
             </Link>
           ))}
         </nav>

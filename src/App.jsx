@@ -13,6 +13,7 @@ import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
 import { ShopHeroProvider } from './context/ShopHeroContext';
 import { AboutProvider } from './context/AboutContext';
 import { PrivacyPolicyProvider } from './context/PrivacyPolicyContext';
+import { CookiePolicyProvider } from './context/CookiePolicyContext';
 import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
@@ -49,13 +50,15 @@ export default function App() {
                 <ContactProvider>
                   <AboutProvider>
                     <PrivacyPolicyProvider>
-                      <DonationPageProvider>
-                        <AlertProvider>
-                          <ChatProvider>
-                            <AppContent />
-                          </ChatProvider>
-                        </AlertProvider>
-                      </DonationPageProvider>
+                      <CookiePolicyProvider>
+                        <DonationPageProvider>
+                          <AlertProvider>
+                            <ChatProvider>
+                              <AppContent />
+                            </ChatProvider>
+                          </AlertProvider>
+                        </DonationPageProvider>
+                      </CookiePolicyProvider>
                     </PrivacyPolicyProvider>
                   </AboutProvider>
                 </ContactProvider>
