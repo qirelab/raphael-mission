@@ -10,6 +10,7 @@ import trainingRoutes from './training.routes.js';
 import contactRoutes from './contact.routes.js';
 import aboutRoutes from './about.routes.js';
 import privacyPolicyRoutes from './privacyPolicy.routes.js';
+import termsOfServiceRoutes from './termsOfService.routes.js';
 import donationPageRoutes from './donationPage.routes.js';
 
 const router = express.Router();
@@ -26,6 +27,7 @@ router.use('/training', trainingRoutes);
 router.use('/contact', contactRoutes);
 router.use('/about', aboutRoutes);
 router.use('/privacy-policy', privacyPolicyRoutes);
+router.use('/terms-of-service', termsOfServiceRoutes);
 router.use('/donation-page', donationPageRoutes);
 
 // API info endpoint
@@ -46,6 +48,7 @@ router.get('/', (req, res) => {
       contact: '/api/contact',
       about: '/api/about',
       privacyPolicy: '/api/privacy-policy',
+      termsOfService: '/api/terms-of-service',
       donationPage: '/api/donation-page',
     },
   });

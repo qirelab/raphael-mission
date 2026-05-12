@@ -386,6 +386,30 @@ export const schemas = {
     }
     return Joi.object(shape).unknown(true);
   })(),
+
+  // Terms of Service — editable content of the public "/terms-of-service" page.
+  // Same shape as Privacy Policy but with 3 items in section 3 instead of 4 in section 2.
+  updateTermsOfService: (() => {
+    const bases = [
+      'hero_title', 'hero_subtitle',
+      'section1_title', 'section1_content',
+      'section2_title', 'section2_content',
+      'section3_title', 'section3_content',
+      'section3_item1', 'section3_item2', 'section3_item3',
+      'section4_title', 'section4_content',
+      'section5_title', 'section5_content',
+      'section6_title', 'section6_content',
+      'contact_title', 'contact_content',
+    ];
+    const shape = {};
+    for (const base of bases) {
+      for (const lang of ['en', 'ru', 'pl']) {
+        shape[`${base}_${lang}`] = Joi.string().allow('', null);
+      }
+    }
+    return Joi.object(shape).unknown(true);
+  })(),
+
   // Donation page — editable content of the public "Пожертвование" page.
   // All fields optional so the admin can save partial updates.
   updateDonationPage: Joi.object({
