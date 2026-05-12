@@ -2,14 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/shop.css';
 import { useLanguage } from '../../context/LanguageContext';
+import { useShopHero } from '../../context/ShopHeroContext';
 import { shopService } from '../../services/shopService';
 import Footer from '../../components/common/Footer';
 import { ProductsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Shop = () => {
   const { t, language } = useLanguage();
+  const { heroData } = useShopHero();
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Resolve a localized hero field from the DB row with graceful fallbacks:
+  //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
+  const heroPick = (base, translationKey) => {
+    if (heroData) {
+      const localized = heroData[`${base}_${language}`];
+      if (localized && localized.trim() !== '') return localized;
+      const englishFallback = heroData[`${base}_en`];
+      if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    }
+    return t(translationKey);
+  };
 
   // Load products only once, not on language change
   useEffect(() => {
@@ -110,10 +124,10 @@ const Shop = () => {
         <div className="w-full max-w-[1248px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
           <div className="flex flex-col items-center text-center gap-4 sm:gap-5">
             <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-poppins font-bold leading-tight text-[#275a3a]">
-              {t('shopHeroTitle')}
+              {heroPick('title', 'shopHeroTitle')}
             </h1>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-poppins font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-[#6b7280] max-w-[760px]">
-              {t('shopHeroDesc')}
+              {heroPick('description', 'shopHeroDesc')}
             </p>
           </div>
         </div>
