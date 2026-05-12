@@ -12,6 +12,7 @@ import { TestimoniesProvider } from './context/TestimoniesContext';
 import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
 import { ShopHeroProvider } from './context/ShopHeroContext';
 import { AboutProvider } from './context/AboutContext';
+import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
 import { ChatProvider } from './context/ChatContext';
@@ -43,17 +44,17 @@ export default function App() {
         <ProjectsHeroProvider>
           <TestimoniesProvider>
             <TestimoniesHeroProvider>
-              <ShopHeroProvider>
-                <ContactProvider>
-                  <AboutProvider>
+              <ContactProvider>
+                <AboutProvider>
+                  <DonationPageProvider>
                     <AlertProvider>
                       <ChatProvider>
                         <AppContent />
                       </ChatProvider>
                     </AlertProvider>
-                  </AboutProvider>
-                </ContactProvider>
-              </ShopHeroProvider>
+                  </DonationPageProvider>
+                </AboutProvider>
+              </ContactProvider>
             </TestimoniesHeroProvider>
           </TestimoniesProvider>
         </ProjectsHeroProvider>

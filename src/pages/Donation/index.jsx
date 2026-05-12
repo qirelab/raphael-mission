@@ -2,13 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import PaymentSelector from '../../components/payment/PaymentSelector';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDonationPage } from '../../context/DonationPageContext';
 import Footer from '../../components/common/Footer';
 import { DonationSkeleton } from '../../components/skeletons';
 
+const DEFAULT_IMAGE = '/images/money.jpg';
+
 const DonationPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { pageData } = useDonationPage();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+
+  // Resolve a localized field from the DB row with graceful fallbacks:
+  //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
+  const pick = (base, translationKey) => {
+    if (pageData) {
+      const localized = pageData[`${base}_${language}`];
+      if (localized && localized.trim() !== '') return localized;
+      const englishFallback = pageData[`${base}_en`];
+      if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    }
+    return t(translationKey);
+  };
+
+  const heroImage =
+    pageData?.image_url && pageData.image_url.trim() !== '' ? pageData.image_url : DEFAULT_IMAGE;
 
   const FIXED_AMOUNT = 25;
   const [showPayment, setShowPayment] = useState(false);
@@ -61,10 +80,10 @@ const DonationPage = () => {
             {/* Левый столбец: заголовок/описание/выбор метода */}
             <div className="w-full lg:w-1/2">
               <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-inter font-bold leading-tight text-global-1">
-                {t('donationPageTitle')}
+                {pick('title', 'donationPageTitle')}
               </h1>
               <p className="mt-3 text-[16px] sm:text-[18px] lg:text-[20px] font-inter text-global-4 max-w-[720px]">
-                {t('donationPageDescription')}
+                {pick('description', 'donationPageDescription')}
               </p>
 
               {/* Карточка с логотипами */}
@@ -119,7 +138,7 @@ const DonationPage = () => {
                       }}
                       className="text-global-2 hover:text-global-1 text-sm font-medium flex items-center gap-2"
                     >
-                      ← {t('backToDonationDetails')}
+                      ← {pick('back_button', 'backToDonationDetails')}
                     </button>
 
                     {paymentStatus === 'success' && (
@@ -180,7 +199,7 @@ const DonationPage = () => {
             {/* Правый столбец: картинка */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <img
-                src="/images/money.jpg"
+                src={heroImage}
                 alt="Mission impact"
                 className="
                   block w-full h-auto
