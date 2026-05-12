@@ -45,19 +45,21 @@ export default function App() {
         <ProjectsHeroProvider>
           <TestimoniesProvider>
             <TestimoniesHeroProvider>
-              <ContactProvider>
-                <AboutProvider>
-                  <PrivacyPolicyProvider>
-                   <DonationPageProvider>
-                    <AlertProvider>
-                      <ChatProvider>
-                        <AppContent />
-                      </ChatProvider>
-                    </AlertProvider>
-                   </DonationPageProvider>
-                  </PrivacyPolicyProvider>
-                </AboutProvider>
-              </ContactProvider>
+              <ShopHeroProvider>
+                <ContactProvider>
+                  <AboutProvider>
+                    <PrivacyPolicyProvider>
+                      <DonationPageProvider>
+                        <AlertProvider>
+                          <ChatProvider>
+                            <AppContent />
+                          </ChatProvider>
+                        </AlertProvider>
+                      </DonationPageProvider>
+                    </PrivacyPolicyProvider>
+                  </AboutProvider>
+                </ContactProvider>
+              </ShopHeroProvider>
             </TestimoniesHeroProvider>
           </TestimoniesProvider>
         </ProjectsHeroProvider>
