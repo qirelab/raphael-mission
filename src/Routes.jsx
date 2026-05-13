@@ -36,6 +36,8 @@ import ContactInfo from './pages/Admin/Contact/ContactInfo';
 import AboutEditor from './pages/Admin/About/AboutEditor';
 import HomeEditor from './pages/Admin/Home/HomeEditor';
 import PrivacyPolicyEditor from './pages/Admin/PrivacyPolicy/PrivacyPolicyEditor';
+import CookiePolicyEditor from './pages/Admin/CookiePolicy/CookiePolicyEditor';
+import TermsOfServiceEditor from './pages/Admin/TermsOfService/TermsOfServiceEditor';
 import DonationEditor from './pages/Admin/Donation/DonationEditor';
 // import TrainingList from './pages/Admin/Training/TrainingList'; // Temporarily hidden
 // import TrainingForm from './pages/Admin/Training/TrainingForm'; // Temporarily hidden
@@ -93,6 +95,8 @@ const AppRoutes = () => {
         <Route path="about" element={<AboutEditor />} />
         <Route path="home" element={<HomeEditor />} />
         <Route path="privacy-policy" element={<PrivacyPolicyEditor />} />
+        <Route path="cookie-policy" element={<CookiePolicyEditor />} />
+        <Route path="terms-of-service" element={<TermsOfServiceEditor />} />
         <Route path="donation" element={<DonationEditor />} />
       </Route>
 
