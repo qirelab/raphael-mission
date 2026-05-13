@@ -390,6 +390,9 @@ export const schemas = {
   // Cookie Policy — editable content of the public "/cookie-policy" page.
   // Hero + 4 sections + 3 cookie types inside section 2 + contact block.
   updateCookiePolicy: (() => {
+  // Terms of Service — editable content of the public "/terms-of-service" page.
+  // Same shape as Privacy Policy but with 3 items in section 3 instead of 4 in section 2.
+  updateTermsOfService: (() => {
     const bases = [
       'hero_title', 'hero_subtitle',
       'section1_title', 'section1_content',
@@ -399,6 +402,11 @@ export const schemas = {
       'type3_title', 'type3_desc',
       'section3_title', 'section3_content',
       'section4_title', 'section4_content',
+      'section3_title', 'section3_content',
+      'section3_item1', 'section3_item2', 'section3_item3',
+      'section4_title', 'section4_content',
+      'section5_title', 'section5_content',
+      'section6_title', 'section6_content',
       'contact_title', 'contact_content',
     ];
     const shape = {};

@@ -142,7 +142,7 @@ const AdminLayout = () => {
       ),
     },
     {
-      name: 'Конфиденциальность',
+      name: 'Политика конфиденциальности',
       path: '/admin/privacy-policy',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,6 +159,8 @@ const AdminLayout = () => {
       name: 'Политика cookies',
       path: '/admin/cookie-policy',
       nameClass: 'font-normal',
+      name: 'Условия использования',
+      path: '/admin/terms-of-service',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
