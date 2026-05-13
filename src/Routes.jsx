@@ -34,6 +34,7 @@ import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
 import TestimoniesHeroEditor from './pages/Admin/Testimonies/TestimoniesHeroEditor';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
 import AboutEditor from './pages/Admin/About/AboutEditor';
+import HomeEditor from './pages/Admin/Home/HomeEditor';
 import PrivacyPolicyEditor from './pages/Admin/PrivacyPolicy/PrivacyPolicyEditor';
 import CookiePolicyEditor from './pages/Admin/CookiePolicy/CookiePolicyEditor';
 import TermsOfServiceEditor from './pages/Admin/TermsOfService/TermsOfServiceEditor';
@@ -92,6 +93,7 @@ const AppRoutes = () => {
         <Route path="shop/edit/:id" element={<ProductForm />} />
         <Route path="contact" element={<ContactInfo />} />
         <Route path="about" element={<AboutEditor />} />
+        <Route path="home" element={<HomeEditor />} />
         <Route path="privacy-policy" element={<PrivacyPolicyEditor />} />
         <Route path="cookie-policy" element={<CookiePolicyEditor />} />
         <Route path="terms-of-service" element={<TermsOfServiceEditor />} />

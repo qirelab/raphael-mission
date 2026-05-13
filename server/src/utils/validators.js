@@ -387,6 +387,26 @@ export const schemas = {
     return Joi.object(shape).unknown(true);
   })(),
 
+  // Home page — editable content of the public landing page.
+  // Hero (logo + texts + buttons) + Mission (3 cards) + Projects/Support/Testimonies headers + Contact (labels + form placeholders).
+  updateHomePage: (() => {
+    const multilingualBases = [
+      'hero_title', 'hero_title_highlight', 'hero_description',
+      'hero_btn_support', 'hero_btn_learn_more',
+      'mission_title', 'mission_description',
+      'card1_title', 'card1_desc',
+      'card2_title', 'card2_desc',
+      'card3_title', 'card3_desc',
+      'projects_title', 'projects_description',
+      'support_title', 'support_description',
+      'testimonies_title', 'testimonies_description',
+      'contact_title', 'contact_description',
+      'label_address', 'label_phone', 'label_email',
+      'form_title',
+      'ph_first_name', 'ph_last_name', 'ph_email', 'ph_subject', 'ph_message',
+    ];
+    const shape = {};
+    for (const base of multilingualBases) {
   // Cookie Policy — editable content of the public "/cookie-policy" page.
   // Hero + 4 sections + 3 cookie types inside section 2 + contact block.
   updateCookiePolicy: (() => {
@@ -415,6 +435,8 @@ export const schemas = {
         shape[`${base}_${lang}`] = Joi.string().allow('', null);
       }
     }
+    // Single-value image field
+    shape.logo_url = Joi.string().allow('', null);
     return Joi.object(shape).unknown(true);
   })(),
 
