@@ -360,7 +360,13 @@ export const schemas = {
     address_line2_ru: Joi.string().allow('', null),
     address_line2_pl: Joi.string().allow('', null),
     city: Joi.string().allow('', null),
+    city_en: Joi.string().allow('', null),
+    city_ru: Joi.string().allow('', null),
+    city_pl: Joi.string().allow('', null),
     country: Joi.string().allow('', null),
+    country_en: Joi.string().allow('', null),
+    country_ru: Joi.string().allow('', null),
+    country_pl: Joi.string().allow('', null),
   }).unknown(true),
 
   // Privacy Policy — editable content of the public "/privacy-policy" page.
@@ -407,12 +413,17 @@ export const schemas = {
     ];
     const shape = {};
     for (const base of multilingualBases) {
+      for (const lang of ['en', 'ru', 'pl']) {
+        shape[`${base}_${lang}`] = Joi.string().allow('', null);
+      }
+    }
+    shape.logo_url = Joi.string().allow('', null);
+    return Joi.object(shape).unknown(true);
+  })(),
+
   // Cookie Policy — editable content of the public "/cookie-policy" page.
   // Hero + 4 sections + 3 cookie types inside section 2 + contact block.
   updateCookiePolicy: (() => {
-  // Terms of Service — editable content of the public "/terms-of-service" page.
-  // Same shape as Privacy Policy but with 3 items in section 3 instead of 4 in section 2.
-  updateTermsOfService: (() => {
     const bases = [
       'hero_title', 'hero_subtitle',
       'section1_title', 'section1_content',
@@ -422,6 +433,23 @@ export const schemas = {
       'type3_title', 'type3_desc',
       'section3_title', 'section3_content',
       'section4_title', 'section4_content',
+      'contact_title', 'contact_content',
+    ];
+    const shape = {};
+    for (const base of bases) {
+      for (const lang of ['en', 'ru', 'pl']) {
+        shape[`${base}_${lang}`] = Joi.string().allow('', null);
+      }
+    }
+    return Joi.object(shape).unknown(true);
+  })(),
+
+  // Terms of Service — editable content of the public "/terms-of-service" page.
+  updateTermsOfService: (() => {
+    const bases = [
+      'hero_title', 'hero_subtitle',
+      'section1_title', 'section1_content',
+      'section2_title', 'section2_content',
       'section3_title', 'section3_content',
       'section3_item1', 'section3_item2', 'section3_item3',
       'section4_title', 'section4_content',
@@ -435,8 +463,6 @@ export const schemas = {
         shape[`${base}_${lang}`] = Joi.string().allow('', null);
       }
     }
-    // Single-value image field
-    shape.logo_url = Joi.string().allow('', null);
     return Joi.object(shape).unknown(true);
   })(),
 

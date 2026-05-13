@@ -4,6 +4,15 @@ import { useTermsOfService } from '../../../context/TermsOfServiceContext';
 import { useAlert } from '../../../hooks/useAlert';
 import { useLanguage } from '../../../context/LanguageContext';
 import MultilingualInput from '../../../components/MultilingualInput';
+import FlagUS from '../../../components/icons/FlagUS';
+import FlagRU from '../../../components/icons/FlagRU';
+import FlagPL from '../../../components/icons/FlagPL';
+
+const PREVIEW_LANGUAGES = [
+  { code: 'en', label: 'EN', name: 'English', FlagComponent: FlagUS },
+  { code: 'ru', label: 'RU', name: 'Русский', FlagComponent: FlagRU },
+  { code: 'pl', label: 'PL', name: 'Polski', FlagComponent: FlagPL },
+];
 
 // All editable fields, grouped logically. Each group renders one card; the
 // list of fields drives both the form state and the rendering — adding /
@@ -95,6 +104,13 @@ const TermsOfServiceEditor = () => {
 
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewLang, setPreviewLang] = useState('en');
+
+  const previewValue = (base) => {
+    const localized = formData[`${base}_${previewLang}`];
+    if (localized && localized.trim() !== '') return localized;
+    return formData[`${base}_en`] || '';
+  };
 
   useEffect(() => {
     if (!pageData) return;
@@ -114,7 +130,7 @@ const TermsOfServiceEditor = () => {
     setIsSubmitting(true);
     try {
       await updatePage(formData);
-      success('Страница «Terms of Service» обновлена!', 'Сохранено');
+      success('Страница «Условия использования» обновлена!', 'Сохранено');
     } catch (err) {
       showError(err.message || 'Не удалось сохранить изменения', t('alertSaveError'));
     } finally {
@@ -149,6 +165,53 @@ const TermsOfServiceEditor = () => {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
+        {/* ====================== HERO LIVE PREVIEW ====================== */}
+        <section className="rounded-xl shadow-sm overflow-hidden border border-gray-100 bg-white">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50">
+            <p className="text-sm font-semibold text-gray-700 font-poppins">
+              Предосмотр верхнего блока
+            </p>
+            <div className="flex gap-2">
+              {PREVIEW_LANGUAGES.map((lang) => {
+                const Flag = lang.FlagComponent;
+                const active = previewLang === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => setPreviewLang(lang.code)}
+                    aria-label={`Предпросмотр на ${lang.name}`}
+                    className={`
+                      flex items-center gap-2 px-3 py-1.5 rounded-lg font-poppins text-sm font-medium
+                      transition-all duration-200 ease-in-out
+                      focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:ring-offset-1
+                      ${
+                        active
+                          ? 'bg-[#2F7D6D] text-white shadow-md ring-2 ring-[#2F7D6D] ring-offset-1'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:border-[#2F7D6D]'
+                      }
+                    `}
+                  >
+                    {Flag && <Flag className="w-5 h-3.5" />}
+                    {lang.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-[#3c8a7a] to-[#2F7D6D] px-6 py-12 sm:py-14 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-poppins mb-3">
+              {previewValue('hero_title') || 'Terms of Service'}
+            </h2>
+            {previewValue('hero_subtitle') && (
+              <p className="text-sm sm:text-base text-white/90 font-poppins">
+                {previewValue('hero_subtitle')}
+              </p>
+            )}
+          </div>
+        </section>
+
         {SECTIONS.map((section) => (
           <section
             key={section.key}

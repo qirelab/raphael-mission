@@ -38,7 +38,7 @@ const ProjectsList = () => {
       const data = await projectsService.getAll();
       setProjects(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch projects');
+      setError(err.message || 'Не удалось загрузить проекты');
     } finally {
       setLoading(false);
       setRefreshing(false);

@@ -398,10 +398,10 @@ VALUES
 
 INSERT INTO contact (email, phone, address_en, address_ru, social_links)
 VALUES (
-    'info@raphael-mission.org',
-    '+1 (555) 123-4567',
-    '123 Mission Street, Suite 100, City, State 12345, USA',
-    'ул. Миссионерская, 123, офис 100, Город, Область 12345, США',
+    'im.raphael@gmail.com',
+    '+48 570 941 670',
+    'Brzeg 3/1 44-178, Gliwice, Poland',
+    'Brzeg 3/1 44-178, Гливице, Польша',
     '{
         "facebook": "https://facebook.com/raphaelmission",
         "instagram": "https://instagram.com/raphaelmission",

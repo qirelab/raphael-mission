@@ -36,7 +36,7 @@ const TestimoniesList = () => {
       const data = await testimoniesService.getAll();
       setTestimonies(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch testimonies');
+      setError(err.message || 'Не удалось загрузить свидетельства');
     } finally {
       setLoading(false);
       setRefreshing(false);

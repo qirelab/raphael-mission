@@ -61,14 +61,18 @@ END $$;
 INSERT INTO contact_info (
     phone_number, email,
     address_line1_en, address_line1_ru, address_line1_pl,
+    address_line2_en, address_line2_ru, address_line2_pl,
     city, country
 )
 SELECT
-    '+1 234 567 8900',
-    'info@raphael-mission.org',
-    '123 Main Street',
-    'ул. Главная 123',
-    'ul. Główna 123',
-    'New York',
-    'USA'
+    '+48 570 941 670',
+    'im.raphael@gmail.com',
+    'Brzeg 3/1 44-178',
+    'Brzeg 3/1 44-178',
+    'Brzeg 3/1 44-178',
+    'Gliwice, Poland',
+    'Гливице, Польша',
+    'Gliwice, Polska',
+    'Gliwice',
+    'Poland'
 WHERE NOT EXISTS (SELECT 1 FROM contact_info);

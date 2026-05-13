@@ -5,6 +5,7 @@ import app from './app.js';
 import { logger } from './utils/logger.js';
 import { connectRedis } from './config/redis.js';
 import { testConnection, closePool } from './config/database.js';
+import { runMigrations } from './utils/runMigrations.js';
 
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -14,6 +15,15 @@ async function startServer() {
     // Test database connection
     logger.info('Testing database connection...');
     await testConnection();
+
+    // Apply pending schema migrations before serving traffic
+    logger.info('Running database migrations...');
+    try {
+      await runMigrations();
+    } catch (err) {
+      logger.error('Migration runner failed:', err);
+      throw err;
+    }
 
     // Connect to Redis (optional - will fallback to node-cache if unavailable)
     logger.info('Connecting to Redis...');

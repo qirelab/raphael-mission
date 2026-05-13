@@ -463,11 +463,13 @@ const Home = () => {
                       {pick('label_address', 'addressLabel')}
                     </h3>
                     {(() => {
+                      const localizedCity = contactData?.[`city_${language}`] || contactData?.city_en || contactData?.city;
+                      const localizedCountry = contactData?.[`country_${language}`] || contactData?.country_en || contactData?.country;
                       const addressParts = [
                         contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
                         contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
-                        contactData?.city,
-                        contactData?.country
+                        localizedCity,
+                        localizedCountry
                       ].filter(Boolean);
 
                       const hasAddress = addressParts.length > 0;
@@ -498,12 +500,12 @@ const Home = () => {
                                 contactData?.address_line2}
                             </>
                           )}
-                          {(contactData?.city || contactData?.country) && (
+                          {(localizedCity || localizedCountry) && (
                             <>
                               <br />
-                              {contactData?.city && contactData?.country
-                                ? `${contactData.city}, ${contactData.country}`
-                                : contactData?.city || contactData?.country}
+                              {localizedCity && localizedCountry
+                                ? `${localizedCity}, ${localizedCountry}`
+                                : localizedCity || localizedCountry}
                             </>
                           )}
                         </a>

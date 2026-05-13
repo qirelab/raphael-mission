@@ -47,7 +47,7 @@ const TestimonyForm = () => {
       };
       setFormData(formData);
     } catch (err) {
-      setError(err.message || 'Failed to fetch testimony');
+      setError(err.message || 'Не удалось загрузить свидетельство');
     } finally {
       setLoading(false);
     }
@@ -94,7 +94,7 @@ const TestimonyForm = () => {
       }
       navigate('/admin/testimonies');
     } catch (err) {
-      const errorMessage = err.message || 'Failed to save testimony';
+      const errorMessage = err.message || 'Не удалось сохранить свидетельство';
       showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }

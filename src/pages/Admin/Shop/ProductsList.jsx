@@ -36,7 +36,7 @@ const ProductsList = () => {
       const data = await shopService.getAll();
       setProducts(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch products');
+      setError(err.message || 'Не удалось загрузить товары');
     } finally {
       setLoading(false);
       setRefreshing(false);

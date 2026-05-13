@@ -120,7 +120,7 @@ const CookiePolicyEditor = () => {
     setIsSubmitting(true);
     try {
       await updatePage(formData);
-      success('Страница «Cookie Policy» обновлена!', 'Сохранено');
+      success('Страница «Политика cookies» обновлена!', 'Сохранено');
     } catch (err) {
       showError(err.message || 'Не удалось сохранить изменения', t('alertSaveError'));
     } finally {

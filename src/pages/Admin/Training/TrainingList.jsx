@@ -36,7 +36,7 @@ const TrainingList = () => {
       const data = await trainingService.getAll();
       setPrograms(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch training programs');
+      setError(err.message || 'Не удалось загрузить программы обучения');
     } finally {
       setLoading(false);
       setRefreshing(false);

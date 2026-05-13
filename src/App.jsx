@@ -53,18 +53,18 @@ export default function App() {
                   <AboutProvider>
                     <PrivacyPolicyProvider>
                       <HomePageProvider>
-                      <CookiePolicyProvider>
-                      <TermsOfServiceProvider>
-                        <DonationPageProvider>
-                          <AlertProvider>
-                            <ChatProvider>
-                              <AppContent />
-                            </ChatProvider>
-                          </AlertProvider>
-                        </DonationPageProvider>
+                        <CookiePolicyProvider>
+                          <TermsOfServiceProvider>
+                            <DonationPageProvider>
+                              <AlertProvider>
+                                <ChatProvider>
+                                  <AppContent />
+                                </ChatProvider>
+                              </AlertProvider>
+                            </DonationPageProvider>
+                          </TermsOfServiceProvider>
+                        </CookiePolicyProvider>
                       </HomePageProvider>
-                      </CookiePolicyProvider>
-                      </TermsOfServiceProvider>
                     </PrivacyPolicyProvider>
                   </AboutProvider>
                 </ContactProvider>

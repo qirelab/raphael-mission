@@ -53,9 +53,15 @@ export const contactDbService = {
             address_line2_ru = COALESCE($7, address_line2_ru),
             address_line2_pl = COALESCE($8, address_line2_pl),
             city = COALESCE($9, city),
-            country = COALESCE($10, country),
+            city_en = COALESCE($10, city_en),
+            city_ru = COALESCE($11, city_ru),
+            city_pl = COALESCE($12, city_pl),
+            country = COALESCE($13, country),
+            country_en = COALESCE($14, country_en),
+            country_ru = COALESCE($15, country_ru),
+            country_pl = COALESCE($16, country_pl),
             updated_at = CURRENT_TIMESTAMP
-          WHERE id = $11
+          WHERE id = $17
           RETURNING *`,
           [
             contactData.phone_number || null,
@@ -66,8 +72,14 @@ export const contactDbService = {
             contactData.address_line2_en || null,
             contactData.address_line2_ru || null,
             contactData.address_line2_pl || null,
-            contactData.city || null,
-            contactData.country || null,
+            contactData.city || contactData.city_en || null,
+            contactData.city_en || null,
+            contactData.city_ru || null,
+            contactData.city_pl || null,
+            contactData.country || contactData.country_en || null,
+            contactData.country_en || null,
+            contactData.country_ru || null,
+            contactData.country_pl || null,
             existing.rows[0].id
           ]
         );
@@ -81,9 +93,12 @@ export const contactDbService = {
         // Create new record
         const result = await pool.query(
           `INSERT INTO contact_info (
-            phone_number, email, address_line1_en, address_line1_ru, address_line1_pl,
-            address_line2_en, address_line2_ru, address_line2_pl, city, country
-          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            phone_number, email,
+            address_line1_en, address_line1_ru, address_line1_pl,
+            address_line2_en, address_line2_ru, address_line2_pl,
+            city, city_en, city_ru, city_pl,
+            country, country_en, country_ru, country_pl
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
           RETURNING *`,
           [
             contactData.phone_number,
@@ -94,8 +109,14 @@ export const contactDbService = {
             contactData.address_line2_en || null,
             contactData.address_line2_ru || null,
             contactData.address_line2_pl || null,
-            contactData.city || null,
-            contactData.country || null
+            contactData.city || contactData.city_en || null,
+            contactData.city_en || null,
+            contactData.city_ru || null,
+            contactData.city_pl || null,
+            contactData.country || contactData.country_en || null,
+            contactData.country_en || null,
+            contactData.country_ru || null,
+            contactData.country_pl || null
           ]
         );
 

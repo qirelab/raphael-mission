@@ -141,10 +141,10 @@ CREATE TABLE IF NOT EXISTS contact (
 -- Default contact info (single row)
 INSERT INTO contact (email, phone, address_en, address_ru, social_links)
 VALUES (
-    'info@raphael-mission.org',
-    '+7 (XXX) XXX-XX-XX',
-    'Default Address EN',
-    'Адрес по умолчанию RU',
+    'im.raphael@gmail.com',
+    '+48 570 941 670',
+    'Brzeg 3/1 44-178, Gliwice, Poland',
+    'Brzeg 3/1 44-178, Гливице, Польша',
     '{"facebook": "", "instagram": "", "telegram": "", "youtube": ""}'::jsonb
 )
 ON CONFLICT DO NOTHING;
