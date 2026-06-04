@@ -162,21 +162,6 @@ jobs:
 
             echo "✅ Backend deployed and restarted!"
 
-            # ===== TEMP DIAGNOSTIC: list DB tables and applied migrations =====
-            echo "🔎 [DIAG] Inspecting database schema..."
-            cat > /var/www/raphael-mission/server/diag.mjs <<'EOF'
-            import './src/loadEnv.js';
-            import { pool } from './src/config/database.js';
-            const t = await pool.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public' ORDER BY 1");
-            console.log('[DIAG] TABLES:', t.rows.map(r => r.table_name).join(', '));
-            const m = await pool.query("SELECT filename FROM schema_migrations ORDER BY 1");
-            console.log('[DIAG] MIGRATIONS_APPLIED:', m.rows.map(r => r.filename).join(', '));
-            process.exit(0);
-            EOF
-            (cd /var/www/raphael-mission/server && node diag.mjs) || echo "[DIAG] diag script failed"
-            rm -f /var/www/raphael-mission/server/diag.mjs
-            # ===== END TEMP DIAGNOSTIC =====
-
             # ===== CLEANUP =====
             echo "🧹 Cleaning up temporary files..."
             rm -f /tmp/frontend.tar.gz /tmp/backend.tar.gz

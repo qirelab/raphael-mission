@@ -77,6 +77,55 @@ const listMigrationFiles = async () => {
     .sort();
 };
 
+// Content migrations (005–012) and the schema object each one is expected to
+// produce. On a legacy/baselined production DB these were wrongly marked as
+// applied without running, so their tables/columns never got created — which
+// made the public content endpoints (/about, /donation-page, …) return 500.
+const SCHEMA_GUARDS = [
+  { file: '005_create_about_page.sql', table: 'about_page' },
+  { file: '006_create_projects_hero.sql', table: 'projects_hero' },
+  { file: '007_add_projects_cta.sql', table: 'projects_hero', column: 'cta_title_en' },
+  { file: '008_create_testimonies_hero.sql', table: 'testimonies_hero' },
+  { file: '009_add_testimonies_share.sql', table: 'testimonies_hero', column: 'share_title_en' },
+  { file: '010_create_shop_hero.sql', table: 'shop_hero' },
+  { file: '011_create_donation_page.sql', table: 'donation_page' },
+  { file: '012_create_privacy_policy.sql', table: 'privacy_policy' },
+];
+
+const schemaObjectExists = async (client, table, column) => {
+  if (column) {
+    const r = await client.query(
+      `SELECT 1 FROM information_schema.columns
+       WHERE table_schema = 'public' AND table_name = $1 AND column_name = $2 LIMIT 1`,
+      [table, column]
+    );
+    return r.rowCount > 0;
+  }
+  const r = await client.query(
+    `SELECT 1 FROM information_schema.tables
+     WHERE table_schema = 'public' AND table_name = $1 LIMIT 1`,
+    [table]
+  );
+  return r.rowCount > 0;
+};
+
+// Self-heal: if a guarded migration is recorded as applied but the schema
+// object it should have created is missing, drop its record so it re-runs this
+// cycle. All guarded migrations are idempotent (CREATE TABLE IF NOT EXISTS /
+// ADD COLUMN IF NOT EXISTS / seed-if-empty), so re-running them is safe and a
+// no-op on databases where the objects already exist.
+const healBaselinedSchema = async (client) => {
+  for (const g of SCHEMA_GUARDS) {
+    const present = await schemaObjectExists(client, g.table, g.column);
+    if (present) continue;
+    const del = await client.query('DELETE FROM schema_migrations WHERE filename = $1', [g.file]);
+    if (del.rowCount > 0) {
+      const what = g.column ? `column ${g.table}.${g.column}` : `table ${g.table}`;
+      logger.warn(`🩹 Re-queuing migration ${g.file}: expected ${what} is missing`);
+    }
+  }
+};
+
 const applyMigration = async (client, filename) => {
   const sql = await readFile(join(MIGRATIONS_DIR, filename), 'utf8');
   await client.query('BEGIN');
@@ -102,6 +151,10 @@ export const runMigrations = async () => {
     // Guarantee shared DB objects (trigger function) exist before applying
     // pending migrations that depend on them.
     await ensureTriggerFunction(client);
+
+    // Re-queue any content migration whose schema object is missing (legacy
+    // baselined DBs) so it re-runs below.
+    await healBaselinedSchema(client);
 
     const { rows } = await client.query('SELECT filename FROM schema_migrations');
     const applied = new Set(rows.map((r) => r.filename));
