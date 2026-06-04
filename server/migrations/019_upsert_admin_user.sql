@@ -20,6 +20,4 @@ ON CONFLICT (email) DO UPDATE
 SET password_hash = EXCLUDED.password_hash,
     role = 'admin',
     is_active = true,
-    failed_login_attempts = 0,
-    locked_until = NULL,
     updated_at = NOW();
