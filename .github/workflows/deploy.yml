@@ -162,22 +162,6 @@ jobs:
 
             echo "✅ Backend deployed and restarted!"
 
-            # ===== TEMP DIAGNOSTIC: reproduce signin error and surface backend log =====
-            echo "🔎 [DIAG] Test signin to capture real server-side error..."
-            DIAG_CODE=$(curl -s -o /tmp/signin_resp.json -w "%{http_code}" \
-              -X POST http://localhost:6388/api/auth/signin \
-              -H "Content-Type: application/json" \
-              -d '{"email":"admin@raphaelmission.org","password":"Raphael$2026!Secure#Admin*Pass"}' || true)
-            echo "[DIAG] signin HTTP status: $DIAG_CODE"
-            echo "[DIAG] signin response body:"; cat /tmp/signin_resp.json 2>/dev/null; echo
-            sleep 1
-            echo "===== [DIAG] logs/out.log (last 40) ====="
-            tail -n 40 /var/www/raphael-mission/server/logs/out.log 2>/dev/null || echo "(нет out.log)"
-            echo "===== [DIAG] logs/err.log (last 25) ====="
-            tail -n 25 /var/www/raphael-mission/server/logs/err.log 2>/dev/null || echo "(нет err.log)"
-            rm -f /tmp/signin_resp.json
-            # ===== END TEMP DIAGNOSTIC =====
-
             # ===== CLEANUP =====
             echo "🧹 Cleaning up temporary files..."
             rm -f /tmp/frontend.tar.gz /tmp/backend.tar.gz
