@@ -40,7 +40,7 @@ Frontend (React + Vite)  ←→  Backend API (Express.js)  ←→  PostgreSQL + 
 - 🔄 **[FRONTEND_MIGRATION.md](FRONTEND_MIGRATION.md)** - Frontend API integration
 - 📊 **[server/migrations/README.md](server/migrations/README.md)** - Database indexes guide
 - 🔴 **[server/REDIS_SETUP.md](server/REDIS_SETUP.md)** - Redis setup (Windows/Linux)
-- ✉️ **[docs/FEEDBACK_EMAIL_SETUP.md](docs/FEEDBACK_EMAIL_SETUP.md)** - Contact form email (EmailJS) — client setup guide
+- ✉️ **[docs/FEEDBACK_EMAIL_SETUP.md](docs/FEEDBACK_EMAIL_SETUP.md)** - Contact form email (EmailJS)
 
 ### Completed Stages:
 - ✅ **Stage 1:** Backend API Server - [COMPLETED]
