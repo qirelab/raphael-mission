@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const TermsOfService = () => {
   const { t, language } = useLanguage();
   const { pageData } = useTermsOfService();
-  const { contactData } = useContact();
+  const { contactData, loading } = useContact();
 
   // Resolve a localized field from the DB row with graceful fallbacks:
   //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
@@ -115,9 +115,13 @@ const TermsOfService = () => {
               <p className="text-[16px] sm:text-[18px] text-[#4b5563] font-poppins mb-4">
                 {pick('contact_content', 'termsContactContent')}
               </p>
-              <p className="text-[16px] sm:text-[18px] text-[#3c8a7a] font-semibold font-poppins">
-                {contactData?.email || t('emailAddress')}
-              </p>
+              {!loading && contactData?.email ? (
+                <p className="text-[16px] sm:text-[18px] text-[#3c8a7a] font-semibold font-poppins">
+                  {contactData.email}
+                </p>
+              ) : (
+                <div className="animate-pulse bg-gray-200 rounded h-6 w-64 max-w-full" />
+              )}
             </div>
           </div>
 
