@@ -358,13 +358,14 @@ const Home = () => {
             </p>
 
             <div className="w-full flex flex-wrap gap-6 justify-center">
-              <button
+              {/* PayPal временно скрыт (оплата не работает). Не удалять — вернуть, когда заработает. */}
+              {/* <button
                 className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate(`/${language}/donation?method=paypal`)}
               >
                 <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
-              </button>
+              </button> */}
               <button
                 className="bg-white text-[#8454ec] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate(`/${language}/donation?method=stripe`)}

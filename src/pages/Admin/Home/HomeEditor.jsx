@@ -203,7 +203,8 @@ function renderSectionPreview(key, pv, logo) {
             </p>
           )}
           <div className="flex flex-wrap gap-2 justify-center">
-            {['PayPal', 'Stripe', 'Fondy'].map((label) => (
+            {/* 'PayPal' временно скрыт (оплата не работает) — вернуть в массив, когда заработает. */}
+            {['Stripe', 'Fondy'].map((label) => (
               <span
                 key={label}
                 className="inline-block bg-white text-gray-700 px-4 py-1.5 rounded-lg font-semibold font-poppins text-xs shadow-sm"

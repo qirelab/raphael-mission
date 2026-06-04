@@ -46,7 +46,8 @@ const DonationPage = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const method = params.get('method');
-    if (['paypal', 'stripe', 'fondy'].includes(method)) {
+    // 'paypal' временно отключён (оплата не работает) — не добавлять обратно, пока не заработает.
+    if (['stripe', 'fondy'].includes(method)) {
       setPaymentMethod(method);
       setShowPayment(true);
     }
@@ -103,7 +104,8 @@ const DonationPage = () => {
                       <img src="/images/stripe1.svg" alt="Stripe" className="w-[72px] h-[44px]" />
                     </button>
 
-                    <button
+                    {/* PayPal временно скрыт (оплата не работает). Не удалять — вернуть, когда заработает. */}
+                    {/* <button
                       type="button"
                       onClick={() => {
                         setPaymentMethod('paypal');
@@ -114,7 +116,7 @@ const DonationPage = () => {
                       aria-label="Pay with PayPal"
                     >
                       <img src="/images/payp.svg" alt="PayPal" className="w-[62px] h-[44px]" />
-                    </button>
+                    </button> */}
 
                     <button
                       type="button"
