@@ -40,6 +40,7 @@ Frontend (React + Vite)  ←→  Backend API (Express.js)  ←→  PostgreSQL + 
 - 🔄 **[FRONTEND_MIGRATION.md](FRONTEND_MIGRATION.md)** - Frontend API integration
 - 📊 **[server/migrations/README.md](server/migrations/README.md)** - Database indexes guide
 - 🔴 **[server/REDIS_SETUP.md](server/REDIS_SETUP.md)** - Redis setup (Windows/Linux)
+- ✉️ **[docs/FEEDBACK_EMAIL_SETUP.md](docs/FEEDBACK_EMAIL_SETUP.md)** - Contact form email (EmailJS) — client setup guide
 
 ### Completed Stages:
 - ✅ **Stage 1:** Backend API Server - [COMPLETED]
@@ -91,6 +92,12 @@ psql -U raphael_user -d raphael_db -f server/migrations/003_insert_sample_data.s
 psql -U raphael_user -d raphael_db -f server/migrations/001_add_indexes.sql
 ```
 
+> **Note:** On startup the backend automatically applies any *pending* SQL
+> migrations from `server/migrations/` (see `server/src/utils/runMigrations.js`).
+> On an existing database with the core tables already present, migrations
+> `000–012` are treated as a baseline and are **not** re-run. The sample-data
+> migration (`003`) is never auto-run.
+
 ### 3. Configure Environment
 
 **Backend** (`server/.env`):
@@ -108,7 +115,16 @@ ALLOWED_ORIGINS=http://localhost:4028
 
 ```env
 VITE_API_URL=http://localhost:6388/api
+
+# Contact form email delivery (EmailJS) — see docs/FEEDBACK_EMAIL_SETUP.md
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
+
+> The contact form on the site sends messages via **EmailJS**. The recipient
+> address is configured in the EmailJS template (field **To Email**), not in code.
+> For the client-facing setup steps see **[docs/FEEDBACK_EMAIL_SETUP.md](docs/FEEDBACK_EMAIL_SETUP.md)**.
 
 ### 4. Run Application
 
@@ -369,5 +385,5 @@ This project is licensed under the ISC License.
 ---
 
 **Created:** 2024
-**Last Updated:** 2024-02-25
-**Version:** 2.0 (Backend API Architecture)
+**Last Updated:** 2026-06-04
+**Version:** 2.1 (Backend API Architecture + EmailJS contact form)
