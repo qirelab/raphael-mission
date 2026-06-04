@@ -90,11 +90,13 @@ const Footer = () => {
                     )}
 
                     {(() => {
+                      const localizedCity = contactData?.[`city_${language}`] || contactData?.city_en || contactData?.city;
+                      const localizedCountry = contactData?.[`country_${language}`] || contactData?.country_en || contactData?.country;
                       const addressParts = [
                         contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
                         contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
-                        contactData?.city,
-                        contactData?.country
+                        localizedCity,
+                        localizedCountry
                       ].filter(Boolean);
 
                       const hasAddress = addressParts.length > 0;
@@ -124,11 +126,11 @@ const Footer = () => {
                                 contactData?.address_line2}
                             </p>
                           )}
-                          {(contactData?.city || contactData?.country) && (
+                          {(localizedCity || localizedCountry) && (
                             <p className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#d1d5db] font-['Poppins']">
-                              {contactData?.city && contactData?.country
-                                ? `${contactData.city}, ${contactData.country}`
-                                : contactData?.city || contactData?.country}
+                              {localizedCity && localizedCountry
+                                ? `${localizedCity}, ${localizedCountry}`
+                                : localizedCity || localizedCountry}
                             </p>
                           )}
                         </a>

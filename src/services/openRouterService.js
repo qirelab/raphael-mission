@@ -145,7 +145,7 @@ Odpowiadaj krótko, na temat i przyjaźnie.`;
       } else if (message.includes('project') || message.includes('projects')) {
         return 'We have several projects:\n• Clean water\n• Healing ministry\n• Personal evangelism\n• Social projects\n• Tent evangelism\n\nWhich project interests you?';
       } else if (message.includes('contact') || message.includes('reach')) {
-        return 'You can contact us:\n• By phone: +1 (555) 123-4567\n• By email: info@raphaelmission.org\n• Through the contact form on the website\n\nDo you have a specific question?';
+        return 'You can contact us:\n• By phone: +48 570 941 670\n• By email: im.raphael@gmail.com\n• Through the contact form on the website\n\nDo you have a specific question?';
       } else if (message.includes('thank') || message.includes('thanks')) {
         return "You're welcome! Always happy to help. Any other questions?";
       } else if (message.includes('bye') || message.includes('goodbye')) {
@@ -170,7 +170,7 @@ Odpowiadaj krótko, na temat i przyjaźnie.`;
       } else if (message.includes('projekt') || message.includes('projekty')) {
         return 'Mamy kilka projektów:\n• Czysta woda\n• Służba uzdrawiająca\n• Osobista ewangelizacja\n• Projekty społeczne\n• Ewangelizacja namiotowa\n\nKtóry projekt cię interesuje?';
       } else if (message.includes('kontakt') || message.includes('skontaktować')) {
-        return 'Możesz się z nami skontaktować:\n• Telefonicznie: +1 (555) 123-4567\n• Emailem: info@raphaelmission.org\n• Przez formularz kontaktowy na stronie\n\nMasz konkretne pytanie?';
+        return 'Możesz się z nami skontaktować:\n• Telefonicznie: +48 570 941 670\n• Emailem: im.raphael@gmail.com\n• Przez formularz kontaktowy na stronie\n\nMasz konkretne pytanie?';
       } else if (message.includes('dziękuję') || message.includes('dzięki')) {
         return 'Proszę! Zawsze chętnie pomogę. Masz jeszcze pytania?';
       } else if (message.includes('pa') || message.includes('do widzenia')) {
@@ -196,7 +196,7 @@ Odpowiadaj krótko, na temat i przyjaźnie.`;
       } else if (message.includes('проект') || message.includes('проекты')) {
         return 'У нас есть несколько проектов:\n• Чистая вода\n• Исцеляющее служение\n• Личная евангелизация\n• Социальные проекты\n• Палаточная евангелизация\n\nКакой проект вас интересует?';
       } else if (message.includes('контакт') || message.includes('связаться')) {
-        return 'С нами можно связаться:\n• По телефону: +1 (555) 123-4567\n• По email: info@raphaelmission.org\n• Через форму обратной связи на сайте\n\nЕсть конкретный вопрос?';
+        return 'С нами можно связаться:\n• По телефону: +48 570 941 670\n• По email: im.raphael@gmail.com\n• Через форму обратной связи на сайте\n\nЕсть конкретный вопрос?';
       } else if (message.includes('спасибо') || message.includes('благодарю')) {
         return 'Пожалуйста! Всегда рад помочь. Есть еще вопросы?';
       } else if (message.includes('пока') || message.includes('до свидания')) {

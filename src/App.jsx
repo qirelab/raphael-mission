@@ -7,7 +7,16 @@ import PageLoader from './components/common/PageLoader';
 import ChatBot from './components/ChatBot';
 import { ContactProvider } from './context/ContactContext';
 import { ProjectsProvider } from './context/ProjectsContext';
+import { ProjectsHeroProvider } from './context/ProjectsHeroContext';
 import { TestimoniesProvider } from './context/TestimoniesContext';
+import { TestimoniesHeroProvider } from './context/TestimoniesHeroContext';
+import { ShopHeroProvider } from './context/ShopHeroContext';
+import { AboutProvider } from './context/AboutContext';
+import { PrivacyPolicyProvider } from './context/PrivacyPolicyContext';
+import { HomePageProvider } from './context/HomePageContext';
+import { CookiePolicyProvider } from './context/CookiePolicyContext';
+import { TermsOfServiceProvider } from './context/TermsOfServiceContext';
+import { DonationPageProvider } from './context/DonationPageContext';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import { AlertProvider } from './context/AlertContext';
 import { ChatProvider } from './context/ChatContext';
@@ -36,15 +45,33 @@ export default function App() {
   return (
     <LoadingProvider>
       <ProjectsProvider>
-        <TestimoniesProvider>
-          <ContactProvider>
-            <AlertProvider>
-              <ChatProvider>
-                <AppContent />
-              </ChatProvider>
-            </AlertProvider>
-          </ContactProvider>
-        </TestimoniesProvider>
+        <ProjectsHeroProvider>
+          <TestimoniesProvider>
+            <TestimoniesHeroProvider>
+              <ShopHeroProvider>
+                <ContactProvider>
+                  <AboutProvider>
+                    <PrivacyPolicyProvider>
+                      <HomePageProvider>
+                        <CookiePolicyProvider>
+                          <TermsOfServiceProvider>
+                            <DonationPageProvider>
+                              <AlertProvider>
+                                <ChatProvider>
+                                  <AppContent />
+                                </ChatProvider>
+                              </AlertProvider>
+                            </DonationPageProvider>
+                          </TermsOfServiceProvider>
+                        </CookiePolicyProvider>
+                      </HomePageProvider>
+                    </PrivacyPolicyProvider>
+                  </AboutProvider>
+                </ContactProvider>
+              </ShopHeroProvider>
+            </TestimoniesHeroProvider>
+          </TestimoniesProvider>
+        </ProjectsHeroProvider>
       </ProjectsProvider>
     </LoadingProvider>
   );

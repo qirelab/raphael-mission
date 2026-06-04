@@ -9,6 +9,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { projectsService } from '../../services/projectsService';
 import { useTestimoniesContext } from '../../context/TestimoniesContext';
 import { useContact } from '../../context/ContactContext';
+import { useHomePage } from '../../context/HomePageContext';
 import { useAlert } from '../../hooks/useAlert';
 import Footer from '../../components/common/Footer';
 import { CardsGridSkeleton, TestimonialsGridSkeleton } from '../../components/skeletons';
@@ -38,6 +39,21 @@ const Home = () => {
 
   const { testimonies: testimoniesRaw, loading: loadingTestimonies } = useTestimoniesContext();
   const { contactData } = useContact();
+  const { pageData } = useHomePage();
+
+  // Resolve a localized field from the DB row with graceful fallbacks:
+  //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
+  const pick = (base, translationKey) => {
+    if (pageData) {
+      const localized = pageData[`${base}_${language}`];
+      if (localized && localized.trim() !== '') return localized;
+      const englishFallback = pageData[`${base}_en`];
+      if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    }
+    return t(translationKey);
+  };
+
+  const logoUrl = (pageData?.logo_url && pageData.logo_url.trim()) || '/images/img_logo_2.png';
 
   // Transform testimonies based on current language (client-side, no API call)
   const testimonies = useMemo(() => {
@@ -163,7 +179,7 @@ const Home = () => {
             {/* Logo (без hover) */}
             <div className="w-full lg:w-auto flex justify-center lg:justify-start">
               <img
-                src="/images/img_logo_2.png"
+                src={logoUrl}
                 alt={`${t('brandName')} Logo`}
                 className="w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px]"
               />
@@ -172,12 +188,12 @@ const Home = () => {
             {/* Content */}
             <div className="w-full lg:w-[64%] flex flex-col items-center lg:items-start text-center lg:text-left">
               <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[40px] sm:leading-[50px] lg:leading-[60px] text-white font-['Poppins'] mb-4">
-                <span className="text-white">{t('heroTitle')} </span>
-                <span className="text-[#3b8a79]">{t('heroTitleHighlight')}</span>
+                <span className="text-white">{pick('hero_title', 'heroTitle')} </span>
+                <span className="text-[#3b8a79]">{pick('hero_title_highlight', 'heroTitleHighlight')}</span>
               </h1>
 
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-white font-['Poppins'] mb-8 lg:mb-9">
-                {t('heroDescription')}
+                {pick('hero_description', 'heroDescription')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -186,7 +202,7 @@ const Home = () => {
                   className="pt-[18px] pr-[28px] pb-[18px] pl-[28px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] w-full sm:w-auto"
                   onClick={() => navigate(`/${language}/donate`)}
                 >
-                  {t('supportMission')}
+                  {pick('hero_btn_support', 'supportMission')}
                 </Button>
 
                 <Button
@@ -194,7 +210,7 @@ const Home = () => {
                   className="pt-[18px] pr-[30px] pb-[18px] pl-[30px] text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[27px] text-center text-white font-['Poppins'] border-2 border-[#3b8a79] w-full sm:w-auto hover:bg-white/90 hover:text-gray-900 hover:shadow-lg transition-colors"
                   onClick={() => navigate(`/${language}/about-mission`)}
                 >
-                  {t('learnMore')}
+                  {pick('hero_btn_learn_more', 'learnMore')}
                 </Button>
               </div>
             </div>
@@ -207,10 +223,10 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
-              {t('missionTitle')}
+              {pick('mission_title', 'missionTitle')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#374151] font-['Poppins'] max-w-full md:max-w-[56%]">
-              {t('missionDescription')}
+              {pick('mission_description', 'missionDescription')}
             </p>
           </div>
 
@@ -219,10 +235,10 @@ const Home = () => {
             <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
-                  {t('humanitarianAid')}
+                  {pick('card1_title', 'humanitarianAid')}
                 </h3>
                 <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
-                  {t('humanitarianAidDesc')}
+                  {pick('card1_desc', 'humanitarianAidDesc')}
                 </p>
               </div>
             </div>
@@ -231,10 +247,10 @@ const Home = () => {
             <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
-                  {t('spiritualGuidance')}
+                  {pick('card2_title', 'spiritualGuidance')}
                 </h3>
                 <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
-                  {t('spiritualGuidanceDesc')}
+                  {pick('card2_desc', 'spiritualGuidanceDesc')}
                 </p>
               </div>
             </div>
@@ -243,10 +259,10 @@ const Home = () => {
             <div className="bg-[#3c8a7a] rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019] flex flex-col items-center text-center h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
               <div className="flex-1 flex flex-col items-center text-center">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold leading-[27px] lg:leading-[30px] text-white font-['Poppins'] mb-3">
-                  {t('communityBuilding')}
+                  {pick('card3_title', 'communityBuilding')}
                 </h3>
-                <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sанс']">
-                  {t('communityBuildingDesc')}
+                <p className="text-[14px] lg:text-[16px] leading-[18px] lg:leading-[21px] text-[#e5e7eb] font-['Open_Sans']">
+                  {pick('card3_desc', 'communityBuildingDesc')}
                 </p>
               </div>
             </div>
@@ -259,10 +275,10 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
-              {t('currentProjects')}
+              {pick('projects_title', 'currentProjects')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[60%]">
-              {t('currentProjectsDesc')}
+              {pick('projects_description', 'currentProjectsDesc')}
             </p>
           </div>
 
@@ -335,20 +351,21 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-6">
-              {t('supportOurMission')}
+              {pick('support_title', 'supportOurMission')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-white/90 font-['Poppins'] max-w-full md:max-w-[62%] mx-auto mb-12">
-              {t('supportMissionDesc')}
+              {pick('support_description', 'supportMissionDesc')}
             </p>
 
             <div className="w-full flex flex-wrap gap-6 justify-center">
-              <button
+              {/* PayPal временно скрыт (оплата не работает). Не удалять — вернуть, когда заработает. */}
+              {/* <button
                 className="bg-white text-[#0070BA] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate(`/${language}/donation?method=paypal`)}
               >
                 <img src="/images/payp.svg" alt="PayPal" className="w-[12px] h-[24px]" />
                 PayPal
-              </button>
+              </button> */}
               <button
                 className="bg-white text-[#8454ec] font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-3"
                 onClick={() => navigate(`/${language}/donation?method=stripe`)}
@@ -373,10 +390,10 @@ const Home = () => {
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[36px] sm:leading-[42px] lg:leading-[48px] text-[#111827] font-['Poppins'] mb-4">
-              {t('testimonies')}
+              {pick('testimonies_title', 'testimonies')}
             </h2>
             <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[44%]">
-              {t('testimoniesDesc')}
+              {pick('testimonies_description', 'testimoniesDesc')}
             </p>
           </div>
 
@@ -426,10 +443,10 @@ const Home = () => {
             {/* Info */}
             <div className="w-full lg:w-1/2">
               <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-white font-['Poppins'] mb-3">
-                {t('contactUsTitle')}
+                {pick('contact_title', 'contactUsTitle')}
               </h2>
               <p className="max-w-full lg:max-w-[82%] mb-8 text-[16px] sm:text-[18px] lg:text-[20px] leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#dcfce7] font-['Poppins']">
-                {t('contactUsDesc')}
+                {pick('contact_description', 'contactUsDesc')}
               </p>
 
               <div className="space-y-6">
@@ -438,20 +455,22 @@ const Home = () => {
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
                     <img
                       src="/images/img_div_blue_gray_600.svg"
-                      alt={t('addressLabel')}
+                      alt={pick('label_address', 'addressLabel')}
                       className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
                     />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('addressLabel')}
+                      {pick('label_address', 'addressLabel')}
                     </h3>
                     {(() => {
+                      const localizedCity = contactData?.[`city_${language}`] || contactData?.city_en || contactData?.city;
+                      const localizedCountry = contactData?.[`country_${language}`] || contactData?.country_en || contactData?.country;
                       const addressParts = [
                         contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
                         contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
-                        contactData?.city,
-                        contactData?.country
+                        localizedCity,
+                        localizedCountry
                       ].filter(Boolean);
 
                       const hasAddress = addressParts.length > 0;
@@ -482,12 +501,12 @@ const Home = () => {
                                 contactData?.address_line2}
                             </>
                           )}
-                          {(contactData?.city || contactData?.country) && (
+                          {(localizedCity || localizedCountry) && (
                             <>
                               <br />
-                              {contactData?.city && contactData?.country
-                                ? `${contactData.city}, ${contactData.country}`
-                                : contactData?.city || contactData?.country}
+                              {localizedCity && localizedCountry
+                                ? `${localizedCity}, ${localizedCountry}`
+                                : localizedCity || localizedCountry}
                             </>
                           )}
                         </a>
@@ -505,13 +524,13 @@ const Home = () => {
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
                     <img
                       src="/images/img_div_blue_gray_600_48x48.svg"
-                      alt={t('phoneLabel')}
+                      alt={pick('label_phone', 'phoneLabel')}
                       className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
                     />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('phoneLabel')}
+                      {pick('label_phone', 'phoneLabel')}
                     </h3>
                     {contactData?.phone_number ? (
                       <a
@@ -533,13 +552,13 @@ const Home = () => {
                   <div className="w-[48px] h-[48px] bg-white rounded-[24px] flex items-center justify-center">
                     <img
                       src="/images/img_vector_blue_gray_600.svg"
-                      alt={t('emailLabel')}
+                      alt={pick('label_email', 'emailLabel')}
                       className="w-[24px] h-[24px] transition-transform duration-300 hover:scale-110"
                     />
                   </div>
                   <div>
                     <h3 className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-white font-['Poppins']">
-                      {t('emailLabel')}
+                      {pick('label_email', 'emailLabel')}
                     </h3>
                     {contactData?.email ? (
                       <a
@@ -561,19 +580,19 @@ const Home = () => {
             {/* Form */}
             <div className="w-full lg:w-[46%] bg-white rounded-[12px] p-6 lg:p-8 shadow-[0px_10px_15px_#00000019]">
               <h3 className="text-[20px] lg:text-[24px] font-semibold leading-[30px] lg:leading-[36px] text-[#1f2937] font-['Poppins'] mb-4">
-                {t('sendMessage')}
+                {pick('form_title', 'sendMessage')}
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <EditText
-                    placeholder={t('firstName')}
+                    placeholder={pick('ph_first_name', 'firstName')}
                     value={firstName}
                     onChange={(e) => setFirstName(e?.target?.value)}
                     fullWidth
                   />
                   <EditText
-                    placeholder={t('lastName')}
+                    placeholder={pick('ph_last_name', 'lastName')}
                     value={lastName}
                     onChange={(e) => setLastName(e?.target?.value)}
                     fullWidth
@@ -581,21 +600,21 @@ const Home = () => {
                 </div>
 
                 <EditText
-                  placeholder={t('emailField')}
+                  placeholder={pick('ph_email', 'emailField')}
                   value={email}
                   onChange={(e) => setEmail(e?.target?.value)}
                   fullWidth
                 />
 
                 <EditText
-                  placeholder={t('subject')}
+                  placeholder={pick('ph_subject', 'subject')}
                   value={subject}
                   onChange={(e) => setSubject(e?.target?.value)}
                   fullWidth
                 />
 
                 <TextArea
-                  placeholder={t('yourMessage')}
+                  placeholder={pick('ph_message', 'yourMessage')}
                   value={message}
                   onChange={(e) => setMessage(e?.target?.value)}
                   rows={6}
@@ -620,7 +639,7 @@ const Home = () => {
                       className="bg-[#3c8a7a] rounded-[8px] px-4 py-2 w-full flex justify-center hover:bg-[#2f7d6d] transition-colors duration-200 min-h-[48px]"
                     >
                       <span className="text-[14px] lg:text-[16px] font-semibold leading-[20px] lg:leading-[24px] text-center text-white font-['Poppins'] py-1.5">
-                        {t('sendMessage')}
+                        {pick('form_title', 'sendMessage')}
                       </span>
                     </button>
                   )}

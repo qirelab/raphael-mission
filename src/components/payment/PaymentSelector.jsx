@@ -1,7 +1,8 @@
 // src/components/payment/PaymentSelector.jsx
 import React, { useEffect, useState } from 'react';
 import StripePayment from './StripePayment';
-import PayPalPayment from './PayPalPayment';
+// PayPal временно отключён (оплата не работает). Не удалять — вернуть, когда заработает.
+// import PayPalPayment from './PayPalPayment';
 import FondyPayment from './FondyPayment';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -26,12 +27,13 @@ const PaymentSelector = ({
       descriptionKey: 'providerStripeDesc',
       icon: '/images/stripe1.svg',
     },
-    {
-      id: 'paypal',
-      name: 'PayPal',
-      descriptionKey: 'providerPayPalDesc',
-      icon: '/images/i.svg',
-    },
+    // PayPal временно скрыт (оплата не работает). Не удалять — вернуть, когда заработает.
+    // {
+    //   id: 'paypal',
+    //   name: 'PayPal',
+    //   descriptionKey: 'providerPayPalDesc',
+    //   icon: '/images/i.svg',
+    // },
     {
       id: 'fondy',
       name: 'Fondy',
@@ -57,15 +59,16 @@ const PaymentSelector = ({
             onError={handlePaymentError}
           />
         );
-      case 'paypal':
-        return (
-          <PayPalPayment
-            amount={amount}
-            currency={currency}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-          />
-        );
+      // PayPal временно отключён (оплата не работает). Не удалять — вернуть, когда заработает.
+      // case 'paypal':
+      //   return (
+      //     <PayPalPayment
+      //       amount={amount}
+      //       currency={currency}
+      //       onSuccess={handlePaymentSuccess}
+      //       onError={handlePaymentError}
+      //     />
+      //   );
       case 'fondy':
         return (
           <FondyPayment

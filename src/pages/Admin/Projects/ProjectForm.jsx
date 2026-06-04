@@ -61,7 +61,7 @@ const ProjectForm = () => {
       const data = await projectsService.getById(id);
       setFormData(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch project');
+      setError(err.message || 'Не удалось загрузить проект');
     } finally {
       setLoading(false);
     }
@@ -125,7 +125,7 @@ const ProjectForm = () => {
       await refreshProjects();
       navigate('/admin/projects');
     } catch (err) {
-      const errorMessage = err.message || 'Failed to save project';
+      const errorMessage = err.message || 'Не удалось сохранить проект';
       showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }

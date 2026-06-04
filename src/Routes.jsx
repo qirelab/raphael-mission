@@ -28,13 +28,22 @@ import AdminLayout from './pages/Admin/Layout';
 import Dashboard from './pages/Admin/Dashboard';
 import ProjectsList from './pages/Admin/Projects/ProjectsList';
 import ProjectForm from './pages/Admin/Projects/ProjectForm';
+import ProjectsHeroEditor from './pages/Admin/Projects/ProjectsHeroEditor';
 import TestimoniesList from './pages/Admin/Testimonies/TestimoniesList';
 import TestimonyForm from './pages/Admin/Testimonies/TestimonyForm';
+import TestimoniesHeroEditor from './pages/Admin/Testimonies/TestimoniesHeroEditor';
 import ContactInfo from './pages/Admin/Contact/ContactInfo';
+import AboutEditor from './pages/Admin/About/AboutEditor';
+import HomeEditor from './pages/Admin/Home/HomeEditor';
+import PrivacyPolicyEditor from './pages/Admin/PrivacyPolicy/PrivacyPolicyEditor';
+import CookiePolicyEditor from './pages/Admin/CookiePolicy/CookiePolicyEditor';
+import TermsOfServiceEditor from './pages/Admin/TermsOfService/TermsOfServiceEditor';
+import DonationEditor from './pages/Admin/Donation/DonationEditor';
 // import TrainingList from './pages/Admin/Training/TrainingList'; // Temporarily hidden
 // import TrainingForm from './pages/Admin/Training/TrainingForm'; // Temporarily hidden
 import ProductsList from './pages/Admin/Shop/ProductsList';
 import ProductForm from './pages/Admin/Shop/ProductForm';
+import ShopHeroEditor from './pages/Admin/Shop/ShopHeroEditor';
 
 const AppRoutes = () => {
   return (
@@ -68,18 +77,27 @@ const AppRoutes = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="projects" element={<ProjectsList />} />
+        <Route path="projects/hero" element={<ProjectsHeroEditor />} />
         <Route path="projects/new" element={<ProjectForm />} />
         <Route path="projects/edit/:id" element={<ProjectForm />} />
         <Route path="testimonies" element={<TestimoniesList />} />
+        <Route path="testimonies/hero" element={<TestimoniesHeroEditor />} />
         <Route path="testimonies/new" element={<TestimonyForm />} />
         <Route path="testimonies/edit/:id" element={<TestimonyForm />} />
         {/* <Route path="training" element={<TrainingList />} /> */}{/* Temporarily hidden */}
         {/* <Route path="training/new" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
         {/* <Route path="training/edit/:id" element={<TrainingForm />} /> */}{/* Temporarily hidden */}
         <Route path="shop" element={<ProductsList />} />
+        <Route path="shop/hero" element={<ShopHeroEditor />} />
         <Route path="shop/new" element={<ProductForm />} />
         <Route path="shop/edit/:id" element={<ProductForm />} />
         <Route path="contact" element={<ContactInfo />} />
+        <Route path="about" element={<AboutEditor />} />
+        <Route path="home" element={<HomeEditor />} />
+        <Route path="privacy-policy" element={<PrivacyPolicyEditor />} />
+        <Route path="cookie-policy" element={<CookiePolicyEditor />} />
+        <Route path="terms-of-service" element={<TermsOfServiceEditor />} />
+        <Route path="donation" element={<DonationEditor />} />
       </Route>
 
       {/* 404 Route */}

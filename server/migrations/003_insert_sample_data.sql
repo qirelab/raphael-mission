@@ -26,7 +26,7 @@ TRUNCATE TABLE contact CASCADE;
 INSERT INTO users (email, password_hash, name, role, is_active)
 VALUES (
     'admin@raphael.com',
-    '$2a$12$K9p7Xz8qN2YvLmW5fJ3.HuEr4Gx6Tp9Rq8Sv3Nx7Kw2Mp1Lv4Qz8a',
+    '$2a$12$72QBkIxacLfaKtz9uS673.No8MNv6uB1reuiMizf8.77V/N3UMZtm',
     'Администратор',
     'admin',
     true
@@ -36,7 +36,7 @@ VALUES (
 INSERT INTO users (email, password_hash, name, role, is_active)
 VALUES (
     'user@raphael.com',
-    '$2a$12$X5Yp2Wz7Nv6Tm4Kf9Lj2.GuDr3Hx5Uq7Rw8Ox6Mx9Np0Kw3Rv1Za',
+    '$2a$12$s4VCpreQt/4GbeD9n7CWaeuNsBdOqJCbovTPNi5f5l.67E1OIKOme',
     'Обычный пользователь',
     'user',
     true
@@ -398,10 +398,10 @@ VALUES
 
 INSERT INTO contact (email, phone, address_en, address_ru, social_links)
 VALUES (
-    'info@raphael-mission.org',
-    '+1 (555) 123-4567',
-    '123 Mission Street, Suite 100, City, State 12345, USA',
-    'ул. Миссионерская, 123, офис 100, Город, Область 12345, США',
+    'im.raphael@gmail.com',
+    '+48 570 941 670',
+    'Brzeg 3/1 44-178, Gliwice, Poland',
+    'Brzeg 3/1 44-178, Гливице, Польша',
     '{
         "facebook": "https://facebook.com/raphaelmission",
         "instagram": "https://instagram.com/raphaelmission",

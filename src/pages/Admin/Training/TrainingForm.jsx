@@ -37,7 +37,7 @@ const TrainingForm = () => {
       const data = await trainingService.getById(id);
       setFormData(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch training program');
+      setError(err.message || 'Не удалось загрузить программу обучения');
     } finally {
       setLoading(false);
     }
@@ -71,7 +71,7 @@ const TrainingForm = () => {
       }
       navigate('/admin/training');
     } catch (err) {
-      setError(err.message || 'Failed to save training program');
+      setError(err.message || 'Не удалось сохранить программу обучения');
       setLoading(false);
     }
   };

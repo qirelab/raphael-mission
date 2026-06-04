@@ -40,7 +40,7 @@ const ProductForm = () => {
       const data = await shopService.getById(id);
       setFormData(data);
     } catch (err) {
-      setError(err.message || 'Failed to fetch product');
+      setError(err.message || 'Не удалось загрузить товар');
     } finally {
       setLoading(false);
     }
@@ -86,7 +86,7 @@ const ProductForm = () => {
       }
       navigate('/admin/shop');
     } catch (err) {
-      const errorMessage = err.message || 'Failed to save product';
+      const errorMessage = err.message || 'Не удалось сохранить товар';
       showError(errorMessage, t('alertSaveError'));
       setLoading(false);
     }
