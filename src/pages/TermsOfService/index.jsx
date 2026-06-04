@@ -1,12 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTermsOfService } from '../../context/TermsOfServiceContext';
+import { useContact } from '../../context/ContactContext';
 import Footer from '../../components/common/Footer';
 import { Link } from 'react-router-dom';
 
 const TermsOfService = () => {
   const { t, language } = useLanguage();
   const { pageData } = useTermsOfService();
+  const { contactData } = useContact();
 
   // Resolve a localized field from the DB row with graceful fallbacks:
   //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
@@ -114,7 +116,7 @@ const TermsOfService = () => {
                 {pick('contact_content', 'termsContactContent')}
               </p>
               <p className="text-[16px] sm:text-[18px] text-[#3c8a7a] font-semibold font-poppins">
-                {t('emailAddress')}
+                {contactData?.email || t('emailAddress')}
               </p>
             </div>
           </div>
