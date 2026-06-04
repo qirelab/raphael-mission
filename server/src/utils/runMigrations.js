@@ -52,6 +52,24 @@ const baselineIfNeeded = async (client, allFiles) => {
   logger.info(`📌 Baseline: marked ${baselineFiles.length} pre-runner migrations as applied`);
 };
 
+// The `update_updated_at_column()` trigger function is defined only in
+// migration 000. On a baselined database (000–012 marked applied without
+// actually running — see baselineIfNeeded) the tables exist but this function
+// may be missing, which makes every later migration that attaches an
+// updated_at trigger fail with "function update_updated_at_column() does not
+// exist". Recreate it idempotently so pending migrations can rely on it.
+const ensureTriggerFunction = async (client) => {
+  await client.query(`
+    CREATE OR REPLACE FUNCTION update_updated_at_column()
+    RETURNS TRIGGER AS $$
+    BEGIN
+        NEW.updated_at = CURRENT_TIMESTAMP;
+        RETURN NEW;
+    END;
+    $$ language 'plpgsql';
+  `);
+};
+
 const listMigrationFiles = async () => {
   const entries = await readdir(MIGRATIONS_DIR);
   return entries
@@ -80,6 +98,10 @@ export const runMigrations = async () => {
 
     const files = await listMigrationFiles();
     await baselineIfNeeded(client, files);
+
+    // Guarantee shared DB objects (trigger function) exist before applying
+    // pending migrations that depend on them.
+    await ensureTriggerFunction(client);
 
     const { rows } = await client.query('SELECT filename FROM schema_migrations');
     const applied = new Set(rows.map((r) => r.filename));
