@@ -38,6 +38,7 @@ export const translations = {
     currentProjects: 'Our Projects',
     currentProjectsDesc:
       "We share the Gospel by responding to people's needs through various outreach initiatives and events.",
+    allProjects: 'All projects',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
@@ -670,6 +671,7 @@ export const translations = {
     currentProjects: 'Наши проекты',
     currentProjectsDesc:
       'Мы распространяем Евангелие, реагируя на нужды людей через различные инициативы и мероприятия.',
+    allProjects: 'Все проекты',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:
@@ -1307,6 +1309,7 @@ export const translations = {
     currentProjects: 'Nasze projekty',
     currentProjectsDesc:
       'Rozpowszechniamy Ewangelię, reagując na potrzeby ludzi poprzez różne inicjatywy i wydarzenia.',
+    allProjects: 'Wszystkie projekty',
 
     // ===== Home / Testimonies snippet =====
     testimoniesDesc:

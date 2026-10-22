@@ -343,6 +343,19 @@ const Home = () => {
               </div>
             )}
           </div>
+
+          {!loadingProjects && firstProjects.length > 0 && (
+            <div className="flex justify-center mt-10 lg:mt-12">
+              <Button
+                variant="primary"
+                size="large"
+                className="font-semibold text-center text-white font-['Poppins'] w-full sm:w-auto"
+                onClick={() => navigate(`/${language}/projects`)}
+              >
+                {t('allProjects')}
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
