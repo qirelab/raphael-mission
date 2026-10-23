@@ -145,9 +145,10 @@ ON user_sessions(user_id);
 
 -- High Priority: Session validation optimization
 -- Impact: 95% improvement for getSessionById() queries
+-- No `WHERE expires_at > NOW()` predicate: Postgres rejects non-IMMUTABLE
+-- functions in index predicates.
 CREATE INDEX IF NOT EXISTS idx_user_sessions_id_expires
-ON user_sessions(id, expires_at)
-WHERE expires_at > NOW();
+ON user_sessions(id, expires_at);
 
 -- Medium Priority: Cleanup expired sessions
 CREATE INDEX IF NOT EXISTS idx_user_sessions_expires

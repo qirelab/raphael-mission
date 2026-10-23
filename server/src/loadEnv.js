@@ -6,8 +6,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load .env from server directory
-const result = dotenv.config({ path: path.join(__dirname, '..', '.env') });
+// Load .env from server directory. `override` makes server/.env win over
+// variables inherited from the shell / PM2 daemon — other apps on the same VPS
+// export their own DATABASE_URL, which otherwise silently takes precedence.
+const result = dotenv.config({ path: path.join(__dirname, '..', '.env'), override: true });
 
 if (result.error) {
   console.error('Error loading .env file:', result.error);
