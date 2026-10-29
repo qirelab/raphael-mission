@@ -10,68 +10,132 @@ body {
 }
 
 /* Use Inter font for Russian language */
-html[lang="ru"] body,
-html[lang="ru"] body *:not([class*="font-['Poppins']"]) {
+html[lang='ru'] body,
+html[lang='ru'] body *:not([class*="font-['Poppins']"]) {
   font-family: 'Inter', sans-serif;
 }
 
-html[lang="ru"] .font-\[\'Poppins\'\] {
+html[lang='ru'] .font-\[\'Poppins\'\] {
   font-family: 'Inter', sans-serif !important;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 .hero-bg-blur {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(90deg, rgba(17, 24, 39, 0.2) 0%, rgba(17, 24, 39, 0.2) 100%);
   filter: blur(0px);
   z-index: 0;
 }
 
+/* Hero cover: one full-width banner (sower at sunset).
+   ::before is the blurred backdrop that fills the whole block,
+   ::after is the sharp banner on top. */
 .hero-bg-blur::before,
 .hero-bg-blur::after {
   content: '';
   position: absolute;
   top: 0;
+  left: 0;
   height: 100%;
-  width: 50%;
+  width: 100%;
+  background-image: url('/images/raphael-hero-sowing.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   z-index: -1;
 }
 
-.hero-bg-blur::before {
-  left: 0;
-  background-image: url('/images/image2.png');
-}
-
+/* Desktop: the block is wide enough that `cover` keeps the whole scene,
+   so the backdrop layer is not needed. */
 .hero-bg-blur::after {
-  right: 0;
-  background-image: url('/images/image1.png');
+  display: none;
 }
 
-/* Mobile + tablet: show one image to avoid squeezing */
+/* Mobile + tablet: the banner is ~3:1 while the hero is tall, so `cover`
+   would crop away the sower on the left and the tractor on the right.
+   Show the full width sharp, over a blurred, zoomed copy of itself. */
 @media (max-width: 1023px) {
+  .hero-bg-blur {
+    background: #241a12;
+  }
+
   .hero-bg-blur::before {
-    width: 100%;
+    background-size: 260% auto;
+    background-position: center 46%;
+    filter: blur(30px) brightness(0.72) saturate(1.35);
   }
 
   .hero-bg-blur::after {
-    display: none;
-  }
-
-  .hero-bg-blur {
-    background: linear-gradient(90deg, rgba(17, 24, 39, 0.35) 0%, rgba(17, 24, 39, 0.35) 100%);
+    display: block;
+    background-size: 100% auto;
+    background-position: center 42%;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 18%,
+      #000 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
   }
 }
 
 .hero-bg-overlay {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(30, 34, 45, 0.5);
   z-index: 1;
+}
+
+/* The sunset banner is bright in places — keep the hero copy readable. */
+.hero-bg-blur ~ div h1,
+.hero-bg-blur ~ div p {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* Lightbox: the fade/zoom is pure CSS so the overlay is never invisible
+   while still capturing clicks (a JS-driven fade can stall). */
+.lightbox-overlay {
+  animation: lightbox-fade-in 180ms ease-out both;
+}
+
+.lightbox-figure {
+  animation: lightbox-zoom-in 180ms ease-out both;
+}
+
+@keyframes lightbox-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-zoom-in {
+  from {
+    transform: scale(0.96);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-overlay,
+  .lightbox-figure {
+    animation: none;
+  }
 }

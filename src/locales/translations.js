@@ -76,8 +76,7 @@ export const translations = {
 
     // ===== Mission (home section) =====
     missionTitle: 'Our Goals',
-    missionDescription:
-      'Our goal is to lead people to Jesus.',
+    missionDescription: 'Our goal is to lead people to Jesus.',
     humanitarianAid: 'A close relationship with God',
     humanitarianAidDesc:
       'To live in constant closeness with God and pass on to others this desire to be near Him.',
@@ -223,7 +222,8 @@ export const translations = {
 
     // ===== Projects Page =====
     projectsPageTitle: 'Our Projects',
-    projectsPageDescription: 'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
+    projectsPageDescription:
+      'Through each project we see the fruit of the Gospel: open hearts for Jesus, repentance and transformed lives, where people receive freedom, healing, and hope, returning to the meaning of life.',
     projectsBibleQuote: '"I have come that you may have life, and have it to the full."',
     projectsBibleSource: 'Jesus (John 10:10)',
     streetEvangelismTitle: 'Street Evangelism',
@@ -253,6 +253,21 @@ export const translations = {
     transformingLivesTitle: 'Transforming Lives, Building Communities',
     transformingLivesDesc:
       "Each project serves as a bridge of hope, connecting hearts to faith and communities to lasting change. Through our diverse ministries, we witness transformed lives, strengthened families, and thriving communities that reflect God's love and compassion.",
+    // ===== Home / Join Us block =====
+    projectsJoinTitle: 'Join Us!',
+    projectsJoinText:
+      'You can be part of this project through personal involvement, prayer, or financial support. Together, we can help more people hear the Gospel and come to know Jesus Christ.',
+
+    // ===== Projects Page / Intro & Closing =====
+    projectsIntroTitle: 'Sharing the Gospel That Changes Lives!',
+    projectsIntroText1:
+      'We believe that everyone should have the opportunity to hear the Good News of Jesus Christ.',
+    projectsIntroText2:
+      'That is why we share the Gospel in various ways, carry out evangelistic, social, and creative projects, organize mission trips, and support local churches by responding to people’s needs, so that as many people as possible can come to know Jesus Christ and experience life transformation.',
+    projectsClosingText1:
+      'Our mission is for as many people as possible to come to know Jesus Christ, experience His love, and discover the hope that the Gospel brings.',
+    projectsClosingText2: 'Join us in sharing the Good News with those who have not yet heard it!',
+
     joinUsTitle: 'Join Us in Making a Difference',
     joinUsDesc:
       'Your support and participation can help us reach more communities and transform more lives. Together, we can spread hope and compassion to those who need it most.',
@@ -299,7 +314,7 @@ export const translations = {
     noTrainingPrograms: 'No training programs available at the moment. Check back soon!',
 
     // ===== Footer =====
-    footerDesc: "Raphael Mission — the Gospel for the nations and love in action.",
+    footerDesc: 'Raphael Mission — the Gospel for the nations and love in action.',
     navigation: 'Navigation',
     legal: 'Legal',
     followUs: 'Follow Us',
@@ -520,6 +535,16 @@ export const translations = {
     healingMinistryApproach4: 'Follow-up care and discipleship',
 
     // Common project page elements
+    // ===== Project Gallery / Lightbox =====
+    galleryViewPhoto: 'Open photo',
+    galleryViewerLabel: 'Project gallery viewer',
+    galleryClose: 'Close',
+    galleryPrev: 'Previous photo',
+    galleryNext: 'Next photo',
+    galleryZoomIn: 'Zoom in',
+    galleryZoomOut: 'Zoom out',
+    galleryPhoto: 'Photo',
+
     projectGetInvolvedTitle: 'Get Involved',
     projectGetInvolvedDesc:
       'Join us in this vital ministry. Whether through volunteering, financial support, or prayer partnership, you can make a difference.',
@@ -709,8 +734,7 @@ export const translations = {
 
     // ===== Mission (home section) =====
     missionTitle: 'Наши Цели',
-    missionDescription:
-      'Наша цель — приводить людей к Иисусу.',
+    missionDescription: 'Наша цель — приводить людей к Иисусу.',
     humanitarianAid: 'Близкие отношения с Богом',
     humanitarianAidDesc:
       'Быть в постоянной близости с Богом и передавать другим эту жажду быть рядом с Ним.',
@@ -718,8 +742,7 @@ export const translations = {
     spiritualGuidanceDesc:
       'Достигать сердец людей Словом Евангелия, Божьей любовью и силой, принося исцеление, свободу и восстановление.',
     communityBuilding: 'Практическая помощь',
-    communityBuildingDesc:
-      'Через конкретные дела отвечать на нужды, потребности и боль людей.',
+    communityBuildingDesc: 'Через конкретные дела отвечать на нужды, потребности и боль людей.',
 
     // ===== Language switcher =====
     language: 'Язык',
@@ -886,6 +909,22 @@ export const translations = {
     transformingLivesTitle: 'Преобразование жизней, строительство сообществ',
     transformingLivesDesc:
       'Каждый проект — мост надежды, соединяющий сердца с верой и сообщества с устойчивыми изменениями. Мы видим преображённые жизни, укреплённые семьи и процветающие общины, отражающие Божью любовь и сострадание.',
+    // ===== Home / Join Us block =====
+    projectsJoinTitle: 'Присоединяйтесь!',
+    projectsJoinText:
+      'Вы можете стать частью этого проекта через личное участие, молитву или финансовую поддержку. Вместе мы можем помочь большему числу людей услышать Евангелие и познать Иисуса Христа.',
+
+    // ===== Projects Page / Intro & Closing =====
+    projectsIntroTitle: 'Мы делимся Евангелием, которое меняет жизни!',
+    projectsIntroText1:
+      'Мы верим, что каждый человек должен иметь возможность услышать Благую Весть об Иисусе Христе.',
+    projectsIntroText2:
+      'Поэтому мы проповедуем Евангелие различными способами, реализуем евангелизационные, социальные и творческие проекты, проводим миссионерские поездки, а также поддерживаем поместные церкви, откликаясь на нужды людей, чтобы как можно больше людей могли познать Иисуса Христа и пережить преображение своей жизни.',
+    projectsClosingText1:
+      'Наша миссия — чтобы как можно больше людей познали Иисуса Христа, испытали Его любовь и обрели надежду, которую дарит Евангелие.',
+    projectsClosingText2:
+      'Присоединяйся к нам, чтобы вместе нести Благую Весть тем, кто ещё её не слышал!',
+
     joinUsTitle: 'Присоединяйтесь к нам в изменении мира',
     joinUsDesc:
       'Ваша поддержка и участие помогают нам охватывать больше сообществ и преобразовывать больше жизней. Вместе мы несём надежду и сострадание тем, кто особенно нуждается.',
@@ -1151,6 +1190,16 @@ export const translations = {
     healingMinistryApproach4: 'Последующий уход и ученичество',
 
     // Common project page elements
+    // ===== Project Gallery / Lightbox =====
+    galleryViewPhoto: 'Открыть фото',
+    galleryViewerLabel: 'Просмотр галереи проекта',
+    galleryClose: 'Закрыть',
+    galleryPrev: 'Предыдущее фото',
+    galleryNext: 'Следующее фото',
+    galleryZoomIn: 'Увеличить',
+    galleryZoomOut: 'Уменьшить',
+    galleryPhoto: 'Фото',
+
     projectGetInvolvedTitle: 'Присоединяйтесь',
     projectGetInvolvedDesc:
       'Присоединяйтесь к этому важному служению. Через волонтёрство, финансовую поддержку или молитвенное партнёрство вы можете изменить ситуацию.',
@@ -1348,8 +1397,7 @@ export const translations = {
 
     // ===== Mission (home section) =====
     missionTitle: 'Nasze Cele',
-    missionDescription:
-      'Naszym celem jest prowadzić ludzi do Jezusa.',
+    missionDescription: 'Naszym celem jest prowadzić ludzi do Jezusa.',
     humanitarianAid: 'Bliska relacja z Bogiem',
     humanitarianAidDesc:
       'Być w stałej bliskości z Bogiem i przekazywać innym to pragnienie, by być blisko Niego.',
@@ -1524,6 +1572,22 @@ export const translations = {
     transformingLivesTitle: 'Przekształcanie życia, budowanie społeczności',
     transformingLivesDesc:
       'Każdy projekt jest mostem nadziei, łączącym serca z wiarą, a społeczności z trwałą zmianą. Widzimy przemienione życia, wzmocnione rodziny i kwitnące społeczności odzwierciedlające Bożą miłość i współczucie.',
+    // ===== Home / Join Us block =====
+    projectsJoinTitle: 'Dołącz do nas!',
+    projectsJoinText:
+      'Możesz stać się częścią tego projektu poprzez osobiste zaangażowanie, modlitwę lub wsparcie finansowe. Razem możemy pomóc większej liczbie osób usłyszeć Ewangelię i poznać Jezusa Chrystusa.',
+
+    // ===== Projects Page / Intro & Closing =====
+    projectsIntroTitle: 'Dzielimy się Ewangelią, która zmienia życie!',
+    projectsIntroText1:
+      'Wierzymy, że każdy człowiek powinien mieć możliwość usłyszeć Dobrą Nowinę o Jezusie Chrystusie.',
+    projectsIntroText2:
+      'Dlatego głosimy Ewangelię na różne sposoby, realizujemy projekty ewangelizacyjne, społeczne i twórcze oraz wyjazdy misyjne, a także wspieramy lokalne kościoły, odpowiadając na potrzeby ludzi, aby jak najwięcej osób mogło poznać Jezusa Chrystusa i doświadczyć przemiany życia.',
+    projectsClosingText1:
+      'Naszą misją jest, aby jak najwięcej osób poznało Jezusa Chrystusa, doświadczyło Jego miłości i odkryło nadzieję, którą daje Ewangelia.',
+    projectsClosingText2:
+      'Dołącz do nas, aby wspólnie nieść Dobrą Nowinę tym, którzy jeszcze jej nie słyszeli!',
+
     joinUsTitle: 'Dołącz do nas w czynieniu różnicy',
     joinUsDesc:
       'Twoje wsparcie i uczestnictwo pomagają nam dotrzeć do większej liczby społeczności i zmieniać więcej żyć. Razem nieśmy nadzieję i współczucie tym, którzy najbardziej tego potrzebują.',
@@ -1790,6 +1854,16 @@ export const translations = {
     healingMinistryApproach4: 'Opieka następcza i uczniowstwo',
 
     // Common project page elements
+    // ===== Project Gallery / Lightbox =====
+    galleryViewPhoto: 'Otwórz zdjęcie',
+    galleryViewerLabel: 'Przeglądarka galerii projektu',
+    galleryClose: 'Zamknij',
+    galleryPrev: 'Poprzednie zdjęcie',
+    galleryNext: 'Następne zdjęcie',
+    galleryZoomIn: 'Powiększ',
+    galleryZoomOut: 'Pomniejsz',
+    galleryPhoto: 'Zdjęcie',
+
     projectGetInvolvedTitle: 'Zaangażuj się',
     projectGetInvolvedDesc:
       'Dołącz do tej ważnej służby. Poprzez wolontariat, wsparcie finansowe lub partnerstwo modlitewne możesz zrobić różnicę.',
