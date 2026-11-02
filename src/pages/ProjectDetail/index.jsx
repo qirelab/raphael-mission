@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { projectsService } from '../../services/projectsService';
 import Button from '../../components/ui/Button';
 import Footer from '../../components/common/Footer';
+import Lightbox from '../../components/ui/Lightbox';
 import { ProjectDetailSkeleton } from '../../components/skeletons';
 
 const ProjectDetail = () => {
@@ -13,6 +14,7 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     const loadProject = async () => {
@@ -245,15 +247,38 @@ const ProjectDetail = () => {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {galleryImages.map((src, idx) => (
-              <img
+              <button
                 key={idx}
-                src={src}
-                alt={`Gallery ${idx + 1}`}
-                className="rounded-lg object-cover w-full h-[160px] sm:h-[140px] md:h-[160px] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              />
+                type="button"
+                onClick={() => setLightboxIndex(idx)}
+                aria-label={`${t('galleryViewPhoto')} ${idx + 1}`}
+                className="block w-full rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2F7D6D] focus-visible:ring-offset-2"
+              >
+                <img
+                  src={src}
+                  alt={`${t('galleryPhoto')} ${idx + 1}`}
+                  className="rounded-lg object-cover w-full h-[160px] sm:h-[140px] md:h-[160px]"
+                />
+              </button>
             ))}
           </div>
         </div>
+
+        <Lightbox
+          images={galleryImages}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onIndexChange={setLightboxIndex}
+          labels={{
+            dialog: t('galleryViewerLabel'),
+            close: t('galleryClose'),
+            previous: t('galleryPrev'),
+            next: t('galleryNext'),
+            image: t('galleryPhoto'),
+            zoomIn: t('galleryZoomIn'),
+            zoomOut: t('galleryZoomOut'),
+          }}
+        />
       </section>
 
       {/* Get Involved CTA */}

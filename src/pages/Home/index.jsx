@@ -189,7 +189,9 @@ const Home = () => {
             <div className="w-full lg:w-[64%] flex flex-col items-center lg:items-start text-center lg:text-left">
               <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[40px] sm:leading-[50px] lg:leading-[60px] text-white font-['Poppins'] mb-4">
                 <span className="text-white">{pick('hero_title', 'heroTitle')} </span>
-                <span className="text-[#3b8a79]">{pick('hero_title_highlight', 'heroTitleHighlight')}</span>
+                <span className="text-[#3b8a79]">
+                  {pick('hero_title_highlight', 'heroTitleHighlight')}
+                </span>
               </h1>
 
               <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[26px] sm:leading-[30px] lg:leading-[33px] text-white font-['Poppins'] mb-8 lg:mb-9">
@@ -277,8 +279,14 @@ const Home = () => {
             <h2 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold leading-[32px] sm:leading-[36px] lg:leading-[40px] text-[#1f2937] font-['Poppins'] mb-3">
               {pick('projects_title', 'currentProjects')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[60%]">
-              {pick('projects_description', 'currentProjectsDesc')}
+            <h3 className="text-[20px] sm:text-[24px] lg:text-[26px] font-semibold leading-[28px] sm:leading-[32px] lg:leading-[34px] text-[#1f2937] font-['Poppins'] max-w-full md:max-w-[70%] mt-2 mb-4">
+              {t('projectsIntroTitle')}
+            </h3>
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[68%] mb-3">
+              {t('projectsIntroText1')}
+            </p>
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins'] max-w-full md:max-w-[68%]">
+              {t('projectsIntroText2')}
             </p>
           </div>
 
@@ -356,6 +364,30 @@ const Home = () => {
               </Button>
             </div>
           )}
+
+          {/* Join Us! — directly under the project cards */}
+          <div className="mt-12 lg:mt-16 mx-auto w-full max-w-[860px] rounded-[16px] border border-[#d8e6e1] bg-[#f3f8f6] px-6 py-8 sm:px-10 sm:py-10 text-center">
+            <h3 className="text-[22px] sm:text-[26px] lg:text-[28px] font-bold leading-[30px] sm:leading-[34px] lg:leading-[36px] text-[#1f2937] font-['Poppins'] mb-4">
+              {t('projectsJoinTitle')}
+            </h3>
+            <p className="text-[16px] sm:text-[17px] lg:text-[18px] font-normal leading-[24px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins']">
+              {t('projectsJoinText')}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Closing text — last block before the Donate section */}
+      <section className="w-full bg-[#f9fafb] py-10 sm:py-12 lg:py-14">
+        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center mx-auto w-full max-w-[1120px]">
+            <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#4b5563] font-['Poppins'] mb-3">
+              {t('projectsClosingText1')}
+            </p>
+            <p className="text-[17px] sm:text-[19px] lg:text-[21px] font-semibold leading-[26px] sm:leading-[30px] lg:leading-[32px] text-[#1f2937] font-['Poppins']">
+              {t('projectsClosingText2')}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -477,13 +509,23 @@ const Home = () => {
                       {pick('label_address', 'addressLabel')}
                     </h3>
                     {(() => {
-                      const localizedCity = contactData?.[`city_${language}`] || contactData?.city_en || contactData?.city;
-                      const localizedCountry = contactData?.[`country_${language}`] || contactData?.country_en || contactData?.country;
+                      const localizedCity =
+                        contactData?.[`city_${language}`] ||
+                        contactData?.city_en ||
+                        contactData?.city;
+                      const localizedCountry =
+                        contactData?.[`country_${language}`] ||
+                        contactData?.country_en ||
+                        contactData?.country;
                       const addressParts = [
-                        contactData?.[`address_line1_${language}`] || contactData?.address_line1_en || contactData?.address_line1,
-                        contactData?.[`address_line2_${language}`] || contactData?.address_line2_en || contactData?.address_line2,
+                        contactData?.[`address_line1_${language}`] ||
+                          contactData?.address_line1_en ||
+                          contactData?.address_line1,
+                        contactData?.[`address_line2_${language}`] ||
+                          contactData?.address_line2_en ||
+                          contactData?.address_line2,
                         localizedCity,
-                        localizedCountry
+                        localizedCountry,
                       ].filter(Boolean);
 
                       const hasAddress = addressParts.length > 0;
