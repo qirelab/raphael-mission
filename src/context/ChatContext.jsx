@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import openRouterService from '../services/openRouterService';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { streamChatReply, ChatError } from '../services/chatService';
 import { useLanguage } from './LanguageContext';
 
 const ChatContext = createContext();
@@ -12,167 +13,141 @@ export const useChat = () => {
   return context;
 };
 
+const STORAGE_KEY = 'chat-v2';
+const HISTORY_TTL_MS = 24 * 60 * 60 * 1000; // forget conversations after a day
+const MAX_CONTEXT_MESSAGES = 12;
+// Keys from the previous OpenRouter-based chat
+const LEGACY_KEYS = ['chat-isOpen', 'chat-messages', 'chat-customRules'];
+
+/**
+ * Message shape: { id, sender: 'user'|'bot', text, timestamp, kind? }
+ * kind: 'welcome' | 'error' | 'rate-limited' — rendered from translations at
+ * display time (so they follow the site language) and never sent to the model.
+ */
+const welcomeMessage = () => ({
+  id: 'welcome',
+  sender: 'bot',
+  kind: 'welcome',
+  text: '',
+  timestamp: new Date(),
+});
+
+const loadMessages = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && Date.now() - saved.savedAt < HISTORY_TTL_MS && saved.messages?.length) {
+      return saved.messages.map((m) => ({ ...m, timestamp: new Date(m.timestamp) }));
+    }
+  } catch {
+    // corrupted storage → start fresh
+  }
+  return [welcomeMessage()];
+};
+
+let idCounter = 0;
+const nextId = () => `${Date.now()}-${idCounter++}`;
+
 export const ChatProvider = ({ children }) => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const location = useLocation();
 
-  // Load initial state from localStorage
-  const [isOpen, setIsOpen] = useState(() => {
-    const saved = localStorage.getItem('chat-isOpen');
-    return saved ? JSON.parse(saved) : false;
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [view, setView] = useState('chat'); // 'chat' | 'handoff'
+  const [messages, setMessages] = useState(loadMessages);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const abortRef = useRef(null);
 
-  const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem('chat-messages');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        // Convert timestamp strings back to Date objects
-        return parsed.map((msg) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp),
+  useEffect(() => {
+    LEGACY_KEYS.forEach((key) => localStorage.removeItem(key));
+  }, []);
+
+  useEffect(() => {
+    // Don't persist a half-streamed answer
+    if (isStreaming) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ savedAt: Date.now(), messages }));
+  }, [messages, isStreaming]);
+
+  const openChat = useCallback(() => setIsOpen(true), []);
+  const closeChat = useCallback(() => setIsOpen(false), []);
+  const toggleChat = useCallback(() => setIsOpen((open) => !open), []);
+
+  const sendMessage = useCallback(
+    async (rawText) => {
+      const text = rawText.trim();
+      if (!text || isStreaming) return;
+
+      const userMessage = { id: nextId(), sender: 'user', text, timestamp: new Date() };
+      const botId = nextId();
+
+      // Only real dialogue turns go to the model
+      const history = [...messages, userMessage]
+        .filter((m) => !m.kind && m.text)
+        .slice(-MAX_CONTEXT_MESSAGES)
+        // Backend rejects turns over 4000 chars; never let one long answer break the chat
+        .map((m) => ({
+          role: m.sender === 'user' ? 'user' : 'assistant',
+          content: m.text.slice(0, 4000),
         }));
-      } catch (error) {
-        console.error('Error parsing saved messages:', error);
-      }
-    }
-    return [
-      {
-        id: 1,
-        text: t('chatBotWelcome'),
-        sender: 'bot',
-        timestamp: new Date(),
-      },
-    ];
-  });
 
-  const [isTyping, setIsTyping] = useState(false);
-  const [isApiError, setIsApiError] = useState(false);
-  const [customRules, setCustomRules] = useState(() => {
-    const saved = localStorage.getItem('chat-customRules');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  // Save state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('chat-isOpen', JSON.stringify(isOpen));
-  }, [isOpen]);
-
-  useEffect(() => {
-    localStorage.setItem('chat-messages', JSON.stringify(messages));
-  }, [messages]);
-
-  useEffect(() => {
-    localStorage.setItem('chat-customRules', JSON.stringify(customRules));
-  }, [customRules]);
-
-  // Update welcome message when language changes
-  useEffect(() => {
-    if (messages.length === 1 && messages[0].sender === 'bot') {
-      setMessages([
-        {
-          id: 1,
-          text: t('chatBotWelcome'),
-          sender: 'bot',
-          timestamp: new Date(),
-        },
+      setMessages((prev) => [
+        ...prev,
+        userMessage,
+        { id: botId, sender: 'bot', text: '', timestamp: new Date() },
       ]);
-    }
-  }, [language, t]);
+      setIsStreaming(true);
 
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
+      const controller = new AbortController();
+      abortRef.current = controller;
 
-  const addMessage = (text, sender = 'user') => {
-    const newMessage = {
-      id: Date.now(),
-      text,
-      sender,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, newMessage]);
-  };
+      const updateBot = (patch) =>
+        setMessages((prev) => prev.map((m) => (m.id === botId ? { ...m, ...patch } : m)));
 
-  const getBotResponse = async (userMessage) => {
-    setIsTyping(true);
-    setIsApiError(false);
+      try {
+        let answer = '';
+        await streamChatReply({
+          messages: history,
+          language,
+          page: location.pathname,
+          signal: controller.signal,
+          onDelta: (delta) => {
+            answer += delta;
+            updateBot({ text: answer });
+          },
+        });
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+        console.error('Chat error:', error);
+        updateBot({
+          text: '',
+          kind: error instanceof ChatError && error.code === 'RATE_LIMITED' ? 'rate-limited' : 'error',
+        });
+      } finally {
+        if (abortRef.current === controller) abortRef.current = null;
+        setIsStreaming(false);
+      }
+    },
+    [isStreaming, messages, language, location.pathname]
+  );
 
-    try {
-      // Prepare messages for API (last 10 messages for context)
-      const recentMessages = messages.slice(-10).map((msg) => ({
-        role: msg.sender === 'user' ? 'user' : 'assistant',
-        content: msg.text,
-      }));
-
-      // Add current user message
-      recentMessages.push({
-        role: 'user',
-        content: userMessage,
-      });
-
-      // Call OpenRouter API
-      const botResponse = await openRouterService.sendMessage(
-        recentMessages,
-        customRules,
-        language
-      );
-
-      addMessage(botResponse, 'bot');
-    } catch (error) {
-      console.error('OpenRouter API Error:', error);
-      setIsApiError(true);
-
-      // Fallback to simple responses
-      const fallbackResponse = openRouterService.getFallbackResponse(userMessage, language);
-      addMessage(fallbackResponse, 'bot');
-    } finally {
-      setIsTyping(false);
-    }
-  };
-
-  const sendMessage = (text) => {
-    if (!text.trim()) return;
-
-    addMessage(text, 'user');
-    getBotResponse(text);
-  };
-
-  const clearChat = () => {
-    const defaultMessages = [
-      {
-        id: 1,
-        text: t('chatBotWelcome'),
-        sender: 'bot',
-        timestamp: new Date(),
-      },
-    ];
-    setMessages(defaultMessages);
-    // Clear from localStorage as well
-    localStorage.setItem('chat-messages', JSON.stringify(defaultMessages));
-  };
-
-  const resetChat = () => {
-    // Reset all chat data
-    setIsOpen(false);
-    setCustomRules([]);
-    clearChat();
-    // Clear all localStorage data
-    localStorage.removeItem('chat-isOpen');
-    localStorage.removeItem('chat-messages');
-    localStorage.removeItem('chat-customRules');
-  };
+  const clearChat = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    setIsStreaming(false);
+    setView('chat');
+    setMessages([welcomeMessage()]);
+  }, []);
 
   const value = {
     isOpen,
+    view,
+    setView,
     messages,
-    isTyping,
-    isApiError,
-    customRules,
-    setCustomRules,
+    isStreaming,
+    openChat,
+    closeChat,
     toggleChat,
     sendMessage,
     clearChat,
-    resetChat,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

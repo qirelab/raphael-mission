@@ -1,8 +1,10 @@
 import React from 'react';
 import { useChat } from '../context/ChatContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const ChatButton = () => {
   const { isOpen, toggleChat } = useChat();
+  const { t } = useLanguage();
 
   return (
     <button
@@ -10,7 +12,8 @@ const ChatButton = () => {
       className={`chat-button fixed bottom-4 right-2 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-[#2F7D6D] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#2F7D6D]/30 ${
         isOpen ? 'rotate-45' : 'rotate-0'
       }`}
-      aria-label={isOpen ? 'Закрыть чат' : 'Открыть чат с Casper AI'}
+      aria-label={isOpen ? t('chatBotClose') : t('chatBotOpen')}
+      aria-expanded={isOpen}
     >
       <div className="flex items-center justify-center w-full h-full">
         {isOpen ? (
