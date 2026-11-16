@@ -131,6 +131,10 @@ jobs:
             # Clean restart PM2
             echo "🔄 Restarting backend with PM2..."
             pm2 delete raphael-backend || true
+            # A stale manually started process ("raphael-mission-backend", fork mode) was
+            # holding port 6388, so every new raphael-backend crashed with EADDRINUSE while
+            # the old code kept serving. Make sure nothing else owns the port.
+            pm2 delete raphael-mission-backend || true
             pm2 start ecosystem.config.cjs
             pm2 save
 
@@ -138,9 +142,12 @@ jobs:
             echo "🏥 Checking backend health..."
             HEALTH_OK=0
             for i in $(seq 1 15); do
-              if curl -fs http://localhost:6388/health > /dev/null 2>&1; then
+              # Must be the freshly started process: a stale one on the same port
+              # also answers /health, but with a large uptime
+              UPTIME=$(curl -fs http://localhost:6388/health 2>/dev/null | sed -n 's/.*"uptime":\([0-9]*\).*/\1/p')
+              if [ -n "$UPTIME" ] && [ "$UPTIME" -lt 300 ]; then
                 HEALTH_OK=1
-                echo "✅ Backend healthy (попытка $i/15)"
+                echo "✅ Backend healthy, uptime ${UPTIME}s (попытка $i/15)"
                 break
               fi
               echo "⏳ Бэкенд ещё не готов, жду... ($i/15)"
