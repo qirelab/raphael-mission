@@ -14,6 +14,7 @@ import homePageRoutes from './homePage.routes.js';
 import cookiePolicyRoutes from './cookiePolicy.routes.js';
 import termsOfServiceRoutes from './termsOfService.routes.js';
 import donationPageRoutes from './donationPage.routes.js';
+import chatRoutes from './chat.routes.js';
 
 const router = express.Router();
 
@@ -33,6 +34,7 @@ router.use('/home-page', homePageRoutes);
 router.use('/cookie-policy', cookiePolicyRoutes);
 router.use('/terms-of-service', termsOfServiceRoutes);
 router.use('/donation-page', donationPageRoutes);
+router.use('/chat', chatRoutes);
 
 // API info endpoint
 router.get('/', (req, res) => {
@@ -56,6 +58,7 @@ router.get('/', (req, res) => {
       cookiePolicy: '/api/cookie-policy',
       termsOfService: '/api/terms-of-service',
       donationPage: '/api/donation-page',
+      chat: '/api/chat',
     },
   });
 });

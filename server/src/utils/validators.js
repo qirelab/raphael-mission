@@ -502,4 +502,20 @@ export const schemas = {
   limitQuery: Joi.object({
     limit: Joi.number().integer().min(1).max(100).default(3),
   }),
+
+  // Support chat: client sends only user/assistant turns, never system prompts
+  chatMessage: Joi.object({
+    messages: Joi.array()
+      .items(
+        Joi.object({
+          role: Joi.string().valid('user', 'assistant').required(),
+          content: Joi.string().trim().min(1).max(4000).required(),
+        })
+      )
+      .min(1)
+      .max(40)
+      .required(),
+    language: Joi.string().valid('en', 'ru', 'pl').default('en'),
+    page: Joi.string().max(300).allow('').optional(),
+  }),
 };

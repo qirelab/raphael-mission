@@ -146,5 +146,28 @@ export const createLimiter = rateLimit({
   skip: () => isDevelopment,
 });
 
+/**
+ * CHAT LIMITER
+ * Each chat message is a paid OpenAI call: cap per-IP usage to protect the budget
+ */
+export const chatLimiter = rateLimit({
+  store,
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: isDevelopment ? 0 : 30, // 30 messages / 10 min per IP in production
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    logger.warn(`Chat rate limit exceeded for IP: ${req.ip}`);
+    res.status(429).json({
+      success: false,
+      error: {
+        code: 'TOO_MANY_REQUESTS',
+        message: 'Too many chat messages, please try again later',
+      },
+    });
+  },
+  skip: () => isDevelopment,
+});
+
 // Backward compatibility - use publicGetLimiter as default
 export const apiLimiter = publicGetLimiter;
