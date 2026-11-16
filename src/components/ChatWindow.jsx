@@ -115,7 +115,7 @@ const ChatWindow = () => {
 
   return (
     <div
-      className="chat-window fixed z-40 bottom-20 right-2 sm:right-4 w-[calc(100vw-1rem)] sm:w-96 h-[min(600px,calc(100dvh-6rem))] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+      className="chat-window fixed z-40 bottom-20 right-2 sm:right-4 w-[calc(100vw-1rem)] sm:w-96 h-[min(600px,calc(100dvh-10.5rem))] min-h-[280px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
       role="dialog"
       aria-label={t('chatBotTitle')}
     >
