@@ -95,15 +95,15 @@ const buildProjects = (rows, lang) =>
     })
     .join('\n\n');
 
+// stock_quantity is deliberately not passed to the bot: the admin panel has no
+// field for it (it stays at the default 0), so it made the bot tell visitors
+// that paintings were out of stock.
 const buildShop = (rows, lang) =>
   rows
     .map((p) =>
       [
         `### ${pick(p, 'name', lang)}`,
         `Price: ${p.price} ${p.currency || 'USD'}`,
-        p.stock_quantity !== null && p.stock_quantity !== undefined
-          ? `In stock: ${p.stock_quantity > 0 ? 'yes' : 'no'}`
-          : '',
         pick(p, 'description', lang),
       ]
         .filter(Boolean)
@@ -157,7 +157,10 @@ Recurring (monthly) donations, minimum amounts, crypto, bank account details for
 Refunds: according to the site's Terms of service, donations are voluntary and non-refundable, except where required by law. If someone donated by mistake or has a payment problem, they should contact the team, who will look into it.
 
 ## Shop
-The [shop page](/${lang}/shop) is a catalogue. There is no online cart or checkout on the site: to order an item, the visitor contacts the mission (email, phone or the contact form) and the team arranges payment and delivery.
+The [shop page](/${lang}/shop) is a catalogue of original handmade paintings. Buying a painting is a way to support the mission: the money helps spread the Gospel and respond to people's needs.
+There is no online cart or checkout on the site: to buy a painting, the visitor contacts the mission (email, phone, the contact form or the "Write to the team" button in this chat) and the team arranges payment and delivery.
+The site does not track availability: only the team can confirm it. Never say a painting is sold or unavailable.
+Visitors can ask the team for more photos or details of a painting.
 
 ## Social media
 - [Instagram](https://www.instagram.com/i.m.raphael)
