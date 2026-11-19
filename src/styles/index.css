@@ -36,11 +36,8 @@ html[lang='ru'] .font-\[\'Poppins\'\] {
   z-index: 0;
 }
 
-/* Hero cover: one full-width banner (sower at sunset).
-   ::before is the blurred backdrop that fills the whole block,
-   ::after is the sharp banner on top. */
-.hero-bg-blur::before,
-.hero-bg-blur::after {
+/* Hero cover: one full-width banner (sower at sunset) filling the whole block. */
+.hero-bg-blur::before {
   content: '';
   position: absolute;
   top: 0;
@@ -54,38 +51,19 @@ html[lang='ru'] .font-\[\'Poppins\'\] {
   z-index: -1;
 }
 
-/* Desktop: the block is wide enough that `cover` keeps the whole scene,
-   so the backdrop layer is not needed. */
-.hero-bg-blur::after {
-  display: none;
-}
-
-/* Mobile + tablet: the banner is ~3:1 while the hero is tall, so `cover`
-   would crop away the sower on the left and the tractor on the right.
-   Show the full width sharp, over a blurred, zoomed copy of itself. */
+/* Mobile + tablet: the hero box is portrait while the banner is ~3:1, so
+   `cover` keeps only a narrow vertical slice of it. Anchor that slice near the
+   left edge, where the hand with the seeds and the sower are — centring it
+   would land on the empty field between the two halves of the scene. */
 @media (max-width: 1023px) {
-  .hero-bg-blur {
-    background: #241a12;
-  }
-
   .hero-bg-blur::before {
-    background-size: 260% auto;
-    background-position: center 46%;
-    filter: blur(30px) brightness(0.72) saturate(1.35);
+    background-position: 7% center;
   }
 
-  .hero-bg-blur::after {
-    display: block;
-    background-size: 100% auto;
-    background-position: center 42%;
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 18%,
-      #000 82%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  /* The photo now fills the block, so this layer's own tint only adds to the
+     veil stack described below. The gradient there does the darkening. */
+  .hero-bg-blur {
+    background: none;
   }
 }
 
@@ -97,6 +75,23 @@ html[lang='ru'] .font-\[\'Poppins\'\] {
   height: 100%;
   background: rgba(30, 34, 45, 0.5);
   z-index: 1;
+}
+
+/* Three flat veils stack over the photo (this one, the tint on .hero-bg-blur
+   and the inline one in Home), which on phones left the sunset a flat grey.
+   Drop this one to nothing over the sky and the logo and let it build up
+   behind the heading, the paragraph and the buttons, which sit lower.
+   Must stay after the rule above — same specificity, so order decides. */
+@media (max-width: 1023px) {
+  .hero-bg-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(23, 27, 36, 0) 0%,
+      rgba(23, 27, 36, 0.06) 30%,
+      rgba(23, 27, 36, 0.42) 58%,
+      rgba(23, 27, 36, 0.6) 100%
+    );
+  }
 }
 
 /* The sunset banner is bright in places — keep the hero copy readable. */
