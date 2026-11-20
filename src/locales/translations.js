@@ -253,11 +253,6 @@ export const translations = {
     transformingLivesTitle: 'Transforming Lives, Building Communities',
     transformingLivesDesc:
       "Each project serves as a bridge of hope, connecting hearts to faith and communities to lasting change. Through our diverse ministries, we witness transformed lives, strengthened families, and thriving communities that reflect God's love and compassion.",
-    // ===== Home / Join Us block =====
-    projectsJoinTitle: 'Join Us!',
-    projectsJoinText:
-      'You can be part of this project through personal involvement, prayer, or financial support. Together, we can help more people hear the Gospel and come to know Jesus Christ.',
-
     // ===== Projects Page / Intro & Closing =====
     projectsIntroTitle: 'Sharing the Gospel That Changes Lives!',
     projectsIntroText1:
@@ -933,11 +928,6 @@ export const translations = {
     transformingLivesTitle: 'Преобразование жизней, строительство сообществ',
     transformingLivesDesc:
       'Каждый проект — мост надежды, соединяющий сердца с верой и сообщества с устойчивыми изменениями. Мы видим преображённые жизни, укреплённые семьи и процветающие общины, отражающие Божью любовь и сострадание.',
-    // ===== Home / Join Us block =====
-    projectsJoinTitle: 'Присоединяйтесь!',
-    projectsJoinText:
-      'Вы можете стать частью этого проекта через личное участие, молитву или финансовую поддержку. Вместе мы можем помочь большему числу людей услышать Евангелие и познать Иисуса Христа.',
-
     // ===== Projects Page / Intro & Closing =====
     projectsIntroTitle: 'Мы делимся Евангелием, которое меняет жизни!',
     projectsIntroText1:
@@ -1621,11 +1611,6 @@ export const translations = {
     transformingLivesTitle: 'Przekształcanie życia, budowanie społeczności',
     transformingLivesDesc:
       'Każdy projekt jest mostem nadziei, łączącym serca z wiarą, a społeczności z trwałą zmianą. Widzimy przemienione życia, wzmocnione rodziny i kwitnące społeczności odzwierciedlające Bożą miłość i współczucie.',
-    // ===== Home / Join Us block =====
-    projectsJoinTitle: 'Dołącz do nas!',
-    projectsJoinText:
-      'Możesz stać się częścią tego projektu poprzez osobiste zaangażowanie, modlitwę lub wsparcie finansowe. Razem możemy pomóc większej liczbie osób usłyszeć Ewangelię i poznać Jezusa Chrystusa.',
-
     // ===== Projects Page / Intro & Closing =====
     projectsIntroTitle: 'Dzielimy się Ewangelią, która zmienia życie!',
     projectsIntroText1:
