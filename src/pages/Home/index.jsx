@@ -364,16 +364,6 @@ const Home = () => {
               </Button>
             </div>
           )}
-
-          {/* Join Us! — directly under the project cards */}
-          <div className="mt-12 lg:mt-16 mx-auto w-full max-w-[860px] rounded-[16px] border border-[#d8e6e1] bg-[#f3f8f6] px-6 py-8 sm:px-10 sm:py-10 text-center">
-            <h3 className="text-[22px] sm:text-[26px] lg:text-[28px] font-bold leading-[30px] sm:leading-[34px] lg:leading-[36px] text-[#1f2937] font-['Poppins'] mb-4">
-              {t('projectsJoinTitle')}
-            </h3>
-            <p className="text-[16px] sm:text-[17px] lg:text-[18px] font-normal leading-[24px] sm:leading-[26px] lg:leading-[28px] text-[#4b5563] font-['Poppins']">
-              {t('projectsJoinText')}
-            </p>
-          </div>
         </div>
       </section>
 
