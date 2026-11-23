@@ -8,11 +8,21 @@ import MultilingualInput from '../../../components/MultilingualInput';
 import FlagUS from '../../../components/icons/FlagUS';
 import FlagRU from '../../../components/icons/FlagRU';
 import FlagPL from '../../../components/icons/FlagPL';
+import ViewportPreview from '../../../components/ui/ViewportPreview';
+import TestimoniesHero from '../../Testimonies/TestimoniesHero';
+import { translations } from '../../../locales/translations';
 
 const PREVIEW_LANGUAGES = [
   { code: 'en', label: 'EN', name: 'English', FlagComponent: FlagUS },
   { code: 'ru', label: 'RU', name: 'Русский', FlagComponent: FlagRU },
   { code: 'pl', label: 'PL', name: 'Polski', FlagComponent: FlagPL },
+];
+
+const PREVIEW_WIDTHS = [
+  { width: 1920, label: '1920' },
+  { width: 1440, label: '1440' },
+  { width: 1280, label: '1280' },
+  { width: 390, label: 'Телефон' },
 ];
 
 const EMPTY_FORM = {
@@ -37,6 +47,7 @@ const TestimoniesHeroEditor = () => {
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewLang, setPreviewLang] = useState('en');
+  const [previewWidth, setPreviewWidth] = useState(1440);
   const [sharePreviewLang, setSharePreviewLang] = useState('en');
 
   useEffect(() => {
@@ -47,12 +58,14 @@ const TestimoniesHeroEditor = () => {
     setFormData(sanitized);
   }, [heroData]);
 
-  // Resolve a localized preview value with English fallback so the preview is
-  // never blank just because one language was left empty.
-  const previewValue = (base) => {
+  // Same fallback chain as the public page: field in the preview language →
+  // English field → built-in translation for the preview language.
+  const previewValue = (base, translationKey) => {
     const localized = formData[`${base}_${previewLang}`];
     if (localized && localized.trim() !== '') return localized;
-    return formData[`${base}_en`] || '';
+    const englishFallback = formData[`${base}_en`];
+    if (englishFallback && englishFallback.trim() !== '') return englishFallback;
+    return translations[previewLang]?.[translationKey] || '';
   };
   // Independent picker for the Share Your Story preview.
   const sharePreviewValue = (base) => {
@@ -126,10 +139,41 @@ const TestimoniesHeroEditor = () => {
         {/* ====================== LIVE PREVIEW ====================== */}
         <section className="rounded-xl shadow-sm overflow-hidden border border-gray-100 bg-white">
           {/* Language switcher */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50">
-            <p className="text-sm font-semibold text-gray-700 font-poppins">
-              Предосмотр блока
-            </p>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-4 sm:px-6 py-3 border-b border-gray-100 bg-gray-50">
+            <div>
+              <p className="text-sm font-semibold text-gray-700 font-poppins">
+                Предосмотр блока
+              </p>
+              <p className="text-xs text-gray-500 font-poppins">
+                Так блок выглядит на сайте при выбранной ширине экрана
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {PREVIEW_WIDTHS.map(({ width, label }) => {
+                const active = previewWidth === width;
+                return (
+                  <button
+                    key={width}
+                    type="button"
+                    onClick={() => setPreviewWidth(width)}
+                    aria-label={`Ширина экрана ${width} px`}
+                    title={`${width} px`}
+                    className={`
+                      px-3 py-1.5 rounded-lg font-poppins text-sm font-medium
+                      transition-all duration-200 ease-in-out
+                      focus:outline-none focus:ring-2 focus:ring-[#2F7D6D] focus:ring-offset-1
+                      ${
+                        active
+                          ? 'bg-[#2F7D6D] text-white shadow-md ring-2 ring-[#2F7D6D] ring-offset-1'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 hover:border-[#2F7D6D]'
+                      }
+                    `}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
             <div className="flex gap-2">
               {PREVIEW_LANGUAGES.map((lang) => {
                 const Flag = lang.FlagComponent;
@@ -159,39 +203,31 @@ const TestimoniesHeroEditor = () => {
             </div>
           </div>
 
-          {/* Preview canvas — повторяет публичную верстку Hero */}
-          <div className="relative isolate min-h-[280px] overflow-hidden">
-            <img
-              src={formData.background_image_url || '/images/transformation.png'}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover brightness-[0.96] contrast-[0.86] saturate-[0.9]"
-            />
-            <div className="absolute inset-0 z-[1] bg-white/82 backdrop-blur-[2px]" />
-            <div className="absolute inset-0 z-[2] bg-[#1F7A5B]/20 mix-blend-multiply" />
-            <div className="relative z-[3] px-6 sm:px-10 py-10 sm:py-14">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight tracking-tight font-poppins">
-                <span className="text-neutral-900">
-                  {previewValue('title') || 'Stories of Faith and'}
-                </span>
-                <span className="text-[#1F7A5B]">
-                  {previewValue('title_highlight') || ' Transformation'}
-                </span>
-              </h2>
-              {previewValue('description') && (
-                <p className="mt-3 text-sm sm:text-base max-w-2xl text-[#111827]/80 font-poppins">
-                  {previewValue('description')}
-                </p>
-              )}
-            </div>
+          {/* Preview canvas — тот же компонент, что и на публичной странице */}
+          <div className="bg-gray-100">
+            <ViewportPreview width={previewWidth} lang={previewLang} title="Предпросмотр Hero-блока">
+              <TestimoniesHero
+                headingAs="h2"
+                title={previewValue('title', 'testimoniesPageTitle')}
+                titleHighlight={previewValue('title_highlight', 'testimoniesPageTitleHighlight')}
+                description={previewValue('description', 'testimoniesPageDescription')}
+                background={formData.background_image_url}
+              />
+            </ViewportPreview>
           </div>
         </section>
 
         {/* ====================== TEXT FIELDS ====================== */}
         <section className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-2">
             <div className="w-1.5 h-8 bg-[#2F7D6D] rounded-full" />
             <h2 className="text-xl font-bold text-gray-900 font-poppins">Верхний блок</h2>
           </div>
+
+          <p className="text-sm text-gray-500 font-poppins mb-6 ml-4">
+            Длинный заголовок переносится сам. Чтобы задать перенос в нужном месте, нажмите Enter —
+            новая строка будет и на сайте. Проверьте результат в предосмотре на ширинах 1280 и 1920.
+          </p>
 
           <div className="space-y-6">
             <MultilingualInput
@@ -203,7 +239,8 @@ const TestimoniesHeroEditor = () => {
                 pl: formData.title_pl,
               }}
               onChange={handleChange}
-              type="input"
+              type="textarea"
+              rows={2}
               placeholder="Например: Истории веры и"
             />
 
@@ -216,7 +253,8 @@ const TestimoniesHeroEditor = () => {
                 pl: formData.title_highlight_pl,
               }}
               onChange={handleChange}
-              type="input"
+              type="textarea"
+              rows={2}
               placeholder="Например: преобразования"
             />
 
