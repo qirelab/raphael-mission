@@ -5,6 +5,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useShopHero } from '../../context/ShopHeroContext';
 import { shopService } from '../../services/shopService';
 import Footer from '../../components/common/Footer';
+import Lightbox from '../../components/ui/Lightbox';
 import { ProductsGridSkeleton, HeroSkeleton } from '../../components/skeletons';
 
 const Shop = () => {
@@ -12,6 +13,8 @@ const Shop = () => {
   const { heroData } = useShopHero();
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  // { src, name } of the painting open in the lightbox, null when closed.
+  const [viewer, setViewer] = useState(null);
 
   // Resolve a localized hero field from the DB row with graceful fallbacks:
   //   db[<base>_<lang>] → db[<base>_en] → translation(<translationKey>)
@@ -145,11 +148,35 @@ const Shop = () => {
                   key={p.id}
                   className="bg-white rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#eef0f3] overflow-hidden transition-transform duration-300 ease-in-out hover:scale-[1.05] hover:shadow-xl flex flex-col h-full"
                 >
-                  <img
-                    src={p.image_url || '/images/shop/img_img_192x280.png'}
-                    alt={p[`name_${language}`] || p.name_en}
-                    className="w-full h-[190px] object-cover"
-                  />
+                  {p.image_url ? (
+                    <button
+                      type="button"
+                      onClick={() => setViewer({ src: p.image_url, name: p.name })}
+                      aria-label={`${t('shopViewPhoto')}: ${p.name}`}
+                      className="group relative block w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#2F7D6D]"
+                    >
+                      <img src={p.image_url} alt={p.name} className="w-full h-[190px] object-cover" />
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white transition-colors duration-200 group-hover:bg-black/70"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  ) : (
+                    <img
+                      src="/images/shop/img_img_192x280.png"
+                      alt={p.name}
+                      className="w-full h-[190px] object-cover"
+                    />
+                  )}
                   <div className="p-5 flex flex-col h-full">
                     <h3 className="text-[16px] lg:text-[18px] font-poppins font-semibold text-[#0f172a] mb-2">
                       {p[`name_${language}`] || p.name_en}
@@ -174,6 +201,23 @@ const Shop = () => {
           )}
         </div>
       </section>
+
+      <Lightbox
+        images={viewer ? [viewer.src] : []}
+        index={viewer ? 0 : null}
+        captions={viewer ? [viewer.name] : null}
+        onClose={() => setViewer(null)}
+        onIndexChange={() => {}}
+        labels={{
+          dialog: t('shopViewerLabel'),
+          close: t('galleryClose'),
+          previous: t('galleryPrev'),
+          next: t('galleryNext'),
+          image: t('galleryPhoto'),
+          zoomIn: t('galleryZoomIn'),
+          zoomOut: t('galleryZoomOut'),
+        }}
+      />
 
       {/* Footer */}
       <Footer />
