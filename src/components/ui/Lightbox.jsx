@@ -4,22 +4,28 @@ import PropTypes from 'prop-types';
 
 // Minimum horizontal travel (px) that counts as a swipe instead of a tap.
 const SWIPE_THRESHOLD = 50;
+// Vertical travel (px) after which releasing the finger closes the viewer.
+const SWIPE_CLOSE_THRESHOLD = 80;
 
 /**
- * Fullscreen image viewer for the project gallery.
+ * Fullscreen image viewer (project gallery, shop paintings).
  *
  * Controlled by `index`: a number opens the viewer on that image, `null` keeps
  * it closed. Closing restores focus to whatever element opened it, so keyboard
  * and screen-reader users land back on the thumbnail they clicked.
+ *
+ * Swipe up or down closes; left/right flips photos, or closes when there is
+ * only one. Optional `captions` are shown under the photo and used as alt text.
  */
-const Lightbox = ({ images, index, onClose, onIndexChange, labels }) => {
+const Lightbox = ({ images, index, onClose, onIndexChange, labels, captions }) => {
   const isOpen = index !== null && index !== undefined;
   const total = images.length;
 
   const [isZoomed, setIsZoomed] = useState(false);
+  const [dragY, setDragY] = useState(0);
   const closeButtonRef = useRef(null);
   const triggerRef = useRef(null);
-  const touchStartX = useRef(null);
+  const touchStart = useRef(null);
   const panRef = useRef(null);
 
   const goTo = useCallback(
@@ -65,7 +71,10 @@ const Lightbox = ({ images, index, onClose, onIndexChange, labels }) => {
   }, [isOpen, onClose, goPrev, goNext]);
 
   // Always reopen a photo at fit-to-screen, including after prev/next.
-  useEffect(() => setIsZoomed(false), [index, isOpen]);
+  useEffect(() => {
+    setIsZoomed(false);
+    setDragY(0);
+  }, [index, isOpen]);
 
   // Start the zoomed view centred instead of at the top-left corner.
   useEffect(() => {
@@ -77,22 +86,48 @@ const Lightbox = ({ images, index, onClose, onIndexChange, labels }) => {
 
   if (!isOpen || total === 0) return null;
 
-  // While zoomed, horizontal drags pan the photo — they must not also flip to
-  // the next one.
+  // While zoomed, drags pan the photo — they must not also flip or close it.
+  // A second finger (pinch) cancels the gesture.
   const handleTouchStart = (e) => {
-    if (isZoomed) return;
-    touchStartX.current = e.changedTouches[0].clientX;
+    if (isZoomed || e.touches.length > 1) {
+      touchStart.current = null;
+      return;
+    }
+    const { clientX, clientY } = e.changedTouches[0];
+    touchStart.current = { x: clientX, y: clientY };
+  };
+
+  const handleTouchMove = (e) => {
+    if (!touchStart.current) return;
+    if (e.touches.length > 1) {
+      touchStart.current = null;
+      setDragY(0);
+      return;
+    }
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    setDragY(Math.abs(dy) > Math.abs(dx) ? dy : 0);
   };
 
   const handleTouchEnd = (e) => {
-    if (isZoomed) return;
-    if (touchStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    if (Math.abs(delta) < SWIPE_THRESHOLD) return;
-    if (delta > 0) goPrev();
+    if (!touchStart.current) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+    setDragY(0);
+
+    if (Math.abs(dy) > Math.abs(dx)) {
+      if (Math.abs(dy) >= SWIPE_CLOSE_THRESHOLD) onClose();
+      return;
+    }
+    if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+    if (total === 1) onClose();
+    else if (dx > 0) goPrev();
     else goNext();
   };
+
+  const caption = captions?.[index];
+  const imageAlt = caption || `${labels.image} ${index + 1}`;
 
   const arrowClasses =
     'absolute top-1/2 z-10 -translate-y-1/2 flex items-center justify-center w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
@@ -105,6 +140,13 @@ const Lightbox = ({ images, index, onClose, onIndexChange, labels }) => {
       className="lightbox-overlay fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/90"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
+      }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={() => {
+        touchStart.current = null;
+        setDragY(0);
       }}
     >
       {/* Close */}
@@ -156,48 +198,57 @@ const Lightbox = ({ images, index, onClose, onIndexChange, labels }) => {
       )}
 
       {/* Image */}
-      <div
-        className="lightbox-figure relative flex flex-col items-center max-w-full max-h-full"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        {isZoomed ? (
-          <div
-            ref={panRef}
-            className="overflow-auto overscroll-contain max-w-[84vw] sm:max-w-[88vw] max-h-[78vh] sm:max-h-[82vh] rounded-lg"
-          >
+      <div className="lightbox-figure relative max-w-full max-h-full">
+        <div
+          className={`flex flex-col items-center ${dragY === 0 ? 'transition-[transform,opacity] duration-200 ease-out' : ''}`}
+          style={{
+            transform: `translateY(${dragY}px)`,
+            opacity: 1 - Math.min(Math.abs(dragY) / 400, 0.6),
+          }}
+        >
+          {isZoomed ? (
+            <div
+              ref={panRef}
+              className="overflow-auto overscroll-contain max-w-[84vw] sm:max-w-[88vw] max-h-[78vh] sm:max-h-[82vh] rounded-lg"
+            >
+              <button
+                type="button"
+                onClick={() => setIsZoomed(false)}
+                aria-label={labels.zoomOut}
+                className="block cursor-zoom-out focus:outline-none"
+              >
+                <img
+                  src={images[index]}
+                  alt={imageAlt}
+                  className="max-w-none w-[180vw] sm:w-[150vw] h-auto select-none"
+                />
+              </button>
+            </div>
+          ) : (
             <button
               type="button"
-              onClick={() => setIsZoomed(false)}
-              aria-label={labels.zoomOut}
-              className="block cursor-zoom-out focus:outline-none"
+              onClick={() => setIsZoomed(true)}
+              aria-label={labels.zoomIn}
+              className="block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-lg"
             >
               <img
                 src={images[index]}
-                alt={`${labels.image} ${index + 1}`}
-                className="max-w-none w-[180vw] sm:w-[150vw] h-auto select-none"
+                alt={imageAlt}
+                className={`max-w-[84vw] sm:max-w-[88vw] ${caption ? 'max-h-[70vh] sm:max-h-[76vh]' : 'max-h-[78vh] sm:max-h-[82vh]'} w-auto h-auto object-contain rounded-lg select-none`}
               />
             </button>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setIsZoomed(true)}
-            aria-label={labels.zoomIn}
-            className="block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-lg"
-          >
-            <img
-              src={images[index]}
-              alt={`${labels.image} ${index + 1}`}
-              className="max-w-[84vw] sm:max-w-[88vw] max-h-[78vh] sm:max-h-[82vh] w-auto h-auto object-contain rounded-lg select-none"
-            />
-          </button>
-        )}
-        {total > 1 && (
-          <span className="mt-4 text-[14px] sm:text-[16px] font-poppins text-white/80">
-            {index + 1} / {total}
-          </span>
-        )}
+          )}
+          {caption && (
+            <p className="mt-3 max-w-[84vw] sm:max-w-[640px] text-center text-[14px] sm:text-[16px] leading-snug font-poppins text-white line-clamp-2">
+              {caption}
+            </p>
+          )}
+          {total > 1 && (
+            <span className="mt-4 text-[14px] sm:text-[16px] font-poppins text-white/80">
+              {index + 1} / {total}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -219,10 +270,12 @@ Lightbox.propTypes = {
     zoomIn: PropTypes.string,
     zoomOut: PropTypes.string,
   }),
+  captions: PropTypes.arrayOf(PropTypes.string),
 };
 
 Lightbox.defaultProps = {
   index: null,
+  captions: null,
   labels: {
     dialog: 'Image viewer',
     close: 'Close',

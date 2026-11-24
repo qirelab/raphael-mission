@@ -219,6 +219,8 @@ export const translations = {
     shopTestimonialFoodProgram:
       "The mission's food program saved my family during our darkest hour. Their compassion gave us hope when we had none left.",
     noProducts: 'No products available at the moment. Check back soon!',
+    shopViewPhoto: 'Open full-size photo',
+    shopViewerLabel: 'Painting photo viewer',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Our Projects',
@@ -895,6 +897,8 @@ export const translations = {
     shopTestimonialFoodProgram:
       'Программа питания миссии спасла мою семью в самый трудный момент. Их сострадание подарило нам надежду, когда её уже не было.',
     noProducts: 'Товары пока недоступны. Загляните позже!',
+    shopViewPhoto: 'Открыть фото целиком',
+    shopViewerLabel: 'Просмотр фото картины',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Наши проекты',
@@ -1580,6 +1584,8 @@ export const translations = {
     shopTestimonialFoodProgram:
       'Program żywnościowy misji uratował moją rodzinę w najtrudniejszej chwili. Ich współczucie dało nam nadzieję, gdy już jej nie mieliśmy.',
     noProducts: 'Produkty są obecnie niedostępne. Wróć wkrótce!',
+    shopViewPhoto: 'Otwórz pełne zdjęcie',
+    shopViewerLabel: 'Podgląd zdjęcia obrazu',
 
     // ===== Projects Page =====
     projectsPageTitle: 'Nasze projekty',
